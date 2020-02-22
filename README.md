@@ -13,6 +13,8 @@ Collect vulnerability information and save it in parsable format automatically
 | oval/debian | Debian GNU/Linux | OVAL                            | https://www.debian.org/security/oval/               |
 | redhat/     | RHEL/CentOS      | Security Data                   | https://www.redhat.com/security/data/metrics/       |
 | ubuntu/     | Ubuntu           | Ubuntu CVE Tracker              | https://people.canonical.com/~ubuntu-security/cve/  |
+| cvrf/suse   | OpenSUSE/SLES    | SUSE Security CVRF              | http://ftp.suse.com/pub/projects/security/cvrf/     |
+| photon/     | Photon           | Photon Security Advisory        | https://vmware.bintray.com/photon_cve_metadata/     |
 
 ## Update frequency
 daily
