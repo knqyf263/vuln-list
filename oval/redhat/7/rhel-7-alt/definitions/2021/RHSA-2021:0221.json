@@ -1,0 +1,115 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210221",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:0221: sudo security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0221",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0221"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3156",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3156"
+      }
+    ],
+    "Description": "The sudo packages contain the sudo utility which allows system administrators to provide certain users with the permission to execute privileged commands, which are used for system management purposes, without having to log in as root.\n\nSecurity Fix(es):\n\n* sudo: Heap buffer overflow in argument parsing (CVE-2021-3156)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-01-27"
+      },
+      "Updated": {
+        "Date": "2021-01-27"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-3156",
+          "Cvss3": "7.0/CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-122",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3156",
+          "Public": "20210126:1800"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1917684",
+          "ID": "1917684"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sudo is earlier than 0:1.8.23-10.el7_9.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210221001"
+                  },
+                  {
+                    "Comment": "sudo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152424002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sudo-devel is earlier than 0:1.8.23-10.el7_9.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210221003"
+                  },
+                  {
+                    "Comment": "sudo-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152424004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210218",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2021:0218: sudo security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0218",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0218"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3156",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3156"
+      }
+    ],
+    "Description": "The sudo packages contain the sudo utility which allows system administrators to provide certain users with the permission to execute privileged commands, which are used for system management purposes, without having to log in as root.\n\nSecurity Fix(es):\n\n* sudo: Heap buffer overflow in argument parsing (CVE-2021-3156)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-01-26"
+      },
+      "Updated": {
+        "Date": "2021-01-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-3156",
+          "Cvss3": "7.0/CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-122",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3156",
+          "Public": "20210126:1800"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1917684",
+          "ID": "1917684"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:8",
+        "cpe:/o:redhat:enterprise_linux:8::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20137488004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20137488003"
+          },
+          {
+            "Comment": "sudo is earlier than 0:1.8.29-6.el8_3.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20210218001"
+          },
+          {
+            "Comment": "sudo is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:201919234004"
+          }
+        ]
+      }
+    ]
+  }
+}
