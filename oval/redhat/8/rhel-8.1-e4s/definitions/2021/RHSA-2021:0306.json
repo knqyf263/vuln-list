@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210306",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2021:0306: flatpak security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8.1 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0306",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0306"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-21261",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-21261"
+      }
+    ],
+    "Description": "Flatpak is a system for building, distributing, and running sandboxed desktop applications on Linux.\n\nSecurity Fix(es):\n\n* flatpak: sandbox escape via spawn portal (CVE-2021-21261)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-02-01"
+      },
+      "Updated": {
+        "Date": "2021-02-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-21261",
+          "Cvss3": "8.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-77",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-21261",
+          "Public": "20210114"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1917430",
+          "ID": "1917430"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_eus:8.1",
+        "cpe:/a:redhat:rhel_eus:8.1::appstream"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20193384067"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20193384066"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "flatpak is earlier than 0:1.0.9-3.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210306001"
+                  },
+                  {
+                    "Comment": "flatpak is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191143002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "flatpak-libs is earlier than 0:1.0.9-3.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210306003"
+                  },
+                  {
+                    "Comment": "flatpak-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191143004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

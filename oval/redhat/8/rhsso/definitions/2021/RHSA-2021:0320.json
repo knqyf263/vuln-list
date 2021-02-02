@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210320",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:0320: Red Hat Single Sign-On 7.4.5 security update on RHEL 8 (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Single Sign-On 7.4 for RHEL 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0320",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0320"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10770",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10770"
+      }
+    ],
+    "Description": "Red Hat Single Sign-On 7.4 is a standalone server, based on the Keycloak project, that provides authentication and standards-based single sign-on capabilities for web and mobile applications.\n\nThis release of Red Hat Single Sign-On 7.4.5 on RHEL 8 serves as a replacement for Red Hat Single Sign-On 7.4.4, and includes bug fixes and enhancements, which are documented in the Release Notes document linked to in the References.\n\nSecurity Fix(es):\n\n* keycloak: Default Client configuration is vulnerable to SSRF using \"request_uri\" parameter (CVE-2020-10770)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-02-01"
+      },
+      "Updated": {
+        "Date": "2021-02-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-10770",
+          "Cvss3": "5.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:L",
+          "Cwe": "CWE-601",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10770",
+          "Public": "20201126"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1846270",
+          "ID": "1846270"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:red_hat_single_sign_on:7",
+        "cpe:/a:redhat:red_hat_single_sign_on:7::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20193046006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20193046005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-keycloak is earlier than 0:9.0.11-1.redhat_00001.1.el8sso",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210320001"
+                  },
+                  {
+                    "Comment": "rh-sso7-keycloak is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193046002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-keycloak-server is earlier than 0:9.0.11-1.redhat_00001.1.el8sso",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210320003"
+                  },
+                  {
+                    "Comment": "rh-sso7-keycloak-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193046004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
