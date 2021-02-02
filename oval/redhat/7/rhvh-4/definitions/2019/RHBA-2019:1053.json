@@ -1,0 +1,177 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20191053",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHBA-2019:1053: redhat-virtualization-host bug fix and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization 4 for Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2019:1053",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2019:1053"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-5407",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-5407"
+      }
+    ],
+    "Description": "The imgbased packages provide a way to create read-only base images from squashfs images, and a way to manage writable filesystem layers on top of those base images, including the installation of new images through yum and selection of a layer from runtime.\n\nThe redhat-virtualization-host packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nThe redhat-release-virtualization-host package provides the Red Hat Virtualization Host. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nChanges to the imgbased component:\n\n* Previously, Red Hat Virtualization Host entered emergency mode after it was updated to the latest version and rebooted twice. This was due to the presence of a local disk WWID in /etc/multipath/wwids.\n\nIn the current release, /etc/multipath/wwids has been removed. During upgrades, imgbased now calls \"vdsm-tool configure --force\" in the new layer, using the SYSTEMD_IGNORE_CHROOT environment variable. (BZ#1636028)\n\n* Previously, the default ntp.conf file was migrated to chrony even when NTP was disabled, overwriting chrony.conf file with incorrect values. In the current release, ntp.conf is only migrated if NTP is enabled. (BZ#1638606)\n\n* Previously, imgbased failed upon receiving the e2fsck return code 1 when creating a new layer. In the current release, imgbased handles the  e2fsck return code 1 as a success, since the new file system is correct and the new layer is installed successfully. (BZ#1645395)\n\n* Previously, even if lvmetad was disabled in the configuration, the lvmetad service left a pid file hanging. As a result, entering lvm commands displayed warnings.\n\nThe current release masks the lvmetad service during build so it never starts and lvm commands do not show warnings. (BZ#1652795)\n\nChanges to the redhat-virtualization-host component:\n\n* Previously, during an upgrade, dracut running inside chroot did not detect the cpuinfo and the kernel config files because /proc was not mounted and /boot was bindmounted. As a result, the correct microcode was missing from the initramfs.\n\nThe current release bindmounts /proc to the chroot and removes the --hostonly flag. This change inserts both AMD and Intel microcodes into the initramfs and boots the host after an upgrade. (BZ#1652519)\n\n* The current release applies the OpenSCAP security profile when installing and upgrading RHV-H. This feature helps organizations comply with the Security Content Automation Protocol (SCAP) standards. (BZ#1654253)\n\n* Do not use a VNC-based connection to deploy Red Hat Virtualization Manager as a self-hosted engine. The VNC protocol does not support password auth in FIPS mode. As a result, the self-hosted engine will fail to deploy.\n\nInstead, deploy the Manager as a self-hosted engine, use a SPICE-based connection. (BZ#1591693)\n\n* The current release ships a new version of Red Hat Gluster Storage, RHGS  3.4.4, in Red Hat Virtualization Host (RHVH). (BZ#1679133)\n\n* Previously, changing log levels required editing libvirt.conf and restarting the libvirtd service. This restart prevented support from collecting data and made reproducing issues more difficult.\n\nThe current release adds the libvirt-admin package to the optional channel for Red Hat Virtualization Host. Installing this package enables you to run the virt-admin command to change libvirt logging levels on the fly. (BZ#1571283)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-05-08"
+      },
+      "Updated": {
+        "Date": "2019-05-08"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-5407",
+          "Cvss3": "4.8/CVSS:3.0/AV:P/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-5407",
+          "Public": "20181030"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1645695",
+          "ID": "1645695"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20172529012"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20172529011"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-node-ng-nodectl is earlier than 0:4.3.0-0.20181213.0.el7ev",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053001"
+                  },
+                  {
+                    "Comment": "ovirt-node-ng-nodectl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python2-ovirt-node-ng-nodectl is earlier than 0:4.3.0-0.20181213.0.el7ev",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053003"
+                  },
+                  {
+                    "Comment": "python2-ovirt-node-ng-nodectl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-release-virtualization-host is earlier than 0:4.3-0.5.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053005"
+                  },
+                  {
+                    "Comment": "redhat-release-virtualization-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is earlier than 0:4.3-0.5.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053007"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "imgbased is earlier than 0:1.1.7-0.1.el7ev",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053009"
+                  },
+                  {
+                    "Comment": "imgbased is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-imgbased is earlier than 0:1.1.7-0.1.el7ev",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053011"
+                  },
+                  {
+                    "Comment": "python-imgbased is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is earlier than 0:4.3-20190409.0.el7_6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053013"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
