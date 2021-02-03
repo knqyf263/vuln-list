@@ -1,13 +1,14 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20173453",
-  "Version": "638",
+  "Version": "639",
   "Metadata": {
     "Title": "RHSA-2017:3453: java-1.8.0-ibm security update (Important)",
     "AffectedList": [
       {
         "Family": "unix",
         "Platforms": [
+          "Red Hat Satellite 5.8",
           "Red Hat Satellite 5.8 ELS"
         ]
       }
@@ -726,10 +727,6 @@
           "Href": "https://bugzilla.redhat.com/1503319",
           "ID": "1503319"
         }
-      ],
-      "AffectedCpeList": [
-        "cpe:/a:redhat:network_satellite:5.8",
-        "cpe:/a:redhat:network_satellite:5.8::el6"
       ]
     }
   },
@@ -738,10 +735,52 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhsa:tst:20171558310"
+        "TestRef": "oval:com.redhat.rhsa:tst:20171558464"
       }
     ],
     "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20171558309"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-ibm is earlier than 1:1.8.0.5.5-1jpp.1.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173453001"
+                  },
+                  {
+                    "Comment": "java-1.8.0-ibm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171558176"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-ibm-devel is earlier than 1:1.8.0.5.5-1jpp.1.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173453003"
+                  },
+                  {
+                    "Comment": "java-1.8.0-ibm-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171558178"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
       {
         "Operator": "AND",
         "Criterions": [

@@ -1,13 +1,14 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20182944",
-  "Version": "635",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2018:2944: rh-nodejs6-nodejs security update (Important)",
     "AffectedList": [
       {
         "Family": "unix",
         "Platforms": [
+          "Red Hat Software Collections for Red Hat Enterprise Linux 6",
           "Red Hat Software Collections for Red Hat Enterprise Linux 6.7 EUS"
         ]
       }
@@ -49,10 +50,6 @@
           "Href": "https://bugzilla.redhat.com/1620219",
           "ID": "1620219"
         }
-      ],
-      "AffectedCpeList": [
-        "cpe:/a:redhat:rhel_software_collections:3",
-        "cpe:/a:redhat:rhel_software_collections:3::el6"
       ]
     }
   },
@@ -65,6 +62,61 @@
       }
     ],
     "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20131427029"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nodejs6-nodejs is earlier than 0:6.11.3-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182944001"
+                  },
+                  {
+                    "Comment": "rh-nodejs6-nodejs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172908002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nodejs6-nodejs-devel is earlier than 0:6.11.3-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182944003"
+                  },
+                  {
+                    "Comment": "rh-nodejs6-nodejs-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172908004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nodejs6-nodejs-docs is earlier than 0:6.11.3-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182944005"
+                  },
+                  {
+                    "Comment": "rh-nodejs6-nodejs-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172908006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
       {
         "Operator": "AND",
         "Criterions": [

@@ -1,0 +1,220 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210348",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:0348: glibc security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0348",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0348"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-25013",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-25013"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10029",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10029"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-29573",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-29573"
+      }
+    ],
+    "Description": "The glibc packages provide the standard C libraries (libc), POSIX thread libraries (libpthread), standard math libraries (libm), and the name service cache daemon (nscd) used by multiple programs on the system. Without these libraries, the Linux system cannot function correctly.\n\nSecurity Fix(es):\n\n* glibc: buffer over-read in iconv when processing invalid multi-byte input sequences in the EUC-KR encoding (CVE-2019-25013)\n\n* glibc: stack corruption from crafted input in cosl, sinl, sincosl, and tanl functions (CVE-2020-10029)\n\n* glibc: stack-based buffer overflow if the input to any of the printf family of functions is an 80-bit long double with a non-canonical bit pattern (CVE-2020-29573)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* glibc: 64bit_strstr_via_64bit_strstr_sse2_unaligned detection fails with large device and inode numbers (BZ#1883162)\n\n* glibc: Performance regression in ebizzy benchmark (BZ#1889977)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-02-02"
+      },
+      "Updated": {
+        "Date": "2021-02-02"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-25013",
+          "Cvss3": "4.8/CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-119",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-25013",
+          "Public": "20190906"
+        },
+        {
+          "CveID": "CVE-2020-10029",
+          "Cvss3": "5.7/CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:H",
+          "Cwe": "CWE-121",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10029",
+          "Public": "20200212"
+        },
+        {
+          "CveID": "CVE-2020-29573",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-121",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-29573",
+          "Public": "20200922"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1810670",
+          "ID": "1810670"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1905213",
+          "ID": "1905213"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1912960",
+          "ID": "1912960"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc is earlier than 0:2.17-322.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210348001"
+                  },
+                  {
+                    "Comment": "glibc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20095155008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-common is earlier than 0:2.17-322.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210348003"
+                  },
+                  {
+                    "Comment": "glibc-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20095155012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-devel is earlier than 0:2.17-322.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210348005"
+                  },
+                  {
+                    "Comment": "glibc-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20095155006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-headers is earlier than 0:2.17-322.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210348007"
+                  },
+                  {
+                    "Comment": "glibc-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20095155004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-static is earlier than 0:2.17-322.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210348009"
+                  },
+                  {
+                    "Comment": "glibc-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20095155010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-utils is earlier than 0:2.17-322.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210348011"
+                  },
+                  {
+                    "Comment": "glibc-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20095155014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nscd is earlier than 0:2.17-322.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210348013"
+                  },
+                  {
+                    "Comment": "nscd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20095155002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

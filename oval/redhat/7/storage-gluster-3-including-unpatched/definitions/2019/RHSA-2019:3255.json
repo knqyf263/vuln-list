@@ -1,14 +1,15 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20193255",
-  "Version": "639",
+  "Version": "640",
   "Metadata": {
     "Title": "RHSA-2019:3255: heketi security, bug fix, and enhancement update (Moderate)",
     "AffectedList": [
       {
         "Family": "unix",
         "Platforms": [
-          "Native Client for RHEL 7 for Red Hat Storage"
+          "Native Client for RHEL 7 for Red Hat Storage",
+          "Red Hat Gluster Storage 3.5 for RHEL 7"
         ]
       }
     ],
@@ -49,10 +50,6 @@
           "Href": "https://bugzilla.redhat.com/1701091",
           "ID": "1701091"
         }
-      ],
-      "AffectedCpeList": [
-        "cpe:/a:redhat:storage:3",
-        "cpe:/a:redhat:storage:3:client:el7"
       ]
     }
   },
@@ -78,7 +75,62 @@
           },
           {
             "Comment": "heketi-client is signed with Red Hat redhatrelease2 key",
-            "TestRef": "oval:com.redhat.cve:tst:20191002100004"
+            "TestRef": "oval:com.redhat.cve:tst:20191002100006"
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20137459005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "heketi is earlier than 0:9.0.0-7.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193255004"
+                  },
+                  {
+                    "Comment": "heketi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "heketi-client is earlier than 0:9.0.0-7.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193255001"
+                  },
+                  {
+                    "Comment": "heketi-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-heketi is earlier than 0:9.0.0-7.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193255007"
+                  },
+                  {
+                    "Comment": "python-heketi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100004"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }

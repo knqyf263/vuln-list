@@ -1,14 +1,15 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20204143",
-  "Version": "637",
+  "Version": "638",
   "Metadata": {
     "Title": "RHSA-2020:4143: OCS 3.11.z async security, bug fix, and enhancement update (Moderate)",
     "AffectedList": [
       {
         "Family": "unix",
         "Platforms": [
-          "Native Client for RHEL 7 for Red Hat Storage"
+          "Native Client for RHEL 7 for Red Hat Storage",
+          "Red Hat Gluster Storage 3.5 for RHEL 7"
         ]
       }
     ],
@@ -65,10 +66,6 @@
           "Href": "https://bugzilla.redhat.com/1845387",
           "ID": "1845387"
         }
-      ],
-      "AffectedCpeList": [
-        "cpe:/a:redhat:storage:3",
-        "cpe:/a:redhat:storage:3:client:el7"
       ]
     }
   },
@@ -94,7 +91,114 @@
           },
           {
             "Comment": "heketi-client is signed with Red Hat redhatrelease2 key",
-            "TestRef": "oval:com.redhat.cve:tst:20191002100004"
+            "TestRef": "oval:com.redhat.cve:tst:20191002100006"
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20137459005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gluster-block is earlier than 0:0.2.1-36.2.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204143004"
+                  },
+                  {
+                    "Comment": "gluster-block is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204143005"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtcmu is earlier than 0:1.2.0-32.2.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204143006"
+                  },
+                  {
+                    "Comment": "libtcmu is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173277002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtcmu-devel is earlier than 0:1.2.0-32.2.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204143008"
+                  },
+                  {
+                    "Comment": "libtcmu-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173277004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tcmu-runner is earlier than 0:1.2.0-32.2.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204143010"
+                  },
+                  {
+                    "Comment": "tcmu-runner is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173277006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "heketi is earlier than 0:9.0.0-9.5.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204143012"
+                  },
+                  {
+                    "Comment": "heketi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "heketi-client is earlier than 0:9.0.0-9.5.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204143001"
+                  },
+                  {
+                    "Comment": "heketi-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-heketi is earlier than 0:9.0.0-9.5.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204143015"
+                  },
+                  {
+                    "Comment": "python-heketi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100004"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
