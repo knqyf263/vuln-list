@@ -1,0 +1,436 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20191190",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2019:1190: kernel-rt security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise MRG 2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:1190",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:1190"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-7913",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-7913"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8633",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8633"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-11600",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-11600"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12190",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12190"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-13215",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-13215"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-16939",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-16939"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-17558",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-17558"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1068",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1068"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12126",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12126"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12127",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12127"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12130",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12130"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-18559",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-18559"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-3665",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-3665"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11091",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11091"
+      }
+    ],
+    "Description": "The kernel-rt packages provide the Real Time Linux Kernel, which enables fine-tuning for systems with extremely high determinism requirements.\n\nSecurity Fix(es):\n\n* A flaw was found in the implementation of the \"fill buffer\", a mechanism used by modern CPUs when a cache-miss is made on L1 CPU cache. If an attacker can generate a load operation that would create a page fault, the execution will continue speculatively with incorrect data from the fill buffer while the data is fetched from higher level caches. This response time can be measured to infer data in the fill buffer. (CVE-2018-12130)\n\n* Modern Intel microprocessors implement hardware-level micro-optimizations to improve the performance of writing data back to CPU caches. The write operation is split into STA (STore Address) and STD (STore Data) sub-operations. These sub-operations allow the processor to hand-off address generation logic into these sub-operations for optimized writes. Both of these sub-operations write to a shared distributed processor structure called the 'processor store buffer'. As a result, an unprivileged attacker could use this flaw to read private data resident within the CPU's processor store buffer. (CVE-2018-12126)\n\n* Microprocessors use a ‘load port’ subcomponent to perform load operations from memory or IO. During a load operation, the load port receives data from the memory or IO subsystem and then provides the data to the CPU registers and operations in the CPU’s pipelines. Stale load operations results are stored in the 'load port' table until overwritten by newer operations. Certain load-port operations triggered by an attacker can be used to reveal data about previous stale requests leaking data back to the attacker via a timing side-channel. (CVE-2018-12127)\n\n* Uncacheable memory on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access. (CVE-2019-11091)\n\n* kernel: Buffer overflow in firewire driver via crafted incoming packets (CVE-2016-8633)\n\n* kernel: crypto: privilege escalation in skcipher_recvmsg function (CVE-2017-13215)\n\n* Kernel: ipsec: xfrm: use-after-free leading to potential privilege escalation (CVE-2017-16939)\n\n* kernel: Out-of-bounds write via userland offsets in ebt_entry struct in netfilter/ebtables.c (CVE-2018-1068)\n\n* kernel: Use-after-free due to race condition in AF_PACKET implementation (CVE-2018-18559)\n\n* kernel: media: use-after-free in [tuner-xc2028] media driver (CVE-2016-7913)\n\n* kernel: Out-of-bounds access via an XFRM_MSG_MIGRATE xfrm Netlink message (CVE-2017-11600)\n\n* kernel: memory leak when merging buffers in SCSI IO vectors (CVE-2017-12190)\n\n* kernel: Unallocated memory access by malicious USB device via bNumInterfaces overflow (CVE-2017-17558)\n\n* Kernel: FPU state information leakage via lazy FPU restore (CVE-2018-3665)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* update the MRG 2.5.z 3.10 kernel-rt sources (BZ#1692711)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-05-14"
+      },
+      "Updated": {
+        "Date": "2019-05-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-7913",
+          "Cvss2": "9.3/AV:N/AC:M/Au:N/C:C/I:C/A:C",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-7913",
+          "Public": "20160128"
+        },
+        {
+          "CveID": "CVE-2016-8633",
+          "Cvss2": "5.9/AV:L/AC:M/Au:N/C:P/I:P/A:C",
+          "Cvss3": "6.8/CVSS:3.0/AV:P/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-787",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8633",
+          "Public": "20161106"
+        },
+        {
+          "CveID": "CVE-2017-11600",
+          "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-11600",
+          "Public": "20170711"
+        },
+        {
+          "CveID": "CVE-2017-12190",
+          "Cvss3": "6.2/CVSS:3.0/AV:A/AC:L/PR:H/UI:N/S:C/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12190",
+          "Public": "20170921"
+        },
+        {
+          "CveID": "CVE-2017-13215",
+          "Cvss3": "5.3/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-287",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-13215",
+          "Public": "20180102"
+        },
+        {
+          "CveID": "CVE-2017-16939",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Cvss3": "8.1/CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-16939",
+          "Public": "20171124"
+        },
+        {
+          "CveID": "CVE-2017-17558",
+          "Cvss3": "6.4/CVSS:3.0/AV:P/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-17558",
+          "Public": "20171211"
+        },
+        {
+          "CveID": "CVE-2018-1068",
+          "Cvss3": "8.1/CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-119",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1068",
+          "Public": "20180305"
+        },
+        {
+          "CveID": "CVE-2018-12126",
+          "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12126",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2018-12127",
+          "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12127",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2018-12130",
+          "Cvss3": "6.2/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-203-\u003eCWE-385-\u003eCWE-226",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12130",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2018-18559",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-18559",
+          "Public": "20180615"
+        },
+        {
+          "CveID": "CVE-2018-3665",
+          "Cvss3": "5.6/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-3665",
+          "Public": "20180613:2100"
+        },
+        {
+          "CveID": "CVE-2019-11091",
+          "Cvss3": "3.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11091",
+          "Public": "20190514:1700"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1391490",
+          "ID": "1391490"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1402885",
+          "ID": "1402885"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1474928",
+          "ID": "1474928"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1495089",
+          "ID": "1495089"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1517220",
+          "ID": "1517220"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1525474",
+          "ID": "1525474"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1535173",
+          "ID": "1535173"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1552048",
+          "ID": "1552048"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1585011",
+          "ID": "1585011"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1641878",
+          "ID": "1641878"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1646781",
+          "ID": "1646781"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1646784",
+          "ID": "1646784"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1667782",
+          "ID": "1667782"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1705312",
+          "ID": "1705312"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_mrg:2",
+        "cpe:/a:redhat:enterprise_mrg:2:computenode:el6",
+        "cpe:/a:redhat:enterprise_mrg:2:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20120496022"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20120496021"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190001"
+                  },
+                  {
+                    "Comment": "kernel-rt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190003"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-devel is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190005"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-devel is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190007"
+                  },
+                  {
+                    "Comment": "kernel-rt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-doc is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190009"
+                  },
+                  {
+                    "Comment": "kernel-rt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-firmware is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190011"
+                  },
+                  {
+                    "Comment": "kernel-rt-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190013"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-devel is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190015"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190017"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is earlier than 1:3.10.0-693.47.2.rt56.641.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191190019"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

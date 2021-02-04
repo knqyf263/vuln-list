@@ -1,0 +1,104 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151447",
+  "Version": "646",
+  "Metadata": {
+    "Title": "RHSA-2015:1447: grep security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1447",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1447"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-5667",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-5667"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-1345",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-1345"
+      }
+    ],
+    "Description": "The grep utility searches through textual input for lines that contain a\nmatch to a specified pattern and then prints the matching lines. The GNU\ngrep utilities include grep, egrep, and fgrep.\n\nAn integer overflow flaw, leading to a heap-based buffer overflow, was\nfound in the way grep parsed large lines of data. An attacker able to trick\na user into running grep on a specially crafted data file could use this\nflaw to crash grep or, potentially, execute arbitrary code with the\nprivileges of the user running grep. (CVE-2012-5667)\n\nA heap-based buffer overflow flaw was found in the way grep processed\ncertain pattern and text combinations. An attacker able to trick a user\ninto running grep on specially crafted input could use this flaw to crash\ngrep or, potentially, read from uninitialized memory. (CVE-2015-1345)\n\nThe grep packages have been upgraded to upstream version 2.20, which\nprovides a number of bug fixes and enhancements over the previous version.\nNotably, the speed of various operations has been improved significantly.\nNow, the recursive grep utility uses the fts function of the gnulib library\nfor directory traversal, so that it can handle much larger directories\nwithout reporting the \"File name too long\" error message, and it can\noperate faster when dealing with large directory hierarchies. (BZ#982215,\nBZ#1064668, BZ#1126757, BZ#1167766, BZ#1171806)\n\nThis update also fixes the following bugs:\n\n* Prior to this update, the \\w and \\W symbols were inconsistently matched\nto the [:alnum:] character class. Consequently, regular expressions that used \\w and \\W in some cases had incorrect results. An upstream patch which fixes the matching problem has been applied, and \\w is now matched to the [_[:alnum:]] character and \\W to the [^_[:alnum:]] character consistently. (BZ#799863)\n\n* Previously, the \"--fixed-regexp\" command-line option was not included in\nthe grep(1) manual page. Consequently, the manual page was inconsistent\nwith the built-in help of the grep utility. To fix this bug, grep(1) has\nbeen updated to include a note informing the user that \"--fixed-regexp\" is\nan obsolete option. Now, the built-in help and manual page are consistent\nregarding the \"--fixed-regexp\" option. (BZ#1103270)\n\n* Previously, the Perl Compatible Regular Expression (PCRE) library did not\nwork correctly when matching non-UTF-8 text in UTF-8 mode. Consequently, an\nerror message about invalid UTF-8 byte sequence characters was returned.\nTo fix this bug, patches from upstream have been applied to the PCRE\nlibrary and the grep utility. As a result, PCRE now skips non-UTF-8\ncharacters as non-matching text without returning any error message.\n(BZ#1193030)\n\nAll grep users are advised to upgrade to these updated packages, which\ncorrect these issues and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-20"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-5667",
+          "Cvss2": "4.4/AV:L/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-5667",
+          "Public": "20121222"
+        },
+        {
+          "CveID": "CVE-2015-1345",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:N/I:N/A:P",
+          "Cwe": "(CWE-122|CWE-125)",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-1345",
+          "Public": "20150118"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/889935",
+          "ID": "889935"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1183651",
+          "ID": "1183651"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "grep is earlier than 0:2.20-3.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151447001"
+          },
+          {
+            "Comment": "grep is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151447002"
+          }
+        ]
+      }
+    ]
+  }
+}

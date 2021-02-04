@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141390",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2014:1390: luci security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1390",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1390"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3593",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3593"
+      }
+    ],
+    "Description": "Luci is a web-based high availability administration application.\n\nIt was discovered that luci used eval() on inputs containing strings from\nthe cluster configuration file when generating its web pages. An attacker\nwith privileges to create or edit the cluster configuration could use this\nflaw to execute arbitrary code as the luci user on a host running luci.\n(CVE-2014-3593)\n\nThis issue was discovered by Jan Pokorný of Red Hat.\n\nThese updated luci packages also include several bug fixes and multiple\nenhancements. Space precludes documenting all of these changes in this\nadvisory. Users are directed to the Red Hat Enterprise Linux 6.6 Technical\nNotes, linked to in the References section, for information on the most\nsignificant of these changes.\n\nAll luci users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add these\nenhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-10-14"
+      },
+      "Updated": {
+        "Date": "2014-10-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-3593",
+          "Cvss2": "5.2/AV:A/AC:L/Au:S/C:P/I:P/A:P",
+          "Cwe": "CWE-77",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3593",
+          "Public": "20141014"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/989005",
+          "ID": "989005"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "luci is earlier than 0:0.26.0-63.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20141390001"
+          },
+          {
+            "Comment": "luci is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20131603002"
+          }
+        ]
+      }
+    ]
+  }
+}

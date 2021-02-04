@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20131840",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2013:1840: nss security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.2 EUS - Server and Compute Node Only"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:1840",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:1840"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-5605",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-5605"
+      }
+    ],
+    "Description": "Network Security Services (NSS) is a set of libraries designed to support\nthe cross-platform development of security-enabled client and server\napplications.\n\nA flaw was found in the way NSS handled invalid handshake packets. A remote\nattacker could use this flaw to cause a TLS/SSL client using NSS to crash\nor, possibly, execute arbitrary code with the privileges of the user\nrunning the application. (CVE-2013-5605)\n\nAll NSS users should upgrade to these updated packages, which contain a\nbackported patch to correct this issue. After installing this update,\napplications using NSS must be restarted for the changes to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-12-16"
+      },
+      "Updated": {
+        "Date": "2013-12-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-5605",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-5605",
+          "Public": "20131113"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1030807",
+          "ID": "1030807"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss is earlier than 0:3.13.1-9.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131840001"
+                  },
+                  {
+                    "Comment": "nss is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-devel is earlier than 0:3.13.1-9.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131840003"
+                  },
+                  {
+                    "Comment": "nss-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-pkcs11-devel is earlier than 0:3.13.1-9.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131840005"
+                  },
+                  {
+                    "Comment": "nss-pkcs11-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-sysinit is earlier than 0:3.13.1-9.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131840007"
+                  },
+                  {
+                    "Comment": "nss-sysinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-tools is earlier than 0:3.13.1-9.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131840009"
+                  },
+                  {
+                    "Comment": "nss-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

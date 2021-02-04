@@ -1,0 +1,135 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193266",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2019:3266: OpenShift Container Platform 4.1 openshift security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3266",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3266"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11251",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11251"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the openshift RPM packages for Red Hat\nOpenShift Container Platform 4.1.21.\n\nSecurity Fix(es):\n\n* kubernetes: `kubectl cp` allows for arbitrary file write via double symlinks (CVE-2019-11251)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-10-30"
+      },
+      "Updated": {
+        "Date": "2019-10-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-11251",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-59",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11251",
+          "Public": "20190918"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1753495",
+          "ID": "1753495"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.1",
+        "cpe:/a:redhat:openshift:4.1::el7",
+        "cpe:/a:redhat:openshift:4.2",
+        "cpe:/a:redhat:openshift:4.2::el7",
+        "cpe:/a:redhat:openshift:4.3",
+        "cpe:/a:redhat:openshift:4.3::el7",
+        "cpe:/a:redhat:openshift:4.4",
+        "cpe:/a:redhat:openshift:4.4::el7",
+        "cpe:/a:redhat:openshift:4.5",
+        "cpe:/a:redhat:openshift:4.5::el7",
+        "cpe:/a:redhat:openshift:4.6",
+        "cpe:/a:redhat:openshift:4.6::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201714623006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201714623005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients is earlier than 0:4.1.21-201910220952.git.0.493dbf6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193266001"
+                  },
+                  {
+                    "Comment": "openshift-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201714623004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients-redistributable is earlier than 0:4.1.21-201910220952.git.0.493dbf6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193266003"
+                  },
+                  {
+                    "Comment": "openshift-clients-redistributable is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201714623002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-hyperkube is earlier than 0:4.1.21-201910220952.git.0.493dbf6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193266005"
+                  },
+                  {
+                    "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

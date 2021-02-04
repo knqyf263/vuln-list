@@ -1,0 +1,178 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130512",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2013:0512: httpd security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0512",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0512"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2008-0455",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2008-0455"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2687",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2687"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-4557",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-4557"
+      }
+    ],
+    "Description": "The httpd packages contain the Apache HTTP Server (httpd), which is the\nnamesake project of The Apache Software Foundation.\n\nAn input sanitization flaw was found in the mod_negotiation Apache HTTP\nServer module. A remote attacker able to upload or create files with\narbitrary names in a directory that has the MultiViews options enabled,\ncould use this flaw to conduct cross-site scripting attacks against users\nvisiting the site. (CVE-2008-0455, CVE-2012-2687)\n\nIt was discovered that mod_proxy_ajp, when used in configurations with\nmod_proxy in load balancer mode, would mark a back-end server as failed\nwhen request processing timed out, even when a previous AJP (Apache JServ\nProtocol) CPing request was responded to by the back-end. A remote\nattacker able to make a back-end use an excessive amount of time to\nprocess a request could cause mod_proxy to not send requests to back-end\nAJP servers for the retry timeout period or until all back-end servers\nwere marked as failed. (CVE-2012-4557)\n\nThese updated httpd packages include numerous bug fixes and enhancements.\nSpace precludes documenting all of these changes in this advisory. Users\nare directed to the Red Hat Enterprise Linux 6.4 Technical Notes, linked\nto in the References, for information on the most significant of these\nchanges.\n\nAll users of httpd are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add these\nenhancements. After installing the updated packages, the httpd daemon will\nbe restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2008-0455",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Href": "https://access.redhat.com/security/cve/CVE-2008-0455",
+          "Public": "20120613"
+        },
+        {
+          "CveID": "CVE-2012-2687",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2687",
+          "Public": "20120613"
+        },
+        {
+          "CveID": "CVE-2012-4557",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:N/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-4557",
+          "Public": "20120104"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/850794",
+          "ID": "850794"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/871685",
+          "ID": "871685"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd is earlier than 0:2.2.15-26.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130512001"
+                  },
+                  {
+                    "Comment": "httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-devel is earlier than 0:2.2.15-26.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130512003"
+                  },
+                  {
+                    "Comment": "httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-manual is earlier than 0:2.2.15-26.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130512005"
+                  },
+                  {
+                    "Comment": "httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-tools is earlier than 0:2.2.15-26.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130512007"
+                  },
+                  {
+                    "Comment": "httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ssl is earlier than 1:2.2.15-26.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130512009"
+                  },
+                  {
+                    "Comment": "mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

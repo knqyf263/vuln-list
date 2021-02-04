@@ -1,0 +1,285 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20180181",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2018:0181: kernel-rt security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise MRG 2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:0181",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:0181"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-8539",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-8539"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12192",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12192"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12193",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12193"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-15649",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-15649"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7472",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7472"
+      }
+    ],
+    "Description": "The kernel-rt packages provide the Real Time Linux Kernel, which enables fine-tuning for systems with extremely high determinism requirements.\n\nSecurity Fix(es):\n\n* A flaw was found in the Linux kernel's key management system where it was possible for an attacker to escalate privileges or crash the machine. If a user key gets negatively instantiated, an error code is cached in the payload area. A negatively instantiated key may be then be positively instantiated by updating it with valid data. However, the -\u003eupdate key type method must be aware that the error code may be there. (CVE-2015-8539, Important)\n\n* It was found that fanout_add() in 'net/packet/af_packet.c' in the Linux kernel, before version 4.13.6, allows local users to gain privileges via crafted system calls that trigger mishandling of packet_fanout data structures, because of a race condition (involving fanout_add and packet_do_bind) that leads to a use-after-free bug. (CVE-2017-15649, Important)\n\n* A vulnerability was found in the Linux kernel where the keyctl_set_reqkey_keyring() function leaks the thread keyring. This allows an unprivileged local user to exhaust kernel memory and thus cause a DoS. (CVE-2017-7472, Moderate)\n\nRed Hat would like to thank Dmitry Vyukov of Google engineering for reporting CVE-2015-8539.\n\nBug Fix(es):\n\n* The mlx5 driver has a number of configuration options, including the selective support for network protocols, such as InfiniBand and Ethernet. Due to a regression in the configuration of the MRG-RT kernel, the Ethernet mode of the driver was turned off. The regression has been resolved by enabling the mlx5 Ethernet mode, making the Ethernet protocol to work again. (BZ#1422778)\n\n* The migrate_disable/enable() kernel operations are used to pin a thread to a CPU temporarily. This method is a kernel-rt specific. To keep RHEL-RT's kernel up-to-date with the latest real-time kernel, the migrate_disable/enable routine was updated to the version present on kernel v4.9-rt. However, this version showed to be problematic. The changes in the migrate_disable/enabled have been thus reverted to a stable version, avoiding the kernel BUG. (BZ#1507831)\n\n* The kernel-rt packages have been upgraded to version 3.10.0-693.15.1.rt56.601, which provides a number of security and bug fixes over the previous version. (BZ#1519504)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-01-25"
+      },
+      "Updated": {
+        "Date": "2018-01-25"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-8539",
+          "Cvss2": "7.2/AV:L/AC:L/Au:N/C:C/I:C/A:C",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-667",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-8539",
+          "Public": "20151209"
+        },
+        {
+          "CveID": "CVE-2017-12192",
+          "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-476",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12192",
+          "Public": "20170918"
+        },
+        {
+          "CveID": "CVE-2017-12193",
+          "Cvss3": "4.7/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-476",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12193",
+          "Public": "20171102"
+        },
+        {
+          "CveID": "CVE-2017-15649",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-15649",
+          "Public": "20170920"
+        },
+        {
+          "CveID": "CVE-2017-7472",
+          "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7472",
+          "Public": "20170401"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1284450",
+          "ID": "1284450"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1442086",
+          "ID": "1442086"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1493435",
+          "ID": "1493435"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1501215",
+          "ID": "1501215"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1504574",
+          "ID": "1504574"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_mrg:2",
+        "cpe:/a:redhat:enterprise_mrg:2:computenode:el6",
+        "cpe:/a:redhat:enterprise_mrg:2:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20120496022"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20120496021"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181001"
+                  },
+                  {
+                    "Comment": "kernel-rt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181003"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-devel is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181005"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-devel is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181007"
+                  },
+                  {
+                    "Comment": "kernel-rt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-doc is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181009"
+                  },
+                  {
+                    "Comment": "kernel-rt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-firmware is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181011"
+                  },
+                  {
+                    "Comment": "kernel-rt-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181013"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-devel is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181015"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181017"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is earlier than 1:3.10.0-693.17.1.rt56.604.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180181019"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20160495",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2016:0495: nss-util security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.2 Advanced Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:0495",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:0495"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-1950",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-1950"
+      }
+    ],
+    "Description": "Network Security Services (NSS) is a set of libraries designed to support\nthe cross-platform development of security-enabled client and server\napplications. The nss-util package provides a set of utilities for NSS and\nthe Softoken module.\n\nA heap-based buffer overflow flaw was found in the way NSS parsed certain\nASN.1 structures. An attacker could use this flaw to create a specially\ncrafted certificate which, when parsed by NSS, could cause it to crash, or\nexecute arbitrary code, using the permissions of the user running an\napplication compiled against the NSS library. (CVE-2016-1950)\n\nRed Hat would like to thank the Mozilla project for reporting this issue.\nUpstream acknowledges Francis Gabriel as the original reporter.\n\nAll nss-util users are advised to upgrade to these updated packages, which\ncontain a backported patch to correct this issue. For the update to take\neffect, all applications linked to the nss and nss-util libraries must be\nrestarted, or the system rebooted.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-03-23"
+      },
+      "Updated": {
+        "Date": "2016-03-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-1950",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-1950",
+          "Public": "20160308"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1310509",
+          "ID": "1310509"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util is earlier than 0:3.13.1-10.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160495001"
+                  },
+                  {
+                    "Comment": "nss-util is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util-devel is earlier than 0:3.13.1-10.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160495003"
+                  },
+                  {
+                    "Comment": "nss-util-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

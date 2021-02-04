@@ -1,0 +1,190 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151424",
+  "Version": "646",
+  "Metadata": {
+    "Title": "RHSA-2015:1424: pacemaker security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1424",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1424"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-1867",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-1867"
+      }
+    ],
+    "Description": "The Pacemaker Resource Manager is a collection of technologies working\ntogether to provide data integrity and the ability to maintain application\navailability in the event of a failure.\n\nA flaw was found in the way pacemaker, a cluster resource manager,\nevaluated added nodes in certain situations. A user with read-only access\ncould potentially assign any other existing roles to themselves and then\nadd privileges to other users as well. (CVE-2015-1867)\n\nThis update also fixes the following bugs:\n\n* Due to a race condition, nodes that gracefully shut down occasionally had\ndifficulty rejoining the cluster. As a consequence, nodes could come online\nand be shut down again immediately by the cluster. This bug has been fixed,\nand the \"shutdown\" attribute is now cleared properly. (BZ#1198638)\n\n* Prior to this update, the pacemaker utility caused an unexpected\ntermination of the attrd daemon after a system update to Red Hat Enterprise\nLinux 6.6. The bug has been fixed so that attrd no longer crashes when\npacemaker starts. (BZ#1205292)\n\n* Previously, the access control list (ACL) of the pacemaker utility\nallowed a role assignment to the Cluster Information Base (CIB) with a\nread-only permission. With this update, ACL is enforced and can no longer\nbe bypassed by the user without the write permission, thus fixing this bug.\n(BZ#1207621)\n\n* Prior to this update, the ClusterMon (crm_mon) utility did not trigger an\nexternal agent script with the \"-E\" parameter to monitor the Cluster\nInformation Base (CIB) when the pacemaker utility was used. A patch has\nbeen provided to fix this bug, and crm_mon now calls the agent script when\nthe \"-E\" parameter is used. (BZ#1208896)\n\nUsers of pacemaker are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-20"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-1867",
+          "Cvss2": "6.0/AV:N/AC:M/Au:S/C:P/I:P/A:P",
+          "Cwe": "CWE-863",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-1867",
+          "Public": "20150331"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1211370",
+          "ID": "1211370"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pacemaker is earlier than 0:1.1.12-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151424001"
+                  },
+                  {
+                    "Comment": "pacemaker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131635002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pacemaker-cli is earlier than 0:1.1.12-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151424003"
+                  },
+                  {
+                    "Comment": "pacemaker-cli is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131635004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pacemaker-cluster-libs is earlier than 0:1.1.12-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151424005"
+                  },
+                  {
+                    "Comment": "pacemaker-cluster-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131635006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pacemaker-cts is earlier than 0:1.1.12-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151424007"
+                  },
+                  {
+                    "Comment": "pacemaker-cts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131635008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pacemaker-doc is earlier than 0:1.1.12-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151424009"
+                  },
+                  {
+                    "Comment": "pacemaker-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131635010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pacemaker-libs is earlier than 0:1.1.12-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151424011"
+                  },
+                  {
+                    "Comment": "pacemaker-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131635012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pacemaker-libs-devel is earlier than 0:1.1.12-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151424013"
+                  },
+                  {
+                    "Comment": "pacemaker-libs-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131635014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pacemaker-remote is earlier than 0:1.1.12-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151424015"
+                  },
+                  {
+                    "Comment": "pacemaker-remote is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131635016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

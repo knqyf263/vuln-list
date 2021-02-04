@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151439",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2015:1439: wpa_supplicant security and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1439",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1439"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-4142",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-4142"
+      }
+    ],
+    "Description": "The wpa_supplicant package contains an 802.1X Supplicant with support for\nWEP, WPA, WPA2 (IEEE 802.11i / RSN), and various EAP authentication\nmethods. It implements key negotiation with a WPA Authenticator for client\nstations and controls the roaming and IEEE 802.11 authentication and\nassociation of the WLAN driver.\n\nAn integer underflow flaw, leading to a buffer over-read, was found in the\nway wpa_supplicant handled WMM Action frames. A specially crafted frame\ncould possibly allow an attacker within Wi-Fi radio range to cause\nwpa_supplicant to crash. (CVE-2015-4142)\n\nThis update includes the following enhancement:\n\n* Prior to this update, wpa_supplicant did not provide a way to require the\nhost name to be listed in an X.509 certificate's Common Name or Subject\nAlternative Name, and only allowed host name suffix or subject substring\nchecks. This update introduces a new configuration directive,\n'domain_match', which adds a full host name check. (BZ#1186806)\n\nAll wpa_supplicant users are advised to upgrade to this updated package,\nwhich contains a backported patch to correct this issue and adds this\nenhancement. After installing this update, the wpa_supplicant service will\nbe restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-20"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-4142",
+          "Cvss2": "2.9/AV:A/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-190-\u003eCWE-125",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-4142",
+          "Public": "20150504"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1221178",
+          "ID": "1221178"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "wpa_supplicant is earlier than 1:0.7.3-6.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151439001"
+          },
+          {
+            "Comment": "wpa_supplicant is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151439002"
+          }
+        ]
+      }
+    ]
+  }
+}

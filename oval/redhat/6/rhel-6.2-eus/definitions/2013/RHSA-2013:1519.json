@@ -1,0 +1,271 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20131519",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2013:1519: kernel security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.2 EUS - Server and Compute Node Only"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:1519",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:1519"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-4508",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-4508"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4299",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4299"
+      }
+    ],
+    "Description": "The kernel packages contain the Linux kernel, the core of any Linux\noperating system.\n\n* A race condition was found in the way asynchronous I/O and fallocate()\ninteracted when using the ext4 file system. A local, unprivileged user\ncould use this flaw to expose random data from an extent whose data blocks\nhave not yet been written, and thus contain data from a deleted file.\n(CVE-2012-4508, Important)\n\n* An information leak flaw was found in the way Linux kernel's device\nmapper subsystem, under certain conditions, interpreted data written to\nsnapshot block devices. An attacker could use this flaw to read data from\ndisk blocks in free space, which are normally inaccessible. (CVE-2013-4299,\nModerate)\n\nRed Hat would like to thank Theodore Ts'o for reporting CVE-2012-4508, and\nFujitsu for reporting CVE-2013-4299. Upstream acknowledges Dmitry Monakhov\nas the original reporter of CVE-2012-4508.\n\nThis update also fixes the following bugs:\n\n* When the Audit subsystem was under heavy load, it could loop infinitely\nin the audit_log_start() function instead of failing over to the error\nrecovery code. This would cause soft lockups in the kernel. With this\nupdate, the timeout condition in the audit_log_start() function has been\nmodified to properly fail over when necessary. (BZ#1017898)\n\n* When handling Memory Type Range Registers (MTRRs), the\nstop_one_cpu_nowait() function could potentially be executed in parallel\nwith the stop_machine() function, which resulted in a deadlock. The MTRR\nhandling logic now uses the stop_machine() function and makes use of mutual\nexclusion to avoid the aforementioned deadlock. (BZ#1017902)\n\n* Power-limit notification interrupts were enabled by default. This could\nlead to degradation of system performance or even render the system\nunusable on certain platforms, such as Dell PowerEdge servers. Power-limit\nnotification interrupts have been disabled by default and a new kernel\ncommand line parameter \"int_pln_enable\" has been added to allow users to\nobserve these events using the existing system counters. Power-limit\nnotification messages are also no longer displayed on the console.\nThe affected platforms no longer suffer from degraded system performance\ndue to this problem. (BZ#1020519)\n\n* Package level thermal and power limit events are not defined as MCE\nerrors for the x86 architecture. However, the mcelog utility erroneously\nreported these events as MCE errors with the following message:\n\n    kernel: [Hardware Error]: Machine check events logged\n\nPackage level thermal and power limit events are no longer reported as MCE\nerrors by mcelog. When these events are triggered, they are now reported\nonly in the respective counters in sysfs (specifically,\n/sys/devices/system/cpu/cpu\u003cnumber\u003e/thermal_throttle/). (BZ#1021950)\n\n* An insufficiently designed calculation in the CPU accelerator could cause\nan arithmetic overflow in the set_cyc2ns_scale() function if the system\nuptime exceeded 208 days prior to using kexec to boot into a new kernel.\nThis overflow led to a kernel panic on systems using the Time Stamp Counter\n(TSC) clock source, primarily systems using Intel Xeon E5 processors that\ndo not reset TSC on soft power cycles. A patch has been applied to modify\nthe calculation so that this arithmetic overflow and kernel panic can no\nlonger occur under these circumstances. (BZ#1024453)\n\nAll kernel users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. The system must be\nrebooted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-11-13"
+      },
+      "Updated": {
+        "Date": "2013-11-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-4508",
+          "Cvss2": "4.9/AV:L/AC:L/Au:N/C:C/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-4508",
+          "Public": "20121023"
+        },
+        {
+          "CveID": "CVE-2013-4299",
+          "Cvss2": "4.3/AV:A/AC:H/Au:S/C:C/I:N/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4299",
+          "Public": "20131016"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/869904",
+          "ID": "869904"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1004233",
+          "ID": "1004233"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:2.6.32-220.45.1.el6 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20131519025"
+              },
+              {
+                "Comment": "kernel earlier than 0:2.6.32-220.45.1.el6 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20131519026"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-bootwrapper is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519003"
+                  },
+                  {
+                    "Comment": "kernel-bootwrapper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519005"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519007"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519009"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-doc is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519011"
+                  },
+                  {
+                    "Comment": "kernel-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-firmware is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519013"
+                  },
+                  {
+                    "Comment": "kernel-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-headers is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519015"
+                  },
+                  {
+                    "Comment": "kernel-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519017"
+                  },
+                  {
+                    "Comment": "kernel-kdump is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump-devel is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519019"
+                  },
+                  {
+                    "Comment": "kernel-kdump-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perf is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519021"
+                  },
+                  {
+                    "Comment": "perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-perf is earlier than 0:2.6.32-220.45.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131519023"
+                  },
+                  {
+                    "Comment": "python-perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111530024"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130499",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2013:0499: xinetd security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0499",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0499"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-0862",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-0862"
+      }
+    ],
+    "Description": "The xinetd package provides a secure replacement for inetd, the Internet\nservices daemon. xinetd provides access control for all services based on\nthe address of the remote host and/or on time of access, and can prevent\ndenial-of-access attacks.\n\nWhen xinetd services are configured with the \"TCPMUX\" or \"TCPMUXPLUS\" type,\nand the tcpmux-server service is enabled, those services are accessible via\nport 1. It was found that enabling the tcpmux-server service (it is\ndisabled by default) allowed every xinetd service, including those that are\nnot configured with the \"TCPMUX\" or \"TCPMUXPLUS\" type, to be accessible via\nport 1. This could allow a remote attacker to bypass intended firewall\nrestrictions. (CVE-2012-0862)\n\nRed Hat would like to thank Thomas Swan of FedEx for reporting this issue.\n\nThis update also fixes the following bugs:\n\n* Prior to this update, a file descriptor array in the service.c source\nfile was not handled as expected. As a consequence, some of the descriptors\nremained open when xinetd was under heavy load. Additionally, the system\nlog was filled with a large number of messages that took up a lot of disk\nspace over time. This update modifies the xinetd code to handle the file\ndescriptors correctly and messages no longer fill the system log.\n(BZ#790036)\n\n* Prior to this update, services were disabled permanently when their CPS\nlimit was reached. As a consequence, a failed bind operation could occur\nwhen xinetd attempted to restart the service. This update adds additional\nlogic that attempts to restart the service. Now, the service is only\ndisabled if xinetd cannot restart the service after 30 attempts.\n(BZ#809271)\n\nAll users of xinetd are advised to upgrade to this updated package, which\ncontains backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-0862",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-0862",
+          "Public": "20120509"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/790940",
+          "ID": "790940"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "xinetd is earlier than 2:2.3.14-38.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20130499001"
+          },
+          {
+            "Comment": "xinetd is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20130499002"
+          }
+        ]
+      }
+    ]
+  }
+}

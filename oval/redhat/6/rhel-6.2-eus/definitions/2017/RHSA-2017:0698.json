@@ -1,0 +1,192 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170698",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2017:0698: subscription-manager security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0698",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0698"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4455",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4455"
+      }
+    ],
+    "Description": "The subscription-manager packages provide programs and libraries to allow users to manage subscriptions and yum repositories from the Red Hat entitlement platform.\n\nThe subscription-manager-migration-data package provides certificates for migrating a system from the legacy Red Hat Network Classic (RHN) to Red Hat Subscription Management (RHSM).\n\nThe python-rhsm packages provide a library for communicating with the representational state transfer (REST) interface of a Red Hat Unified Entitlement Platform. The Subscription Management tools use this interface to manage system entitlements, certificates, and access to content.\n\nThe following packages have been upgraded to a later upstream version: subscription-manager (1.18.10), python-rhsm (1.18.6), subscription-manager-migration-data (2.0.34). (BZ#1383475, BZ#1385446, BZ#1385382)\n\nSecurity Fix(es):\n\n* It was found that subscription-manager set weak permissions on files in /var/lib/rhsm/, causing an information disclosure. A local, unprivileged user could use this flaw to access sensitive data that could potentially be used in a social engineering attack. (CVE-2016-4455)\n\nRed Hat would like to thank Robert Scheck for reporting this issue.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 6.9 Release Notes and Red Hat Enterprise Linux 6.9 Technical Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-03-21"
+      },
+      "Updated": {
+        "Date": "2017-03-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-4455",
+          "Cvss2": "1.7/AV:L/AC:L/Au:S/C:P/I:N/A:N",
+          "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-732",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4455",
+          "Public": "20160525"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1340525",
+          "ID": "1340525"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-rhsm is earlier than 0:1.18.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698001"
+                  },
+                  {
+                    "Comment": "python-rhsm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-rhsm-certificates is earlier than 0:1.18.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698003"
+                  },
+                  {
+                    "Comment": "python-rhsm-certificates is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "subscription-manager is earlier than 0:1.18.10-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698005"
+                  },
+                  {
+                    "Comment": "subscription-manager is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "subscription-manager-firstboot is earlier than 0:1.18.10-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698007"
+                  },
+                  {
+                    "Comment": "subscription-manager-firstboot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "subscription-manager-gui is earlier than 0:1.18.10-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698009"
+                  },
+                  {
+                    "Comment": "subscription-manager-gui is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "subscription-manager-migration is earlier than 0:1.18.10-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698011"
+                  },
+                  {
+                    "Comment": "subscription-manager-migration is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "subscription-manager-plugin-container is earlier than 0:1.18.10-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698013"
+                  },
+                  {
+                    "Comment": "subscription-manager-plugin-container is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "subscription-manager-migration-data is earlier than 0:2.0.34-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698015"
+                  },
+                  {
+                    "Comment": "subscription-manager-migration-data is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170698016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

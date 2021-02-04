@@ -1,0 +1,87 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130505",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2013:0505: squid security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0505",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0505"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-5643",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-5643"
+      }
+    ],
+    "Description": "Squid is a high-performance proxy caching server for web clients that\nsupports FTP, Gopher, and HTTP data objects.\n\nA denial of service flaw was found in the way the Squid Cache Manager\nprocessed certain requests. A remote attacker who is able to access the\nCache Manager CGI could use this flaw to cause Squid to consume an\nexcessive amount of memory. (CVE-2012-5643)\n\nThis update also fixes the following bugs:\n\n* Due to a bug in the ConnStateData::noteMoreBodySpaceAvailable() function,\nchild processes of Squid terminated upon encountering a failed assertion.\nAn upstream patch has been provided and Squid child processes no longer\nterminate. (BZ#805879)\n\n* Due to an upstream patch, which renamed the HTTP header controlling\npersistent connections from \"Proxy-Connection\" to \"Connection\", the NTLM\npass-through authentication does not work, thus preventing login. This\nupdate adds the new \"http10\" option to the squid.conf file, which can be\nused to enable the change in the patch. This option is set to \"off\" by\ndefault. When set to \"on\", the NTLM pass-through authentication works\nproperly, thus allowing login attempts to succeed. (BZ#844723)\n\n* When the IPv6 protocol was disabled and Squid tried to handle an HTTP GET\nrequest containing an IPv6 address, the Squid child process terminated due\nto signal 6. This bug has been fixed and such requests are now handled as\nexpected. (BZ#832484)\n\n* The old \"stale if hit\" logic did not account for cases where the stored\nstale response became fresh due to a successful re-validation with the\norigin server. Consequently, incorrect warning messages were returned. Now,\nSquid no longer marks elements as stale in the described scenario.\n(BZ#847056)\n\n* When squid packages were installed before samba-winbind, the wbpriv group\ndid not include Squid. Consequently, NTLM authentication calls failed. Now,\nSquid correctly adds itself into the wbpriv group if samba-winbind is\ninstalled before Squid, thus fixing this bug. (BZ#797571)\n\n* In FIPS mode, Squid was using private MD5 hash functions for user\nauthentication and network access. As MD5 is incompatible with FIPS mode,\nSquid could fail to start. This update limits the use of the private MD5\nfunctions to local disk file hash identifiers, thus allowing Squid to work\nin FIPS mode. (BZ#833086)\n\n* Under high system load, the squid process could terminate unexpectedly\nwith a segmentation fault during reboot. This update provides better memory\nhandling during reboot, thus fixing this bug. (BZ#782732)\n\n* Squid incorrectly set the timeout limit for client HTTP connections with\nthe value for server-side connections, which is much higher, thus creating\nunnecessary delays. With this update, Squid uses a proper value for the\nclient timeout limit. (BZ#798090)\n\n* Squid did not properly release allocated memory when generating error\npage contents, which caused memory leaks. Consequently, the Squid proxy\nserver consumed a lot of memory within a short time period. This update\nfixes this memory leak. (BZ#758861)\n\n* Squid did not pass the ident value to a URL rewriter that was configured\nusing the \"url_rewrite_program\" directive. Consequently, the URL rewriter\nreceived the dash character (\"–\") as the user value instead of the correct\nuser name. Now, the URL rewriter receives the correct user name in the\ndescribed scenario. (BZ#797884)\n\n* Squid, used as a transparent proxy, can only handle the HTTP protocol.\nPreviously, it was possible to define a URL in which the access protocol\ncontained the asterisk character (*) or an unknown protocol namespace URI.\nConsequently, an \"Invalid URL\" error message was logged to access.log\nduring reload. This update ensures that \"http://\" is always used in\ntransparent proxy URLs, and the error message is no longer logged in this\nscenario. (BZ#720504)\n\nAll users of squid are advised to upgrade to these updated packages, which\nfix these issues. After installing this update, the squid service will be\nrestarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-5643",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-401",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-5643",
+          "Public": "20121217"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/887962",
+          "ID": "887962"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "squid is earlier than 7:3.1.10-16.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20130505001"
+          },
+          {
+            "Comment": "squid is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110545002"
+          }
+        ]
+      }
+    ]
+  }
+}

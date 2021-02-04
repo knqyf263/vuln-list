@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130522",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2013:0522: gdb security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0522",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0522"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-4355",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-4355"
+      }
+    ],
+    "Description": "The GNU Debugger (GDB) allows debugging of programs written in C, C++,\nJava, and other languages by executing them in a controlled fashion and\nthen printing out their data.\n\nGDB tried to auto-load certain files (such as GDB scripts, Python scripts,\nand a thread debugging library) from the current working directory when\ndebugging programs. This could result in the execution of arbitrary code\nwith the user's privileges when GDB was run in a directory that has\nuntrusted content. (CVE-2011-4355)\n\nWith this update, GDB no longer auto-loads files from the current directory\nand only trusts certain system directories by default. The list of trusted\ndirectories can be viewed and modified using the \"show auto-load safe-path\"\nand \"set auto-load safe-path\" GDB commands. Refer to the GDB manual, linked\nto in the References, for further information.\n\nThis update also fixes the following bugs:\n\n* When a struct member was at an offset greater than 256 MB, the resulting\nbit position within the struct overflowed and caused an invalid memory\naccess by GDB. With this update, the code has been modified to ensure that\nGDB can access such positions. (BZ#795424)\n\n* When a thread list of the core file became corrupted, GDB did not print\nthis list but displayed the \"Cannot find new threads: generic error\" error\nmessage instead. With this update, GDB has been modified and it now prints\nthe thread list of the core file as expected. (BZ#811648)\n\n* GDB did not properly handle debugging of multiple binaries with the\nsame build ID. This update modifies GDB to use symbolic links created for\nparticular binaries so that debugging of binaries that share a build ID\nnow proceeds as expected. Debugging of live programs and core files is\nnow more user-friendly. (BZ#836966)\n\nAll users of gdb are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-4355",
+          "Cvss2": "3.7/AV:L/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-20",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-4355",
+          "Public": "20110429"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/703238",
+          "ID": "703238"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gdb is earlier than 0:7.2-60.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130522001"
+                  },
+                  {
+                    "Comment": "gdb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130522002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gdb-gdbserver is earlier than 0:7.2-60.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130522003"
+                  },
+                  {
+                    "Comment": "gdb-gdbserver is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130522004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

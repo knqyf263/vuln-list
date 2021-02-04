@@ -1,0 +1,180 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130500",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2013:0500: hplip security, bug fix and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0500",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0500"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2722",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2722"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0200",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0200"
+      }
+    ],
+    "Description": "The hplip packages contain the Hewlett-Packard Linux Imaging and Printing\nProject (HPLIP), which provides drivers for Hewlett-Packard printers and\nmulti-function peripherals.\n\nSeveral temporary file handling flaws were found in HPLIP. A local attacker\ncould use these flaws to perform a symbolic link attack, overwriting\narbitrary files accessible to a process using HPLIP. (CVE-2013-0200,\nCVE-2011-2722)\n\nThe CVE-2013-0200 issues were discovered by Tim Waugh of Red Hat.\n\nThe hplip packages have been upgraded to upstream version 3.12.4, which\nprovides a number of bug fixes and enhancements over the previous version.\n(BZ#731900)\n\nThis update also fixes the following bugs:\n\n* Previously, the hpijs package required the obsolete cupsddk-drivers\npackage, which was provided by the cups package. Under certain\ncircumstances, this dependency caused hpijs installation to fail. This\nbug has been fixed and hpijs no longer requires cupsddk-drivers.\n(BZ#829453)\n\n* The configuration of the Scanner Access Now Easy (SANE) back end is\nlocated in the /etc/sane.d/dll.d/ directory, however, the hp-check\nutility checked only the /etc/sane.d/dll.conf file. Consequently,\nhp-check checked for correct installation, but incorrectly reported a\nproblem with the way the SANE back end was installed. With this update,\nhp-check properly checks for installation problems in both locations as\nexpected. (BZ#683007)\n\nAll users of hplip are advised to upgrade to these updated packages, which\nfix these issues and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-2722",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-377",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2722",
+          "Public": "20110713"
+        },
+        {
+          "CveID": "CVE-2013-0200",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-377",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0200",
+          "Public": "20130221"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/725830",
+          "ID": "725830"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/902163",
+          "ID": "902163"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hpijs is earlier than 1:3.12.4-4.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130500001"
+                  },
+                  {
+                    "Comment": "hpijs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110154002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hplip is earlier than 0:3.12.4-4.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130500003"
+                  },
+                  {
+                    "Comment": "hplip is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110154004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hplip-common is earlier than 0:3.12.4-4.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130500005"
+                  },
+                  {
+                    "Comment": "hplip-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110154006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hplip-gui is earlier than 0:3.12.4-4.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130500007"
+                  },
+                  {
+                    "Comment": "hplip-gui is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110154008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hplip-libs is earlier than 0:3.12.4-4.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130500009"
+                  },
+                  {
+                    "Comment": "hplip-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110154010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsane-hpaio is earlier than 0:3.12.4-4.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130500011"
+                  },
+                  {
+                    "Comment": "libsane-hpaio is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110154012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

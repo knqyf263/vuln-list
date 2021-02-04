@@ -1,0 +1,213 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151330",
+  "Version": "649",
+  "Metadata": {
+    "Title": "RHSA-2015:1330: python security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1330",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1330"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1752",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1752"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-1912",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-1912"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-4650",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-4650"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-7185",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-7185"
+      }
+    ],
+    "Description": "Python is an interpreted, interactive, object-oriented programming language\noften compared to Tcl, Perl, Scheme, or Java. Python includes modules,\nclasses, exceptions, very high level dynamic data types and dynamic typing.\nPython supports interfaces to many system calls and libraries, as well as\nto various windowing systems (X11, Motif, Tk, Mac and MFC).\n\nIt was discovered that the socket.recvfrom_into() function failed to check\nthe size of the supplied buffer. This could lead to a buffer overflow when\nthe function was called with an insufficiently sized buffer.\n(CVE-2014-1912)\n\nIt was discovered that multiple Python standard library modules\nimplementing network protocols (such as httplib or smtplib) failed to\nrestrict the sizes of server responses. A malicious server could cause a\nclient using one of the affected modules to consume an excessive amount of\nmemory. (CVE-2013-1752)\n\nIt was discovered that the CGIHTTPServer module incorrectly handled URL\nencoded paths. A remote attacker could use this flaw to execute scripts\noutside of the cgi-bin directory, or disclose the source code of the\nscripts in the cgi-bin directory. (CVE-2014-4650)\n\nAn integer overflow flaw was found in the way the buffer() function handled\nits offset and size arguments. An attacker able to control these arguments\ncould use this flaw to disclose portions of the application memory or cause\nit to crash. (CVE-2014-7185)\n\nThese updated python packages also include numerous bug fixes and\nenhancements. Space precludes documenting all of these changes in this\nadvisory. For information on the most significant of these changes, users\nare directed to the following article on the Red Hat Customer Portal:\n\nhttps://access.redhat.com/articles/1495363\n\nAll python users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add this\nenhancement.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-20"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1752",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1752",
+          "Public": "20120925"
+        },
+        {
+          "CveID": "CVE-2014-1912",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-120",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-1912",
+          "Public": "20140114"
+        },
+        {
+          "CveID": "CVE-2014-4650",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-138",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-4650",
+          "Public": "20140623"
+        },
+        {
+          "CveID": "CVE-2014-7185",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:N/A:P",
+          "Cwe": "CWE-190-\u003eCWE-125-\u003eCWE-200",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-7185",
+          "Public": "20140623"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1046174",
+          "ID": "1046174"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1062370",
+          "ID": "1062370"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1113527",
+          "ID": "1113527"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1146026",
+          "ID": "1146026"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python is earlier than 0:2.6.6-64.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151330001"
+                  },
+                  {
+                    "Comment": "python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110554004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-devel is earlier than 0:2.6.6-64.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151330003"
+                  },
+                  {
+                    "Comment": "python-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110554006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-libs is earlier than 0:2.6.6-64.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151330005"
+                  },
+                  {
+                    "Comment": "python-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110554008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-test is earlier than 0:2.6.6-64.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151330007"
+                  },
+                  {
+                    "Comment": "python-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110554010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-tools is earlier than 0:2.6.6-64.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151330009"
+                  },
+                  {
+                    "Comment": "python-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110554012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tkinter is earlier than 0:2.6.6-64.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151330011"
+                  },
+                  {
+                    "Comment": "tkinter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110554014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

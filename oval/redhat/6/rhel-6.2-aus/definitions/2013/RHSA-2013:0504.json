@@ -1,0 +1,137 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130504",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2013:0504: dhcp security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0504",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0504"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-3955",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-3955"
+      }
+    ],
+    "Description": "The dhcp packages provide the Dynamic Host Configuration Protocol (DHCP)\nthat allows individual devices on an IP network to get their own network\nconfiguration information, including an IP address, a subnet mask, and a\nbroadcast address.\n\nA flaw was found in the way the dhcpd daemon handled the expiration time of\nIPv6 leases. If dhcpd's configuration was changed to reduce the default\nIPv6 lease time, lease renewal requests for previously assigned leases\ncould cause dhcpd to crash. (CVE-2012-3955)\n\nThis update also fixes the following bugs:\n\n* Prior to this update, the DHCP server discovered only the first IP\naddress of a network interface if the network interface had more than one\nconfigured IP address. As a consequence, the DHCP server failed to\nrestart if the server was configured to serve only a subnet of the\nfollowing IP addresses. This update modifies network interface addresses\ndiscovery code to find all addresses of a network interface. The DHCP\nserver can also serve subnets of other addresses. (BZ#803540)\n\n* Prior to this update, the dhclient rewrote the /etc/resolv.conf file\nwith backup data after it was stopped even when the PEERDNS flag was set\nto \"no\" before shut down if the configuration file was changed while the\ndhclient ran with PEERDNS=yes. This update removes the backing up and\nrestoring functions for this configuration file from the dhclient-script.\nNow, the dhclient no longer rewrites the /etc/resolv.conf file when\nstopped. (BZ#824622)\n\nAll users of DHCP are advised to upgrade to these updated packages, which\nfix these issues. After installing this update, all DHCP servers will be\nrestarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-3955",
+          "Cvss2": "2.9/AV:A/AC:M/Au:N/C:N/I:N/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-3955",
+          "Public": "20120912"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/856766",
+          "ID": "856766"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhclient is earlier than 12:4.1.1-34.P1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130504001"
+                  },
+                  {
+                    "Comment": "dhclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100923002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp is earlier than 12:4.1.1-34.P1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130504003"
+                  },
+                  {
+                    "Comment": "dhcp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100923004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-common is earlier than 12:4.1.1-34.P1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130504005"
+                  },
+                  {
+                    "Comment": "dhcp-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111819006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-devel is earlier than 12:4.1.1-34.P1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130504007"
+                  },
+                  {
+                    "Comment": "dhcp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100923006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

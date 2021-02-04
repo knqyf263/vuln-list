@@ -1,0 +1,86 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120958",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2012:0958: sos security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0958",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0958"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2664",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2664"
+      }
+    ],
+    "Description": "The sos package contains a set of tools that gather information from system\nhardware, logs and configuration files. The information can then be used\nfor diagnostic purposes and debugging.\n\nThe sosreport utility collected the Kickstart configuration file\n(\"/root/anaconda-ks.cfg\"), but did not remove the root user's password from\nit before adding the file to the resulting archive of debugging\ninformation. An attacker able to access the archive could possibly use this\nflaw to obtain the root user's password. \"/root/anaconda-ks.cfg\" usually\nonly contains a hash of the password, not the plain text password.\n(CVE-2012-2664)\n\nNote: This issue affected all installations, not only systems installed via\nKickstart. A \"/root/anaconda-ks.cfg\" file is created by all installation\ntypes.\n\nThis updated sos package also includes numerous bug fixes and enhancements.\nSpace precludes documenting all of these changes in this advisory. Users\nare directed to the Red Hat Enterprise Linux 6.3 Technical Notes for\ninformation on the most significant of these changes.\n\nAll users of sos are advised to upgrade to this updated package, which\ncontains backported patches to correct these issues and add these\nenhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-19"
+      },
+      "Updated": {
+        "Date": "2012-06-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-2664",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:P/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2664",
+          "Public": "20120214"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/826884",
+          "ID": "826884"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "sos is earlier than 0:2.2-29.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20120958001"
+          },
+          {
+            "Comment": "sos is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20111536002"
+          }
+        ]
+      }
+    ]
+  }
+}

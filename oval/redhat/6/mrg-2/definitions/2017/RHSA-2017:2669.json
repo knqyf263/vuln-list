@@ -1,0 +1,631 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20172669",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2017:2669: kernel-rt security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise MRG 2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:2669",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:2669"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-8839",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-8839"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-10088",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-10088"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-10741",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-10741"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-7042",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-7042"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-7097",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-7097"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8645",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8645"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9576",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9576"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9604",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9604"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9685",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9685"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9806",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9806"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-2671",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-2671"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-5551",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-5551"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-5970",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-5970"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-6001",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-6001"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-6951",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-6951"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7187",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7187"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7495",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7495"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7533",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7533"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7889",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7889"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-8797",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-8797"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-8890",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-8890"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-9074",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-9074"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-9075",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-9075"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-9076",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-9076"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-9077",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-9077"
+      }
+    ],
+    "Description": "The kernel-rt packages provide the Real Time Linux Kernel, which enables fine-tuning for systems with extremely high determinism requirements.\n\nSecurity Fix(es):\n\n* A race condition was found in the Linux kernel, present since v3.14-rc1 through v4.12. The race happens between threads of inotify_handle_event() and vfs_rename() while running the rename operation against the same file. As a result of the race the next slab data or the slab's free list pointer can be corrupted with attacker-controlled data, which may lead to the privilege escalation. (CVE-2017-7533, Important)\n\n* It was found that the NFSv4 server in the Linux kernel did not properly validate layout type when processing NFSv4 pNFS LAYOUTGET and GETDEVICEINFO operands. A remote attacker could use this flaw to soft-lockup the system and thus cause denial of service. (CVE-2017-8797, Important)\n\nThis update also fixes multiple Moderate and Low impact security issues:\n\nCVE-2017-8797 CVE-2015-8839 CVE-2016-9576 CVE-2016-7042 CVE-2016-7097 CVE-2016-8645 CVE-2016-9576 CVE-2016-9806 CVE-2016-10088 CVE-2017-2671 CVE-2017-5970 CVE-2017-6001 CVE-2017-6951 CVE-2017-7187 CVE-2017-7889 CVE-2017-8890 CVE-2017-9074 CVE-2017-8890 CVE-2017-9075 CVE-2017-8890 CVE-2017-9076 CVE-2017-8890 CVE-2017-9077 CVE-2016-9604 CVE-2016-9685\n\nDocumentation for these issues are available from the Technical Notes document linked to in the References section.\n\nRed Hat would like to thank Leilei Lin (Alibaba Group), Fan Wu (The University of Hong Kong), and Shixiong Zhao (The University of Hong Kong) for reporting CVE-2017-7533 and Marco Grassi for reporting CVE-2016-8645. The CVE-2016-7042 issue was discovered by Ondrej Kozina (Red Hat); the CVE-2016-7097 issue was discovered by Andreas Gruenbacher (Red Hat) and Jan Kara (SUSE); the CVE-2016-9604 issue was discovered by David Howells (Red Hat); and the CVE-2016-9685 issue was discovered by Qian Cai (Red Hat).",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-09-06"
+      },
+      "Updated": {
+        "Date": "2017-09-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-8839",
+          "Cvss2": "4.7/AV:L/AC:M/Au:N/C:N/I:C/A:N",
+          "Cwe": "CWE-362",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-8839",
+          "Public": "20160331"
+        },
+        {
+          "CveID": "CVE-2016-10088",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-10088",
+          "Public": "20170111"
+        },
+        {
+          "CveID": "CVE-2016-10741",
+          "Cvss3": "4.7/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-369",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-10741",
+          "Public": "20161108"
+        },
+        {
+          "CveID": "CVE-2016-7042",
+          "Cvss2": "4.9/AV:L/AC:L/Au:N/C:N/I:N/A:C",
+          "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-121",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-7042",
+          "Public": "20161013"
+        },
+        {
+          "CveID": "CVE-2016-7097",
+          "Cvss2": "3.3/AV:L/AC:M/Au:N/C:P/I:P/A:N",
+          "Cvss3": "4.4/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-287",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-7097",
+          "Public": "20160526"
+        },
+        {
+          "CveID": "CVE-2016-8645",
+          "Cvss2": "4.9/AV:L/AC:L/Au:N/C:N/I:N/A:C",
+          "Cvss3": "6.2/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-617",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8645",
+          "Public": "20161110"
+        },
+        {
+          "CveID": "CVE-2016-9576",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9576",
+          "Public": "20161125"
+        },
+        {
+          "CveID": "CVE-2016-9604",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:N/I:P/A:N",
+          "Cvss3": "4.4/CVSS:3.0/AV:L/AC:L/PR:H/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-732",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9604",
+          "Public": "20170418"
+        },
+        {
+          "CveID": "CVE-2016-9685",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:P/I:N/A:N",
+          "Cvss3": "3.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N",
+          "Cwe": "CWE-772",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9685",
+          "Public": "20161201"
+        },
+        {
+          "CveID": "CVE-2016-9806",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9806",
+          "Public": "20160515"
+        },
+        {
+          "CveID": "CVE-2017-2671",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-362",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-2671",
+          "Public": "20170324"
+        },
+        {
+          "CveID": "CVE-2017-5551",
+          "Cvss3": "4.4/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-287",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-5551",
+          "Public": "20170109"
+        },
+        {
+          "CveID": "CVE-2017-5970",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-476",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-5970",
+          "Public": "20170204"
+        },
+        {
+          "CveID": "CVE-2017-6001",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-362",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-6001",
+          "Public": "20170114"
+        },
+        {
+          "CveID": "CVE-2017-6951",
+          "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-476",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-6951",
+          "Public": "20170303"
+        },
+        {
+          "CveID": "CVE-2017-7187",
+          "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-121",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7187",
+          "Public": "20170316"
+        },
+        {
+          "CveID": "CVE-2017-7495",
+          "Cvss3": "6.2/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-665",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7495",
+          "Public": "20170512"
+        },
+        {
+          "CveID": "CVE-2017-7533",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-362-\u003eCWE-642",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7533",
+          "Public": "20170803"
+        },
+        {
+          "CveID": "CVE-2017-7889",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-391",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7889",
+          "Public": "20170405"
+        },
+        {
+          "CveID": "CVE-2017-8797",
+          "Cvss3": "8.6/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+          "Cwe": "CWE-20",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-8797",
+          "Public": "20170627"
+        },
+        {
+          "CveID": "CVE-2017-8890",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-8890",
+          "Public": "20170509"
+        },
+        {
+          "CveID": "CVE-2017-9074",
+          "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-9074",
+          "Public": "20170516"
+        },
+        {
+          "CveID": "CVE-2017-9075",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-9075",
+          "Public": "20170517"
+        },
+        {
+          "CveID": "CVE-2017-9076",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-9076",
+          "Public": "20170510"
+        },
+        {
+          "CveID": "CVE-2017-9077",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-9077",
+          "Public": "20170510"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1323577",
+          "ID": "1323577"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1368938",
+          "ID": "1368938"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1373966",
+          "ID": "1373966"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1389433",
+          "ID": "1389433"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1393904",
+          "ID": "1393904"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1396941",
+          "ID": "1396941"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1401502",
+          "ID": "1401502"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1403145",
+          "ID": "1403145"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1412210",
+          "ID": "1412210"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1416126",
+          "ID": "1416126"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1421638",
+          "ID": "1421638"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1422825",
+          "ID": "1422825"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1433252",
+          "ID": "1433252"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1434327",
+          "ID": "1434327"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1436649",
+          "ID": "1436649"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1444493",
+          "ID": "1444493"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1450261",
+          "ID": "1450261"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1450972",
+          "ID": "1450972"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1452679",
+          "ID": "1452679"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1452688",
+          "ID": "1452688"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1452691",
+          "ID": "1452691"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1452744",
+          "ID": "1452744"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1466329",
+          "ID": "1466329"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1468283",
+          "ID": "1468283"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1671869",
+          "ID": "1671869"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_mrg:2",
+        "cpe:/a:redhat:enterprise_mrg:2:computenode:el6",
+        "cpe:/a:redhat:enterprise_mrg:2:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20120496022"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20120496021"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669001"
+                  },
+                  {
+                    "Comment": "kernel-rt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669003"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-devel is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669005"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-devel is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669007"
+                  },
+                  {
+                    "Comment": "kernel-rt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-doc is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669009"
+                  },
+                  {
+                    "Comment": "kernel-rt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-firmware is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669011"
+                  },
+                  {
+                    "Comment": "kernel-rt-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669013"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-devel is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669015"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669017"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is earlier than 1:3.10.0-693.2.1.rt56.585.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172669019"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

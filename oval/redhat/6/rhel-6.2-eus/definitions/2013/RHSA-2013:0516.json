@@ -1,0 +1,178 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130516",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2013:0516: evolution security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0516",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0516"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3201",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3201"
+      }
+    ],
+    "Description": "Evolution is the GNOME mailer, calendar, contact manager and communication\ntool. The components which make up Evolution are tightly integrated with\none another and act as a seamless personal information-management tool.\n\nThe way Evolution handled mailto URLs allowed any file to be attached to\nthe new message. This could lead to information disclosure if the user did\nnot notice the attached file before sending the message. With this update,\nmailto URLs cannot be used to attach certain files, such as hidden files or\nfiles in hidden directories, files in the /etc/ directory, or files\nspecified using a path containing \"..\". (CVE-2011-3201)\n\nRed Hat would like to thank Matt McCutchen for reporting this issue.\n\nThis update also fixes the following bugs:\n\n* Creating a contact list with contact names encoded in UTF-8 caused these\nnames to be displayed in the contact list editor in the ASCII encoding\ninstead of UTF-8. This bug has been fixed and the contact list editor now\ndisplays the names in the correct format. (BZ#707526)\n\n* Due to a bug in the evolution-alarm-notify process, calendar appointment\nalarms did not appear in some types of calendars. The underlying source\ncode has been modified and calendar notifications work as expected.\n(BZ#805239)\n\n* An attempt to print a calendar month view as a PDF file caused Evolution\nto terminate unexpectedly. This update applies a patch to fix this bug and\nEvolution no longer crashes in this situation. (BZ#890642)\n\nAll evolution users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. All running instances\nof Evolution must be restarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-3201",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-356",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3201",
+          "Public": "20110825"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/733504",
+          "ID": "733504"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "evolution is earlier than 0:2.28.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516001"
+                  },
+                  {
+                    "Comment": "evolution is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "evolution-conduits is earlier than 0:2.28.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516003"
+                  },
+                  {
+                    "Comment": "evolution-conduits is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "evolution-devel is earlier than 0:2.28.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516005"
+                  },
+                  {
+                    "Comment": "evolution-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "evolution-help is earlier than 0:2.28.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516007"
+                  },
+                  {
+                    "Comment": "evolution-help is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "evolution-perl is earlier than 0:2.28.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516009"
+                  },
+                  {
+                    "Comment": "evolution-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "evolution-pst is earlier than 0:2.28.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516011"
+                  },
+                  {
+                    "Comment": "evolution-pst is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "evolution-spamassassin is earlier than 0:2.28.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516013"
+                  },
+                  {
+                    "Comment": "evolution-spamassassin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130516014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

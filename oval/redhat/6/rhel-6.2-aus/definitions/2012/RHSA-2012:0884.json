@@ -1,0 +1,164 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120884",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2012:0884: openssh security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0884",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0884"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-5000",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-5000"
+      }
+    ],
+    "Description": "OpenSSH is OpenBSD's Secure Shell (SSH) protocol implementation. These\npackages include the core files necessary for the OpenSSH client and\nserver.\n\nA denial of service flaw was found in the OpenSSH GSSAPI authentication\nimplementation. A remote, authenticated user could use this flaw to make\nthe OpenSSH server daemon (sshd) use an excessive amount of memory, leading\nto a denial of service. GSSAPI authentication is enabled by default\n(\"GSSAPIAuthentication yes\" in \"/etc/ssh/sshd_config\"). (CVE-2011-5000)\n\nThese updated openssh packages also provide fixes for the following bugs:\n\n* SSH X11 forwarding failed if IPv6 was enabled and the parameter\nX11UseLocalhost was set to \"no\". Consequently, users could not set X\nforwarding. This update fixes sshd and ssh to correctly bind the port for\nthe IPv6 protocol. As a result, X11 forwarding now works as expected with\nIPv6. (BZ#732955)\n\n* The sshd daemon was killed by the OOM killer when running a stress test.\nConsequently, a user could not log in. With this update, the sshd daemon\nsets its oom_adj value to -17. As a result, sshd is not chosen by OOM\nkiller and users are able to log in to solve problems with memory.\n(BZ#744236)\n\n* If the SSH server is configured with a banner that contains a backslash\ncharacter, then the client will escape it with another \"\\\" character, so it\nprints double backslashes. An upstream patch has been applied to correct\nthe problem and the SSH banner is now correctly displayed. (BZ#809619)\n\nIn addition, these updated openssh packages provide the following\nenhancements:\n\n* Previously, SSH allowed multiple ways of authentication of which only one\nwas required for a successful login. SSH can now be set up to require\nmultiple ways of authentication. For example, logging in to an SSH-enabled\nmachine requires both a passphrase and a public key to be entered. The\nRequiredAuthentications1 and RequiredAuthentications2 options can be\nconfigured in the /etc/ssh/sshd_config file to specify authentications that\nare required for a successful login. For example, to set key and password\nauthentication for SSH version 2, type:\n\necho \"RequiredAuthentications2 publickey,password\" \u003e\u003e /etc/ssh/sshd_config\n\nFor more information on the aforementioned /etc/ssh/sshd_config options,\nrefer to the sshd_config man page. (BZ#657378)\n\n* Previously, OpenSSH could use the Advanced Encryption Standard New\nInstructions (AES-NI) instruction set only with the AES Cipher-block\nchaining (CBC) cipher. This update adds support for Counter (CTR) mode\nencryption in OpenSSH so the AES-NI instruction set can now be used\nefficiently also with the AES CTR cipher. (BZ#756929)\n\n* Prior to this update, an unprivileged slave sshd process was run as\nthe sshd_t context during privilege separation (privsep). sshd_t is the\nSELinux context used for running the sshd daemon. Given that the\nunprivileged slave process is run under the user's UID, it is fitting to\nrun this process under the user's SELinux context instead of the privileged\nsshd_t context. With this update, the unprivileged slave process is now run\nas the user's context instead of the sshd_t context in accordance with the\nprinciple of privilege separation. The unprivileged process, which might be\npotentially more sensitive to security threats, is now run under the user's\nSELinux context. (BZ#798241)\n\nUsers are advised to upgrade to these updated openssh packages, which\ncontain backported patches to resolve these issues and add these\nenhancements. After installing this update, the OpenSSH server daemon\n(sshd) will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-19"
+      },
+      "Updated": {
+        "Date": "2012-06-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-5000",
+          "Cvss2": "3.5/AV:N/AC:M/Au:S/C:N/I:N/A:P",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-5000",
+          "Public": "20110801"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/809938",
+          "ID": "809938"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh is earlier than 0:5.3p1-81.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884001"
+                  },
+                  {
+                    "Comment": "openssh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-askpass is earlier than 0:5.3p1-81.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884003"
+                  },
+                  {
+                    "Comment": "openssh-askpass is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-clients is earlier than 0:5.3p1-81.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884005"
+                  },
+                  {
+                    "Comment": "openssh-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-ldap is earlier than 0:5.3p1-81.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884007"
+                  },
+                  {
+                    "Comment": "openssh-ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-server is earlier than 0:5.3p1-81.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884009"
+                  },
+                  {
+                    "Comment": "openssh-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pam_ssh_agent_auth is earlier than 0:0.9-81.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884011"
+                  },
+                  {
+                    "Comment": "pam_ssh_agent_auth is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

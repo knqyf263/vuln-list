@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141294",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2014:1294: bash security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.2 Advanced Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1294",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1294"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-6271",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-6271"
+      }
+    ],
+    "Description": "The GNU Bourne Again shell (Bash) is a shell and command language\ninterpreter compatible with the Bourne shell (sh). Bash is the default\nshell for Red Hat Enterprise Linux.\n\nA flaw was found in the way Bash evaluated certain specially crafted\nenvironment variables. An attacker could use this flaw to override or\nbypass environment restrictions to execute shell commands. Certain\nservices and applications allow remote unauthenticated attackers to\nprovide environment variables, allowing them to exploit this issue.\n(CVE-2014-6271)\n\nFor additional information on the CVE-2014-6271 flaw, refer to the\nKnowledgebase article at https://access.redhat.com/articles/1200223\n\nRed Hat would like to thank Stephane Chazelas for reporting this issue.\n\nAll bash users are advised to upgrade to these updated packages, which\ncontain a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-09-24"
+      },
+      "Updated": {
+        "Date": "2014-09-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-6271",
+          "Cvss2": "7.5/AV:N/AC:L/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-78",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-6271",
+          "Public": "20140924"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1141597",
+          "ID": "1141597"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bash is earlier than 0:4.1.2-9.el6_2.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141294001"
+                  },
+                  {
+                    "Comment": "bash is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141294002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bash-doc is earlier than 0:4.1.2-9.el6_2.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141294003"
+                  },
+                  {
+                    "Comment": "bash-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141294004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

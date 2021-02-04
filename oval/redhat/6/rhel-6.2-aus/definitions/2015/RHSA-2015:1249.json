@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151249",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2015:1249: httpd security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1249",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1249"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-5704",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-5704"
+      }
+    ],
+    "Description": "The httpd packages provide the Apache HTTP Server, a powerful, efficient,\nand extensible web server.\n\nA flaw was found in the way httpd handled HTTP Trailer headers when\nprocessing requests using chunked encoding. A malicious client could use\nTrailer headers to set additional HTTP headers after header processing was\nperformed by other modules. This could, for example, lead to a bypass of\nheader restrictions defined with mod_headers. (CVE-2013-5704)\n\nThis update also fixes the following bugs:\n\n* The order of mod_proxy workers was not checked when httpd configuration\nwas reloaded. When mod_proxy workers were removed, added, or their order\nwas changed, their parameters and scores could become mixed. The order of\nmod_proxy workers has been made internally consistent during configuration\nreload. (BZ#1149906)\n\n* The local host certificate created during firstboot contained CA\nextensions, which caused the httpd service to return warning messages.\nThis has been addressed by local host certificates being generated with the\n\"-extensions v3_req\" option. (BZ#906476)\n\n* The default mod_ssl configuration no longer enables support for SSL\ncipher suites using the single DES, IDEA, or SEED encryption algorithms.\n(BZ#1086771)\n\n* The apachectl script did not take into account the HTTPD_LANG variable\nset in the /etc/sysconfig/httpd file during graceful restarts.\nConsequently, httpd did not use a changed value of HTTPD_LANG when the\ndaemon was restarted gracefully. The script has been fixed to handle the\nHTTPD_LANG variable correctly. (BZ#963146)\n\n* The mod_deflate module failed to check the original file size while\nextracting files larger than 4 GB, making it impossible to extract large\nfiles. Now, mod_deflate checks the original file size properly according to\nRFC1952, and it is able to decompress files larger than 4 GB. (BZ#1057695)\n\n* The httpd service did not check configuration before restart. When a\nconfiguration contained an error, an attempt to restart httpd gracefully\nfailed. Now, httpd checks configuration before restart and if the\nconfiguration is in an inconsistent state, an error message is printed,\nhttpd is not stopped and a restart is not performed. (BZ#1146194)\n\n* The SSL_CLIENT_VERIFY environment variable was incorrectly handled when\nthe \"SSLVerifyClient optional_no_ca\" and \"SSLSessionCache\" options were\nused. When an SSL session was resumed, the SSL_CLIENT_VERIFY value was set\nto \"SUCCESS\" instead of the previously set \"GENEROUS\". SSL_CLIENT_VERIFY is\nnow correctly set to GENEROUS in this scenario. (BZ#1149703)\n\n* The ab utility did not correctly handle situations when an SSL connection\nwas closed after some data had already been read. As a consequence, ab did\nnot work correctly with SSL servers and printed \"SSL read failed\" error\nmessages. With this update, ab works as expected with HTTPS servers.\n(BZ#1045477)\n\n* When a client presented a revoked certificate, log entries were created\nonly at the debug level. The log level of messages regarding a revoked\ncertificate has been increased to INFO, and administrators are now properly\ninformed of this situation. (BZ#1161328)\n\nIn addition, this update adds the following enhancement:\n\n* A mod_proxy worker can now be set into drain mode (N) using the\nbalancer-manager web interface or using the httpd configuration file.\nA worker in drain mode accepts only existing sticky sessions destined for\nitself and ignores all other requests. The worker waits until all clients\ncurrently connected to this worker complete their work before the worker is\nstopped. As a result, drain mode enables to perform maintenance on a worker\nwithout affecting clients. (BZ#767130)\n\nUsers of httpd are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add this\nenhancement. After installing the updated packages, the httpd service will\nbe restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-20"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-5704",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-287",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-5704",
+          "Public": "20131019"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1082903",
+          "ID": "1082903"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd is earlier than 0:2.2.15-45.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151249001"
+                  },
+                  {
+                    "Comment": "httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-devel is earlier than 0:2.2.15-45.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151249003"
+                  },
+                  {
+                    "Comment": "httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-manual is earlier than 0:2.2.15-45.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151249005"
+                  },
+                  {
+                    "Comment": "httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-tools is earlier than 0:2.2.15-45.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151249007"
+                  },
+                  {
+                    "Comment": "httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ssl is earlier than 1:2.2.15-45.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151249009"
+                  },
+                  {
+                    "Comment": "mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

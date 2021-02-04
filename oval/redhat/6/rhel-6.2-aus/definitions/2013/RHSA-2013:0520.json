@@ -1,0 +1,180 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130520",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2013:0520: dovecot security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0520",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0520"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2166",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2166"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2167",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2167"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-4318",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-4318"
+      }
+    ],
+    "Description": "Dovecot is an IMAP server, written with security primarily in mind, for\nLinux and other UNIX-like systems. It also contains a small POP3 server. It\nsupports mail in either of maildir or mbox formats. The SQL drivers and\nauthentication plug-ins are provided as sub-packages.\n\nTwo flaws were found in the way some settings were enforced by the\nscript-login functionality of Dovecot. A remote, authenticated user could\nuse these flaws to bypass intended access restrictions or conduct a\ndirectory traversal attack by leveraging login scripts. (CVE-2011-2166,\nCVE-2011-2167)\n\nA flaw was found in the way Dovecot performed remote server identity\nverification, when it was configured to proxy IMAP and POP3 connections to\nremote hosts using TLS/SSL protocols. A remote attacker could use this flaw\nto conduct man-in-the-middle attacks using an X.509 certificate issued by\na trusted Certificate Authority (for a different name). (CVE-2011-4318)\n\nThis update also fixes the following bug:\n\n* When a new user first accessed their IMAP inbox, Dovecot was, under some\ncircumstances, unable to change the group ownership of the inbox directory\nin the user's Maildir location to match that of the user's mail spool\n(/var/mail/$USER). This correctly generated an \"Internal error occurred\"\nmessage. However, with a subsequent attempt to access the inbox, Dovecot\nsaw that the directory already existed and proceeded with its operation,\nleaving the directory with incorrectly set permissions. This update\ncorrects the underlying permissions setting error. When a new user now\naccesses their inbox for the first time, and it is not possible to set\ngroup ownership, Dovecot removes the created directory and generates an\nerror message instead of keeping the directory with incorrect group\nownership. (BZ#697620)\n\nUsers of dovecot are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. After installing the\nupdated packages, the dovecot service will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-2166",
+          "Cvss2": "3.6/AV:N/AC:H/Au:S/C:P/I:P/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2166",
+          "Public": "20110511"
+        },
+        {
+          "CveID": "CVE-2011-2167",
+          "Cvss2": "3.6/AV:N/AC:H/Au:S/C:P/I:P/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2167",
+          "Public": "20110511"
+        },
+        {
+          "CveID": "CVE-2011-4318",
+          "Cvss2": "5.8/AV:N/AC:M/Au:N/C:P/I:P/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-4318",
+          "Public": "20111117"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/709095",
+          "ID": "709095"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/709097",
+          "ID": "709097"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/754980",
+          "ID": "754980"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot is earlier than 1:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130520001"
+                  },
+                  {
+                    "Comment": "dovecot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot-devel is earlier than 1:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130520003"
+                  },
+                  {
+                    "Comment": "dovecot-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot-mysql is earlier than 1:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130520005"
+                  },
+                  {
+                    "Comment": "dovecot-mysql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot-pgsql is earlier than 1:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130520007"
+                  },
+                  {
+                    "Comment": "dovecot-pgsql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot-pigeonhole is earlier than 1:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130520009"
+                  },
+                  {
+                    "Comment": "dovecot-pigeonhole is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

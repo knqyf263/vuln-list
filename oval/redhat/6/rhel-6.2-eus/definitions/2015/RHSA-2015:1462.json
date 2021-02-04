@@ -1,0 +1,181 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151462",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2015:1462: ipa security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1462",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1462"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-5312",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-5312"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-6662",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-6662"
+      }
+    ],
+    "Description": "Two cross-site scripting (XSS) flaws were found in jQuery, which impacted\nthe Identity Management web administrative interface, and could allow an\nauthenticated user to inject arbitrary HTML or web script into the\ninterface. (CVE-2010-5312, CVE-2012-6662)\n\nNote: The IdM version provided by this update no longer uses jQuery.\n\nBug fixes:\n\n* The ipa-server-install, ipa-replica-install, and ipa-client-install\nutilities are not supported on machines running in FIPS-140 mode.\nPreviously, IdM did not warn users about this. Now, IdM does not allow\nrunning the utilities in FIPS-140 mode, and displays an explanatory\nmessage. (BZ#1131571)\n\n* If an Active Directory (AD) server was specified or discovered\nautomatically when running the ipa-client-install utility, the utility\nproduced a traceback instead of informing the user that an IdM server is\nexpected in this situation. Now, ipa-client-install detects the AD server\nand fails with an explanatory message. (BZ#1132261)\n\n* When IdM servers were configured to require the TLS protocol version 1.1\n(TLSv1.1) or later in the httpd server, the ipa utility failed. With this\nupdate, running ipa works as expected with TLSv1.1 or later. (BZ#1154687)\n\n* In certain high-load environments, the Kerberos authentication step of\nthe IdM client installer can fail. Previously, the entire client\ninstallation failed in this situation. This update modifies\nipa-client-install to prefer the TCP protocol over the UDP protocol and to\nretry the authentication attempt in case of failure. (BZ#1161722)\n\n* If ipa-client-install updated or created the /etc/nsswitch.conf file, the\nsudo utility could terminate unexpectedly with a segmentation fault. Now,\nipa-client-install puts a new line character at the end of nsswitch.conf if\nit modifies the last line of the file, fixing this bug. (BZ#1185207)\n\n* The ipa-client-automount utility failed with the \"UNWILLING_TO_PERFORM\"\nLDAP error when the nsslapd-minssf Red Hat Directory Server configuration\nparameter was set to \"1\". This update modifies ipa-client-automount to use\nencrypted connection for LDAP searches by default, and the utility now\nfinishes successfully even with nsslapd-minssf specified. (BZ#1191040)\n\n* If installing an IdM server failed after the Certificate Authority (CA)\ninstallation, the \"ipa-server-install --uninstall\" command did not perform\na proper cleanup. After the user issued \"ipa-server-install --uninstall\"\nand then attempted to install the server again, the installation failed.\nNow, \"ipa-server-install --uninstall\" removes the CA-related files in the\ndescribed situation, and ipa-server-install no longer fails with the\nmentioned error message. (BZ#1198160)\n\n* Running ipa-client-install added the \"sss\" entry to the sudoers line in\nnsswitch.conf even if \"sss\" was already configured and the entry was\npresent in the file. Duplicate \"sss\" then caused sudo to become\nunresponsive. Now, ipa-client-install no longer adds \"sss\" if it is already\npresent in nsswitch.conf. (BZ#1198339)\n\n* After running ipa-client-install, it was not possible to log in using SSH\nunder certain circumstances. Now, ipa-client-install no longer corrupts the\nsshd_config file, and the sshd service can start as expected, and logging\nin using SSH works in the described situation. (BZ#1201454)\n\n* An incorrect definition of the dc attribute in the\n/usr/share/ipa/05rfc2247.ldif file caused bogus error messages to be\nreturned during migration. The attribute has been fixed, but the bug\npersists if the copy-schema-to-ca.py script was run on Red Hat Enterprise\nLinux 6.6 prior to running it on Red Hat Enterprise Linux 6.7. To work\naround this problem, manually copy /usr/share/ipa/schema/05rfc2247.ldif to\n/etc/dirsrv/slapd-PKI-IPA/schema/ and restart IdM. (BZ#1220788)\n\nAll ipa users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-21"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2010-5312",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-5312",
+          "Public": "20100903"
+        },
+        {
+          "CveID": "CVE-2012-6662",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-6662",
+          "Public": "20121127"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1166041",
+          "ID": "1166041"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1166064",
+          "ID": "1166064"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-admintools is earlier than 0:3.0.0-47.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151462001"
+                  },
+                  {
+                    "Comment": "ipa-admintools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-client is earlier than 0:3.0.0-47.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151462003"
+                  },
+                  {
+                    "Comment": "ipa-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-python is earlier than 0:3.0.0-47.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151462005"
+                  },
+                  {
+                    "Comment": "ipa-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server is earlier than 0:3.0.0-47.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151462007"
+                  },
+                  {
+                    "Comment": "ipa-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server-selinux is earlier than 0:3.0.0-47.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151462009"
+                  },
+                  {
+                    "Comment": "ipa-server-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server-trust-ad is earlier than 0:3.0.0-47.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151462011"
+                  },
+                  {
+                    "Comment": "ipa-server-trust-ad is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130528012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

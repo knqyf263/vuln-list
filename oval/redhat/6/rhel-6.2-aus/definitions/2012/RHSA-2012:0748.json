@@ -1,0 +1,150 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120748",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:0748: libvirt security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0748",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0748"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2693",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2693"
+      }
+    ],
+    "Description": "The libvirt library is a C API for managing and interacting with the\nvirtualization capabilities of Linux and other operating systems. In\naddition, libvirt provides tools for remote management of virtualized\nsystems.\n\nBus and device IDs were ignored when attempting to attach multiple USB\ndevices with identical vendor or product IDs to a guest. This could result\nin the wrong device being attached to a guest, giving that guest root\naccess to the device. (CVE-2012-2693)\n\nThese updated libvirt packages include numerous bug fixes and enhancements.\nSpace precludes documenting all of these changes in this advisory. Users\nare directed to the Red Hat Enterprise Linux 6.3 Technical Notes for\ninformation on the most significant of these changes.\n\nAll users of libvirt are advised to upgrade to these updated packages,\nwhich fix these issues and add these enhancements. After installing the\nupdated packages, libvirtd must be restarted (\"service libvirtd restart\")\nfor this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-19"
+      },
+      "Updated": {
+        "Date": "2012-06-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-2693",
+          "Cvss2": "3.7/AV:L/AC:H/Au:N/C:P/I:P/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2693",
+          "Public": "20120428"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/831164",
+          "ID": "831164"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt is earlier than 0:0.9.10-21.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120748001"
+                  },
+                  {
+                    "Comment": "libvirt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120013002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-client is earlier than 0:0.9.10-21.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120748003"
+                  },
+                  {
+                    "Comment": "libvirt-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120013004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-devel is earlier than 0:0.9.10-21.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120748005"
+                  },
+                  {
+                    "Comment": "libvirt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120013006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-lock-sanlock is earlier than 0:0.9.10-21.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120748007"
+                  },
+                  {
+                    "Comment": "libvirt-lock-sanlock is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120013008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-python is earlier than 0:0.9.10-21.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120748009"
+                  },
+                  {
+                    "Comment": "libvirt-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120013010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

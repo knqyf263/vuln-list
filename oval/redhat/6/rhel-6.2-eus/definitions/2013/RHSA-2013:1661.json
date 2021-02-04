@@ -1,0 +1,440 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20131661",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2013:1661: RDMA stack security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:1661",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:1661"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-4516",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-4516"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-2561",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-2561"
+      }
+    ],
+    "Description": "Red Hat Enterprise Linux includes a collection of Infiniband and iWARP\nutilities, libraries and development packages for writing applications that\nuse Remote Direct Memory Access (RDMA) technology.\n\nA flaw was found in the way ibutils handled temporary files. A local\nattacker could use this flaw to cause arbitrary files to be overwritten as\nthe root user via a symbolic link attack. (CVE-2013-2561)\n\nIt was discovered that librdmacm used a static port to connect to the\nib_acm service. A local attacker able to run a specially crafted ib_acm\nservice on that port could use this flaw to provide incorrect address\nresolution information to librmdacm applications. (CVE-2012-4516)\n\nThe CVE-2012-4516 issue was discovered by Florian Weimer of the Red Hat\nProduct Security Team.\n\nThis advisory updates the following packages to the latest upstream\nreleases, providing a number of bug fixes and enhancements over the\nprevious versions:\n\n* libibverbs-1.1.7\n* libmlx4-1.0.5\n* librdmacm-1.0.17\n* mstflint-3.0\n* perftest-2.0\n* qperf-0.4.9\n* rdma-3.10\n\nSeveral bugs have been fixed in the openmpi, mpitests, ibutils, and\ninfinipath-psm packages.\n\nThe most notable changes in these updated packages from the RDMA stack are\nthe following:\n\n* Multiple bugs in the Message Passing Interface (MPI) test packages were\nresolved, allowing more of the mpitest applications to pass on the\nunderlying MPI implementations.\n\n* The libmlx4 package now includes dracut module files to ensure that any\nnecessary custom configuration of mlx4 port types is included in the\ninitramfs dracut builds.\n\n* Multiple test programs in the perftest and qperf packages now work\nproperly over RoCE interfaces, or when specifying the use of rdmacm\nqueue pairs.\n\n* The mstflint package has been updated to the latest upstream version,\nwhich is now capable of burning firmware on newly released Mellanox\nConnect-IB hardware.\n\n* A compatibility problem between the openmpi and infinipath-psm packages\nhas been resolved with new builds of these packages.\n\nAll RDMA users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add\nthese enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-11-20"
+      },
+      "Updated": {
+        "Date": "2013-11-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-4516",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-4516",
+          "Public": "20121008"
+        },
+        {
+          "CveID": "CVE-2013-2561",
+          "Cvss2": "4.0/AV:L/AC:H/Au:N/C:N/I:C/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-2561",
+          "Public": "20130306"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/865483",
+          "ID": "865483"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/927430",
+          "ID": "927430"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libibverbs is earlier than 0:1.1.7-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661001"
+                  },
+                  {
+                    "Comment": "libibverbs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libibverbs-devel is earlier than 0:1.1.7-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661003"
+                  },
+                  {
+                    "Comment": "libibverbs-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libibverbs-devel-static is earlier than 0:1.1.7-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661005"
+                  },
+                  {
+                    "Comment": "libibverbs-devel-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libibverbs-utils is earlier than 0:1.1.7-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661007"
+                  },
+                  {
+                    "Comment": "libibverbs-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rdma is earlier than 0:3.10-3.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661009"
+                  },
+                  {
+                    "Comment": "rdma is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librdmacm is earlier than 0:1.0.17-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661011"
+                  },
+                  {
+                    "Comment": "librdmacm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509058"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librdmacm-devel is earlier than 0:1.0.17-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661013"
+                  },
+                  {
+                    "Comment": "librdmacm-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509060"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librdmacm-static is earlier than 0:1.0.17-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661015"
+                  },
+                  {
+                    "Comment": "librdmacm-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librdmacm-utils is earlier than 0:1.0.17-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661017"
+                  },
+                  {
+                    "Comment": "librdmacm-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509064"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "infinipath-psm is earlier than 0:3.0.1-115.1015_open.2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661019"
+                  },
+                  {
+                    "Comment": "infinipath-psm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "infinipath-psm-devel is earlier than 0:3.0.1-115.1015_open.2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661021"
+                  },
+                  {
+                    "Comment": "infinipath-psm-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openmpi is earlier than 0:1.5.4-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661023"
+                  },
+                  {
+                    "Comment": "openmpi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openmpi-devel is earlier than 0:1.5.4-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661025"
+                  },
+                  {
+                    "Comment": "openmpi-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libmlx4 is earlier than 0:1.0.5-4.el6.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661027"
+                  },
+                  {
+                    "Comment": "libmlx4 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libmlx4-static is earlier than 0:1.0.5-4.el6.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661029"
+                  },
+                  {
+                    "Comment": "libmlx4-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qperf is earlier than 0:0.4.9-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661031"
+                  },
+                  {
+                    "Comment": "qperf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mstflint is earlier than 0:3.0-0.6.g6961daa.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661033"
+                  },
+                  {
+                    "Comment": "mstflint is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ibutils is earlier than 0:1.5.7-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661035"
+                  },
+                  {
+                    "Comment": "ibutils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ibutils-devel is earlier than 0:1.5.7-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661037"
+                  },
+                  {
+                    "Comment": "ibutils-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ibutils-libs is earlier than 0:1.5.7-8.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661039"
+                  },
+                  {
+                    "Comment": "ibutils-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130509044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mpitests-mvapich is earlier than 0:3.2-9.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661041"
+                  },
+                  {
+                    "Comment": "mpitests-mvapich is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mpitests-mvapich-psm is earlier than 0:3.2-9.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661043"
+                  },
+                  {
+                    "Comment": "mpitests-mvapich-psm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mpitests-mvapich2 is earlier than 0:3.2-9.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661045"
+                  },
+                  {
+                    "Comment": "mpitests-mvapich2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mpitests-mvapich2-psm is earlier than 0:3.2-9.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661047"
+                  },
+                  {
+                    "Comment": "mpitests-mvapich2-psm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mpitests-openmpi is earlier than 0:3.2-9.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661049"
+                  },
+                  {
+                    "Comment": "mpitests-openmpi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perftest is earlier than 0:2.0-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661051"
+                  },
+                  {
+                    "Comment": "perftest is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131661052"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

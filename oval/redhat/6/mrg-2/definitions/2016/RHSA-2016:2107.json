@@ -1,0 +1,251 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20162107",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2016:2107: kernel-rt security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise MRG 2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:2107",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:2107"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5195",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5195"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-7039",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-7039"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8666",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8666"
+      }
+    ],
+    "Description": "The kernel-rt packages provide the Real Time Linux Kernel, which enables fine-tuning for systems with extremely high determinism requirements.\n\nSecurity Fix(es):\n\n* A race condition was found in the way the Linux kernel's memory subsystem handled the copy-on-write (COW) breakage of private read-only memory mappings. An unprivileged, local user could use this flaw to gain write access to otherwise read-only memory mappings and thus increase their privileges on the system. (CVE-2016-5195, Important)\n\n* Linux kernel built with the 802.1Q/802.1ad VLAN(CONFIG_VLAN_8021Q) OR Virtual eXtensible Local Area Network(CONFIG_VXLAN) with Transparent Ethernet Bridging(TEB) GRO support, is vulnerable to a stack overflow issue. It could occur while receiving large packets via GRO path; As an unlimited recursion could unfold in both VLAN and TEB modules, leading to a stack corruption in the kernel. (CVE-2016-7039, Important)\n\nRed Hat would like to thank Phil Oester for reporting CVE-2016-5195.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-10-26"
+      },
+      "Updated": {
+        "Date": "2016-10-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-5195",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5195",
+          "Public": "20161019"
+        },
+        {
+          "CveID": "CVE-2016-7039",
+          "Cvss2": "7.1/AV:N/AC:M/Au:N/C:N/I:N/A:C",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-674",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-7039",
+          "Public": "20161010"
+        },
+        {
+          "CveID": "CVE-2016-8666",
+          "Cvss2": "7.1/AV:N/AC:M/Au:N/C:N/I:N/A:C",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-674",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8666",
+          "Public": "20161013"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1375944",
+          "ID": "1375944"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1384344",
+          "ID": "1384344"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1384991",
+          "ID": "1384991"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_mrg:2",
+        "cpe:/a:redhat:enterprise_mrg:2:computenode:el6",
+        "cpe:/a:redhat:enterprise_mrg:2:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20120496022"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20120496021"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107001"
+                  },
+                  {
+                    "Comment": "kernel-rt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107003"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-devel is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107005"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-devel is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107007"
+                  },
+                  {
+                    "Comment": "kernel-rt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-doc is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107009"
+                  },
+                  {
+                    "Comment": "kernel-rt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-firmware is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107011"
+                  },
+                  {
+                    "Comment": "kernel-rt-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107013"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-devel is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107015"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107017"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is earlier than 1:3.10.0-327.rt56.198.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162107019"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

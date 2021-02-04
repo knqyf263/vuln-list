@@ -1,0 +1,139 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20162802",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2016:2802: openssl security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.2 Advanced Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:2802",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:2802"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6304",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6304"
+      }
+    ],
+    "Description": "OpenSSL is a toolkit that implements the Secure Sockets Layer (SSL) and Transport Layer Security (TLS) protocols, as well as a full-strength general-purpose cryptography library.\n\nSecurity Fix(es):\n\n* A memory leak flaw was found in the way OpenSSL handled TLS status request extension data during session renegotiation. A remote attacker could cause a TLS server using OpenSSL to consume an excessive amount of memory and, possibly, exit unexpectedly after exhausting all available memory, if it enabled OCSP stapling support. (CVE-2016-6304)\n\nRed Hat would like to thank the OpenSSL project for reporting this issue. Upstream acknowledges Shi Lei (Gear Team of Qihoo 360 Inc.) as the original reporter.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-11-17"
+      },
+      "Updated": {
+        "Date": "2016-11-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-6304",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6304",
+          "Public": "20160922"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1377600",
+          "ID": "1377600"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl is earlier than 0:1.0.0-20.el6_2.9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162802001"
+                  },
+                  {
+                    "Comment": "openssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100888002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-devel is earlier than 0:1.0.0-20.el6_2.9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162802003"
+                  },
+                  {
+                    "Comment": "openssl-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100888004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-perl is earlier than 0:1.0.0-20.el6_2.9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162802005"
+                  },
+                  {
+                    "Comment": "openssl-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100888006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-static is earlier than 0:1.0.0-20.el6_2.9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162802007"
+                  },
+                  {
+                    "Comment": "openssl-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100888008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

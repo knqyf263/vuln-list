@@ -1,0 +1,204 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120939",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:0939: xorg-x11-server security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0939",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0939"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-4028",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-4028"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-4029",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-4029"
+      }
+    ],
+    "Description": "X.Org is an open source implementation of the X Window System. It provides\nthe basic low-level functionality that full-fledged graphical user\ninterfaces are designed upon.\n\nA flaw was found in the way the X.Org server handled lock files. A local\nuser with access to the system console could use this flaw to determine the\nexistence of a file in a directory not accessible to the user, via a\nsymbolic link attack. (CVE-2011-4028)\n\nA race condition was found in the way the X.Org server managed temporary\nlock files. A local attacker could use this flaw to perform a symbolic link\nattack, allowing them to make an arbitrary file world readable, leading to\nthe disclosure of sensitive information. (CVE-2011-4029)\n\nRed Hat would like to thank the researcher with the nickname vladz for\nreporting these issues.\n\nThis update also fixes the following bugs:\n\n* Prior to this update, the KDE Display Manager (KDM) could pass invalid\n24bpp pixmap formats to the X server. As a consequence, the X server could\nunexpectedly abort. This update modifies the underlying code to pass the\ncorrect formats. (BZ#651934, BZ#722860)\n\n* Prior to this update, absolute input devices, like the stylus of a\ngraphic tablet, could become unresponsive in the right-most or bottom-most\nscreen if the X server was configured as a multi-screen setup through\nmultiple \"Device\" sections in the xorg.conf file. This update changes the\nscreen crossing behavior so that absolute devices are always mapped across\nall screens. (BZ#732467)\n\n* Prior to this update, the misleading message \"Session active, not\ninhibited, screen idle. If you see this test, your display server is broken\nand you should notify your distributor.\" could be displayed after resuming\nthe system or re-enabling the display, and included a URL to an external\nweb page. This update removes this message. (BZ#748704)\n\n* Prior to this update, the erroneous input handling code of the Xephyr\nserver disabled screens on a screen crossing event. The focus was only on\nthe screen where the mouse was located and only this screen was updated\nwhen the Xephyr nested X server was configured in a multi-screen setup.\nThis update removes this code and Xephyr now correctly updates screens in\nmulti-screen setups. (BZ#757792)\n\n* Prior to this update, raw events did not contain relative axis values. As\na consequence, clients which relied on relative values for functioning did\nnot behave as expected. This update sets the values to the original driver\nvalues instead of the already transformed values. Now, raw events contain\nrelative axis values as expected. (BZ#805377)\n\nAll users of xorg-x11-server are advised to upgrade to these updated\npackages, which correct these issues. All running X.Org server instances\nmust be restarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-19"
+      },
+      "Updated": {
+        "Date": "2012-06-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-4028",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:P/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-4028",
+          "Public": "20111018"
+        },
+        {
+          "CveID": "CVE-2011-4029",
+          "Cvss2": "4.0/AV:L/AC:H/Au:N/C:C/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-4029",
+          "Public": "20111018"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/745024",
+          "ID": "745024"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/745755",
+          "ID": "745755"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xorg-x11-server-Xdmx is earlier than 0:1.10.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120939001"
+                  },
+                  {
+                    "Comment": "xorg-x11-server-Xdmx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376182"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xorg-x11-server-Xephyr is earlier than 0:1.10.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120939003"
+                  },
+                  {
+                    "Comment": "xorg-x11-server-Xephyr is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376184"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xorg-x11-server-Xnest is earlier than 0:1.10.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120939005"
+                  },
+                  {
+                    "Comment": "xorg-x11-server-Xnest is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376186"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xorg-x11-server-Xorg is earlier than 0:1.10.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120939007"
+                  },
+                  {
+                    "Comment": "xorg-x11-server-Xorg is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376188"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xorg-x11-server-Xvfb is earlier than 0:1.10.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120939009"
+                  },
+                  {
+                    "Comment": "xorg-x11-server-Xvfb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376190"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xorg-x11-server-common is earlier than 0:1.10.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120939011"
+                  },
+                  {
+                    "Comment": "xorg-x11-server-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376192"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xorg-x11-server-devel is earlier than 0:1.10.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120939013"
+                  },
+                  {
+                    "Comment": "xorg-x11-server-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376194"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xorg-x11-server-source is earlier than 0:1.10.6-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120939015"
+                  },
+                  {
+                    "Comment": "xorg-x11-server-source is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376196"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

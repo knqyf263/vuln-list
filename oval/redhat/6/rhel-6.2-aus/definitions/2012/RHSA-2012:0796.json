@@ -1,0 +1,176 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120796",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2012:0796: rsyslog security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0796",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0796"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-4623",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-4623"
+      }
+    ],
+    "Description": "The rsyslog packages provide an enhanced, multi-threaded syslog daemon.\n\nA numeric truncation error, leading to a heap-based buffer overflow, was\nfound in the way the rsyslog imfile module processed text files containing\nlong lines. An attacker could use this flaw to crash the rsyslogd daemon\nor, possibly, execute arbitrary code with the privileges of rsyslogd, if\nthey are able to cause a long line to be written to a log file that\nrsyslogd monitors with imfile. The imfile module is not enabled by default.\n(CVE-2011-4623)\n\nBug fixes:\n\n* Several variables were incorrectly deinitialized with Transport Layer\nSecurity (TLS) transport and keys in PKCS#8 format. The rsyslogd daemon\naborted with a segmentation fault when keys in this format were provided.\nNow, the variables are correctly deinitialized. (BZ#727380)\n\n* Previously, the imgssapi plug-in initialization was incomplete. As a\nresult, the rsyslogd daemon aborted when configured to provide a GSSAPI\nlistener. Now, the plug-in is correctly initialized. (BZ#756664)\n\n* The fully qualified domain name (FQDN) for the localhost used in messages\nwas the first alias found. This did not always produce the expected result\non multihomed hosts. With this update, the algorithm uses the alias that\ncorresponds to the hostname. (BZ#767527)\n\n* The gtls module leaked a file descriptor every time it was loaded due to\nan error in the GnuTLS library. No new files or network connections could\nbe opened when the limit for the file descriptor count was reached. This\nupdate modifies the gtls module so that it is not unloaded during the\nprocess lifetime. (BZ#803550)\n\n* rsyslog could not override the hostname to set an alternative hostname\nfor locally generated messages. Now, the local hostname can be overridden.\n(BZ#805424)\n\n* The rsyslogd init script did not pass the lock file path to the 'status'\naction. As a result, the lock file was ignored and a wrong exit code was\nreturned. This update modifies the init script to pass the lock file to\nthe 'status' action. Now, the correct exit code is returned. (BZ#807608)\n\n* Data could be incorrectly deinitialized when rsyslogd was supplied with\nmalformed spool files. The rsyslogd daemon could be aborted with a\nsegmentation fault. This update modifies the underlying code to correctly\ndeinitialize the data. (BZ#813079)\n\n* Previously, deinitialization of non-existent data could, in certain error\ncases, occur. As a result, rsyslogd could abort with a segmentation fault\nwhen rsyslog was configured to use a disk assisted queue without specifying\na spool file. With this update, the error cases are handled gracefully.\n(BZ#813084)\n\n* The manual page wrongly stated that the '-d' option to turn on debugging\ncaused the daemon to run in the foreground, which was misleading as the\ncurrent behavior is to run in the background. Now, the manual page reflects\nthe correct behavior. (BZ#820311)\n\n* rsyslog attempted to write debugging messages to standard output even\nwhen run in the background. This resulted in the debugging information\nbeing written to some other output. This was corrected and the debug\nmessages are no longer written to standard output when run in the\nbackground. (BZ#820996)\n\n* The string buffer to hold the distinguished name (DN) of a certificate\nwas too small. DNs with more than 128 characters were not displayed. This\nupdate enlarges the buffer to process longer DNs. (BZ#822118)\n\nEnhancements:\n\n* Support for rate limiting and multi-line message capability. Now,\nrsyslogd can limit the number of messages it accepts through a UNIX socket.\n(BZ#672182)\n\n* The addition of the \"/etc/rsyslog.d/\" configuration directory to supply\nsyslog configuration files. (BZ#740420)\n\nAll users of rsyslog are advised to upgrade to these updated packages,\nwhich upgrade rsyslog to version 5.8.10 and correct these issues and add\nthese enhancements. After installing this update, the rsyslog daemon will\nbe restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-19"
+      },
+      "Updated": {
+        "Date": "2012-06-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-4623",
+          "Cvss2": "5.4/AV:A/AC:M/Au:N/C:P/I:P/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-4623",
+          "Public": "20110209"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/769822",
+          "ID": "769822"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rsyslog is earlier than 0:5.8.10-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120796001"
+                  },
+                  {
+                    "Comment": "rsyslog is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111247002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rsyslog-gnutls is earlier than 0:5.8.10-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120796003"
+                  },
+                  {
+                    "Comment": "rsyslog-gnutls is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111247004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rsyslog-gssapi is earlier than 0:5.8.10-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120796005"
+                  },
+                  {
+                    "Comment": "rsyslog-gssapi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111247006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rsyslog-mysql is earlier than 0:5.8.10-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120796007"
+                  },
+                  {
+                    "Comment": "rsyslog-mysql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111247008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rsyslog-pgsql is earlier than 0:5.8.10-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120796009"
+                  },
+                  {
+                    "Comment": "rsyslog-pgsql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111247010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rsyslog-relp is earlier than 0:5.8.10-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120796011"
+                  },
+                  {
+                    "Comment": "rsyslog-relp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111247012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rsyslog-snmp is earlier than 0:5.8.10-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120796013"
+                  },
+                  {
+                    "Comment": "rsyslog-snmp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120796014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

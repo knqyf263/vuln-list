@@ -1,0 +1,97 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20205260",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2020:5260: OpenShift Container Platform 4.6.8 security and packages update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:5260",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:5260"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8563",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8563"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private cloud deployments.\n\nSecurity Fix(es):\n\n* kubernetes: Secret leaks in kube-controller-manager when using vSphere Provider (CVE-2020-8563)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container Platform 4.6.8. See the following advisory for the container images for this release:\n\nhttps://access.redhat.com/errata/RHSA-2020:5259\n\nAll OpenShift Container Platform 4.6 users are advised to upgrade to these updated packages and images when they are available in the appropriate release channel. To check for available updates, use the OpenShift Console or the CLI oc command. Instructions for upgrading a cluster are available at https://docs.openshift.com/container-platform/4.6/updating/updating-cluster-between-minor.html#understanding-upgrade-channels_updating-cluster-between-minor.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-12-14"
+      },
+      "Updated": {
+        "Date": "2020-12-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-8563",
+          "Cvss3": "6.3/CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-117",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8563",
+          "Public": "20201014"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1886635",
+          "ID": "1886635"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.1",
+        "cpe:/a:redhat:openshift:4.1::el7",
+        "cpe:/a:redhat:openshift:4.2",
+        "cpe:/a:redhat:openshift:4.2::el7",
+        "cpe:/a:redhat:openshift:4.3",
+        "cpe:/a:redhat:openshift:4.3::el7",
+        "cpe:/a:redhat:openshift:4.4",
+        "cpe:/a:redhat:openshift:4.4::el7",
+        "cpe:/a:redhat:openshift:4.5",
+        "cpe:/a:redhat:openshift:4.5::el7",
+        "cpe:/a:redhat:openshift:4.6",
+        "cpe:/a:redhat:openshift:4.6::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201714623006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201714623005"
+          },
+          {
+            "Comment": "openshift-hyperkube is earlier than 0:4.6.0-202012051246.p0.git.94231.efc9027.el7",
+            "TestRef": "oval:com.redhat.rhsa:tst:20205260001"
+          },
+          {
+            "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:20181002101004"
+          }
+        ]
+      }
+    ]
+  }
+}

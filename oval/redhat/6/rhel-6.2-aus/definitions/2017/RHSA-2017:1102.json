@@ -1,0 +1,111 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20171102",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2017:1102: nss-util security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.2 Advanced Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:1102",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:1102"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-5461",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-5461"
+      }
+    ],
+    "Description": "The nss-util packages provide utilities for use with the Network Security Services (NSS) libraries.\n\nSecurity Fix(es):\n\n* An out-of-bounds write flaw was found in the way NSS performed certain Base64-decoding operations. An attacker could use this flaw to create a specially crafted certificate which, when parsed by NSS, could cause it to crash or execute arbitrary code, using the permissions of the user running an application compiled against the NSS library. (CVE-2017-5461)\n\nRed Hat would like to thank the Mozilla project for reporting this issue. Upstream acknowledges Ronald Crane as the original reporter.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-04-20"
+      },
+      "Updated": {
+        "Date": "2017-04-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-5461",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-5461",
+          "Public": "20170419"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1440080",
+          "ID": "1440080"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util is earlier than 0:3.13.1-11.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171102001"
+                  },
+                  {
+                    "Comment": "nss-util is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util-devel is earlier than 0:3.13.1-11.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171102003"
+                  },
+                  {
+                    "Comment": "nss-util-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100862014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

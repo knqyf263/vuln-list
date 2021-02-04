@@ -1,0 +1,271 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170113",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2017:0113: kernel-rt security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise MRG 2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0113",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0113"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6828",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6828"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-7117",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-7117"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9555",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9555"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-13167",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-13167"
+      }
+    ],
+    "Description": "The kernel-rt packages provide the Real Time Linux Kernel, which enables fine-tuning for systems with extremely high determinism requirements.\n\nThe kernel-rt packages have been upgraded to version 3.10.0-514, which provides a number of security and bug fixes over the previous version. (BZ#1400193)\n\nSecurity Fix(es):\n\n* A use-after-free vulnerability was found in the kernel's socket recvmmsg subsystem. This may allow remote attackers to corrupt memory and may allow execution of arbitrary code. This corruption takes place during the error handling routines within __sys_recvmmsg() function. (CVE-2016-7117, Important)\n\n* A use-after-free vulnerability was found in tcp_xmit_retransmit_queue and other tcp_* functions. This condition could allow an attacker to send an incorrect selective acknowledgment to existing connections, possibly resetting a connection. (CVE-2016-6828, Moderate)\n\n* A flaw was found in the Linux kernel's implementation of sctp protocol in which a remote attacker can trigger an out of bounds read with an offset of up to 64kB. This may panic the machine with a page-fault. (CVE-2016-9555, Moderate)\n\nBug Fix(es):\n\n* Previously, console warnings from the real-time kernel were generated when a sleeping lock was acquired in atomic context. With this update, the code has been modified to not acquire a sleeping lock in this context. As a result, the console warnings are no longer generated. (BZ#1378982)\n\n* Previously, the device mapper (DM) subsystem was not notified that the real-time kernel changes the way preemption works with spinlocks. This caused a kernel panic when the dm-multipath kernel module was loaded because the interrupt request (IRQ) check was invalid on the real-time kernel. This check has been corrected enabling the system to boot correctly with the dm-multipath module enabled. (BZ#1400305)\n\n* Previously, the kernel could sometimes panic due to a possible division by zero in the scheduler. This bug has been fixed by defining a new div64_ul() division function and correcting the affected calculation in the proc_sched_show_task() function. (BZ#1400975)\n\n* Unlike the standard Linux kernel, the real-time kernel does not disable interrupts inside the Interrupt Service Routines driver. Because of this difference, a New API (NAPI) function for turning interrupt requests (IRQ) off was actually being called with IRQs enabled. Consequently, the NAPI poll list was being corrupted, causing improper networking card operation and potential kernel hangs. With this update, the NAPI function has been corrected to force modifications of the poll list to be protected allowing proper operation of the networking card drivers. (BZ#1401779)\n\nEnhancement(s):\n\n* With this update, the CONFIG_SLUB_DEBUG and CONFIG_SLABINFO kernel configuration options are enabled in the real-time kernel. These options turn on SLUB allocator debugging and slab information tracking, which are helpful when investigating kernel memory allocation problems. (BZ#1357997)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-01-17"
+      },
+      "Updated": {
+        "Date": "2017-01-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-6828",
+          "Cvss2": "3.6/AV:L/AC:L/Au:N/C:N/I:P/A:P",
+          "Cvss3": "4.4/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:L",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6828",
+          "Public": "20160815"
+        },
+        {
+          "CveID": "CVE-2016-7117",
+          "Cvss2": "7.6/AV:N/AC:H/Au:N/C:C/I:C/A:C",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-7117",
+          "Public": "20160314"
+        },
+        {
+          "CveID": "CVE-2016-9555",
+          "Cvss2": "7.1/AV:N/AC:M/Au:N/C:N/I:N/A:C",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9555",
+          "Public": "20161025"
+        },
+        {
+          "CveID": "CVE-2017-13167",
+          "Cvss3": "3.6/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:L",
+          "Cwe": "CWE-362",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-13167",
+          "Public": "20160209"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1367091",
+          "ID": "1367091"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1382268",
+          "ID": "1382268"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1397930",
+          "ID": "1397930"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1568821",
+          "ID": "1568821"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_mrg:2",
+        "cpe:/a:redhat:enterprise_mrg:2:computenode:el6",
+        "cpe:/a:redhat:enterprise_mrg:2:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20120496022"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20120496021"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113001"
+                  },
+                  {
+                    "Comment": "kernel-rt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113003"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-devel is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113005"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-devel is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113007"
+                  },
+                  {
+                    "Comment": "kernel-rt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-doc is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113009"
+                  },
+                  {
+                    "Comment": "kernel-rt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-firmware is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113011"
+                  },
+                  {
+                    "Comment": "kernel-rt-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113013"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-devel is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113015"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113017"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is earlier than 1:3.10.0-514.rt56.210.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170113019"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

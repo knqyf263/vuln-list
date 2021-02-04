@@ -1,0 +1,380 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120743",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:0743: kernel security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0743",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0743"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-0044",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-0044"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-1179",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-1179"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2119",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2119"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2121",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2121"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2123",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2123"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2136",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2136"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2137",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2137"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2372",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2372"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2373",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2373"
+      }
+    ],
+    "Description": "The kernel packages contain the Linux kernel, the core of any Linux\noperating system.\n\nThis update fixes the following security issues:\n\n* A local, unprivileged user could use an integer overflow flaw in\ndrm_mode_dirtyfb_ioctl() to cause a denial of service or escalate their\nprivileges. (CVE-2012-0044, Important)\n\n* A buffer overflow flaw was found in the macvtap device driver, used for\ncreating a bridged network between the guest and the host in KVM\n(Kernel-based Virtual Machine) environments. A privileged guest user in a\nKVM guest could use this flaw to crash the host. Note: This issue only\naffected hosts that have the vhost_net module loaded with the\nexperimental_zcopytx module option enabled (it is not enabled by default),\nand that also have macvtap configured for at least one guest.\n(CVE-2012-2119, Important)\n\n* When a set user ID (setuid) application is executed, certain personality\nflags for controlling the application's behavior are cleared (that is, a\nprivileged application will not be affected by those flags). It was found\nthat those flags were not cleared if the application was made privileged\nvia file system capabilities. A local, unprivileged user could use this\nflaw to change the behavior of such applications, allowing them to bypass\nintended restrictions. Note that for default installations, no application\nshipped by Red Hat for Red Hat Enterprise Linux is made privileged via file\nsystem capabilities. (CVE-2012-2123, Important)\n\n* It was found that the data_len parameter of the sock_alloc_send_pskb()\nfunction in the Linux kernel's networking implementation was not validated\nbefore use. A privileged guest user in a KVM guest could use this flaw to\ncrash the host or, possibly, escalate their privileges on the host.\n(CVE-2012-2136, Important)\n\n* A buffer overflow flaw was found in the setup_routing_entry() function in\nthe KVM subsystem of the Linux kernel in the way the Message Signaled\nInterrupts (MSI) routing entry was handled. A local, unprivileged user\ncould use this flaw to cause a denial of service or, possibly, escalate\ntheir privileges. (CVE-2012-2137, Important)\n\n* A race condition was found in the Linux kernel's memory management\nsubsystem in the way pmd_none_or_clear_bad(), when called with mmap_sem in\nread mode, and Transparent Huge Pages (THP) page faults interacted. A\nprivileged user in a KVM guest with the ballooning functionality enabled\ncould potentially use this flaw to crash the host. A local, unprivileged\nuser could use this flaw to crash the system. (CVE-2012-1179, Moderate)\n\n* A flaw was found in the way device memory was handled during guest device\nremoval. Upon successful device removal, memory used by the device was not\nproperly unmapped from the corresponding IOMMU or properly released from\nthe kernel, leading to a memory leak. A malicious user on a KVM host who\nhas the ability to assign a device to a guest could use this flaw to crash\nthe host. (CVE-2012-2121, Moderate)\n\n* A flaw was found in the Linux kernel's Reliable Datagram Sockets (RDS)\nprotocol implementation. A local, unprivileged user could use this flaw to\ncause a denial of service. (CVE-2012-2372, Moderate)\n\n* A race condition was found in the Linux kernel's memory management\nsubsystem in the way pmd_populate() and pte_offset_map_lock() interacted on\n32-bit x86 systems with more than 4GB of RAM. A local, unprivileged user\ncould use this flaw to cause a denial of service. (CVE-2012-2373, Moderate)\n\nRed Hat would like to thank Chen Haogang for reporting CVE-2012-0044.\n\nThis update also fixes several bugs. Documentation for these changes will\nbe available shortly from the Technical Notes document linked to in the\nReferences section.\n\nUsers should upgrade to these updated packages, which contain backported\npatches to correct these issues, and fix the bugs noted in the Technical\nNotes. The system must be rebooted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-18"
+      },
+      "Updated": {
+        "Date": "2012-06-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-0044",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-190",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-0044",
+          "Public": "20111123"
+        },
+        {
+          "CveID": "CVE-2012-1179",
+          "Cvss2": "5.2/AV:A/AC:M/Au:S/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-1179",
+          "Public": "20120315"
+        },
+        {
+          "CveID": "CVE-2012-2119",
+          "Cvss2": "5.2/AV:A/AC:M/Au:S/C:N/I:N/A:C",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2119",
+          "Public": "20120416"
+        },
+        {
+          "CveID": "CVE-2012-2121",
+          "Cvss2": "4.7/AV:L/AC:M/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2121",
+          "Public": "20120329"
+        },
+        {
+          "CveID": "CVE-2012-2123",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:N/I:P/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2123",
+          "Public": "20120417"
+        },
+        {
+          "CveID": "CVE-2012-2136",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-228-\u003eCWE-119",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2136",
+          "Public": "20120529"
+        },
+        {
+          "CveID": "CVE-2012-2137",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2137",
+          "Public": "20120605"
+        },
+        {
+          "CveID": "CVE-2012-2372",
+          "Cvss2": "4.9/AV:L/AC:L/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2372",
+          "Public": "20120605"
+        },
+        {
+          "CveID": "CVE-2012-2373",
+          "Cvss2": "4.0/AV:L/AC:H/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2373",
+          "Public": "20120517"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/772894",
+          "ID": "772894"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/803793",
+          "ID": "803793"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/806722",
+          "ID": "806722"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/814149",
+          "ID": "814149"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/814278",
+          "ID": "814278"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/816151",
+          "ID": "816151"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/816289",
+          "ID": "816289"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/822754",
+          "ID": "822754"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/822821",
+          "ID": "822821"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:2.6.32-220.23.1.el6 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20120743025"
+              },
+              {
+                "Comment": "kernel earlier than 0:2.6.32-220.23.1.el6 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20120743026"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-bootwrapper is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743003"
+                  },
+                  {
+                    "Comment": "kernel-bootwrapper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743005"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743007"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743009"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-doc is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743011"
+                  },
+                  {
+                    "Comment": "kernel-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-firmware is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743013"
+                  },
+                  {
+                    "Comment": "kernel-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-headers is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743015"
+                  },
+                  {
+                    "Comment": "kernel-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743017"
+                  },
+                  {
+                    "Comment": "kernel-kdump is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump-devel is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743019"
+                  },
+                  {
+                    "Comment": "kernel-kdump-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perf is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743021"
+                  },
+                  {
+                    "Comment": "perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-perf is earlier than 0:2.6.32-220.23.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120743023"
+                  },
+                  {
+                    "Comment": "python-perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111530024"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

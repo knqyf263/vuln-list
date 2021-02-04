@@ -1,0 +1,225 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151459",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2015:1459: ntp security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1459",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1459"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-9297",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-9297"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-9298",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-9298"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-9750",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-9750"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-9751",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-9751"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-1798",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-1798"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-1799",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-1799"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3405",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3405"
+      }
+    ],
+    "Description": "The Network Time Protocol (NTP) is used to synchronize a computer's time\nwith another referenced time source.\n\nIt was found that because NTP's access control was based on a source IP\naddress, an attacker could bypass source IP restrictions and send malicious\ncontrol and configuration packets by spoofing ::1 addresses.\n(CVE-2014-9298)\n\nA denial of service flaw was found in the way NTP hosts that were peering\nwith each other authenticated themselves before updating their internal\nstate variables. An attacker could send packets to one peer host, which\ncould cascade to other peers, and stop the synchronization process among\nthe reached peers. (CVE-2015-1799)\n\nA flaw was found in the way the ntp-keygen utility generated MD5 symmetric\nkeys on big-endian systems. An attacker could possibly use this flaw to\nguess generated MD5 keys, which could then be used to spoof an NTP client\nor server. (CVE-2015-3405)\n\nA stack-based buffer overflow was found in the way the NTP autokey protocol\nwas implemented. When an NTP client decrypted a secret received from an NTP\nserver, it could cause that client to crash. (CVE-2014-9297)\n\nIt was found that ntpd did not check whether a Message Authentication Code\n(MAC) was present in a received packet when ntpd was configured to use\nsymmetric cryptographic keys. A man-in-the-middle attacker could use this\nflaw to send crafted packets that would be accepted by a client or a peer\nwithout the attacker knowing the symmetric key. (CVE-2015-1798)\n\nThe CVE-2015-1798 and CVE-2015-1799 issues were discovered by Miroslav\nLichvár of Red Hat.\n\nBug fixes:\n\n* The ntpd daemon truncated symmetric keys specified in the key file to 20\nbytes. As a consequence, it was impossible to configure NTP authentication\nto work with peers that use longer keys. The maximum length of keys has now\nbeen changed to 32 bytes. (BZ#1053551)\n\n* The ntp-keygen utility used the exponent of 3 when generating RSA keys,\nand generating RSA keys failed when FIPS mode was enabled. ntp-keygen has\nbeen modified to use the exponent of 65537, and generating keys in FIPS\nmode now works as expected. (BZ#1184421)\n\n* The ntpd daemon included a root delay when calculating its root\ndispersion. Consequently, the NTP server reported larger root dispersion\nthan it should have and clients could reject the source when its distance\nreached the maximum synchronization distance (1.5 seconds by default).\nCalculation of root dispersion has been fixed, the root dispersion is now\nreported correctly, and clients no longer reject the server due to a large\nsynchronization distance. (BZ#1045376)\n\n* The ntpd daemon dropped incoming NTP packets if their source port was\nlower than 123 (the NTP port). Clients behind Network Address Translation\n(NAT) were unable to synchronize with the server if their source port was\ntranslated to ports below 123. With this update, ntpd no longer checks the\nsource port number. (BZ#1171630)\n\nEnhancements:\n\n* This update introduces configurable access of memory segments used for\nShared Memory Driver (SHM) reference clocks. Previously, only the first two\nmemory segments were created with owner-only access, allowing just two SHM\nreference clocks to be used securely on a system. Now, the owner-only\naccess to SHM is configurable with the \"mode\" option, and it is therefore\npossible to use more SHM reference clocks securely. (BZ#1122015)\n\n* Support for nanosecond resolution has been added to the SHM reference\nclock. Prior to this update, when a Precision Time Protocol (PTP) hardware\nclock was used as a time source to synchronize the system clock (for\nexample, with the timemaster service from the linuxptp package), the\naccuracy of the synchronization was limited due to the microsecond\nresolution of the SHM protocol. The nanosecond extension in the SHM\nprotocol now enables sub-microsecond synchronization of the system clock.\n(BZ#1117704)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-21"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-9297",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-9297",
+          "Public": "20150204"
+        },
+        {
+          "CveID": "CVE-2014-9298",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:P/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-9298",
+          "Public": "20150204"
+        },
+        {
+          "CveID": "CVE-2014-9750",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-9750",
+          "Public": "20150204"
+        },
+        {
+          "CveID": "CVE-2014-9751",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:P/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-9751",
+          "Public": "20150204"
+        },
+        {
+          "CveID": "CVE-2015-1798",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-347",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-1798",
+          "Public": "20150407"
+        },
+        {
+          "CveID": "CVE-2015-1799",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-1799",
+          "Public": "20150407"
+        },
+        {
+          "CveID": "CVE-2015-3405",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:P/A:N",
+          "Cwe": "CWE-628-\u003e(CWE-835|CWE-330)",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3405",
+          "Public": "20150409"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1184572",
+          "ID": "1184572"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1184573",
+          "ID": "1184573"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1199430",
+          "ID": "1199430"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1199435",
+          "ID": "1199435"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1210324",
+          "ID": "1210324"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ntp is earlier than 0:4.2.6p5-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151459001"
+                  },
+                  {
+                    "Comment": "ntp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151459002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ntp-doc is earlier than 0:4.2.6p5-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151459003"
+                  },
+                  {
+                    "Comment": "ntp-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151459004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ntp-perl is earlier than 0:4.2.6p5-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151459005"
+                  },
+                  {
+                    "Comment": "ntp-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151459006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ntpdate is earlier than 0:4.2.6p5-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151459007"
+                  },
+                  {
+                    "Comment": "ntpdate is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151459008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

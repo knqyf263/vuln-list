@@ -1,0 +1,164 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130528",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2013:0528: ipa security, bug fix and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0528",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0528"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-4546",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-4546"
+      }
+    ],
+    "Description": "Red Hat Identity Management is a centralized authentication, identity\nmanagement and authorization solution for both traditional and cloud-based\nenterprise environments. It integrates components of the Red Hat Directory\nServer, MIT Kerberos, Red Hat Certificate System, NTP, and DNS. It provides\nweb browser and command-line interfaces. Its administration tools allow an\nadministrator to quickly install, set up, and administer a group of domain\ncontrollers to meet the authentication and identity management requirements\nof large-scale Linux and UNIX deployments.\n\nIt was found that the current default configuration of IPA servers did not\npublish correct CRLs (Certificate Revocation Lists). The default\nconfiguration specifies that every replica is to generate its own CRL;\nhowever, this can result in inconsistencies in the CRL contents provided to\nclients from different Identity Management replicas. More specifically, if\na certificate is revoked on one Identity Management replica, it will not\nshow up on another Identity Management replica. (CVE-2012-4546)\n\nThese updated ipa packages also include numerous bug fixes and\nenhancements. Space precludes documenting all of these changes in this\nadvisory. Users are directed to the Red Hat Enterprise Linux 6.4 Technical\nNotes, linked to in the References, for information on the most significant\nof these changes.\n\nUsers are advised to upgrade to these updated ipa packages, which fix these\nissues and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-4546",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:P/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-4546",
+          "Public": "20120904"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/870234",
+          "ID": "870234"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-admintools is earlier than 0:3.0.0-25.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130528001"
+                  },
+                  {
+                    "Comment": "ipa-admintools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-client is earlier than 0:3.0.0-25.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130528003"
+                  },
+                  {
+                    "Comment": "ipa-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-python is earlier than 0:3.0.0-25.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130528005"
+                  },
+                  {
+                    "Comment": "ipa-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server is earlier than 0:3.0.0-25.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130528007"
+                  },
+                  {
+                    "Comment": "ipa-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server-selinux is earlier than 0:3.0.0-25.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130528009"
+                  },
+                  {
+                    "Comment": "ipa-server-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111533010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server-trust-ad is earlier than 0:3.0.0-25.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130528011"
+                  },
+                  {
+                    "Comment": "ipa-server-trust-ad is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130528012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

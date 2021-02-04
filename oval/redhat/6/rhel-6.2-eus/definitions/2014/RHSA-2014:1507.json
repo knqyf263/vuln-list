@@ -1,0 +1,125 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141507",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2014:1507: trousers security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1507",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1507"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-0698",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-0698"
+      }
+    ],
+    "Description": "TrouSerS is an implementation of the Trusted Computing Group's Software\nStack (TSS) specification. You can use TrouSerS to write applications that\nmake use of your TPM hardware. TPM hardware can create, store and use RSA\nkeys securely (without ever being exposed in memory), verify a platform's\nsoftware state using cryptographic hashes and more.\n\nA flaw was found in the way tcsd, the daemon that manages Trusted Computing\nresources, processed incoming TCP packets. A remote attacker could send a\nspecially crafted TCP packet that, when processed by tcsd, could cause the\ndaemon to crash. Note that by default tcsd accepts requests on localhost\nonly. (CVE-2012-0698)\n\nRed Hat would like to thank Andrew Lutomirski for reporting this issue.\n\nThe trousers package has been upgraded to upstream version 0.3.13, which\nprovides a number of bug fixes and enhancements over the previous version,\nincluding corrected internal symbol names to avoid collisions with other\napplications, fixed memory leaks, added IPv6 support, fixed buffer handling\nin tcsd, as well as changed the license to BSD. (BZ#633584, BZ#1074634)\n\nAll trousers users are advised to upgrade to these updated packages, which\ncorrect these issues and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-10-13"
+      },
+      "Updated": {
+        "Date": "2014-10-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-0698",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:N/I:N/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-0698",
+          "Public": "20120113"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/781648",
+          "ID": "781648"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "trousers is earlier than 0:0.3.13-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141507001"
+                  },
+                  {
+                    "Comment": "trousers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141507002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "trousers-devel is earlier than 0:0.3.13-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141507003"
+                  },
+                  {
+                    "Comment": "trousers-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141507004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "trousers-static is earlier than 0:0.3.13-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141507005"
+                  },
+                  {
+                    "Comment": "trousers-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141507006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

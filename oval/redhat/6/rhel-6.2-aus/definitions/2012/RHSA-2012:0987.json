@@ -1,0 +1,124 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120987",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:0987: sblim-cim-client2 security update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0987",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0987"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2328",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2328"
+      }
+    ],
+    "Description": "The SBLIM (Standards-Based Linux Instrumentation for Manageability) CIM\n(Common Information Model) Client is a class library for Java applications\nthat provides access to CIM servers using the CIM Operations over HTTP\nprotocol defined by the DMTF (Distributed Management Task Force) standards.\n\nIt was found that the Java HashMap implementation was susceptible to\npredictable hash collisions. SBLIM uses HashMap when parsing XML inputs. A\nspecially-crafted CIM-XML message from a WBEM (Web-Based Enterprise\nManagement) server could cause a SBLIM client to use an excessive amount of\nCPU. Randomization has been added to help avoid collisions. (CVE-2012-2328)\n\nAll users of sblim-cim-client2 are advised to upgrade to these updated\npackages, which contain a backported patch to resolve this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-19"
+      },
+      "Updated": {
+        "Date": "2012-06-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-2328",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2328",
+          "Public": "20120221"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/819733",
+          "ID": "819733"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sblim-cim-client2 is earlier than 0:2.1.3-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120987001"
+                  },
+                  {
+                    "Comment": "sblim-cim-client2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120987002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sblim-cim-client2-javadoc is earlier than 0:2.1.3-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120987003"
+                  },
+                  {
+                    "Comment": "sblim-cim-client2-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120987004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sblim-cim-client2-manual is earlier than 0:2.1.3-2.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120987005"
+                  },
+                  {
+                    "Comment": "sblim-cim-client2-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120987006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

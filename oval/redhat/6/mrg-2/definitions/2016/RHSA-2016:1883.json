@@ -1,0 +1,253 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161883",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2016:1883: kernel-rt security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise MRG 2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1883",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1883"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-3134",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-3134"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4997",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4997"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4998",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4998"
+      }
+    ],
+    "Description": "The kernel-rt packages provide the Real Time Linux Kernel, which enables fine-tuning for systems with extremely high determinism requirements.\n\nThe kernel-rt packages have been upgraded to version 3.10.0-327.rt56.197, which provides a number of bug fixes over the previous version. (BZ#1366059)\n\nSecurity Fix(es):\n\n* A security flaw was found in the Linux kernel in the mark_source_chains() function in \"net/ipv4/netfilter/ip_tables.c\". It is possible for a user-supplied \"ipt_entry\" structure to have a large \"next_offset\" field. This field is not bounds checked prior to writing to a counter value at the supplied offset. (CVE-2016-3134, Important)\n\n* A flaw was discovered in processing setsockopt for 32 bit processes on 64 bit systems. This flaw will allow attackers to alter arbitrary kernel memory when unloading a kernel module. This action is usually restricted to root-privileged users but can also be leveraged if the kernel is compiled with CONFIG_USER_NS and CONFIG_NET_NS and the user is granted elevated privileges. (CVE-2016-4997, Important)\n\n* An out-of-bounds heap memory access leading to a Denial of Service, heap disclosure, or further impact was found in setsockopt(). The function call is normally restricted to root, however some processes with cap_sys_admin may also be able to trigger this flaw in privileged container environments. (CVE-2016-4998, Moderate)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-09-14"
+      },
+      "Updated": {
+        "Date": "2016-09-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-3134",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Cvss3": "6.4/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:N/I:L/A:H",
+          "Cwe": "CWE-20",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-3134",
+          "Public": "20160310"
+        },
+        {
+          "CveID": "CVE-2016-4997",
+          "Cvss2": "7.2/AV:L/AC:L/Au:N/C:C/I:C/A:C",
+          "Cvss3": "7.3/CVSS:3.0/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-20",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4997",
+          "Public": "20160624"
+        },
+        {
+          "CveID": "CVE-2016-4998",
+          "Cvss2": "5.6/AV:L/AC:L/Au:N/C:P/I:N/A:C",
+          "Cvss3": "6.1/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4998",
+          "Public": "20160624"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1317383",
+          "ID": "1317383"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1349722",
+          "ID": "1349722"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1349886",
+          "ID": "1349886"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_mrg:2",
+        "cpe:/a:redhat:enterprise_mrg:2:computenode:el6",
+        "cpe:/a:redhat:enterprise_mrg:2:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20120496022"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20120496021"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883001"
+                  },
+                  {
+                    "Comment": "kernel-rt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883003"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-devel is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883005"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-devel is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883007"
+                  },
+                  {
+                    "Comment": "kernel-rt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-doc is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883009"
+                  },
+                  {
+                    "Comment": "kernel-rt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-firmware is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883011"
+                  },
+                  {
+                    "Comment": "kernel-rt-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883013"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-devel is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883015"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883017"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is earlier than 1:3.10.0-327.rt56.197.el6rt",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161883019"
+                  },
+                  {
+                    "Comment": "kernel-rt-vanilla-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120496020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

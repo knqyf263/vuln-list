@@ -1,0 +1,209 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141391",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:1391: glibc security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1391",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1391"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4237",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4237"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4458",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4458"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-7424",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-7424"
+      }
+    ],
+    "Description": "The glibc packages provide the standard C libraries (libc), POSIX thread\nlibraries (libpthread), standard math libraries (libm), and the Name\nServer Caching Daemon (nscd) used by multiple programs on the system.\nWithout these libraries, the Linux system cannot function correctly.\n\nAn out-of-bounds write flaw was found in the way the glibc's readdir_r()\nfunction handled file system entries longer than the NAME_MAX character\nconstant. A remote attacker could provide a specially crafted NTFS or CIFS\nfile system that, when processed by an application using readdir_r(), would\ncause that application to crash or, potentially, allow the attacker to\nexecute arbitrary code with the privileges of the user running the\napplication. (CVE-2013-4237)\n\nIt was found that getaddrinfo() did not limit the amount of stack memory\nused during name resolution. An attacker able to make an application\nresolve an attacker-controlled hostname or IP address could possibly cause\nthe application to exhaust all stack memory and crash. (CVE-2013-4458)\n\nThese updated glibc packages also include several bug fixes and two\nenhancements. Space precludes documenting all of these changes in this\nadvisory. Users are directed to the Red Hat Enterprise Linux 6.6 Technical\nNotes, linked to in the References section, for information on the most\nsignificant of these changes.\n\nAll glibc users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add these\nenhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-10-13"
+      },
+      "Updated": {
+        "Date": "2014-10-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-4237",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-787",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4237",
+          "Public": "20130811"
+        },
+        {
+          "CveID": "CVE-2013-4458",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-121",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4458",
+          "Public": "20131022"
+        },
+        {
+          "CveID": "CVE-2013-7424",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-7424",
+          "Public": "20150127"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/995839",
+          "ID": "995839"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1022280",
+          "ID": "1022280"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1186614",
+          "ID": "1186614"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc is earlier than 0:2.12-1.149.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141391001"
+                  },
+                  {
+                    "Comment": "glibc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-common is earlier than 0:2.12-1.149.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141391003"
+                  },
+                  {
+                    "Comment": "glibc-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-devel is earlier than 0:2.12-1.149.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141391005"
+                  },
+                  {
+                    "Comment": "glibc-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-headers is earlier than 0:2.12-1.149.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141391007"
+                  },
+                  {
+                    "Comment": "glibc-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-static is earlier than 0:2.12-1.149.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141391009"
+                  },
+                  {
+                    "Comment": "glibc-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-utils is earlier than 0:2.12-1.149.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141391011"
+                  },
+                  {
+                    "Comment": "glibc-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nscd is earlier than 0:2.12-1.149.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141391013"
+                  },
+                  {
+                    "Comment": "nscd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

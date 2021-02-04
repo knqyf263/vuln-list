@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20131732",
+  "Version": "650",
+  "Metadata": {
+    "Title": "RHSA-2013:1732: busybox security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:1732",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:1732"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1813",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1813"
+      }
+    ],
+    "Description": "BusyBox provides a single binary that includes versions of a large number\nof system commands, including a shell. This can be very useful for\nrecovering from certain types of system failures, particularly those\ninvolving broken shared libraries.\n\nIt was found that the mdev BusyBox utility could create certain directories\nwithin /dev with world-writable permissions. A local unprivileged user\ncould use this flaw to manipulate portions of the /dev directory tree.\n(CVE-2013-1813)\n\nThis update also fixes the following bugs:\n\n* Previously, due to a too eager string size optimization on the IBM System\nz architecture, the \"wc\" BusyBox command failed after processing standard\ninput with the following error:\n\n    wc: : No such file or directory\n\nThis bug was fixed by disabling the string size optimization and the \"wc\"\ncommand works properly on IBM System z architectures. (BZ#820097)\n\n* Prior to this update, the \"mknod\" command was unable to create device\nnodes with a major or minor number larger than 255. Consequently, the kdump\nutility failed to handle such a device. The underlying source code has been\nmodified, and it is now possible to use the \"mknod\" command to create\ndevice nodes with a major or minor number larger than 255. (BZ#859817)\n\n* If a network installation from an NFS server was selected, the \"mount\"\ncommand used the UDP protocol by default. If only TCP mounts were supported\nby the server, this led to a failure of the mount command. As a result,\nAnaconda could not continue with the installation. This bug is now fixed\nand NFS mount operations default to the TCP protocol. (BZ#855832)\n\nAll busybox users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-11-20"
+      },
+      "Updated": {
+        "Date": "2013-11-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1813",
+          "Cvss2": "3.6/AV:L/AC:L/Au:N/C:P/I:P/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1813",
+          "Public": "20130301"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/919608",
+          "ID": "919608"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "busybox is earlier than 1:1.15.1-20.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131732001"
+                  },
+                  {
+                    "Comment": "busybox is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120810002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "busybox-petitboot is earlier than 1:1.15.1-20.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131732003"
+                  },
+                  {
+                    "Comment": "busybox-petitboot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120810004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151385",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2015:1385: net-snmp security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1385",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1385"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3565",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3565"
+      }
+    ],
+    "Description": "The net-snmp packages provide various libraries and tools for the Simple\nNetwork Management Protocol (SNMP), including an SNMP library, an\nextensible agent, tools for requesting or setting information from SNMP\nagents, tools for generating and handling SNMP traps, a version of the\nnetstat command which uses SNMP, and a Tk/Perl Management Information Base\n(MIB) browser.\n\nA denial of service flaw was found in the way snmptrapd handled certain\nSNMP traps when started with the \"-OQ\" option. If an attacker sent an SNMP\ntrap containing a variable with a NULL type where an integer variable type\nwas expected, it would cause snmptrapd to crash. (CVE-2014-3565)\n\nThis update also fixes the following bugs:\n\n* The HOST-RESOURCES-MIB::hrSystemProcesses object was not implemented\nbecause parts of the HOST-RESOURCES-MIB module were rewritten in an earlier\nversion of net-snmp. Consequently, HOST-RESOURCES-MIB::hrSystemProcesses\ndid not provide information on the number of currently loaded or running\nprocesses. With this update, HOST-RESOURCES-MIB::hrSystemProcesses has been\nimplemented, and the net-snmp daemon reports as expected. (BZ#1134335)\n\n* The Net-SNMP agent daemon, snmpd, reloaded the system ARP table every 60\nseconds. As a consequence, snmpd could cause a short CPU usage spike on\nbusy systems with a large APR table. With this update, snmpd does not\nreload the full ARP table periodically, but monitors the table changes\nusing a netlink socket. (BZ#789500)\n\n* Previously, snmpd used an invalid pointer to the current time when\nperiodically checking certain conditions specified by the \"monitor\" option\nin the /etc/snmpd/snmpd.conf file. Consequently, snmpd terminated\nunexpectedly on start with a segmentation fault if a certain entry with the\n\"monitor\" option was used. Now, snmpd initializes the correct pointer\nto the current time, and snmpd no longer crashes on start. (BZ#1050970)\n\n* Previously, snmpd expected 8-bit network interface indices when\nprocessing HOST-RESOURCES-MIB::hrDeviceTable. If an interface index of a\nlocal network interface was larger than 30,000 items, snmpd could terminate\nunexpectedly due to accessing invalid memory. Now, processing of all\nnetwork sizes is enabled, and snmpd no longer crashes in the described\nsituation. (BZ#1195547)\n\n* The snmpdtrapd service incorrectly checked for errors when forwarding a\ntrap with a RequestID value of 0, and logged \"Forward failed\" even though\nthe trap was successfully forwarded. This update fixes snmptrapd checks and\nthe aforementioned message is now logged only when appropriate.\n(BZ#1146948)\n\n* Previously, snmpd ignored the value of the \"storageUseNFS\" option in the\n/etc/snmpd/snmpd.conf file. As a consequence, NFS drivers were shown as\n\"Network Disks\", even though \"storageUseNFS\" was set to \"2\" to report them\nas \"Fixed Disks\" in HOST-RESOURCES-MIB::hrStorageTable. With this update,\nsnmpd takes the \"storageUseNFS\" option value into account, and \"Fixed Disks\"\nNFS drives are reported correctly. (BZ#1125793)\n\n* Previously, the Net-SNMP python binding used an incorrect size (8 bytes\ninstead of 4) for variables of IPADDRESS type. Consequently, applications\nthat were using Net-SNMP Python bindings could send malformed SNMP\nmessages. With this update, the bindings now use 4 bytes for variables with\nIPADRESS type, and only valid SNMP messages are sent. (BZ#1100099)\n\n* Previously, the snmpd service did not cut values in\nHOST-RESOURCES-MIB::hrStorageTable to signed 32-bit integers, as required\nby SNMP standards, and provided the values as unsigned integers. As a\nconsequence, the HOST-RESOURCES-MIB::hrStorageTable implementation did not\nconform to RFC 2790. The values are now cut to 32-bit signed integers, and\nsnmpd is therefore standard compliant. (BZ#1104293)\n\nUsers of net-snmp are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-20"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-3565",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-843",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3565",
+          "Public": "20140831"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1125155",
+          "ID": "1125155"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp is earlier than 1:5.5-54.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151385001"
+                  },
+                  {
+                    "Comment": "net-snmp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120876002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-devel is earlier than 1:5.5-54.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151385003"
+                  },
+                  {
+                    "Comment": "net-snmp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120876004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-libs is earlier than 1:5.5-54.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151385005"
+                  },
+                  {
+                    "Comment": "net-snmp-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120876006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-perl is earlier than 1:5.5-54.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151385007"
+                  },
+                  {
+                    "Comment": "net-snmp-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120876008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-python is earlier than 1:5.5-54.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151385009"
+                  },
+                  {
+                    "Comment": "net-snmp-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120876010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-utils is earlier than 1:5.5-54.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151385011"
+                  },
+                  {
+                    "Comment": "net-snmp-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120876012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151457",
+  "Version": "646",
+  "Metadata": {
+    "Title": "RHSA-2015:1457: gnutls security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1457",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1457"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-8155",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-8155"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-0282",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-0282"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-0294",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-0294"
+      }
+    ],
+    "Description": "The GnuTLS library provides support for cryptographic algorithms and for\nprotocols such as Transport Layer Security (TLS).\n\nIt was found that GnuTLS did not check activation and expiration dates of\nCA certificates. This could cause an application using GnuTLS to\nincorrectly accept a certificate as valid when its issuing CA is already\nexpired. (CVE-2014-8155)\n\nIt was found that GnuTLS did not verify whether a hashing algorithm listed\nin a signature matched the hashing algorithm listed in the certificate.\nAn attacker could create a certificate that used a different hashing\nalgorithm than it claimed, possibly causing GnuTLS to use an insecure,\ndisallowed hashing algorithm during certificate verification.\n(CVE-2015-0282)\n\nIt was discovered that GnuTLS did not check if all sections of X.509\ncertificates indicate the same signature algorithm. This flaw, in\ncombination with a different flaw, could possibly lead to a bypass of the\ncertificate signature check. (CVE-2015-0294)\n\nThe CVE-2014-8155 issue was discovered by Marcel Kolaja of Red Hat.\nThe CVE-2015-0282 and CVE-2015-0294 issues were discovered by Nikos\nMavrogiannopoulos of the Red Hat Security Technologies Team.\n\nThis update also fixes the following bug:\n\n* Previously, under certain circumstances, the certtool utility could\ngenerate X.509 certificates which contained a negative modulus.\nConsequently, such certificates could have interoperation problems with the\nsoftware using them. The bug has been fixed, and certtool no longer\ngenerates X.509 certificates containing a negative modulus. (BZ#1036385)\n\nUsers of gnutls are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-21"
+      },
+      "Updated": {
+        "Date": "2015-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-8155",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-325",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-8155",
+          "Public": "20100314"
+        },
+        {
+          "CveID": "CVE-2015-0282",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:P/A:N",
+          "Cwe": "CWE-295",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-0282",
+          "Public": "20150311"
+        },
+        {
+          "CveID": "CVE-2015-0294",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-295",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-0294",
+          "Public": "20150227"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1194371",
+          "ID": "1194371"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1196323",
+          "ID": "1196323"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1197995",
+          "ID": "1197995"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls is earlier than 0:2.8.5-18.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151457001"
+                  },
+                  {
+                    "Comment": "gnutls is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120429002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-devel is earlier than 0:2.8.5-18.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151457003"
+                  },
+                  {
+                    "Comment": "gnutls-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120429004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-guile is earlier than 0:2.8.5-18.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151457005"
+                  },
+                  {
+                    "Comment": "gnutls-guile is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120429006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-utils is earlier than 0:2.8.5-18.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151457007"
+                  },
+                  {
+                    "Comment": "gnutls-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120429008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

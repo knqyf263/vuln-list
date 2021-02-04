@@ -1,0 +1,163 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130519",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2013:0519: openssh security, bug fix and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0519",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0519"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-5536",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-5536"
+      }
+    ],
+    "Description": "OpenSSH is OpenBSD's Secure Shell (SSH) protocol implementation. These\npackages include the core files necessary for the OpenSSH client and\nserver.\n\nDue to the way the pam_ssh_agent_auth PAM module was built in Red Hat\nEnterprise Linux 6, the glibc's error() function was called rather than the\nintended error() function in pam_ssh_agent_auth to report errors. As these\ntwo functions expect different arguments, it was possible for an attacker\nto cause an application using pam_ssh_agent_auth to crash, disclose\nportions of its memory or, potentially, execute arbitrary code.\n(CVE-2012-5536)\n\nNote that the pam_ssh_agent_auth module is not used in Red Hat Enterprise\nLinux 6 by default.\n\nThis update also fixes the following bugs:\n\n* All possible options for the new RequiredAuthentications directive were\nnot documented in the sshd_config man page. This update improves the man\npage to document all the possible options. (BZ#821641)\n\n* When stopping one instance of the SSH daemon (sshd), the sshd init script\n(/etc/rc.d/init.d/sshd) stopped all sshd processes regardless of the PID of\nthe processes. This update improves the init script so that it only kills\nprocesses with the relevant PID. As a result, the init script now works\nmore reliably in a multi-instance environment. (BZ#826720)\n\n* Due to a regression, the ssh-copy-id command returned an exit status code\nof zero even if there was an error in copying the key to a remote host.\nWith this update, a patch has been applied and ssh-copy-id now returns a\nnon-zero exit code if there is an error in copying the SSH certificate to a\nremote host. (BZ#836650)\n\n* When SELinux was disabled on the system, no on-disk policy was installed,\na user account was used for a connection, and no \"~/.ssh\" configuration was\npresent in that user's home directory, the SSH client terminated\nunexpectedly with a segmentation fault when attempting to connect to\nanother system. A patch has been provided to address this issue and the\ncrashes no longer occur in the described scenario. (BZ#836655)\n\n* The \"HOWTO\" document /usr/share/doc/openssh-ldap-5.3p1/HOWTO.ldap-keys\nincorrectly documented the use of the AuthorizedKeysCommand directive.\nThis update corrects the document. (BZ#857760)\n\nThis update also adds the following enhancements:\n\n* When attempting to enable SSH for use with a Common Access Card (CAC),\nthe ssh-agent utility read all the certificates in the card even though\nonly the ID certificate was needed. Consequently, if a user entered their\nPIN incorrectly, then the CAC was locked, as a match for the PIN was\nattempted against all three certificates. With this update, ssh-add does\nnot try the same PIN for every certificate if the PIN fails for the first\none. As a result, the CAC will not be disabled if a user enters their PIN\nincorrectly. (BZ#782912)\n\n* This update adds a \"netcat mode\" to SSH. The \"ssh -W host:port ...\"\ncommand connects standard input and output (stdio) on a client to a single\nport on a server. As a result, SSH can be used to route connections via\nintermediate servers. (BZ#860809)\n\n* Due to a bug, arguments for the RequiredAuthentications2 directive were\nnot stored in a Match block. Consequently, parsing of the config file was\nnot in accordance with the man sshd_config documentation. This update fixes\nthe bug and users can now use the required authentication feature to\nspecify a list of authentication methods as expected according to the man\npage. (BZ#869903)\n\nAll users of openssh are advised to upgrade to these updated packages,\nwhich fix these issues and add these enhancements. After installing this\nupdate, the OpenSSH server daemon (sshd) will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-5536",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-5536",
+          "Public": "20130221"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/834618",
+          "ID": "834618"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh is earlier than 0:5.3p1-84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130519001"
+                  },
+                  {
+                    "Comment": "openssh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-askpass is earlier than 0:5.3p1-84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130519003"
+                  },
+                  {
+                    "Comment": "openssh-askpass is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-clients is earlier than 0:5.3p1-84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130519005"
+                  },
+                  {
+                    "Comment": "openssh-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-ldap is earlier than 0:5.3p1-84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130519007"
+                  },
+                  {
+                    "Comment": "openssh-ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-server is earlier than 0:5.3p1-84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130519009"
+                  },
+                  {
+                    "Comment": "openssh-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pam_ssh_agent_auth is earlier than 0:0.9.3-84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130519011"
+                  },
+                  {
+                    "Comment": "pam_ssh_agent_auth is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120884012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120683",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2012:0683: bind-dyndb-ldap security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0683",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0683"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2134",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2134"
+      }
+    ],
+    "Description": "The dynamic LDAP back end is a plug-in for BIND that provides back-end\ncapabilities to LDAP databases. It features support for dynamic updates\nand internal caching that help to reduce the load on LDAP servers.\n\nA flaw was found in the way bind-dyndb-ldap handled LDAP query errors. If a\nremote attacker were able to send DNS queries to a named server that is\nconfigured to use bind-dyndb-ldap, they could trigger such an error with a\nDNS query leveraging bind-dyndb-ldap's insufficient escaping of the LDAP\nbase DN (distinguished name). This would result in an invalid LDAP query\nthat named would retry in a loop, preventing it from responding to other\nDNS queries. With this update, bind-dyndb-ldap only attempts to retry one\ntime when an LDAP search returns an unexpected error. (CVE-2012-2134)\n\nRed Hat would like to thank Ronald van Zantvoort for reporting this issue.\n\nAll bind-dyndb-ldap users should upgrade to this updated package, which\ncontains a backported patch to correct this issue. For the update to take\neffect, the named service must be restarted.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-05-21"
+      },
+      "Updated": {
+        "Date": "2012-05-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-2134",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2134",
+          "Public": "20120424"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/815846",
+          "ID": "815846"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "bind-dyndb-ldap is earlier than 0:0.2.0-7.el6_2.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20120683001"
+          },
+          {
+            "Comment": "bind-dyndb-ldap is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20120683002"
+          }
+        ]
+      }
+    ]
+  }
+}

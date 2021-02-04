@@ -1,0 +1,145 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20131652",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2013:1652: coreutils security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:1652",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:1652"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0221",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0221"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0222",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0222"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0223",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0223"
+      }
+    ],
+    "Description": "The coreutils package contains the core GNU utilities. It is a combination\nof the old GNU fileutils, sh-utils, and textutils packages.\n\nIt was discovered that the sort, uniq, and join utilities did not properly\nrestrict the use of the alloca() function. An attacker could use this flaw\nto crash those utilities by providing long input strings. (CVE-2013-0221,\nCVE-2013-0222, CVE-2013-0223)\n\nThese updated coreutils packages include numerous bug fixes and two\nenhancements. Space precludes documenting all of these changes in this\nadvisory. Users are directed to the Red Hat Enterprise Linux 6.5 Technical\nNotes, linked to in the References, for information on the most significant\nof these changes.\n\nAll coreutils users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add these\nenhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-11-20"
+      },
+      "Updated": {
+        "Date": "2013-11-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-0221",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-391-\u003eCWE-665",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0221",
+          "Public": "20130115"
+        },
+        {
+          "CveID": "CVE-2013-0222",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-391-\u003eCWE-665",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0222",
+          "Public": "20121231"
+        },
+        {
+          "CveID": "CVE-2013-0223",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-391-\u003eCWE-665",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0223",
+          "Public": "20130115"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/903464",
+          "ID": "903464"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/903465",
+          "ID": "903465"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/903466",
+          "ID": "903466"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "coreutils is earlier than 0:8.4-31.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131652001"
+                  },
+                  {
+                    "Comment": "coreutils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131652002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "coreutils-libs is earlier than 0:8.4-31.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131652003"
+                  },
+                  {
+                    "Comment": "coreutils-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131652004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170621",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2017:0621: qemu-kvm security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0621",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0621"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-3712",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-3712"
+      }
+    ],
+    "Description": "Kernel-based Virtual Machine (KVM) is a full virtualization solution for Linux on a variety of architectures. The qemu-kvm packages provide the user-space component for running virtual machines that use KVM.\n\nSecurity Fix(es):\n\n* An integer overflow flaw and an out-of-bounds read flaw were found in the way QEMU's VGA emulator set certain VGA registers while in VBE mode. A privileged guest user could use this flaw to crash the QEMU process instance. (CVE-2016-3712)\n\nRed Hat would like to thank Zuozhi Fzz (Alibaba Inc.) for reporting this issue.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 6.9 Release Notes and Red Hat Enterprise Linux 6.9 Technical Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-03-21"
+      },
+      "Updated": {
+        "Date": "2017-03-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-3712",
+          "Cvss2": "3.8/AV:A/AC:M/Au:S/C:P/I:N/A:P",
+          "Cwe": "CWE-125",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-3712",
+          "Public": "20160509"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1318712",
+          "ID": "1318712"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.2",
+        "cpe:/o:redhat:rhel_eus:6.2::computenode",
+        "cpe:/o:redhat:rhel_eus:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-guest-agent is earlier than 2:0.12.1.2-2.503.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170621001"
+                  },
+                  {
+                    "Comment": "qemu-guest-agent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131553002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img is earlier than 2:0.12.1.2-2.503.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170621003"
+                  },
+                  {
+                    "Comment": "qemu-img is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm is earlier than 2:0.12.1.2-2.503.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170621005"
+                  },
+                  {
+                    "Comment": "qemu-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools is earlier than 2:0.12.1.2-2.503.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170621007"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

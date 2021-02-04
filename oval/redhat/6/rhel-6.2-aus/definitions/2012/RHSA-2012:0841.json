@@ -1,0 +1,464 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120841",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2012:0841: abrt, libreport, btparser, and python-meh security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0841",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0841"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-4088",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-4088"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-1106",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-1106"
+      }
+    ],
+    "Description": "ABRT (Automatic Bug Reporting Tool) is a tool to help users to detect\ndefects in applications and to create a bug report with all the information\nneeded by a maintainer to fix it. It uses a plug-in system to extend its\nfunctionality. libreport provides an API for reporting different problems\nin applications to different bug targets, such as Bugzilla, FTP, and Trac.\n\nThe btparser utility is a backtrace parser and analyzer library, which\nworks with backtraces produced by the GNU Project Debugger. It can parse a\ntext file with a backtrace to a tree of C structures, allowing to analyze\nthe threads and frames of the backtrace and process them.\n\nThe python-meh package provides a python library for handling exceptions.\n\nIf the C handler plug-in in ABRT was enabled (the abrt-addon-ccpp package\ninstalled and the abrt-ccpp service running), and the sysctl\nfs.suid_dumpable option was set to \"2\" (it is \"0\" by default), core dumps\nof set user ID (setuid) programs were created with insecure group ID\npermissions. This could allow local, unprivileged users to obtain sensitive\ninformation from the core dump files of setuid processes they would\notherwise not be able to access. (CVE-2012-1106)\n\nABRT did not allow users to easily search the collected crash information\nfor sensitive data prior to submitting it. This could lead to users\nunintentionally exposing sensitive information via the submitted crash\nreports. This update adds functionality to search across all the collected\ndata. Note that this fix does not apply to the default configuration, where\nreports are sent to Red Hat Customer Support. It only takes effect for\nusers sending information to Red Hat Bugzilla. (CVE-2011-4088)\n\nRed Hat would like to thank Jan Iven for reporting CVE-2011-4088.\n\nThese updated packages include numerous bug fixes. Space precludes\ndocumenting all of these changes in this advisory. Users are directed to\nthe Red Hat Enterprise Linux 6.3 Technical Notes for information on the\nmost significant of these changes.\n\nAll users of abrt, libreport, btparser, and python-meh are advised to\nupgrade to these updated packages, which correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-19"
+      },
+      "Updated": {
+        "Date": "2012-06-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-4088",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:P/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-4088",
+          "Public": "20111118"
+        },
+        {
+          "CveID": "CVE-2012-1106",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:P/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-1106",
+          "Public": "20120206"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/749854",
+          "ID": "749854"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/785163",
+          "ID": "785163"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-meh is earlier than 0:0.12.1-3.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841001"
+                  },
+                  {
+                    "Comment": "python-meh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "btparser is earlier than 0:0.16-3.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841003"
+                  },
+                  {
+                    "Comment": "btparser is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "btparser-devel is earlier than 0:0.16-3.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841005"
+                  },
+                  {
+                    "Comment": "btparser-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "btparser-python is earlier than 0:0.16-3.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841007"
+                  },
+                  {
+                    "Comment": "btparser-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841009"
+                  },
+                  {
+                    "Comment": "abrt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-addon-ccpp is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841011"
+                  },
+                  {
+                    "Comment": "abrt-addon-ccpp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-addon-kerneloops is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841013"
+                  },
+                  {
+                    "Comment": "abrt-addon-kerneloops is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-addon-python is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841015"
+                  },
+                  {
+                    "Comment": "abrt-addon-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-addon-vmcore is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841017"
+                  },
+                  {
+                    "Comment": "abrt-addon-vmcore is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-cli is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841019"
+                  },
+                  {
+                    "Comment": "abrt-cli is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-desktop is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841021"
+                  },
+                  {
+                    "Comment": "abrt-desktop is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-devel is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841023"
+                  },
+                  {
+                    "Comment": "abrt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-gui is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841025"
+                  },
+                  {
+                    "Comment": "abrt-gui is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-libs is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841027"
+                  },
+                  {
+                    "Comment": "abrt-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "abrt-tui is earlier than 0:2.0.8-6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841029"
+                  },
+                  {
+                    "Comment": "abrt-tui is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841031"
+                  },
+                  {
+                    "Comment": "libreport is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-cli is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841033"
+                  },
+                  {
+                    "Comment": "libreport-cli is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-devel is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841035"
+                  },
+                  {
+                    "Comment": "libreport-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-gtk is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841037"
+                  },
+                  {
+                    "Comment": "libreport-gtk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-gtk-devel is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841039"
+                  },
+                  {
+                    "Comment": "libreport-gtk-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-newt is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841041"
+                  },
+                  {
+                    "Comment": "libreport-newt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-bugzilla is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841043"
+                  },
+                  {
+                    "Comment": "libreport-plugin-bugzilla is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-kerneloops is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841045"
+                  },
+                  {
+                    "Comment": "libreport-plugin-kerneloops is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-logger is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841047"
+                  },
+                  {
+                    "Comment": "libreport-plugin-logger is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-mailx is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841049"
+                  },
+                  {
+                    "Comment": "libreport-plugin-mailx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-reportuploader is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841051"
+                  },
+                  {
+                    "Comment": "libreport-plugin-reportuploader is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841052"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-rhtsupport is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841053"
+                  },
+                  {
+                    "Comment": "libreport-plugin-rhtsupport is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841054"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-python is earlier than 0:2.0.9-5.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841055"
+                  },
+                  {
+                    "Comment": "libreport-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841056"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

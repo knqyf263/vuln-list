@@ -1,0 +1,242 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130511",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2013:0511: pki-core security, bug fix and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0511",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0511"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-4543",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-4543"
+      }
+    ],
+    "Description": "Red Hat Certificate System is an enterprise software system designed to\nmanage enterprise public key infrastructure (PKI) deployments. PKI Core\ncontains fundamental packages required by Red Hat Certificate System, which\ncomprise the Certificate Authority (CA) subsystem.\n\nNote: The Certificate Authority component provided by this advisory cannot\nbe used as a standalone server. It is installed and operates as a part of\nIdentity Management (the IPA component) in Red Hat Enterprise Linux.\n\nMultiple cross-site scripting flaws were discovered in Certificate System.\nAn attacker could use these flaws to perform a cross-site scripting (XSS)\nattack against victims using Certificate System's web interface.\n(CVE-2012-4543)\n\nThis update also fixes the following bugs:\n\n* Previously, due to incorrect conversion of large integers while\ngenerating a new serial number, some of the most significant bits in the\nserial number were truncated. Consequently, the serial number generated for\ncertificates was sometimes smaller than expected and this incorrect\nconversion in turn led to a collision if a certificate with the smaller\nnumber already existed in the database. This update removes the incorrect\ninteger conversion so that no serial numbers are truncated. As a result,\nthe installation wizard proceeds as expected. (BZ#841663)\n\n* The certificate authority used a different profile for issuing the audit\ncertificate than it used for renewing it. The issuing profile was for two\nyears, and the renewal was for six months. They should both be for two\nyears. This update sets the default and constraint parameters in the\ncaSignedLogCert.cfg audit certificate renewal profile to two years.\n(BZ#844459)\n\nThis update also adds the following enhancements:\n\n* IPA (Identity, Policy and Audit) now provides an improved way to\ndetermine that PKI is up and ready to service requests. Checking the\nservice status was not sufficient. This update creates a mechanism for\nclients to determine that the PKI subsystem is up using the getStatus()\nfunction to query the cs.startup_state in CS.cfg. (BZ#858864)\n\n* This update increases the default root CA validity period from eight\nyears to twenty years. (BZ#891985) \n\nAll users of pki-core are advised to upgrade to these updated packages,\nwhich fix these issues and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-4543",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-4543",
+          "Public": "20121206"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/864397",
+          "ID": "864397"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-ca is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511001"
+                  },
+                  {
+                    "Comment": "pki-ca is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-common is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511003"
+                  },
+                  {
+                    "Comment": "pki-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-common-javadoc is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511005"
+                  },
+                  {
+                    "Comment": "pki-common-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-java-tools is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511007"
+                  },
+                  {
+                    "Comment": "pki-java-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-java-tools-javadoc is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511009"
+                  },
+                  {
+                    "Comment": "pki-java-tools-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-native-tools is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511011"
+                  },
+                  {
+                    "Comment": "pki-native-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-selinux is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511013"
+                  },
+                  {
+                    "Comment": "pki-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-setup is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511015"
+                  },
+                  {
+                    "Comment": "pki-setup is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-silent is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511017"
+                  },
+                  {
+                    "Comment": "pki-silent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-symkey is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511019"
+                  },
+                  {
+                    "Comment": "pki-symkey is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-util is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511021"
+                  },
+                  {
+                    "Comment": "pki-util is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pki-util-javadoc is earlier than 0:9.0.3-30.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511023"
+                  },
+                  {
+                    "Comment": "pki-util-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130511024"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

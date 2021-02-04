@@ -1,0 +1,102 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140858",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2014:0858: Red Hat Enterprise MRG 2.5 Messaging and Grid security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise MRG 2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0858",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0858"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2682",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2682"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-0174",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-0174"
+      }
+    ],
+    "Description": "Red Hat Enterprise MRG (Messaging, Realtime, and Grid) is a next-generation\nIT infrastructure for enterprise computing. MRG offers increased\nperformance, reliability, interoperability, and faster computing for\nenterprise customers.\n\nIt was found that if Cumin were asked to display a link name containing\nnon-ASCII characters, the request would terminate with an error. If data\ncontaining non-ASCII characters were added to the database (such as via\nCumin or Wallaby), requests to load said data would terminate and the\nrequested page would not be displayed until an administrator cleans the\ndatabase. (CVE-2012-2682)\n\nIt was found that Cumin did not set the HttpOnly flag on session cookies.\nThis could allow a malicious script to access the session cookie.\n(CVE-2014-0174)\n\nThese issues were discovered by Stanislav Graf of Red Hat.\n\nAll users of cumin with Red Hat Enterprise MRG 2.5 for Red Hat Enterprise\nLinux 6 are advised to upgrade to this updated package, which corrects\nthese issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-07-09"
+      },
+      "Updated": {
+        "Date": "2014-07-09"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-2682",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2682",
+          "Public": "20140709"
+        },
+        {
+          "CveID": "CVE-2014-0174",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-0174",
+          "Public": "20140410"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/830254",
+          "ID": "830254"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1086000",
+          "ID": "1086000"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_mrg:2",
+        "cpe:/a:redhat:enterprise_mrg:2:computenode:el6",
+        "cpe:/a:redhat:enterprise_mrg:2:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20120496022"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20120496021"
+          },
+          {
+            "Comment": "cumin is earlier than 0:0.1.5797-3.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20140858001"
+          },
+          {
+            "Comment": "cumin is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20111250042"
+          }
+        ]
+      }
+    ]
+  }
+}

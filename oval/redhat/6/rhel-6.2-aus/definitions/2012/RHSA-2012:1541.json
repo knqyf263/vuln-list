@@ -1,0 +1,270 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20121541",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:1541: kernel security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.2 EUS - Server and Compute Node Only"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:1541",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:1541"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-4131",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-4131"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2313",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2313"
+      }
+    ],
+    "Description": "These packages contain the Linux kernel.\n\nSecurity fixes:\n\n* A malicious NFSv4 server could return a crafted reply to a GETACL\nrequest, causing a denial of service on the client. (CVE-2011-4131,\nModerate)\n\n* A flaw in the dl2k driver could allow a local, unprivileged user to issue\npotentially harmful IOCTLs, possibly causing Ethernet adapters using the\ndriver to malfunction (such as losing network connectivity).\n(CVE-2012-2313, Low)\n\nRed Hat would like to thank Andy Adamson for reporting CVE-2011-4131, and\nStephan Mueller for reporting CVE-2012-2313.\n\nBug fixes:\n\n* A kernel oops occurred in the nf_nat code when a bogus pointer was\ndereferenced in the nf_conn_nat structure. Consequently, if Source Network\nAddress Translation (SNAT) was performed, incorrect information could be\nreceived by other CTS (Clear to Send) signals. A conntrack entry is now\nplaced in the source hash after SNAT has been completed, which prevents the\ndescribed problems. (BZ#865715)\n\n* Previously, the ixgbe_setup_tc() function was called recursively when the\nset_state() CEE (Convergence Enhanced Ethernet) API routine was called in\nIEEE DCBX (Data Center Bridging eXchange) mode. This is considered unsafe\naccording to the IEEE standards. With this update, the ixgbe driver has\nbeen modified to no longer call the set_state() routine in IEEE DCBX mode.\nThe driver now calls routines of the PFC (Priority-based Flow Control) and\nETS (Enhanced Transmission Selection) extensions instead of the CEE\nextension routines in IEEE DCBX mode. (BZ#867859)\n\n* A Symmetric Multi Processing (SMP) race condition between the munmap()\nand exit() function could lead to false-positive triggering of the BUG_ON()\nmacro if Transparent Huge Pages (THP) were enabled. This update fixes the\nrace condition, which avoids false-positive triggering of the BUG_ON()\nmacro in this scenario. (BZ#875121)\n\n* The kernel allows high priority real time tasks, such as tasks scheduled\nwith the SCHED_FIFO policy, to be throttled. Previously, the CPU stop tasks\nwere scheduled as high priority real time tasks and could be thus throttled\naccordingly. However, the replenishment timer, which is responsible for\nclearing a throttle flag on tasks, could be pending on the just disabled\nCPU. This could lead to the situation that the throttled tasks were never\nscheduled to run. Consequently, if any of such tasks was needed to complete\nthe CPU disabling, the system became unresponsive. This update introduces a\nnew scheduler class, which gives a task the highest possible system\npriority and such a task cannot be throttled. The stop-task scheduling\nclass is now used for the CPU stop tasks, and the system shutdown completes\nas expected in the scenario described. (BZ#876078)\n\n* Previously, XFS log buffers were handled incorrectly so that XFS could,\nin certain circumstances, incorrectly read metadata from the journal during\nXFS log recovery. As a consequence, XFS log recovery terminated with an\nerror message and prevented the file system from being mounted. This\nproblem could result in a loss of data if the user forcibly emptied the log\nto allow the file system to be mounted. This update ensures that metadata\nis read correctly from the log and journal recovery thus completes\nsuccessfully, and the file system mounts as expected. (BZ#876498)\n\n* Previously, kernel was allowed to reduce the number of unnecessary commit\ncalls by skipping the commit when there was a large number of outstanding\npages being written. However, a test on the number of commits (ncommit) did\nnot properly handle the edge case when ncommit was zero. Consequently,\ninodes sometimes remained on the sb-\u003es_dirty list and could not be freed by\nthe inode cache shrinker. As a result, the nfs_inode_cache structure grew\nvery large over time. With this update, the call to the nfs_write_inode()\nfunction is immediately returned when commit == 0, thus fixing this bug.\n(BZ#877394)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-12-04"
+      },
+      "Updated": {
+        "Date": "2012-12-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-4131",
+          "Cvss2": "4.6/AV:A/AC:H/Au:N/C:N/I:N/A:C",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-4131",
+          "Public": "20111105"
+        },
+        {
+          "CveID": "CVE-2012-2313",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2313",
+          "Public": "20120426"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/747106",
+          "ID": "747106"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/818820",
+          "ID": "818820"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:2.6.32-220.30.1.el6 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20121541025"
+              },
+              {
+                "Comment": "kernel earlier than 0:2.6.32-220.30.1.el6 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20121541026"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-bootwrapper is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541003"
+                  },
+                  {
+                    "Comment": "kernel-bootwrapper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541005"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541007"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541009"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-doc is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541011"
+                  },
+                  {
+                    "Comment": "kernel-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-firmware is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541013"
+                  },
+                  {
+                    "Comment": "kernel-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-headers is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541015"
+                  },
+                  {
+                    "Comment": "kernel-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541017"
+                  },
+                  {
+                    "Comment": "kernel-kdump is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump-devel is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541019"
+                  },
+                  {
+                    "Comment": "kernel-kdump-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perf is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541021"
+                  },
+                  {
+                    "Comment": "perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-perf is earlier than 0:2.6.32-220.30.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121541023"
+                  },
+                  {
+                    "Comment": "python-perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111530024"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

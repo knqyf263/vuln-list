@@ -1,0 +1,127 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120810",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2012:0810: busybox security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0810",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0810"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2006-1168",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2006-1168"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2716",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2716"
+      }
+    ],
+    "Description": "BusyBox provides a single binary that includes versions of a large number\nof system commands, including a shell. This can be very useful for\nrecovering from certain types of system failures, particularly those\ninvolving broken shared libraries.\n\nA buffer underflow flaw was found in the way the uncompress utility of\nBusyBox expanded certain archive files compressed using Lempel-Ziv\ncompression. If a user were tricked into expanding a specially-crafted\narchive file with uncompress, it could cause BusyBox to crash or,\npotentially, execute arbitrary code with the privileges of the user\nrunning BusyBox. (CVE-2006-1168)\n\nThe BusyBox DHCP client, udhcpc, did not sufficiently sanitize certain\noptions provided in DHCP server replies, such as the client hostname. A\nmalicious DHCP server could send such an option with a specially-crafted\nvalue to a DHCP client. If this option's value was saved on the client\nsystem, and then later insecurely evaluated by a process that assumes the\noption is trusted, it could lead to arbitrary code execution with the\nprivileges of that process. Note: udhcpc is not used on Red Hat Enterprise\nLinux by default, and no DHCP client script is provided with the busybox\npackages. (CVE-2011-2716)\n\nThis update also fixes the following bugs:\n\n* Prior to this update, the \"findfs\" command did not recognize Btrfs\npartitions. As a consequence, an error message could occur when dumping a\ncore file. This update adds support for recognizing such partitions so\nthe problem no longer occurs. (BZ#751927)\n\n* If the \"grep\" command was used with the \"-F\" and \"-i\" options at the\nsame time, the \"-i\" option was ignored. As a consequence, the \"grep -iF\"\ncommand incorrectly performed a case-sensitive search instead of an\ninsensitive search. A patch has been applied to ensure that the combination\nof the \"-F\" and \"-i\" options works as expected. (BZ#752134)\n\n* Prior to this update, the msh shell did not support the \"set -o pipefail\"\ncommand. This update adds support for this command. (BZ#782018)\n\n* Previously, the msh shell could terminate unexpectedly with a\nsegmentation fault when attempting to execute an empty command as a result\nof variable substitution (for example msh -c '$nonexistent_variable').\nWith this update, msh has been modified to correctly interpret such\ncommands and no longer crashes in this scenario. (BZ#809092)\n\n* Previously, the msh shell incorrectly executed empty loops. As a\nconsequence, msh never exited such a loop even if the loop condition was\nfalse, which could cause scripts using the loop to become unresponsive.\nWith this update, msh has been modified to execute and exit empty loops\ncorrectly, so that hangs no longer occur. (BZ#752132)\n\nAll users of busybox are advised to upgrade to these updated packages,\nwhich contain backported patches to fix these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-06-19"
+      },
+      "Updated": {
+        "Date": "2012-06-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2006-1168",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2006-1168",
+          "Public": "20060808"
+        },
+        {
+          "CveID": "CVE-2011-2716",
+          "Cvss2": "6.8/AV:A/AC:H/Au:N/C:C/I:C/A:C",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2716",
+          "Public": "20110318"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/201919",
+          "ID": "201919"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/725364",
+          "ID": "725364"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "busybox is earlier than 1:1.15.1-15.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120810001"
+                  },
+                  {
+                    "Comment": "busybox is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120810002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "busybox-petitboot is earlier than 1:1.15.1-15.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120810003"
+                  },
+                  {
+                    "Comment": "busybox-petitboot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120810004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
