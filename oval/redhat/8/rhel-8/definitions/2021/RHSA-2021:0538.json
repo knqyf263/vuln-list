@@ -1,0 +1,258 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210538",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2021:0538: nss security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0538",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0538"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-12400",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-12400"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-12403",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-12403"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-6829",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-6829"
+      }
+    ],
+    "Description": "Network Security Services (NSS) is a set of libraries designed to support the cross-platform development of security-enabled client and server applications.\n\nSecurity Fix(es):\n\n* nss: Side channel attack on ECDSA signature generation (CVE-2020-6829)\n\n* nss: P-384 and P-521 implementation uses a side-channel vulnerable modular inversion function (CVE-2020-12400)\n\n* nss: CHACHA20-POLY1305 decryption with undersized tag leads to out-of-bounds read (CVE-2020-12403)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Support key wrap/unwrap with RSA-OAEP (BZ#1896431)\n\n* 1536bit group from RFC3526 is allowed in FIPS mode when in policy DH-MIN is set to be lower than 1536 (BZ#1896432)\n\n* when NSS_SDB_USE_CACHE not set, after curl access https, dentry increase but never released - consider alternative algorithm for benchmarking ACCESS call in sdb_measureAccess [rhel-8] (BZ#1896933)\n\n* Policy should allow overriding library defaults (BZ#1898702)\n\n* KDF-self-tests-induced changes for nss in RHEL 8.4 (BZ#1898953)\n\n* nss: non-blocksize requests to IKEv1 KDF returns bogus output (BZ#1904408)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-02-16"
+      },
+      "Updated": {
+        "Date": "2021-02-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-12400",
+          "Cvss3": "4.4/CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-327",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-12400",
+          "Public": "20200728"
+        },
+        {
+          "CveID": "CVE-2020-12403",
+          "Cvss3": "6.8/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:H",
+          "Cwe": "CWE-125",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-12403",
+          "Public": "20200727"
+        },
+        {
+          "CveID": "CVE-2020-6829",
+          "Cvss3": "4.4/CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-327",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-6829",
+          "Public": "20200602:1200"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1826187",
+          "ID": "1826187"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1853983",
+          "ID": "1853983"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1868931",
+          "ID": "1868931"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_linux:8",
+        "cpe:/a:redhat:enterprise_linux:8::appstream",
+        "cpe:/a:redhat:enterprise_linux:8::crb",
+        "cpe:/a:redhat:enterprise_linux:8::highavailability",
+        "cpe:/a:redhat:enterprise_linux:8::nfv",
+        "cpe:/a:redhat:enterprise_linux:8::realtime",
+        "cpe:/a:redhat:enterprise_linux:8::resilientstorage",
+        "cpe:/a:redhat:enterprise_linux:8::sap",
+        "cpe:/a:redhat:enterprise_linux:8::sap_hana",
+        "cpe:/a:redhat:enterprise_linux:8::supplementary",
+        "cpe:/o:redhat:enterprise_linux:8",
+        "cpe:/o:redhat:enterprise_linux:8::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538001"
+                  },
+                  {
+                    "Comment": "nss is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-devel is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538003"
+                  },
+                  {
+                    "Comment": "nss-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-softokn is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538005"
+                  },
+                  {
+                    "Comment": "nss-softokn is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-softokn-devel is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538007"
+                  },
+                  {
+                    "Comment": "nss-softokn-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-softokn-freebl is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538009"
+                  },
+                  {
+                    "Comment": "nss-softokn-freebl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-softokn-freebl-devel is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538011"
+                  },
+                  {
+                    "Comment": "nss-softokn-freebl-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-sysinit is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538013"
+                  },
+                  {
+                    "Comment": "nss-sysinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-tools is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538015"
+                  },
+                  {
+                    "Comment": "nss-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538017"
+                  },
+                  {
+                    "Comment": "nss-util is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util-devel is earlier than 0:3.53.1-17.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210538019"
+                  },
+                  {
+                    "Comment": "nss-util-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951024"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
