@@ -20,6 +20,11 @@
       },
       {
         "Source": "CVE",
+        "RefID": "CVE-2020-28362",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-28362"
+      },
+      {
+        "Source": "CVE",
         "RefID": "CVE-2020-8564",
         "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8564"
       }
@@ -37,6 +42,13 @@
       },
       "Cves": [
         {
+          "CveID": "CVE-2020-28362",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-295",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-28362",
+          "Public": "20201112"
+        },
+        {
           "CveID": "CVE-2020-8564",
           "Cvss3": "5.3/CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
           "Cwe": "CWE-117",
@@ -48,6 +60,10 @@
         {
           "Href": "https://bugzilla.redhat.com/1886637",
           "ID": "1886637"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1897635",
+          "ID": "1897635"
         }
       ],
       "AffectedCpeList": [
@@ -83,14 +99,65 @@
           {
             "Comment": "Red Hat Enterprise Linux 8 is installed",
             "TestRef": "oval:com.redhat.rhba:tst:20192794007"
-          },
+          }
+        ],
+        "Criterias": [
           {
-            "Comment": "openshift-hyperkube is earlier than 0:4.6.0-202101160934.p0.git.94242.fc5242e.el8",
-            "TestRef": "oval:com.redhat.rhsa:tst:20210172001"
-          },
-          {
-            "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
-            "TestRef": "oval:com.redhat.rhba:tst:20192794006"
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "containers-common is earlier than 1:1.1.1-3.rhaos4.6.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210172001"
+                  },
+                  {
+                    "Comment": "containers-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20200690006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "skopeo is earlier than 1:1.1.1-3.rhaos4.6.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210172003"
+                  },
+                  {
+                    "Comment": "skopeo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20200690008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "skopeo-tests is earlier than 1:1.1.1-3.rhaos4.6.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210172005"
+                  },
+                  {
+                    "Comment": "skopeo-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200679006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-hyperkube is earlier than 0:4.6.0-202101160934.p0.git.94242.fc5242e.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210172007"
+                  },
+                  {
+                    "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20192794006"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
