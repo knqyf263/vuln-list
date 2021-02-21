@@ -1,0 +1,92 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20201318",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:1318: telnet security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:1318",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:1318"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10188",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10188"
+      }
+    ],
+    "Description": "Telnet is a popular protocol for logging in to remote systems over the Internet. The telnet-server packages include a telnet service that supports remote logins into the host machine. The telnet service is disabled by default.\n\nSecurity Fix(es):\n\n* telnet-server: no bounds checks in nextitem() function allows to remotely execute arbitrary code (CVE-2020-10188)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-04-06"
+      },
+      "Updated": {
+        "Date": "2020-04-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-10188",
+          "Cvss3": "9.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-119",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10188",
+          "Public": "20200228"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1811673",
+          "ID": "1811673"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.2",
+        "cpe:/a:redhat:rhel_e4s:8.2::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.2::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.2",
+        "cpe:/o:redhat:rhel_e4s:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "telnet-server is earlier than 1:0.17-73.el8_1.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20201318001"
+          },
+          {
+            "Comment": "telnet-server is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20201318002"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193951",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2019:3951: SDL security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3951",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3951"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-13616",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-13616"
+      }
+    ],
+    "Description": "Simple DirectMedia Layer (SDL) is a cross-platform multimedia library designed to provide fast access to the graphics frame buffer and audio device.\n\nSecurity Fix(es):\n\n* SDL: heap-based buffer overflow in SDL blit functions in video/SDL_blit*.c (CVE-2019-13616)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-25"
+      },
+      "Updated": {
+        "Date": "2019-11-25"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-13616",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "(CWE-787|CWE-125)",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-13616",
+          "Public": "20190730"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1747237",
+          "ID": "1747237"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.1",
+        "cpe:/a:redhat:rhel_e4s:8.1::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.1::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.1::sap",
+        "cpe:/a:redhat:rhel_e4s:8.1::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.1",
+        "cpe:/o:redhat:rhel_e4s:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "SDL is earlier than 0:1.2.15-36.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193951001"
+                  },
+                  {
+                    "Comment": "SDL is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193553004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "SDL-devel is earlier than 0:1.2.15-36.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193951003"
+                  },
+                  {
+                    "Comment": "SDL-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193553006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

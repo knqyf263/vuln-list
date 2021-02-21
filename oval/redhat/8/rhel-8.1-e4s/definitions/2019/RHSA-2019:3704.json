@@ -1,0 +1,117 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193704",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2019:3704: numpy security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3704",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3704"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-6446",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-6446"
+      }
+    ],
+    "Description": "The numpy packages provide NumPY. NumPY is an extension to the Python programming language, which adds support for large, multi-dimensional arrays and matrices, and a library of mathematical functions that operate on such arrays.\n\nSecurity Fix(es):\n\n* numpy: crafted serialized object passed in numpy.load() in pickle python module allows arbitrary code execution (CVE-2019-6446)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.1 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-05"
+      },
+      "Updated": {
+        "Date": "2019-11-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-6446",
+          "Cvss3": "8.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-358-\u003eCWE-20",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-6446",
+          "Public": "20190116"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1667950",
+          "ID": "1667950"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.1",
+        "cpe:/a:redhat:rhel_e4s:8.1::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.1::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.1::sap",
+        "cpe:/a:redhat:rhel_e4s:8.1::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.1",
+        "cpe:/o:redhat:rhel_e4s:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-numpy is earlier than 1:1.14.3-9.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193704001"
+                  },
+                  {
+                    "Comment": "python3-numpy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193704002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-numpy-f2py is earlier than 1:1.14.3-9.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193704003"
+                  },
+                  {
+                    "Comment": "python3-numpy-f2py is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193704004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

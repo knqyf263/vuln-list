@@ -1,0 +1,167 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202041",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:2041: squid:4 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2041",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2041"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-12519",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-12519"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-12525",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-12525"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11945",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11945"
+      }
+    ],
+    "Description": "Squid is a high-performance proxy caching server for web clients, supporting FTP, Gopher, and HTTP data objects.\n\nSecurity Fix(es):\n\n* squid: improper check for new member in ESIExpression::Evaluate allows for stack buffer overflow (CVE-2019-12519)\n\n* squid: improper access restriction upon Digest Authentication nonce replay could lead to remote code execution (CVE-2020-11945)\n\n* squid: parsing of header Proxy-Authentication leads to memory corruption (CVE-2019-12525)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-05-06"
+      },
+      "Updated": {
+        "Date": "2020-05-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-12519",
+          "Cvss3": "8.1/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-121",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-12519",
+          "Public": "20200424"
+        },
+        {
+          "CveID": "CVE-2019-12525",
+          "Cvss3": "4.3/CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-12525",
+          "Public": "20190712"
+        },
+        {
+          "CveID": "CVE-2020-11945",
+          "Cvss3": "8.1/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-284",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11945",
+          "Public": "20200424"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1730535",
+          "ID": "1730535"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1827552",
+          "ID": "1827552"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1827563",
+          "ID": "1827563"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.2",
+        "cpe:/a:redhat:rhel_e4s:8.2::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.2::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.2",
+        "cpe:/o:redhat:rhel_e4s:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "Module squid:4 is enabled",
+            "TestRef": "oval:com.redhat.rhsa:tst:20192593007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libecap is earlier than 0:1.0.1-2.module+el8.1.0+4044+36416a77",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193476001"
+                  },
+                  {
+                    "Comment": "libecap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192593002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libecap-devel is earlier than 0:1.0.1-2.module+el8.1.0+4044+36416a77",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193476003"
+                  },
+                  {
+                    "Comment": "libecap-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192593004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "squid is earlier than 7:4.4-8.module+el8.2.0+6449+6ba3df3e.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202041005"
+                  },
+                  {
+                    "Comment": "squid is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192593006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

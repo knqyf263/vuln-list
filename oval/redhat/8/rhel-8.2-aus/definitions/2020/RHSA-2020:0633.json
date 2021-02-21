@@ -1,0 +1,127 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200633",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:0633: ppp security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0633",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0633"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8597",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8597"
+      }
+    ],
+    "Description": "The ppp packages contain the Point-to-Point Protocol (PPP) daemon and documentation for PPP support. The PPP protocol provides a method for transmitting datagrams over serial point-to-point links. PPP is usually used to dial in to an Internet Service Provider (ISP) or other organization over a modem and phone line.\n\nSecurity Fix(es):\n\n* ppp: Buffer overflow in the eap_request and eap_response functions in eap.c (CVE-2020-8597)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-02-27"
+      },
+      "Updated": {
+        "Date": "2020-02-27"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-8597",
+          "Cvss3": "9.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-120",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8597",
+          "Public": "20200203"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1800727",
+          "ID": "1800727"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "network-scripts-ppp is earlier than 0:2.4.7-26.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200633001"
+                  },
+                  {
+                    "Comment": "network-scripts-ppp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200633002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ppp is earlier than 0:2.4.7-26.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200633003"
+                  },
+                  {
+                    "Comment": "ppp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200633004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ppp-devel is earlier than 0:2.4.7-26.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200633005"
+                  },
+                  {
+                    "Comment": "ppp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200633006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20201933",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:1933: targetcli security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:1933",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:1933"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10699",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10699"
+      }
+    ],
+    "Description": "The targetcli package contains an administration shell for configuring Internet Small Computer System Interface (iSCSI), Fibre Channel over Ethernet (FCoE), and other SCSI targets, using the Target Core Mod/Linux-IO (TCM/LIO) kernel target subsystem. FCoE users also need to install and use the fcoe-utils package.\n\nSecurity Fix(es):\n\n* targetcli: world writable /var/run/targetclid.sock allows unprivileged user to execute commands (CVE-2020-10699)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-04-28"
+      },
+      "Updated": {
+        "Date": "2020-04-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-10699",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-284",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10699",
+          "Public": "20200323"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1819219",
+          "ID": "1819219"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "targetcli is earlier than 0:2.1.51-4.el8_2",
+            "TestRef": "oval:com.redhat.rhsa:tst:20201933001"
+          },
+          {
+            "Comment": "targetcli is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20201933002"
+          }
+        ]
+      }
+    ]
+  }
+}

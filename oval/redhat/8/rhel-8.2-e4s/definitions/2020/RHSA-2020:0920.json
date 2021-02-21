@@ -1,0 +1,134 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200920",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:0920: libvncserver security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0920",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0920"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-15690",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-15690"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-20788",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-20788"
+      }
+    ],
+    "Description": "LibVNCServer is a C library that enables you to implement VNC server functionality into own programs.\n\nSecurity Fix(es):\n\n* libvncserver: HandleCursorShape() integer overflow resulting in heap-based buffer overflow (CVE-2019-15690)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-03-23"
+      },
+      "Updated": {
+        "Date": "2020-03-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-15690",
+          "Cvss3": "9.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-15690",
+          "Public": "20191220"
+        },
+        {
+          "CveID": "CVE-2019-20788",
+          "Cvss3": "0.0/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+          "Cwe": "(CWE-122|CWE-190)",
+          "Impact": "none",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-20788",
+          "Public": "20191117"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1811948",
+          "ID": "1811948"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1829870",
+          "ID": "1829870"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.2",
+        "cpe:/a:redhat:rhel_e4s:8.2::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.2::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.2",
+        "cpe:/o:redhat:rhel_e4s:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvncserver is earlier than 0:0.9.11-9.el8_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200920001"
+                  },
+                  {
+                    "Comment": "libvncserver is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200920002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvncserver-devel is earlier than 0:0.9.11-9.el8_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200920003"
+                  },
+                  {
+                    "Comment": "libvncserver-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200920004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

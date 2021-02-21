@@ -1,0 +1,1957 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202774",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2020:2774: virt:rhel security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2774",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2774"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-20382",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-20382"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8608",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8608"
+      }
+    ],
+    "Description": "Kernel-based Virtual Machine (KVM) offers a full virtualization solution for Linux on numerous hardware platforms. The virt:rhel module contains packages which provide user-space components used to run virtual machines using KVM. The packages also provide APIs for managing and interacting with the virtualized systems.\n\nSecurity Fix(es):\n\n* QEMU: Slirp: potential OOB access due to unsafe snprintf() usages (CVE-2020-8608)\n\n* QEMU: vnc: memory leakage upon disconnect (CVE-2019-20382)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-06-30"
+      },
+      "Updated": {
+        "Date": "2020-06-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-20382",
+          "Cvss3": "3.5/CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-401-\u003eCWE-772",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-20382",
+          "Public": "20190917"
+        },
+        {
+          "CveID": "CVE-2020-8608",
+          "Cvss3": "5.6/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-122",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8608",
+          "Public": "20200127"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1798453",
+          "ID": "1798453"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1810390",
+          "ID": "1810390"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "Module virt:rhel is enabled",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191175195"
+                  }
+                ],
+                "Criterias": [
+                  {
+                    "Operator": "OR",
+                    "Criterias": [
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "SLOF is earlier than 0:20171214-6.gitfa98132.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345001"
+                          },
+                          {
+                            "Comment": "SLOF is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175002"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345003"
+                          },
+                          {
+                            "Comment": "hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175004"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "hivex-devel is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345005"
+                          },
+                          {
+                            "Comment": "hivex-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175006"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774007"
+                          },
+                          {
+                            "Comment": "libguestfs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175008"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-bash-completion is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774009"
+                          },
+                          {
+                            "Comment": "libguestfs-bash-completion is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175010"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-benchmarking is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774011"
+                          },
+                          {
+                            "Comment": "libguestfs-benchmarking is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175012"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-devel is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774013"
+                          },
+                          {
+                            "Comment": "libguestfs-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175014"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-gfs2 is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774015"
+                          },
+                          {
+                            "Comment": "libguestfs-gfs2 is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175016"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-gobject is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774017"
+                          },
+                          {
+                            "Comment": "libguestfs-gobject is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175018"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-gobject-devel is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774019"
+                          },
+                          {
+                            "Comment": "libguestfs-gobject-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175020"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-inspect-icons is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774021"
+                          },
+                          {
+                            "Comment": "libguestfs-inspect-icons is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175022"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-java is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774023"
+                          },
+                          {
+                            "Comment": "libguestfs-java is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175024"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-java-devel is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774025"
+                          },
+                          {
+                            "Comment": "libguestfs-java-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175026"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-javadoc is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774027"
+                          },
+                          {
+                            "Comment": "libguestfs-javadoc is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175028"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-man-pages-ja is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774029"
+                          },
+                          {
+                            "Comment": "libguestfs-man-pages-ja is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175030"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-man-pages-uk is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774031"
+                          },
+                          {
+                            "Comment": "libguestfs-man-pages-uk is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175032"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-rescue is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774033"
+                          },
+                          {
+                            "Comment": "libguestfs-rescue is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175034"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-rsync is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774035"
+                          },
+                          {
+                            "Comment": "libguestfs-rsync is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175036"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-tools is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774037"
+                          },
+                          {
+                            "Comment": "libguestfs-tools is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175038"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-tools-c is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774039"
+                          },
+                          {
+                            "Comment": "libguestfs-tools-c is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175040"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-winsupport is earlier than 0:8.0-4.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345041"
+                          },
+                          {
+                            "Comment": "libguestfs-winsupport is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175042"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-xfs is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774043"
+                          },
+                          {
+                            "Comment": "libguestfs-xfs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175044"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libiscsi is earlier than 0:1.18.0-8.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345045"
+                          },
+                          {
+                            "Comment": "libiscsi is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175046"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libiscsi-devel is earlier than 0:1.18.0-8.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345047"
+                          },
+                          {
+                            "Comment": "libiscsi-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175048"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libiscsi-utils is earlier than 0:1.18.0-8.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345049"
+                          },
+                          {
+                            "Comment": "libiscsi-utils is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175050"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774051"
+                          },
+                          {
+                            "Comment": "libvirt is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175054"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-admin is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774053"
+                          },
+                          {
+                            "Comment": "libvirt-admin is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175056"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-bash-completion is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774055"
+                          },
+                          {
+                            "Comment": "libvirt-bash-completion is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175058"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-client is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774057"
+                          },
+                          {
+                            "Comment": "libvirt-client is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175060"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774059"
+                          },
+                          {
+                            "Comment": "libvirt-daemon is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175062"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-config-network is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774061"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-config-network is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175064"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-config-nwfilter is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774063"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-config-nwfilter is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175066"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-interface is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774065"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-interface is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175068"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-network is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774067"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-network is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175070"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-nodedev is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774069"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-nodedev is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175072"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-nwfilter is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774071"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-nwfilter is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175074"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-qemu is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774073"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-qemu is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175076"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-secret is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774075"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-secret is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175078"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774077"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175080"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-core is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774079"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-core is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175082"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-disk is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774081"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-disk is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175084"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-gluster is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774083"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-gluster is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175086"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-iscsi is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774085"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-iscsi is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175088"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-logical is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774087"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-logical is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175090"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-mpath is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774089"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-mpath is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175092"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-rbd is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774091"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-rbd is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175094"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-scsi is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774093"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-scsi is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175096"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-kvm is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774095"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-kvm is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175098"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-dbus is earlier than 0:1.2.0-3.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345097"
+                          },
+                          {
+                            "Comment": "libvirt-dbus is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175100"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-devel is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774099"
+                          },
+                          {
+                            "Comment": "libvirt-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175102"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-docs is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774101"
+                          },
+                          {
+                            "Comment": "libvirt-docs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175104"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-libs is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774103"
+                          },
+                          {
+                            "Comment": "libvirt-libs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175106"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-lock-sanlock is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774105"
+                          },
+                          {
+                            "Comment": "libvirt-lock-sanlock is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175108"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-nss is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774107"
+                          },
+                          {
+                            "Comment": "libvirt-nss is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175110"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "lua-guestfs is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774109"
+                          },
+                          {
+                            "Comment": "lua-guestfs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175112"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345111"
+                          },
+                          {
+                            "Comment": "nbdkit is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175114"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-bash-completion is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345113"
+                          },
+                          {
+                            "Comment": "nbdkit-bash-completion is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175116"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-basic-plugins is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345115"
+                          },
+                          {
+                            "Comment": "nbdkit-basic-plugins is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175118"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-devel is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345117"
+                          },
+                          {
+                            "Comment": "nbdkit-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175120"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-example-plugins is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345119"
+                          },
+                          {
+                            "Comment": "nbdkit-example-plugins is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175122"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-plugin-gzip is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345121"
+                          },
+                          {
+                            "Comment": "nbdkit-plugin-gzip is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175124"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-plugin-python-common is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345123"
+                          },
+                          {
+                            "Comment": "nbdkit-plugin-python-common is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175126"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-plugin-python3 is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345125"
+                          },
+                          {
+                            "Comment": "nbdkit-plugin-python3 is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175128"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-plugin-vddk is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345127"
+                          },
+                          {
+                            "Comment": "nbdkit-plugin-vddk is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175130"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "nbdkit-plugin-xz is earlier than 0:1.4.2-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345129"
+                          },
+                          {
+                            "Comment": "nbdkit-plugin-xz is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175132"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "netcf is earlier than 0:0.2.8-12.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345131"
+                          },
+                          {
+                            "Comment": "netcf is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175134"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "netcf-devel is earlier than 0:0.2.8-12.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345133"
+                          },
+                          {
+                            "Comment": "netcf-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175136"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "netcf-libs is earlier than 0:0.2.8-12.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345135"
+                          },
+                          {
+                            "Comment": "netcf-libs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175138"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "perl-Sys-Guestfs is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774137"
+                          },
+                          {
+                            "Comment": "perl-Sys-Guestfs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175140"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "perl-Sys-Virt is earlier than 0:4.5.0-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345139"
+                          },
+                          {
+                            "Comment": "perl-Sys-Virt is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175142"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "perl-hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345141"
+                          },
+                          {
+                            "Comment": "perl-hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175144"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "python3-hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345143"
+                          },
+                          {
+                            "Comment": "python3-hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175146"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "python3-libguestfs is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774145"
+                          },
+                          {
+                            "Comment": "python3-libguestfs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175148"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "python3-libvirt is earlier than 0:4.5.0-2.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345147"
+                          },
+                          {
+                            "Comment": "python3-libvirt is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175150"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-guest-agent is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774149"
+                          },
+                          {
+                            "Comment": "qemu-guest-agent is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175152"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-img is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774151"
+                          },
+                          {
+                            "Comment": "qemu-img is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175154"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774153"
+                          },
+                          {
+                            "Comment": "qemu-kvm is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175156"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm-block-curl is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774155"
+                          },
+                          {
+                            "Comment": "qemu-kvm-block-curl is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175158"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm-block-gluster is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774157"
+                          },
+                          {
+                            "Comment": "qemu-kvm-block-gluster is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175160"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm-block-iscsi is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774159"
+                          },
+                          {
+                            "Comment": "qemu-kvm-block-iscsi is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175162"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm-block-rbd is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774161"
+                          },
+                          {
+                            "Comment": "qemu-kvm-block-rbd is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175164"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm-block-ssh is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774163"
+                          },
+                          {
+                            "Comment": "qemu-kvm-block-ssh is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175166"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm-common is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774165"
+                          },
+                          {
+                            "Comment": "qemu-kvm-common is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175168"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm-core is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774167"
+                          },
+                          {
+                            "Comment": "qemu-kvm-core is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175170"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "ruby-hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345169"
+                          },
+                          {
+                            "Comment": "ruby-hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175172"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "ruby-libguestfs is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774171"
+                          },
+                          {
+                            "Comment": "ruby-libguestfs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175174"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "seabios is earlier than 0:1.11.1-4.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345173"
+                          },
+                          {
+                            "Comment": "seabios is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175176"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "seabios-bin is earlier than 0:1.11.1-4.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345175"
+                          },
+                          {
+                            "Comment": "seabios-bin is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175178"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "seavgabios-bin is earlier than 0:1.11.1-4.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345177"
+                          },
+                          {
+                            "Comment": "seavgabios-bin is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175180"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "sgabios is earlier than 1:0.20170427git-3.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345179"
+                          },
+                          {
+                            "Comment": "sgabios is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175182"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "sgabios-bin is earlier than 1:0.20170427git-3.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345181"
+                          },
+                          {
+                            "Comment": "sgabios-bin is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175184"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "supermin is earlier than 0:5.1.19-9.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345183"
+                          },
+                          {
+                            "Comment": "supermin is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175186"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "supermin-devel is earlier than 0:5.1.19-9.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345185"
+                          },
+                          {
+                            "Comment": "supermin-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175188"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "virt-dib is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774187"
+                          },
+                          {
+                            "Comment": "virt-dib is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175190"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "virt-v2v is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774189"
+                          },
+                          {
+                            "Comment": "virt-v2v is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175194"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "Module virt-devel:rhel is enabled",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193345244"
+                  }
+                ],
+                "Criterias": [
+                  {
+                    "Operator": "OR",
+                    "Criterias": [
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345194"
+                          },
+                          {
+                            "Comment": "hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175004"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "hivex-devel is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345195"
+                          },
+                          {
+                            "Comment": "hivex-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175006"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libguestfs-winsupport is earlier than 0:8.0-4.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345196"
+                          },
+                          {
+                            "Comment": "libguestfs-winsupport is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175042"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libiscsi is earlier than 0:1.18.0-8.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345197"
+                          },
+                          {
+                            "Comment": "libiscsi is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175046"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libiscsi-devel is earlier than 0:1.18.0-8.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345198"
+                          },
+                          {
+                            "Comment": "libiscsi-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175048"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libiscsi-utils is earlier than 0:1.18.0-8.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345199"
+                          },
+                          {
+                            "Comment": "libiscsi-utils is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175050"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774198"
+                          },
+                          {
+                            "Comment": "libvirt is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175054"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-admin is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774199"
+                          },
+                          {
+                            "Comment": "libvirt-admin is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175056"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-bash-completion is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774200"
+                          },
+                          {
+                            "Comment": "libvirt-bash-completion is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175058"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-client is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774201"
+                          },
+                          {
+                            "Comment": "libvirt-client is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175060"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774202"
+                          },
+                          {
+                            "Comment": "libvirt-daemon is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175062"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-config-network is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774203"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-config-network is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175064"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-config-nwfilter is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774204"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-config-nwfilter is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175066"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-interface is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774205"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-interface is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175068"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-network is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774206"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-network is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175070"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-nodedev is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774207"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-nodedev is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175072"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-nwfilter is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774208"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-nwfilter is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175074"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-secret is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774209"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-secret is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175078"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774210"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175080"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-core is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774211"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-core is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175082"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-disk is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774212"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-disk is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175084"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-iscsi is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774213"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-iscsi is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175088"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-logical is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774214"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-logical is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175090"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-mpath is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774215"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-mpath is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175092"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-rbd is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774216"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-rbd is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175094"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-scsi is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774217"
+                          },
+                          {
+                            "Comment": "libvirt-daemon-driver-storage-scsi is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175096"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-dbus is earlier than 0:1.2.0-3.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345220"
+                          },
+                          {
+                            "Comment": "libvirt-dbus is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175100"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-devel is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774219"
+                          },
+                          {
+                            "Comment": "libvirt-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175102"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-docs is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774220"
+                          },
+                          {
+                            "Comment": "libvirt-docs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175104"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-libs is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774221"
+                          },
+                          {
+                            "Comment": "libvirt-libs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175106"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "libvirt-nss is earlier than 0:4.5.0-42.module+el8.2.0+6024+15a2423f",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774222"
+                          },
+                          {
+                            "Comment": "libvirt-nss is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175110"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "netcf is earlier than 0:0.2.8-12.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345225"
+                          },
+                          {
+                            "Comment": "netcf is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175134"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "netcf-devel is earlier than 0:0.2.8-12.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345226"
+                          },
+                          {
+                            "Comment": "netcf-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175136"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "netcf-libs is earlier than 0:0.2.8-12.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345227"
+                          },
+                          {
+                            "Comment": "netcf-libs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175138"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "ocaml-hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345228"
+                          },
+                          {
+                            "Comment": "ocaml-hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345229"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "ocaml-hivex-devel is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345230"
+                          },
+                          {
+                            "Comment": "ocaml-hivex-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345231"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "ocaml-libguestfs is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774230"
+                          },
+                          {
+                            "Comment": "ocaml-libguestfs is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345233"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "ocaml-libguestfs-devel is earlier than 1:1.38.4-15.module+el8.2.0+5297+222a20af",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774232"
+                          },
+                          {
+                            "Comment": "ocaml-libguestfs-devel is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345235"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "perl-Sys-Virt is earlier than 0:4.5.0-5.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345236"
+                          },
+                          {
+                            "Comment": "perl-Sys-Virt is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175142"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "perl-hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345237"
+                          },
+                          {
+                            "Comment": "perl-hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175144"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "python3-hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345238"
+                          },
+                          {
+                            "Comment": "python3-hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175146"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "python3-libvirt is earlier than 0:4.5.0-2.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345239"
+                          },
+                          {
+                            "Comment": "python3-libvirt is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175150"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "qemu-kvm-tests is earlier than 15:2.12.0-99.module+el8.2.0+6870+55b789b4.2",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20202774238"
+                          },
+                          {
+                            "Comment": "qemu-kvm-tests is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345241"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "ruby-hivex is earlier than 0:1.3.15-7.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345242"
+                          },
+                          {
+                            "Comment": "ruby-hivex is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175172"
+                          }
+                        ]
+                      },
+                      {
+                        "Operator": "AND",
+                        "Criterions": [
+                          {
+                            "Comment": "sgabios is earlier than 1:0.20170427git-3.module+el8.1.0+4066+0f1aadab",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20193345243"
+                          },
+                          {
+                            "Comment": "sgabios is signed with Red Hat redhatrelease2 key",
+                            "TestRef": "oval:com.redhat.rhsa:tst:20191175182"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

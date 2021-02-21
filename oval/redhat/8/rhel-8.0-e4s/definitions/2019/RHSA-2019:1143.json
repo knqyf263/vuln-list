@@ -1,0 +1,117 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20191143",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2019:1143: flatpak security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:1143",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:1143"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10063",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10063"
+      }
+    ],
+    "Description": "Flatpak is a system for building, distributing, and running sandboxed desktop applications on Linux.\n\nSecurity Fix(es):\n\n* flatpak: Sandbox bypass via IOCSTI (incomplete fix for CVE-2017-5226) (CVE-2019-10063)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-05-13"
+      },
+      "Updated": {
+        "Date": "2019-05-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-10063",
+          "Cvss3": "8.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-266",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10063",
+          "Public": "20190322"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1695973",
+          "ID": "1695973"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.0",
+        "cpe:/a:redhat:rhel_e4s:8.0::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.0::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.0::sap",
+        "cpe:/a:redhat:rhel_e4s:8.0::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.0",
+        "cpe:/o:redhat:rhel_e4s:8.0::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "flatpak is earlier than 0:1.0.6-3.el8_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191143001"
+                  },
+                  {
+                    "Comment": "flatpak is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191143002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "flatpak-libs is earlier than 0:1.0.6-3.el8_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191143003"
+                  },
+                  {
+                    "Comment": "flatpak-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191143004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

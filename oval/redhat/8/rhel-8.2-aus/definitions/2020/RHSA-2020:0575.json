@@ -1,0 +1,192 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200575",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:0575: systemd security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0575",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0575"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1712",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1712"
+      }
+    ],
+    "Description": "The systemd packages contain systemd, a system and service manager for Linux, compatible with the SysV and LSB init scripts. It provides aggressive parallelism capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, and keeps track of processes using Linux cgroups. In addition, it supports snapshotting and restoring of the system state, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic. It can also work as a drop-in replacement for sysvinit.\n\nSecurity Fix(es):\n\n* systemd: use-after-free when asynchronous polkit queries are performed (CVE-2020-1712)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* systemd: systemctl reload command breaks ordering dependencies between units (BZ#1781712)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-02-24"
+      },
+      "Updated": {
+        "Date": "2020-02-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-1712",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1712",
+          "Public": "20200205:0900"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1794578",
+          "ID": "1794578"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemd is earlier than 0:239-18.el8_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200575001"
+                  },
+                  {
+                    "Comment": "systemd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemd-container is earlier than 0:239-18.el8_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200575003"
+                  },
+                  {
+                    "Comment": "systemd-container is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemd-devel is earlier than 0:239-18.el8_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200575005"
+                  },
+                  {
+                    "Comment": "systemd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemd-journal-remote is earlier than 0:239-18.el8_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200575007"
+                  },
+                  {
+                    "Comment": "systemd-journal-remote is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemd-libs is earlier than 0:239-18.el8_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200575009"
+                  },
+                  {
+                    "Comment": "systemd-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemd-pam is earlier than 0:239-18.el8_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200575011"
+                  },
+                  {
+                    "Comment": "systemd-pam is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemd-tests is earlier than 0:239-18.el8_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200575013"
+                  },
+                  {
+                    "Comment": "systemd-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemd-udev is earlier than 0:239-18.el8_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200575015"
+                  },
+                  {
+                    "Comment": "systemd-udev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

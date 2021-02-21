@@ -1,0 +1,114 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20203385",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2020:3385: libvncserver security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:3385",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:3385"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-18922",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-18922"
+      }
+    ],
+    "Description": "LibVNCServer is a C library that enables you to implement VNC server functionality into own programs.\n\nSecurity Fix(es):\n\n* libvncserver: websocket decoding buffer overflow (CVE-2017-18922)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-08-10"
+      },
+      "Updated": {
+        "Date": "2020-08-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-18922",
+          "Cvss3": "9.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-122",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-18922",
+          "Public": "20170215"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1852356",
+          "ID": "1852356"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvncserver is earlier than 0:0.9.11-15.el8_2.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203385001"
+                  },
+                  {
+                    "Comment": "libvncserver is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200920002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvncserver-devel is earlier than 0:0.9.11-15.el8_2.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203385003"
+                  },
+                  {
+                    "Comment": "libvncserver-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200920004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

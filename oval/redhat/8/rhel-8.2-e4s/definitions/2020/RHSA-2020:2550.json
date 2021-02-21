@@ -1,0 +1,117 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202550",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2020:2550: libexif security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2550",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2550"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-13112",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-13112"
+      }
+    ],
+    "Description": "The libexif packages provide a library for extracting extra information from image files.\n\nSecurity Fix(es):\n\n* libexif: several buffer over-reads in EXIF MakerNote handling can lead to information disclosure and DoS (CVE-2020-13112)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-06-15"
+      },
+      "Updated": {
+        "Date": "2020-06-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-13112",
+          "Cvss3": "9.1/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H",
+          "Cwe": "(CWE-122|CWE-190)-\u003eCWE-125",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-13112",
+          "Public": "20200516"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1840344",
+          "ID": "1840344"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.2",
+        "cpe:/a:redhat:rhel_e4s:8.2::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.2::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.2",
+        "cpe:/o:redhat:rhel_e4s:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libexif is earlier than 0:0.6.21-17.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202550001"
+                  },
+                  {
+                    "Comment": "libexif is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202550002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libexif-devel is earlier than 0:0.6.21-17.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202550003"
+                  },
+                  {
+                    "Comment": "libexif-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202550004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

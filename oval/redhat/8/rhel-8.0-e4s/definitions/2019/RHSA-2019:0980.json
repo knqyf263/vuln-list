@@ -1,0 +1,254 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20190980",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2019:0980: httpd:2.4 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:0980",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:0980"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-0211",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-0211"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-0215",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-0215"
+      }
+    ],
+    "Description": "The httpd packages provide the Apache HTTP Server, a powerful, efficient, and extensible web server.\n\nSecurity Fix(es):\n\n* httpd: privilege escalation from modules scripts (CVE-2019-0211)\n\n* httpd: mod_ssl: access control bypass when using per-location client certification authentication (CVE-2019-0215)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-05-07"
+      },
+      "Updated": {
+        "Date": "2019-05-07"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-0211",
+          "Cvss3": "8.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-250",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-0211",
+          "Public": "20190401"
+        },
+        {
+          "CveID": "CVE-2019-0215",
+          "Cvss3": "6.8/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:N",
+          "Cwe": "CWE-284",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-0215",
+          "Public": "20190401"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1694980",
+          "ID": "1694980"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1695025",
+          "ID": "1695025"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.0",
+        "cpe:/a:redhat:rhel_e4s:8.0::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.0::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.0::sap",
+        "cpe:/a:redhat:rhel_e4s:8.0::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.0",
+        "cpe:/o:redhat:rhel_e4s:8.0::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "Module httpd:2.4 is enabled",
+            "TestRef": "oval:com.redhat.rhsa:tst:20190980023"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd is earlier than 0:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980001"
+                  },
+                  {
+                    "Comment": "httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-devel is earlier than 0:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980003"
+                  },
+                  {
+                    "Comment": "httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-filesystem is earlier than 0:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980005"
+                  },
+                  {
+                    "Comment": "httpd-filesystem is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-manual is earlier than 0:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980007"
+                  },
+                  {
+                    "Comment": "httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-tools is earlier than 0:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980009"
+                  },
+                  {
+                    "Comment": "httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_http2 is earlier than 0:1.11.3-2.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980011"
+                  },
+                  {
+                    "Comment": "mod_http2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ldap is earlier than 0:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980013"
+                  },
+                  {
+                    "Comment": "mod_ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_md is earlier than 0:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980015"
+                  },
+                  {
+                    "Comment": "mod_md is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_proxy_html is earlier than 1:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980017"
+                  },
+                  {
+                    "Comment": "mod_proxy_html is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_session is earlier than 0:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980019"
+                  },
+                  {
+                    "Comment": "mod_session is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ssl is earlier than 1:2.4.37-11.module+el8.0.0+2969+90015743",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980021"
+                  },
+                  {
+                    "Comment": "mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190980022"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

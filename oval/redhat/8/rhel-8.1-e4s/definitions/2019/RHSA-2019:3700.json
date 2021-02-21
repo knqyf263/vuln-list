@@ -1,0 +1,175 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193700",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2019:3700: openssl security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3700",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3700"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-0734",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-0734"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-0735",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-0735"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-1543",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-1543"
+      }
+    ],
+    "Description": "OpenSSL is a toolkit that implements the Secure Sockets Layer (SSL) and Transport Layer Security (TLS) protocols, as well as a full-strength general-purpose cryptography library.\n\nThe following packages have been upgraded to a later upstream version: openssl (1.1.1c). (BZ#1643026)\n\nSecurity Fix(es):\n\n* openssl: timing side channel attack in the DSA signature algorithm (CVE-2018-0734)\n\n* openssl: timing side channel attack in the ECDSA signature generation (CVE-2018-0735)\n\n* openssl: ChaCha20-Poly1305 with long nonces (CVE-2019-1543)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.1 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-05"
+      },
+      "Updated": {
+        "Date": "2019-11-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-0734",
+          "Cvss3": "5.1/CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-385",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-0734",
+          "Public": "20181016"
+        },
+        {
+          "CveID": "CVE-2018-0735",
+          "Cvss3": "5.1/CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-385",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-0735",
+          "Public": "20181025"
+        },
+        {
+          "CveID": "CVE-2019-1543",
+          "Cvss3": "2.9/CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-323",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-1543",
+          "Public": "20190306"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1644356",
+          "ID": "1644356"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1644364",
+          "ID": "1644364"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1695954",
+          "ID": "1695954"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.1",
+        "cpe:/a:redhat:rhel_e4s:8.1::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.1::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.1::sap",
+        "cpe:/a:redhat:rhel_e4s:8.1::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.1",
+        "cpe:/o:redhat:rhel_e4s:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl is earlier than 1:1.1.1c-2.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193700001"
+                  },
+                  {
+                    "Comment": "openssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193700002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-devel is earlier than 1:1.1.1c-2.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193700003"
+                  },
+                  {
+                    "Comment": "openssl-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193700004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-libs is earlier than 1:1.1.1c-2.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193700005"
+                  },
+                  {
+                    "Comment": "openssl-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193700006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-perl is earlier than 1:1.1.1c-2.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193700007"
+                  },
+                  {
+                    "Comment": "openssl-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193700008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

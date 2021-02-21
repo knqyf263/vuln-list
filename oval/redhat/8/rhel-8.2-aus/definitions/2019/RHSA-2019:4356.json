@@ -1,0 +1,321 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20194356",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2019:4356: git security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:4356",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:4356"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-1348",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-1348"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-1349",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-1349"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-1352",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-1352"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-1387",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-1387"
+      }
+    ],
+    "Description": "Git is a distributed revision control system with a decentralized architecture. As opposed to centralized version control systems with a client-server model, Git ensures that each working copy of a Git repository is an exact copy with complete revision history. This not only allows the user to work on and contribute to projects without the need to have permission to push the changes to their official repositories, but also makes it possible for the user to work with no network connection.\n\nThe following packages have been upgraded to a later upstream version: git (2.18.2). (BZ#1784058)\n\nSecurity Fix(es):\n\n* git: Remote code execution in recursive clones with nested submodules (CVE-2019-1387)\n\n* git: Arbitrary path overwriting via export-marks in-stream command feature (CVE-2019-1348)\n\n* git: Recursive submodule cloning allows using git directory twice with synonymous directory name written in .git/ (CVE-2019-1349)\n\n* git: Files inside the .git directory may be overwritten during cloning via NTFS Alternate Data Streams (CVE-2019-1352)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-12-19"
+      },
+      "Updated": {
+        "Date": "2019-12-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-1348",
+          "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-1348",
+          "Public": "20191210"
+        },
+        {
+          "CveID": "CVE-2019-1349",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-1349",
+          "Public": "20191210"
+        },
+        {
+          "CveID": "CVE-2019-1352",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-73",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-1352",
+          "Public": "20191210"
+        },
+        {
+          "CveID": "CVE-2019-1387",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-20",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-1387",
+          "Public": "20191210"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1781127",
+          "ID": "1781127"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1781143",
+          "ID": "1781143"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1781953",
+          "ID": "1781953"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1781963",
+          "ID": "1781963"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356001"
+                  },
+                  {
+                    "Comment": "git is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-all is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356003"
+                  },
+                  {
+                    "Comment": "git-all is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-core is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356005"
+                  },
+                  {
+                    "Comment": "git-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-core-doc is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356007"
+                  },
+                  {
+                    "Comment": "git-core-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-daemon is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356009"
+                  },
+                  {
+                    "Comment": "git-daemon is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-email is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356011"
+                  },
+                  {
+                    "Comment": "git-email is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-gui is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356013"
+                  },
+                  {
+                    "Comment": "git-gui is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-instaweb is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356015"
+                  },
+                  {
+                    "Comment": "git-instaweb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-subtree is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356017"
+                  },
+                  {
+                    "Comment": "git-subtree is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "git-svn is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356019"
+                  },
+                  {
+                    "Comment": "git-svn is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gitk is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356021"
+                  },
+                  {
+                    "Comment": "gitk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gitweb is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356023"
+                  },
+                  {
+                    "Comment": "gitweb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perl-Git is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356025"
+                  },
+                  {
+                    "Comment": "perl-Git is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perl-Git-SVN is earlier than 0:2.18.2-1.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356027"
+                  },
+                  {
+                    "Comment": "perl-Git-SVN is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356028"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

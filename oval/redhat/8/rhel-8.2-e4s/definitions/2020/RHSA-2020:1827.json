@@ -1,0 +1,147 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20201827",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:1827: libxml2 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:1827",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:1827"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-14404",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-14404"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-9251",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-9251"
+      }
+    ],
+    "Description": "The libxml2 library is a development toolbox providing the implementation of various XML standards.\n\nSecurity Fix(es):\n\n* libxml2: NULL pointer dereference in xmlXPathCompOpEval() function in xpath.c (CVE-2018-14404)\n\n* libxml2: infinite loop in xz_decomp function in xzlib.c (CVE-2018-9251)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.2 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-04-28"
+      },
+      "Updated": {
+        "Date": "2020-04-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-14404",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-476",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-14404",
+          "Public": "20180618"
+        },
+        {
+          "CveID": "CVE-2018-9251",
+          "Cvss3": "3.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-835",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-9251",
+          "Public": "20180403"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1565318",
+          "ID": "1565318"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1595985",
+          "ID": "1595985"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.2",
+        "cpe:/a:redhat:rhel_e4s:8.2::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.2::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap",
+        "cpe:/a:redhat:rhel_e4s:8.2::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.2",
+        "cpe:/o:redhat:rhel_e4s:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libxml2 is earlier than 0:2.9.7-7.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201827001"
+                  },
+                  {
+                    "Comment": "libxml2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201827002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libxml2-devel is earlier than 0:2.9.7-7.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201827003"
+                  },
+                  {
+                    "Comment": "libxml2-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201827004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-libxml2 is earlier than 0:2.9.7-7.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201827005"
+                  },
+                  {
+                    "Comment": "python3-libxml2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201827006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

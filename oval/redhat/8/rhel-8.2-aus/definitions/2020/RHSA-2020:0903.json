@@ -1,0 +1,114 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200903",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:0903: zsh security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0903",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0903"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-20044",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-20044"
+      }
+    ],
+    "Description": "The zsh shell is a command interpreter usable as an interactive login shell and as a shell script command processor. Zsh resembles the ksh shell (the Korn shell), but includes many enhancements. Zsh supports command-line editing, built-in spelling correction, programmable command completion, shell functions (with autoloading), a history mechanism, and more.\n\nSecurity Fix(es):\n\n* zsh: insecure dropping of privileges when unsetting PRIVILEGED option (CVE-2019-20044)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-03-19"
+      },
+      "Updated": {
+        "Date": "2020-03-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-20044",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-271",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-20044",
+          "Public": "20200216"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1804859",
+          "ID": "1804859"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "zsh is earlier than 0:5.5.1-6.el8_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200903001"
+                  },
+                  {
+                    "Comment": "zsh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200903002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "zsh-html is earlier than 0:5.5.1-6.el8_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200903003"
+                  },
+                  {
+                    "Comment": "zsh-html is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200903004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

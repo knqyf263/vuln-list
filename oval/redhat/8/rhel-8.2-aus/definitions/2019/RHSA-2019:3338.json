@@ -1,0 +1,146 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193338",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2019:3338: edk2 security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3338",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3338"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12181",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12181"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-0160",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-0160"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-0161",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-0161"
+      }
+    ],
+    "Description": "EDK (Embedded Development Kit) is a project to enable UEFI support for Virtual Machines. This package contains a sample 64-bit UEFI firmware for QEMU and KVM.\n\nSecurity Fix(es):\n\n* edk2: Stack buffer overflow with corrupted BMP (CVE-2018-12181)\n\n* edk2: Buffer overflows in PartitionDxe and UdfDxe with long file names and invalid UDF media (CVE-2019-0160)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.1 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-05"
+      },
+      "Updated": {
+        "Date": "2019-11-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-12181",
+          "Cvss3": "5.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-121",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12181",
+          "Public": "20190307"
+        },
+        {
+          "CveID": "CVE-2019-0160",
+          "Cvss3": "5.9/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "(CWE-122|CWE-121)",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-0160",
+          "Public": "20190226"
+        },
+        {
+          "CveID": "CVE-2019-0161",
+          "Cvss3": "5.9/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-121-\u003eCWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-0161",
+          "Public": "20180605"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1686783",
+          "ID": "1686783"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1691640",
+          "ID": "1691640"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1694065",
+          "ID": "1694065"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "edk2-aarch64 is earlier than 0:20190308git89910a39dcfd-6.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193338001"
+                  },
+                  {
+                    "Comment": "edk2-aarch64 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190968002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "edk2-ovmf is earlier than 0:20190308git89910a39dcfd-6.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193338003"
+                  },
+                  {
+                    "Comment": "edk2-ovmf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190968004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
