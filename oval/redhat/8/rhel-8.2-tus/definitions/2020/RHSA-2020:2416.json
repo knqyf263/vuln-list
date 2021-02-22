@@ -1,0 +1,158 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202416",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:2416: unbound security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2416",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2416"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-12662",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-12662"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-12663",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-12663"
+      }
+    ],
+    "Description": "The unbound packages provide a validating, recursive, and caching DNS or DNSSEC resolver. \n\nSecurity Fix(es):\n\n* unbound: amplification of an incoming query into a large number of queries directed to a target (CVE-2020-12662)\n\n* unbound: infinite loop via malformed DNS answers received from upstream servers (CVE-2020-12663)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-06-08"
+      },
+      "Updated": {
+        "Date": "2020-06-08"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-12662",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-406-\u003eCWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-12662",
+          "Public": "20200519"
+        },
+        {
+          "CveID": "CVE-2020-12663",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-20-\u003eCWE-835",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-12663",
+          "Public": "20200519"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1837597",
+          "ID": "1837597"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1837604",
+          "ID": "1837604"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/a:redhat:rhel_tus:8.2",
+        "cpe:/a:redhat:rhel_tus:8.2::appstream",
+        "cpe:/a:redhat:rhel_tus:8.2::highavailability",
+        "cpe:/o:redhat:rhel_tus:8.2",
+        "cpe:/o:redhat:rhel_tus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-unbound is earlier than 0:1.7.3-11.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202416001"
+                  },
+                  {
+                    "Comment": "python3-unbound is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201716002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "unbound is earlier than 0:1.7.3-11.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202416003"
+                  },
+                  {
+                    "Comment": "unbound is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201716004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "unbound-devel is earlier than 0:1.7.3-11.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202416005"
+                  },
+                  {
+                    "Comment": "unbound-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201716006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "unbound-libs is earlier than 0:1.7.3-11.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202416007"
+                  },
+                  {
+                    "Comment": "unbound-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201716008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

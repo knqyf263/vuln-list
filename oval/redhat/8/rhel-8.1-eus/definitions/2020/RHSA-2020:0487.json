@@ -1,0 +1,95 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200487",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2020:0487: sudo security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0487",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0487"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-18634",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-18634"
+      }
+    ],
+    "Description": "The sudo packages contain the sudo utility which allows system administrators to provide certain users with the permission to execute privileged commands, which are used for system management purposes, without having to log in as root.\n\nSecurity Fix(es):\n\n* sudo: Stack based buffer overflow when pwfeedback is enabled (CVE-2019-18634)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-02-14"
+      },
+      "Updated": {
+        "Date": "2020-02-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-18634",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-121",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-18634",
+          "Public": "20200130"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1796944",
+          "ID": "1796944"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_eus:8.1",
+        "cpe:/a:redhat:rhel_eus:8.1::appstream",
+        "cpe:/a:redhat:rhel_eus:8.1::crb",
+        "cpe:/a:redhat:rhel_eus:8.1::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.1::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.1::sap",
+        "cpe:/a:redhat:rhel_eus:8.1::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.1::supplementary",
+        "cpe:/o:redhat:rhel_eus:8.1",
+        "cpe:/o:redhat:rhel_eus:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "sudo is earlier than 0:1.8.25p1-8.el8_1.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20200487001"
+          },
+          {
+            "Comment": "sudo is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20193694002"
+          }
+        ]
+      }
+    ]
+  }
+}

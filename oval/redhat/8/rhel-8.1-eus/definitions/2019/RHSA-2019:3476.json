@@ -1,0 +1,137 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193476",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2019:3476: squid:4 security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3476",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3476"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-13345",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-13345"
+      }
+    ],
+    "Description": "Squid is a high-performance proxy caching server for web clients, supporting FTP, Gopher, and HTTP data objects.\n\nSecurity Fix(es):\n\n* squid: XSS via user_name or auth parameter in cachemgr.cgi (CVE-2019-13345)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.1 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-05"
+      },
+      "Updated": {
+        "Date": "2019-11-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-13345",
+          "Cvss3": "4.3/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-79",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-13345",
+          "Public": "20190705"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1727744",
+          "ID": "1727744"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_eus:8.1",
+        "cpe:/a:redhat:rhel_eus:8.1::appstream",
+        "cpe:/a:redhat:rhel_eus:8.1::crb",
+        "cpe:/a:redhat:rhel_eus:8.1::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.1::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.1::sap",
+        "cpe:/a:redhat:rhel_eus:8.1::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.1::supplementary",
+        "cpe:/o:redhat:rhel_eus:8.1",
+        "cpe:/o:redhat:rhel_eus:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "Module squid:4 is enabled",
+            "TestRef": "oval:com.redhat.rhsa:tst:20192593007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libecap is earlier than 0:1.0.1-2.module+el8.1.0+4044+36416a77",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193476001"
+                  },
+                  {
+                    "Comment": "libecap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192593002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libecap-devel is earlier than 0:1.0.1-2.module+el8.1.0+4044+36416a77",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193476003"
+                  },
+                  {
+                    "Comment": "libecap-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192593004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "squid is earlier than 7:4.4-8.module+el8.1.0+4044+36416a77",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193476005"
+                  },
+                  {
+                    "Comment": "squid is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192593006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

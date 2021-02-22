@@ -1,0 +1,116 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20194361",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2019:4361: fribidi security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:4361",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:4361"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-18397",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-18397"
+      }
+    ],
+    "Description": "A library to handle bidirectional scripts (for example Hebrew, Arabic), so that the display is done in the proper way, while the text data itself is always written in logical order.\n\nSecurity Fix(es):\n\n* fribidi: buffer overflow in fribidi_get_par_embedding_levels_ex() in lib/fribidi-bidi.c leading to denial of service and possible code execution (CVE-2019-18397)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-12-23"
+      },
+      "Updated": {
+        "Date": "2019-12-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-18397",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-121-\u003eCWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-18397",
+          "Public": "20191107"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1768750",
+          "ID": "1768750"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/a:redhat:rhel_tus:8.2",
+        "cpe:/a:redhat:rhel_tus:8.2::appstream",
+        "cpe:/a:redhat:rhel_tus:8.2::highavailability",
+        "cpe:/o:redhat:rhel_tus:8.2",
+        "cpe:/o:redhat:rhel_tus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fribidi is earlier than 0:1.0.4-7.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194361001"
+                  },
+                  {
+                    "Comment": "fribidi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194361002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fribidi-devel is earlier than 0:1.0.4-7.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194361003"
+                  },
+                  {
+                    "Comment": "fribidi-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194361004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

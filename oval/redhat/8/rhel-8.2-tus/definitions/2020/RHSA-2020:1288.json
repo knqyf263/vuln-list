@@ -1,0 +1,91 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20201288",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2020:1288: haproxy security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:1288",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:1288"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11100",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11100"
+      }
+    ],
+    "Description": "The haproxy packages provide a reliable, high-performance network load balancer for TCP and HTTP-based applications.\n\nSecurity Fix(es):\n\n* haproxy: malformed HTTP/2 requests can lead to out-of-bounds writes (CVE-2020-11100)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-04-02"
+      },
+      "Updated": {
+        "Date": "2020-04-02"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-11100",
+          "Cvss3": "8.8/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-20-\u003eCWE-787",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11100",
+          "Public": "20200402:1300"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1819111",
+          "ID": "1819111"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/a:redhat:rhel_tus:8.2",
+        "cpe:/a:redhat:rhel_tus:8.2::appstream",
+        "cpe:/a:redhat:rhel_tus:8.2::highavailability",
+        "cpe:/o:redhat:rhel_tus:8.2",
+        "cpe:/o:redhat:rhel_tus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "haproxy is earlier than 0:1.8.15-6.el8_1.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20201288001"
+          },
+          {
+            "Comment": "haproxy is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20201288002"
+          }
+        ]
+      }
+    ]
+  }
+}

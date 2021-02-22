@@ -1,0 +1,230 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20192799",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2019:2799: nginx:1.14 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:2799",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:2799"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9511",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9511"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9513",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9513"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9516",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9516"
+      }
+    ],
+    "Description": "Nginx is a web server and a reverse proxy server for HTTP, SMTP, POP3 (Post Office Protocol 3) and IMAP protocols, with a focus on high concurrency, performance and low memory usage. \n\nSecurity Fix(es):\n\n* HTTP/2: large amount of data request leads to denial of service (CVE-2019-9511)\n\n* HTTP/2: flood using PRIORITY frames resulting in excessive resource consumption (CVE-2019-9513)\n\n* HTTP/2: 0-length headers leads to denial of service (CVE-2019-9516)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-09-19"
+      },
+      "Updated": {
+        "Date": "2019-09-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-9511",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9511",
+          "Public": "20190813"
+        },
+        {
+          "CveID": "CVE-2019-9513",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9513",
+          "Public": "20190813:1700"
+        },
+        {
+          "CveID": "CVE-2019-9516",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9516",
+          "Public": "20190813"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1735741",
+          "ID": "1735741"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1741860",
+          "ID": "1741860"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1741864",
+          "ID": "1741864"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/a:redhat:rhel_tus:8.2",
+        "cpe:/a:redhat:rhel_tus:8.2::appstream",
+        "cpe:/a:redhat:rhel_tus:8.2::highavailability",
+        "cpe:/o:redhat:rhel_tus:8.2",
+        "cpe:/o:redhat:rhel_tus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "Module nginx:1.14 is enabled",
+            "TestRef": "oval:com.redhat.rhsa:tst:20192799017"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nginx is earlier than 1:1.14.1-9.module+el8.0.0+4108+af250afe",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799001"
+                  },
+                  {
+                    "Comment": "nginx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nginx-all-modules is earlier than 1:1.14.1-9.module+el8.0.0+4108+af250afe",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799003"
+                  },
+                  {
+                    "Comment": "nginx-all-modules is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nginx-filesystem is earlier than 1:1.14.1-9.module+el8.0.0+4108+af250afe",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799005"
+                  },
+                  {
+                    "Comment": "nginx-filesystem is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nginx-mod-http-image-filter is earlier than 1:1.14.1-9.module+el8.0.0+4108+af250afe",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799007"
+                  },
+                  {
+                    "Comment": "nginx-mod-http-image-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nginx-mod-http-perl is earlier than 1:1.14.1-9.module+el8.0.0+4108+af250afe",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799009"
+                  },
+                  {
+                    "Comment": "nginx-mod-http-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nginx-mod-http-xslt-filter is earlier than 1:1.14.1-9.module+el8.0.0+4108+af250afe",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799011"
+                  },
+                  {
+                    "Comment": "nginx-mod-http-xslt-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nginx-mod-mail is earlier than 1:1.14.1-9.module+el8.0.0+4108+af250afe",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799013"
+                  },
+                  {
+                    "Comment": "nginx-mod-mail is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nginx-mod-stream is earlier than 1:1.14.1-9.module+el8.0.0+4108+af250afe",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799015"
+                  },
+                  {
+                    "Comment": "nginx-mod-stream is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192799016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

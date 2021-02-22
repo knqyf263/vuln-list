@@ -1,0 +1,414 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20201650",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2020:1650: container-tools:rhel8 security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:1650",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:1650"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-19921",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-19921"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1702",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1702"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1726",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1726"
+      }
+    ],
+    "Description": "The container-tools module contains tools for working with containers, notably podman, buildah, skopeo, and runc.\n\nSecurity Fix(es):\n\n* runc: volume mount race condition with shared mounts leads to information leak/integrity manipulation (CVE-2019-19921)\n\n* containers/image: Container images read entire image manifest into memory (CVE-2020-1702)\n\n* podman: incorrectly allows existing files in volumes to be overwritten by a container when it is created (CVE-2020-1726)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.2 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-04-28"
+      },
+      "Updated": {
+        "Date": "2020-04-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-19921",
+          "Cvss3": "7.0/CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-41",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-19921",
+          "Public": "20191221"
+        },
+        {
+          "CveID": "CVE-2020-1702",
+          "Cvss3": "3.5/CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-400",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1702",
+          "Public": "20200120"
+        },
+        {
+          "CveID": "CVE-2020-1726",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-552",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1726",
+          "Public": "20200211"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1792796",
+          "ID": "1792796"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1796107",
+          "ID": "1796107"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1801152",
+          "ID": "1801152"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/a:redhat:rhel_tus:8.2",
+        "cpe:/a:redhat:rhel_tus:8.2::appstream",
+        "cpe:/a:redhat:rhel_tus:8.2::highavailability",
+        "cpe:/o:redhat:rhel_tus:8.2",
+        "cpe:/o:redhat:rhel_tus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "Module container-tools:rhel8 is enabled",
+            "TestRef": "oval:com.redhat.rhsa:tst:20190975025"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "buildah is earlier than 0:1.11.6-7.module+el8.2.0+5856+b8046c6d",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650001"
+                  },
+                  {
+                    "Comment": "buildah is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "buildah-tests is earlier than 0:1.11.6-7.module+el8.2.0+5856+b8046c6d",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650003"
+                  },
+                  {
+                    "Comment": "buildah-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193403004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cockpit-podman is earlier than 0:12-1.module+el8.2.0+5950+6d183a6a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650005"
+                  },
+                  {
+                    "Comment": "cockpit-podman is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193403006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "conmon is earlier than 2:2.0.6-1.module+el8.2.0+5182+3136e5d4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650007"
+                  },
+                  {
+                    "Comment": "conmon is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200348008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "container-selinux is earlier than 2:2.124.0-1.module+el8.2.0+5182+3136e5d4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650009"
+                  },
+                  {
+                    "Comment": "container-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "containernetworking-plugins is earlier than 0:0.8.3-5.module+el8.2.0+5201+6b31f0d9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650011"
+                  },
+                  {
+                    "Comment": "containernetworking-plugins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "containers-common is earlier than 1:0.1.40-10.module+el8.2.0+5955+6cd70ceb",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650013"
+                  },
+                  {
+                    "Comment": "containers-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "crit is earlier than 0:3.12-9.module+el8.2.0+5029+3ac48e7d",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650015"
+                  },
+                  {
+                    "Comment": "crit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "criu is earlier than 0:3.12-9.module+el8.2.0+5029+3ac48e7d",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650017"
+                  },
+                  {
+                    "Comment": "criu is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fuse-overlayfs is earlier than 0:0.7.2-5.module+el8.2.0+6060+9dbc027d",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650019"
+                  },
+                  {
+                    "Comment": "fuse-overlayfs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman is earlier than 0:1.6.4-10.module+el8.2.0+6063+e761893a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650021"
+                  },
+                  {
+                    "Comment": "podman is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman-docker is earlier than 0:1.6.4-10.module+el8.2.0+6063+e761893a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650023"
+                  },
+                  {
+                    "Comment": "podman-docker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman-remote is earlier than 0:1.6.4-10.module+el8.2.0+6063+e761893a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650025"
+                  },
+                  {
+                    "Comment": "podman-remote is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193403026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman-tests is earlier than 0:1.6.4-10.module+el8.2.0+6063+e761893a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650027"
+                  },
+                  {
+                    "Comment": "podman-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193403028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-podman-api is earlier than 0:1.2.0-0.2.gitd0a45fe.module+el8.2.0+5201+6b31f0d9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650029"
+                  },
+                  {
+                    "Comment": "python-podman-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193403030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-criu is earlier than 0:3.12-9.module+el8.2.0+5029+3ac48e7d",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650031"
+                  },
+                  {
+                    "Comment": "python3-criu is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "runc is earlier than 0:1.0.0-65.rc10.module+el8.2.0+5762+aaee29fb",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650033"
+                  },
+                  {
+                    "Comment": "runc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "skopeo is earlier than 1:0.1.40-10.module+el8.2.0+5955+6cd70ceb",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650035"
+                  },
+                  {
+                    "Comment": "skopeo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "skopeo-tests is earlier than 1:0.1.40-10.module+el8.2.0+5955+6cd70ceb",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650037"
+                  },
+                  {
+                    "Comment": "skopeo-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193403036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "slirp4netns is earlier than 0:0.4.2-3.git21fdece.module+el8.2.0+5658+9a15711d",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650039"
+                  },
+                  {
+                    "Comment": "slirp4netns is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190975024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "toolbox is earlier than 0:0.0.7-1.module+el8.2.0+6096+9c3f08f3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650041"
+                  },
+                  {
+                    "Comment": "toolbox is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193403040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "udica is earlier than 0:0.2.1-2.module+el8.2.0+4896+8f613c81",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201650043"
+                  },
+                  {
+                    "Comment": "udica is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200348040"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

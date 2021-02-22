@@ -1,0 +1,153 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20192004",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2019:2004: icedtea-web security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:2004",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:2004"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10181",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10181"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10182",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10182"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10185",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10185"
+      }
+    ],
+    "Description": "The IcedTea-Web project provides a Java web browser plug-in and an implementation of Java Web Start, which is based on the Netx project. It also contains a configuration tool for managing deployment settings for the plug-in and Web Start implementations. IcedTea-Web now also contains PolicyEditor - a simple tool to configure Java policies.\n\nSecurity Fix(es):\n\n* icedtea-web: path traversal while processing \u003cjar/\u003e elements of JNLP files results in arbitrary file overwrite (CVE-2019-10182)\n\n* icedtea-web: directory traversal in the nested jar auto-extraction leading to arbitrary file overwrite (CVE-2019-10185)\n\n* icedtea-web: unsigned code injection in a signed JAR file (CVE-2019-10181)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-07-31"
+      },
+      "Updated": {
+        "Date": "2019-07-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-10181",
+          "Cvss3": "6.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-345",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10181",
+          "Public": "20190731:1342"
+        },
+        {
+          "CveID": "CVE-2019-10182",
+          "Cvss3": "8.2/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:H/A:L",
+          "Cwe": "CWE-22-\u003eCWE-94",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10182",
+          "Public": "20190731:1340"
+        },
+        {
+          "CveID": "CVE-2019-10185",
+          "Cvss3": "8.2/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:H/A:L",
+          "Cwe": "CWE-22",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10185",
+          "Public": "20190731:1341"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1724958",
+          "ID": "1724958"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1724989",
+          "ID": "1724989"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1725928",
+          "ID": "1725928"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_eus:8.1",
+        "cpe:/a:redhat:rhel_eus:8.1::appstream",
+        "cpe:/a:redhat:rhel_eus:8.1::crb",
+        "cpe:/a:redhat:rhel_eus:8.1::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.1::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.1::sap",
+        "cpe:/a:redhat:rhel_eus:8.1::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.1::supplementary",
+        "cpe:/o:redhat:rhel_eus:8.1",
+        "cpe:/o:redhat:rhel_eus:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "icedtea-web is earlier than 0:1.7.1-17.el8_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192004001"
+                  },
+                  {
+                    "Comment": "icedtea-web is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192004002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "icedtea-web-javadoc is earlier than 0:1.7.1-17.el8_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192004003"
+                  },
+                  {
+                    "Comment": "icedtea-web-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192004004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200580",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:0580: python-pillow security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0580",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0580"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-16865",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-16865"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-5311",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-5311"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-5312",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-5312"
+      }
+    ],
+    "Description": "The python-pillow packages contain a Python image processing library that provides extensive file format support, an efficient internal representation, and powerful image-processing capabilities.\n\nSecurity Fix(es):\n\n* python-pillow: out-of-bounds write in expandrow in libImaging/SgiRleDecode.c (CVE-2020-5311)\n\n* python-pillow: improperly restricted operations on memory buffer in libImaging/PcxDecode.c (CVE-2020-5312)\n\n* python-pillow: reading specially crafted image files leads to allocation of large amounts of memory and denial of service (CVE-2019-16865)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-02-24"
+      },
+      "Updated": {
+        "Date": "2020-02-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-16865",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-770",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-16865",
+          "Public": "20191004"
+        },
+        {
+          "CveID": "CVE-2020-5311",
+          "Cvss3": "9.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-787",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-5311",
+          "Public": "20200103"
+        },
+        {
+          "CveID": "CVE-2020-5312",
+          "Cvss3": "9.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-119",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-5312",
+          "Public": "20200103"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1774066",
+          "ID": "1774066"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1789533",
+          "ID": "1789533"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1789535",
+          "ID": "1789535"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_eus:8.1",
+        "cpe:/a:redhat:rhel_eus:8.1::appstream",
+        "cpe:/a:redhat:rhel_eus:8.1::crb",
+        "cpe:/a:redhat:rhel_eus:8.1::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.1::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.1::sap",
+        "cpe:/a:redhat:rhel_eus:8.1::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.1::supplementary",
+        "cpe:/o:redhat:rhel_eus:8.1",
+        "cpe:/o:redhat:rhel_eus:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "python3-pillow is earlier than 0:5.1.1-10.el8_1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20200580001"
+          },
+          {
+            "Comment": "python3-pillow is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20200580002"
+          }
+        ]
+      }
+    ]
+  }
+}
