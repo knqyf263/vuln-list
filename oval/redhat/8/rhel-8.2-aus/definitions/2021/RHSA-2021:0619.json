@@ -1,0 +1,89 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210619",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:0619: stunnel security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8.2 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0619",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0619"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-20230",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-20230"
+      }
+    ],
+    "Description": "Stunnel is a wrapper for network connections. It can be used to tunnel an unencrypted network connection over an encrypted connection (encrypted using SSL or TLS) or to provide an encrypted means of connecting to services that do not natively support encryption.\n\nSecurity Fix(es):\n\n* stunnel: client certificate not correctly verified when redirect and verifyChain options are used (CVE-2021-20230)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-02-22"
+      },
+      "Updated": {
+        "Date": "2021-02-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-20230",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-295",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-20230",
+          "Public": "20201011"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1925226",
+          "ID": "1925226"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          },
+          {
+            "Comment": "stunnel is earlier than 0:5.48-6.el8_2",
+            "TestRef": "oval:com.redhat.rhsa:tst:20210619001"
+          },
+          {
+            "Comment": "stunnel is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20210619002"
+          }
+        ]
+      }
+    ]
+  }
+}
