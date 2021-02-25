@@ -1,0 +1,114 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210651",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:0651: xterm security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8.2 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0651",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0651"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-27135",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-27135"
+      }
+    ],
+    "Description": "The xterm program is a terminal emulator for the X Window System. It provides DEC VT102 and Tektronix 4014 compatible terminals for programs that can't use the window system directly. \n\nSecurity Fix(es):\n\n* xterm: crash when processing combining characters (CVE-2021-27135)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-02-24"
+      },
+      "Updated": {
+        "Date": "2021-02-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-27135",
+          "Cvss3": "9.6/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-787",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-27135",
+          "Public": "20210210"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1927559",
+          "ID": "1927559"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.2",
+        "cpe:/a:redhat:rhel_aus:8.2::appstream",
+        "cpe:/o:redhat:rhel_aus:8.2",
+        "cpe:/o:redhat:rhel_aus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xterm is earlier than 0:331-1.el8_2.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210651001"
+                  },
+                  {
+                    "Comment": "xterm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210651002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xterm-resize is earlier than 0:331-1.el8_2.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210651003"
+                  },
+                  {
+                    "Comment": "xterm-resize is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210651004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
