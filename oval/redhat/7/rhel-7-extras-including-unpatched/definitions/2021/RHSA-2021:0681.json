@@ -1,33 +1,57 @@
 {
-  "Class": "vulnerability",
-  "ID": "oval:com.redhat.cve:def:202120188",
-  "Version": "633",
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210681",
+  "Version": "635",
   "Metadata": {
-    "Title": "CVE-2021-20188 podman: container users permissions are not respected in privileged containers (important)",
+    "Title": "RHSA-2021:0681: podman security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
     "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0681",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0681"
+      },
       {
         "Source": "CVE",
         "RefID": "CVE-2021-20188",
         "RefURL": "https://access.redhat.com/security/cve/CVE-2021-20188"
       }
     ],
-    "Description": "DOCUMENTATION: A flaw was found in podman. File permissions for non-root users running in a privileged container are not correctly checked. This flaw can be abused by a low-privileged user inside the container to access any other file in the container, even if owned by the root user inside the container. It does not allow to directly escape the container, though being a privileged container means that a lot of security features are disabled when running the container. The highest threat from this vulnerability is to data confidentiality and integrity as well as system availability.\n            STATEMENT: OpenShift Container Platform 3.11 (OCP) has previously packaged podman, but instead now relies on the version from rhel-extras. The older version previously packaged is marked as wontfix.\n\nThis issue did not affect the versions of podman provided in the Container Tools module, stream rhel8, as shipped in Red Hat Enterprise Linux 8 as the issue was already fixed in those versions.",
+    "Description": "The podman tool manages pods, container images, and containers. It is part of the libpod library, which is for applications that use container pods. Container pods is a concept in Kubernetes.\n\nSecurity Fix(es):\n\n* podman: container users permissions are not respected in privileged containers (CVE-2021-20188)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
     "Advisory": {
       "From": "secalert@redhat.com",
       "Severity": "Important",
-      "Issued": {},
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-03-01"
+      },
       "Updated": {
-        "Date": "2021-02-11"
+        "Date": "2021-03-01"
       },
       "Cves": [
         {
           "CveID": "CVE-2021-20188",
           "Cvss3": "7.0/CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-863",
-          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2021-20188",
           "Public": "20210210"
         }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1915734",
+          "ID": "1915734"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
       ]
     }
   },
@@ -56,8 +80,8 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "podman is installed",
-                    "TestRef": "oval:com.redhat.cve:tst:202028851001"
+                    "Comment": "podman is earlier than 0:1.6.4-29.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210681001"
                   },
                   {
                     "Comment": "podman is signed with Red Hat redhatrelease2 key",
@@ -69,8 +93,8 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "podman-docker is installed",
-                    "TestRef": "oval:com.redhat.cve:tst:202028851005"
+                    "Comment": "podman-docker is earlier than 0:1.6.4-29.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210681003"
                   },
                   {
                     "Comment": "podman-docker is signed with Red Hat redhatrelease2 key",
