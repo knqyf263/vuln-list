@@ -1,0 +1,260 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210637",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2021:0637: OpenShift Container Platform 3.11.394 bug fix and security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 3.11"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0637",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0637"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11979",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11979"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1945",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1945"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-2304",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-2304"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-2305",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-2305"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-2306",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-2306"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-2307",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-2307"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-2308",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-2308"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-2309",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-2309"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-25658",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-25658"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nSecurity Fix(es):\n\n* jenkins-2-plugins/subversion: XML parser is not preventing XML external entity (XXE) attacks (CVE-2020-2304)\n\n* jenkins-2-plugins/mercurial: XML parser is not preventing XML external entity (XXE) attacks (CVE-2020-2305)\n\n* ant: Insecure temporary file vulnerability (CVE-2020-1945)\n\n* jenkins-2-plugins/mercurial: Missing permission check in an HTTP endpoint could result in information disclosure (CVE-2020-2306)\n\n* jenkins-2-plugins/kubernetes: Jenkins controller environment variables are accessible in Kubernetes plug-in (CVE-2020-2307)\n\n* jenkins-2-plugins/kubernetes: Missing permission check in Kubernetes Plugin allows listing pod templates (CVE-2020-2308)\n\n* jenkins-2-plugins/kubernetes: Missing permission check in Kubernetes plug-in allows enumerating credentials IDs (CVE-2020-2309)\n\n* ant: Insecure temporary file (CVE-2020-11979)\n\n* python-rsa: Bleichenbacher timing oracle attack against RSA decryption (CVE-2020-25658)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE\npage(s) listed in the References section.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container\nPlatform 3.11.394. See the following advisory for the container images for this release:\n\nhttps://access.redhat.com/errata/RHBA-2021:0638\n\nSpace precludes documenting all of the container images in this advisory. See the following Release Notes documentation, which will be updated shortly for this release, for details about these changes:\n\nhttps://docs.openshift.com/container-platform/3.11/release_notes/ocp_3_11_release_notes.html\n\nThis update fixes the following bugs among others:\n\n* Previously, the restart-cluster playbook did not evaluate the defined cluster size for ops clusters. This was causing come clusters to never complete their restart. This bug fix passes the logging ops cluster size, allowing restarts of ops clusters to complete successfully. (BZ#1879407)\n\n* Previously, the `openshift_named_certificates` role checked the contents of the `ca-bundle.crt` file during cluster installation. This caused the check to fail during initial installation because the `ca-bundle.crt` file is not yet created in that scenario. This bug fix allows the cluster to skip checking the `ca-bundle.crt` file if it does not exist, resulting in initial installations succeeding. (BZ#1920567)\n\n* Previously, if the `openshift_release` attribute was not set in the Ansible inventory file, the nodes of the cluster would fail during an upgrade. This was caused by the `cluster_facts.yml` file being gathered before the `openshift_release` attribute was defined by the upgrade playbook. Now the `cluster_facts.yml` file is gathered after the `openshift_version` role runs and the `openshift_release` attribute is set, allowing for successful node upgrades. (BZ#1921353)\n\nAll OpenShift Container Platform 3.11 users are advised to upgrade to these updated packages and images.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-03-03"
+      },
+      "Updated": {
+        "Date": "2021-03-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-11979",
+          "Cvss3": "6.2/CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-377",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11979",
+          "Public": "20201001"
+        },
+        {
+          "CveID": "CVE-2020-1945",
+          "Cvss3": "6.7/CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+          "Cwe": "CWE-377",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1945",
+          "Public": "20200513"
+        },
+        {
+          "CveID": "CVE-2020-2304",
+          "Cvss3": "6.5/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-611",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-2304",
+          "Public": "20201104"
+        },
+        {
+          "CveID": "CVE-2020-2305",
+          "Cvss3": "6.5/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-611",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-2305",
+          "Public": "20201104"
+        },
+        {
+          "CveID": "CVE-2020-2306",
+          "Cvss3": "4.3/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-862",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-2306",
+          "Public": "20201104"
+        },
+        {
+          "CveID": "CVE-2020-2307",
+          "Cvss3": "4.3/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-2307",
+          "Public": "20201104"
+        },
+        {
+          "CveID": "CVE-2020-2308",
+          "Cvss3": "4.3/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-862",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-2308",
+          "Public": "20201104"
+        },
+        {
+          "CveID": "CVE-2020-2309",
+          "Cvss3": "4.3/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-862",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-2309",
+          "Public": "20201104"
+        },
+        {
+          "CveID": "CVE-2020-25658",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-25658",
+          "Public": "20201109"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1837444",
+          "ID": "1837444"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1889972",
+          "ID": "1889972"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1895939",
+          "ID": "1895939"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1895940",
+          "ID": "1895940"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1895941",
+          "ID": "1895941"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1895945",
+          "ID": "1895945"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1895946",
+          "ID": "1895946"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1895947",
+          "ID": "1895947"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1903702",
+          "ID": "1903702"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:3.11",
+        "cpe:/a:redhat:openshift:3.11::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20130169006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20130169005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jenkins-2-plugins is earlier than 0:3.11.1612862361-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210637001"
+                  },
+                  {
+                    "Comment": "jenkins-2-plugins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181000411002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jenkins is earlier than 0:2.263.3.1612433584-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210637003"
+                  },
+                  {
+                    "Comment": "jenkins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202017521002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python2-rsa is earlier than 0:4.5-3.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210637005"
+                  },
+                  {
+                    "Comment": "python2-rsa is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203541016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
