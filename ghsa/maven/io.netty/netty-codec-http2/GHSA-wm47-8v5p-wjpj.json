@@ -1,0 +1,49 @@
+{
+  "Severity": "LOW",
+  "UpdatedAt": "2021-03-09T18:47:10Z",
+  "Package": {
+    "Ecosystem": "MAVEN",
+    "Name": "io.netty:netty-codec-http2"
+  },
+  "Advisory": {
+    "DatabaseId": 3379,
+    "Id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLXdtNDctOHY1cC13anBq",
+    "GhsaId": "GHSA-wm47-8v5p-wjpj",
+    "References": [
+      {
+        "Url": "https://github.com/netty/netty/security/advisories/GHSA-wm47-8v5p-wjpj"
+      },
+      {
+        "Url": "https://nvd.nist.gov/vuln/detail/CVE-2021-21295"
+      },
+      {
+        "Url": "https://github.com/advisories/GHSA-wm47-8v5p-wjpj"
+      }
+    ],
+    "Identifiers": [
+      {
+        "Type": "GHSA",
+        "Value": "GHSA-wm47-8v5p-wjpj"
+      },
+      {
+        "Type": "CVE",
+        "Value": "CVE-2021-21295"
+      }
+    ],
+    "Description": "### Impact\nIf a Content-Length header is present in the original HTTP/2 request, the field is not validated by `Http2MultiplexHandler` as it is propagated up.  This is fine as long as the request is not proxied through as HTTP/1.1.\nIf the request comes in as an HTTP/2 stream, gets converted into the HTTP/1.1 domain objects (`HttpRequest`, `HttpContent`, etc.) via `Http2StreamFrameToHttpObjectCodec `and then sent up to the child channel's pipeline and proxied through a remote peer as HTTP/1.1 this may result in request smuggling.  \n\nIn a proxy case, users  may assume the content-length is validated somehow, which is not the case.  If the request is forwarded to a backend channel that is a HTTP/1.1 connection, the Content-Length now has meaning and needs to be checked.\n\nAn attacker can smuggle requests inside the body as it gets downgraded from HTTP/2 to HTTP/1.1.   A sample attack request looks like:\n\n```\nPOST / HTTP/2\n:authority:: externaldomain.com\nContent-Length: 4\n\nasdfGET /evilRedirect HTTP/1.1\nHost: internaldomain.com\n```\n\nUsers are only affected if all of this is `true`:\n * `HTTP2MultiplexCodec` or `Http2FrameCodec` is used\n * `Http2StreamFrameToHttpObjectCodec` is used to convert to HTTP/1.1 objects\n * These  HTTP/1.1 objects are forwarded to another remote peer.\n \n\n### Patches\nThis has been patched in 4.1.60.Final\n\n### Workarounds\nThe user can do the validation by themselves by implementing a custom `ChannelInboundHandler` that is put in the `ChannelPipeline` behind `Http2StreamFrameToHttpObjectCodec`.\n\n### References\nRelated change to workaround the problem: https://github.com/Netflix/zuul/pull/980",
+    "Origin": "UNSPECIFIED",
+    "PublishedAt": "2021-03-09T18:49:49Z",
+    "Severity": "LOW",
+    "Summary": "Possible request smuggling in HTTP/2 due missing validation",
+    "UpdatedAt": "2021-03-09T18:49:49Z",
+    "WithdrawnAt": ""
+  },
+  "Versions": [
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "4.1.60"
+      },
+      "VulnerableVersionRange": "\u003c 4.1.60"
+    }
+  ]
+}
