@@ -1,0 +1,61 @@
+{
+  "Severity": "MODERATE",
+  "UpdatedAt": "2021-03-10T03:46:24Z",
+  "Package": {
+    "Ecosystem": "MAVEN",
+    "Name": "org.eclipse.jetty:jetty-server"
+  },
+  "Advisory": {
+    "DatabaseId": 3380,
+    "Id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLW0zOTQtOHJ3dy0zanI3",
+    "GhsaId": "GHSA-m394-8rww-3jr7",
+    "References": [
+      {
+        "Url": "https://github.com/eclipse/jetty.project/security/advisories/GHSA-m394-8rww-3jr7"
+      },
+      {
+        "Url": "https://nvd.nist.gov/vuln/detail/CVE-2020-27223"
+      },
+      {
+        "Url": "https://github.com/advisories/GHSA-m394-8rww-3jr7"
+      }
+    ],
+    "Identifiers": [
+      {
+        "Type": "GHSA",
+        "Value": "GHSA-m394-8rww-3jr7"
+      },
+      {
+        "Type": "CVE",
+        "Value": "CVE-2020-27223"
+      }
+    ],
+    "Description": "### Impact\nWhen Jetty handles a request containing request headers with a large number of “quality” (i.e. q) parameters (such as what are seen on the `Accept`, `Accept-Encoding`, and `Accept-Language` request headers), the server may enter a denial of service (DoS) state due to high CPU usage while sorting the list of values based on their quality values.  A single request can easily consume minutes of CPU time before it is even dispatched to the application.\n\nThe only features within Jetty that can trigger this behavior are:\n\n- Default Error Handling - the `Accept` request header with the `QuotedQualityCSV` is used to determine what kind of content to send back to the client (html, text, json, xml, etc)\n- `StatisticsServlet` - uses the `Accept` request header with the `QuotedQualityCSV` to determine what kind of content to send back to the client (xml, json, text, html, etc)\n- `HttpServletRequest.getLocale()` - uses the `Accept-Language` request header with the `QuotedQualityCSV` to determine which “preferred” language is returned on this call.\n- `HttpservletRequest.getLocales()` - is similar to the above, but returns an ordered list of locales based on the quality values on the `Accept-Language` request header.\n- `DefaultServlet` - uses the `Accept-Encoding` request header with the `QuotedQualityCSV` to determine which kind of pre-compressed content should be sent back for static content (content that is not matched against a url-pattern in your web app)\n\n### Versions\n`QuotedQualityCSV` was introduced to Jetty 9.3.9.v20160517 and the bug that introduced the vulnerability was in 9.4.6.v20170531. \n\nCurrently, known vulnerable versions include:\n\n- 9.4.6.v20170531 thru to 9.4.36.v20210114\n- 10.0.0\n- 11.0.0\n\n### Workarounds\n\nQuality ordered values are used infrequently by jetty so they can be avoided by:\n\n * Do not use the default error page/handler.\n * Do not deploy the `StatisticsServlet` exposed to the network\n * Do not call `getLocale` API\n * Do not enable precompressed static content in the `DefaultServlet` \n\n### Patches\n\nAll patches are available for download from the Eclipse Jetty website at [https://www.eclipse.org/jetty/download.php](https://www.eclipse.org/jetty/download.php)\n- 9.4.37.v20210219 and greater\n- 10.0.1 and greater \n- 11.0.1 and greater",
+    "Origin": "UNSPECIFIED",
+    "PublishedAt": "2021-03-10T03:46:47Z",
+    "Severity": "MODERATE",
+    "Summary": "DOS vulnerability for Quoted Quality CSV headers",
+    "UpdatedAt": "2021-03-10T03:46:47Z",
+    "WithdrawnAt": ""
+  },
+  "Versions": [
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "11.0.1"
+      },
+      "VulnerableVersionRange": "= 11.0.0"
+    },
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "10.0.1"
+      },
+      "VulnerableVersionRange": "= 10.0.0"
+    },
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "9.4.37"
+      },
+      "VulnerableVersionRange": "\u003e= 9.4.6, \u003c 9.4.37"
+    }
+  ]
+}
