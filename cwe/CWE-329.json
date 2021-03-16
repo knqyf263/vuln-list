@@ -1,7 +1,7 @@
 {
  "ID": 329,
- "Name": "Not Using a Random IV with CBC Mode",
- "Description": "Not using a random initialization Vector (IV) with Cipher Block Chaining (CBC) Mode causes algorithms to be susceptible to dictionary attacks.",
+ "Name": "Not Using an Unpredictable IV with CBC Mode",
+ "Description": "Not using an unpredictable initialization Vector (IV) with Cipher Block Chaining (CBC) Mode causes algorithms to be susceptible to dictionary attacks when they are encrypted under the same key.",
  "PotentialMitigations": {
   "Mitigation": [
    {
@@ -20,33 +20,15 @@
   "Consequence": [
    {
     "Scope": [
-     "Confidentiality",
-     "Other"
+     "Confidentiality"
     ],
     "Impact": [
-     "Read Application Data",
-     "Other"
-    ]
-   },
-   {
-    "Scope": [
-     "Integrity"
-    ],
-    "Impact": [
-     "Modify Application Data"
-    ]
-   },
-   {
-    "Scope": [
-     "Access Control",
-     "Other"
-    ],
-    "Impact": [
-     "Bypass Protection Mechanism",
-     "Other"
+     "Read Application Data"
     ]
    }
   ]
  },
- "ExtendedDescription": null
+ "ExtendedDescription": [
+  "CBC mode eliminates a weakness of Electronic Code\n\t   Book (ECB) mode by allowing identical plaintext blocks to\n\t   be encrypted to different ciphertext blocks. This is\n\t   possible by the XOR-ing of an IV with the initial plaintext\n\t   block so that every plaintext block in the chain is XOR'd\n\t   with a different value before encryption. If IVs are\n\t   reused, then identical plaintexts would be encrypted to\n\t   identical ciphertexts. However, even if IVs are not\n\t   identical but are predictable, then they still break the\n\t   security of CBC mode against Chosen Plaintext Attacks\n\t   (CPA)."
+ ]
 }
