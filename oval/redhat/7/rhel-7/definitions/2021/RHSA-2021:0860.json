@@ -1,0 +1,239 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210860",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2021:0860: ipa security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0860",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0860"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11023",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11023"
+      }
+    ],
+    "Description": "Red Hat Identity Management (IdM) is a centralized authentication, identity management, and authorization solution for both traditional and cloud-based enterprise environments.\n\nSecurity Fix(es):\n\n* jquery: Passing HTML containing \u003coption\u003e elements to manipulation methods could result in untrusted code execution (CVE-2020-11023)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* cannot issue certs with multiple IP addresses corresponding to different hosts (BZ#1846349)\n\n* CA-less install does not set required permissions on KDC certificate (BZ#1863619)\n\n* IdM Web UI shows users as disabled (BZ#1884819)\n\n* Authentication and login times are over several seconds due to unindexed ipaExternalMember (BZ#1892793)\n\n* improve IPA PKI susbsystem detection by other means than a directory presence, use pki-server subsystem-find (BZ#1895197)\n\n* IPA WebUI inaccessible after upgrading to RHEL 8.3 - idoverride-memberof.js missing (BZ#1897253)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-03-16"
+      },
+      "Updated": {
+        "Date": "2021-03-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-11023",
+          "Cvss3": "6.1/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+          "Cwe": "CWE-79",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11023",
+          "Public": "20200429"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1850004",
+          "ID": "1850004"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-client is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860001"
+                  },
+                  {
+                    "Comment": "ipa-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150442004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-client-common is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860003"
+                  },
+                  {
+                    "Comment": "ipa-client-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170001006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-common is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860005"
+                  },
+                  {
+                    "Comment": "ipa-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170001008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-python-compat is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860007"
+                  },
+                  {
+                    "Comment": "ipa-python-compat is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170001010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860009"
+                  },
+                  {
+                    "Comment": "ipa-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150442008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server-common is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860011"
+                  },
+                  {
+                    "Comment": "ipa-server-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170001014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server-dns is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860013"
+                  },
+                  {
+                    "Comment": "ipa-server-dns is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160612042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ipa-server-trust-ad is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860015"
+                  },
+                  {
+                    "Comment": "ipa-server-trust-ad is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150442010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python2-ipaclient is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860017"
+                  },
+                  {
+                    "Comment": "python2-ipaclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170001020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python2-ipalib is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860019"
+                  },
+                  {
+                    "Comment": "python2-ipalib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170001022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python2-ipaserver is earlier than 0:4.6.8-5.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210860021"
+                  },
+                  {
+                    "Comment": "python2-ipaserver is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170001024"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
