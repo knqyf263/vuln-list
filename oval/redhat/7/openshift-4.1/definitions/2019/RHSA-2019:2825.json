@@ -1,0 +1,87 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20192825",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2019:2825: OpenShift Container Platform 4.1.17 cri-o security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:2825",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:2825"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10214",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10214"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing Kubernetes application platform solution designed for on-premise or private cloud deployments.\n\nThis advisory contains cri-o RPM packages for Red Hat OpenShift Container Platform 4.1.17.\n\nSecurity Fix(es):\n\n* containers/image: not enforcing TLS when sending username+password credentials to token servers leading to credential disclosure (CVE-2019-10214)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-09-25"
+      },
+      "Updated": {
+        "Date": "2019-09-25"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-10214",
+          "Cvss3": "6.4/CVSS:3.0/AV:A/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N",
+          "Cwe": "CWE-522",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10214",
+          "Public": "20190909"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1732508",
+          "ID": "1732508"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.1",
+        "cpe:/a:redhat:openshift:4.1::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20192794016"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20192794015"
+          },
+          {
+            "Comment": "cri-o is earlier than 0:1.13.11-0.4.dev.rhaos4.1.git9cb8f2f.el7",
+            "TestRef": "oval:com.redhat.rhsa:tst:20192825001"
+          },
+          {
+            "Comment": "cri-o is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhba:tst:20200690014"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210172",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2021:0172: OpenShift Container Platform 4.6.13 packages and security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0172",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0172"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-28362",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-28362"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8564",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8564"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nSecurity Fix(es):\n\n* kubernetes: Docker config secrets leaked when file is malformed and loglevel \u003e= 4 (CVE-2020-8564)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container\nPlatform 4.6.13. See the following advisory for the container images for\nthis release:\n\nhttps://access.redhat.com/errata/RHSA-2021:0171\n\nAll OpenShift Container Platform 4.6 users are advised to upgrade to these\nupdated packages and images when they are available in the appropriate\nrelease channel. To check for available updates, use the OpenShift Console\nor the CLI oc command. Instructions for upgrading a cluster are available\nat\nhttps://docs.openshift.com/container-platform/4.6/updating/updating-cluster-between-minor.html#understanding-upgrade-channels_updating-cluster-between-minor.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-01-25"
+      },
+      "Updated": {
+        "Date": "2021-01-25"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-28362",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-295",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-28362",
+          "Public": "20201112"
+        },
+        {
+          "CveID": "CVE-2020-8564",
+          "Cvss3": "5.3/CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-117",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8564",
+          "Public": "20201014"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1886637",
+          "ID": "1886637"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1897635",
+          "ID": "1897635"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.6",
+        "cpe:/a:redhat:openshift:4.6::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20204297024"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20204297023"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "containers-common is earlier than 1:1.1.1-3.rhaos4.6.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210172001"
+                  },
+                  {
+                    "Comment": "containers-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204297012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "skopeo is earlier than 1:1.1.1-3.rhaos4.6.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210172003"
+                  },
+                  {
+                    "Comment": "skopeo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204297014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "skopeo-tests is earlier than 1:1.1.1-3.rhaos4.6.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210172005"
+                  },
+                  {
+                    "Comment": "skopeo-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204297016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-hyperkube is earlier than 0:4.6.0-202101160934.p0.git.94242.fc5242e.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210172007"
+                  },
+                  {
+                    "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205260002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

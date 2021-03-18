@@ -1,0 +1,125 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193942",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2019:3942: OpenShift Container Platform 4.1.24 openshift security update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3942",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3942"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11244",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11244"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the openshift container images for Red Hat OpenShift \nContainer Platform 4.1.24.\n\nSecurity Fix(es):\n\n* A flaw was found in kubectl that leaves http-cache files with read/write permissions for any user. In conjunction with a non-default value for --cache-dir, this could lead to the cache content being placed in a location accessible to other users in the system. (CVE-2019-11244)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-21"
+      },
+      "Updated": {
+        "Date": "2019-11-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-11244",
+          "Cvss3": "3.3/CVSS:3.0/AV:L/AC:H/PR:L/UI:R/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-732",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11244",
+          "Public": "20190422"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1703209",
+          "ID": "1703209"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.1",
+        "cpe:/a:redhat:openshift:4.1::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20192794008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20192794007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients is earlier than 0:4.1.24-201911080309.git.0.c41acf2.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193942001"
+                  },
+                  {
+                    "Comment": "openshift-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20192794002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients-redistributable is earlier than 0:4.1.24-201911080309.git.0.c41acf2.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193942003"
+                  },
+                  {
+                    "Comment": "openshift-clients-redistributable is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20192794004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-hyperkube is earlier than 0:4.1.24-201911080309.git.0.c41acf2.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193942005"
+                  },
+                  {
+                    "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20192794006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20205119",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2020:5119: OpenShift Container Platform 4.5.20 packages and golang security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.5"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:5119",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:5119"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-15586",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-15586"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-16845",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-16845"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing Kubernetes application platform solution designed for on-premise or private cloud deployments.\n\nSecurity Fix(es):\n\n* golang: Data race in certain net/http servers including ReverseProxy can lead to DoS (CVE-2020-15586)\n* golang: ReadUvarint and ReadVarint can read an unlimited number of bytes from invalid inputs (CVE-2020-16845)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container Platform 4.5.20. See the following advisory for the container images for this release:\n\nhttps://access.redhat.com/errata/RHSA-2020:5118\n\nAll OpenShift Container Platform 4.5 users are advised to upgrade to these updated packages and images when they are available in the appropriate release channel. To check for available updates, use the OpenShift Console or the CLI oc command. Instructions for upgrading a cluster are available at https://docs.openshift.com/container-platform/4.[y]/updating/updating-cluster-between-minor.html#understanding-upgrade-channels_updating-cluster-between-minor.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-24"
+      },
+      "Updated": {
+        "Date": "2020-11-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-15586",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-362",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-15586",
+          "Public": "20200714"
+        },
+        {
+          "CveID": "CVE-2020-16845",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-835",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-16845",
+          "Public": "20200806"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1856953",
+          "ID": "1856953"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1867099",
+          "ID": "1867099"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.5",
+        "cpe:/a:redhat:openshift:4.5::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20204229008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20204229007"
+          },
+          {
+            "Comment": "cri-o is earlier than 0:1.18.4-4.rhaos4.5.git6dee389.el7",
+            "TestRef": "oval:com.redhat.rhsa:tst:20205119001"
+          },
+          {
+            "Comment": "cri-o is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20205119002"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200680",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2020:0680: OpenShift Container Platform 4.3.5 podman security update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.3"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0680",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0680"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1726",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1726"
+      }
+    ],
+    "Description": "The podman tool manages Pods, container images, and containers. It is part of the libpod library, which is for applications that use container Pods. Container Pods is a concept in Kubernetes.\n\nSecurity Fix(es):\n\n* podman: incorrectly allowed existing files in volumes to be overwritten by a container when it was created (CVE-2020-1726)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-03-10"
+      },
+      "Updated": {
+        "Date": "2020-03-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-1726",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-552",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1726",
+          "Public": "20200211"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1801152",
+          "ID": "1801152"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.3",
+        "cpe:/a:redhat:openshift:4.3::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20200390004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20200390003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman is earlier than 0:1.6.4-7.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680001"
+                  },
+                  {
+                    "Comment": "podman is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman-docker is earlier than 0:1.6.4-7.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680003"
+                  },
+                  {
+                    "Comment": "podman-docker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman-manpages is earlier than 0:1.6.4-7.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680005"
+                  },
+                  {
+                    "Comment": "podman-manpages is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman-remote is earlier than 0:1.6.4-7.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680007"
+                  },
+                  {
+                    "Comment": "podman-remote is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman-tests is earlier than 0:1.6.4-7.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680009"
+                  },
+                  {
+                    "Comment": "podman-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200680010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

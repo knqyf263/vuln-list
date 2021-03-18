@@ -1,0 +1,245 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193265",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2019:3265: OpenShift Container Platform 4.1 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3265",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3265"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9512",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9512"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9514",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9514"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the ansible-operator, apb, containernetworking-plugins, golang-github-openshift-prometheus-alert-buffer, golang-github-prometheus-promu and openshift-eventrouter RPM packages for Red Hat OpenShift Container Platform 4.1.21. These packages have been rebuilt with an updated version of Go to address the below security issues.\n\nSecurity Fix(es):\n\n* HTTP/2: flood using PING frames results in unbounded memory growth (CVE-2019-9512)\n\n* HTTP/2: flood using HEADERS frames results in unbounded memory growth (CVE-2019-9514)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-10-30"
+      },
+      "Updated": {
+        "Date": "2019-10-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-9512",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9512",
+          "Public": "20190813:1700"
+        },
+        {
+          "CveID": "CVE-2019-9514",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9514",
+          "Public": "20190813:1700"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1735645",
+          "ID": "1735645"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1735744",
+          "ID": "1735744"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.1",
+        "cpe:/a:redhat:openshift:4.1::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20192794016"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20192794015"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apb is earlier than 0:2.0.3-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265001"
+                  },
+                  {
+                    "Comment": "apb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apb-container-scripts is earlier than 0:2.0.3-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265003"
+                  },
+                  {
+                    "Comment": "apb-container-scripts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apb-devel is earlier than 0:2.0.3-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265005"
+                  },
+                  {
+                    "Comment": "apb-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "containernetworking-plugins is earlier than 0:0.8.1-4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265007"
+                  },
+                  {
+                    "Comment": "containernetworking-plugins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "golang-github-openshift-prometheus-alert-buffer is earlier than 0:0-3.gitceca8c1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265009"
+                  },
+                  {
+                    "Comment": "golang-github-openshift-prometheus-alert-buffer is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "golang-github-prometheus-promu is earlier than 0:0-5.git85ceabc.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265011"
+                  },
+                  {
+                    "Comment": "golang-github-prometheus-promu is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "prometheus-promu is earlier than 0:0-5.git85ceabc.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265013"
+                  },
+                  {
+                    "Comment": "prometheus-promu is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-eventrouter is earlier than 0:0.2-3.gited73fb6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265015"
+                  },
+                  {
+                    "Comment": "openshift-eventrouter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible-operator is earlier than 0:0.0.1-3.git.59.4beb3d2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265017"
+                  },
+                  {
+                    "Comment": "ansible-operator is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible-operator-container-scripts is earlier than 0:0.0.1-3.git.59.4beb3d2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265019"
+                  },
+                  {
+                    "Comment": "ansible-operator-container-scripts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible-operator-devel is earlier than 0:0.0.1-3.git.59.4beb3d2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265021"
+                  },
+                  {
+                    "Comment": "ansible-operator-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193265022"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

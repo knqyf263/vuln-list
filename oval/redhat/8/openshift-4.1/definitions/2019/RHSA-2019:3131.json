@@ -1,0 +1,167 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193131",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2019:3131: OpenShift Container Platform 4.1.20 golang security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3131",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3131"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9512",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9512"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9514",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9514"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the cri-o, cri-tools, faq, ignition, openshift-external-storage and pivot RPM packages, which have been rebuilt with an updated version of golang for Red Hat OpenShift Container Platform 4.1.20.\n\nSecurity Fix(es):\n\n* HTTP/2: flood using PING frames results in unbounded memory growth (CVE-2019-9512)\n\n* HTTP/2: flood using HEADERS frames results in unbounded memory growth (CVE-2019-9514)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-10-16"
+      },
+      "Updated": {
+        "Date": "2019-10-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-9512",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9512",
+          "Public": "20190813:1700"
+        },
+        {
+          "CveID": "CVE-2019-9514",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9514",
+          "Public": "20190813:1700"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1735645",
+          "ID": "1735645"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1735744",
+          "ID": "1735744"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.1",
+        "cpe:/a:redhat:openshift:4.1::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20192794008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20192794007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cri-o is earlier than 0:1.13.11-0.13.dev.rhaos4.1.gitbdeb2ca.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131001"
+                  },
+                  {
+                    "Comment": "cri-o is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20200690018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cri-tools is earlier than 0:1.13.0-3.rhaos4.1.gitb69a0b9.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131003"
+                  },
+                  {
+                    "Comment": "cri-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ignition is earlier than 0:0.32.0-2.git5941fc0.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131005"
+                  },
+                  {
+                    "Comment": "ignition is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ignition-validate is earlier than 0:0.32.0-2.git5941fc0.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131007"
+                  },
+                  {
+                    "Comment": "ignition-validate is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pivot is earlier than 0:0.0.5-2.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131009"
+                  },
+                  {
+                    "Comment": "pivot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193131010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
