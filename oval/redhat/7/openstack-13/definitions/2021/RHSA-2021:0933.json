@@ -1,0 +1,114 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210933",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:0933: python-django security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 13.0 (Queens)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0933",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0933"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-13254",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-13254"
+      }
+    ],
+    "Description": "Django is a high-level Python Web framework that encourages rapid\ndevelopment and a clean, pragmatic design. It focuses on automating as much\nas possible and adhering to the DRY (Don't Repeat Yourself) principle.\n\nSecurity Fix(es):\n\n* potential data leakage via malformed memcached keys (CVE-2020-13254)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE\npage listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-03-18"
+      },
+      "Updated": {
+        "Date": "2021-03-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-13254",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-20-\u003eCWE-200",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-13254",
+          "Public": "20200603"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1843614",
+          "ID": "1843614"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:13",
+        "cpe:/a:redhat:openstack-optools:13::el7",
+        "cpe:/a:redhat:openstack:13",
+        "cpe:/a:redhat:openstack:13::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20190448068"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20190448067"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-django-bash-completion is earlier than 0:1.11.27-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210933001"
+                  },
+                  {
+                    "Comment": "python-django-bash-completion is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190082002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python2-django is earlier than 0:1.11.27-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210933003"
+                  },
+                  {
+                    "Comment": "python2-django is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190082004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

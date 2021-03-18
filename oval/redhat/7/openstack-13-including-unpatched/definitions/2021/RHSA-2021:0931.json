@@ -1,0 +1,256 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210931",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2021:0931: openvswitch2.11 and ovn2.11 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 13.0 (Queens)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0931",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0931"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-8011",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-8011"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10722",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10722"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10723",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10723"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10724",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10724"
+      }
+    ],
+    "Description": "Open vSwitch provides standard network bridging functions and support for\nthe OpenFlow protocol for remote per-flow control of traffic.\n\nOVN, the Open Virtual Network, is a system to support virtual network\nabstraction.  OVN complements the existing capabilities of OVS to add native support for virtual network abstractions, such as virtual L2 and L3 overlays and security groups.\n\nSecurity Fix(es):\n\n* buffer overflow in the lldp_decode function in daemon/protocols/lldp.c\n(CVE-2015-8011)\n\n* librte_vhost Integer overflow in vhost_user_set_log_base()\n(CVE-2020-10722)\n\n* librte_vhost Integer truncation in\nvhost_user_check_and_alloc_queue_pair() (CVE-2020-10723)\n\n* librte_vhost Missing inputs validation in Vhost-crypto (CVE-2020-10724)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE\npage listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-03-18"
+      },
+      "Updated": {
+        "Date": "2021-03-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-8011",
+          "Cvss3": "9.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-120",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-8011",
+          "Public": "20151015"
+        },
+        {
+          "CveID": "CVE-2020-10722",
+          "Cvss3": "6.7/CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-190",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10722",
+          "Public": "20200518"
+        },
+        {
+          "CveID": "CVE-2020-10723",
+          "Cvss3": "6.7/CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-190",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10723",
+          "Public": "20200518"
+        },
+        {
+          "CveID": "CVE-2020-10724",
+          "Cvss3": "5.1/CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:U/C:N/I:L/A:H",
+          "Cwe": "CWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10724",
+          "Public": "20200518"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1828867",
+          "ID": "1828867"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1828874",
+          "ID": "1828874"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1828884",
+          "ID": "1828884"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1896536",
+          "ID": "1896536"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:13",
+        "cpe:/a:redhat:openstack-optools:13::el7",
+        "cpe:/a:redhat:openstack:13",
+        "cpe:/a:redhat:openstack:13::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20115034004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20115034003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch2.11 is earlier than 0:2.11.3-77.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931001"
+                  },
+                  {
+                    "Comment": "openvswitch2.11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202027827012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch2.11-devel is earlier than 0:2.11.3-77.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931003"
+                  },
+                  {
+                    "Comment": "openvswitch2.11-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202027827010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch2.11-test is earlier than 0:2.11.3-77.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931005"
+                  },
+                  {
+                    "Comment": "openvswitch2.11-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202027827002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-openvswitch2.11 is earlier than 0:2.11.3-77.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931007"
+                  },
+                  {
+                    "Comment": "python-openvswitch2.11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202027827022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovn2.11 is earlier than 0:2.11.1-57.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931009"
+                  },
+                  {
+                    "Comment": "ovn2.11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovn2.11-central is earlier than 0:2.11.1-57.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931011"
+                  },
+                  {
+                    "Comment": "ovn2.11-central is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovn2.11-host is earlier than 0:2.11.1-57.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931013"
+                  },
+                  {
+                    "Comment": "ovn2.11-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovn2.11-vtep is earlier than 0:2.11.1-57.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931015"
+                  },
+                  {
+                    "Comment": "ovn2.11-vtep is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch-selinux-extra-policy is earlier than 0:1.0-17.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931017"
+                  },
+                  {
+                    "Comment": "openvswitch-selinux-extra-policy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210931018"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
