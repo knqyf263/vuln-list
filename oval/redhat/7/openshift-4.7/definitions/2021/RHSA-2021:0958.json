@@ -1,0 +1,125 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210958",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2021:0958: OpenShift Container Platform 4.7.4 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0958",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0958"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3114",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3114"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container\nPlatform 4.7.4. See the following advisory for the container images for\nthis release:\n\nhttps://access.redhat.com/errata/RHSA-2021:0957\n\nAll OpenShift Container Platform 4.7 users are advised to upgrade to these\nupdated packages and images when they are available in the appropriate\nrelease channel. To check for available updates, use the OpenShift Console\nor the CLI oc command. Instructions for upgrading a cluster are available\nat\nhttps://docs.openshift.com/container-platform/4.7/updating/updating-cluster\n-between-minor.html#understanding-upgrade-channels_updating-cluster-between\n-minor.\n\nSecurity Fix(es):\n\n* golang: crypto/elliptic: incorrect operations on the P-224 curve (CVE-2021-3114)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-03-30"
+      },
+      "Updated": {
+        "Date": "2021-03-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-3114",
+          "Cvss3": "6.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-682",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3114",
+          "Public": "20210120"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1918750",
+          "ID": "1918750"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.7",
+        "cpe:/a:redhat:openshift:4.7::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20205634008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20205634007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-hyperkube is earlier than 0:4.7.0-202103181538.p0.git.97109.7576cdc.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210958001"
+                  },
+                  {
+                    "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205634004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients is earlier than 0:4.7.0-202103191426.p0.git.3953.f3a7513.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210958003"
+                  },
+                  {
+                    "Comment": "openshift-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210958004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients-redistributable is earlier than 0:4.7.0-202103191426.p0.git.3953.f3a7513.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210958005"
+                  },
+                  {
+                    "Comment": "openshift-clients-redistributable is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210958006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
