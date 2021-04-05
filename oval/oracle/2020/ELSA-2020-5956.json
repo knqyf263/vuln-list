@@ -1,6 +1,6 @@
 {
   "Title": "ELSA-2020-5956: Unbreakable Enterprise kernel security update (IMPORTANT)",
-  "Description": "kernel-uek\n[3.8.13-118.51.2]\n- Revert 'kexec: Validate pe files against the system_lacklist_keyring' (John Donnelly)  [Orabug: 32171714]  {CVE-2020-26541} {CVE-2020-26541}\n\n[3.8.13-118.51.1]\n- usb: cdc-acm: make sure a refcount is taken early enough (Oliver Neukum)  [Orabug: 31351090]  {CVE-2019-19530}\n- kexec: Validate pe files against the system_lacklist_keyring (Eric Snowberg)  [Orabug: 31961121]  {CVE-2020-26541}\n- uek-rpm: Update secure boot UEK signing certificates (Brian Maly)  [Orabug: 31974695]\n\ndtrace-modules-3.8.13-118.51.2.el6uek\n[0.4.5-3]\n- Synchronize versions with OL7\n\n[0.4.5-2]\n- Validate d_path() argument pointer to avoid crash.\n  [Orabug: 21304207]\n\n[0.4.5-1]\n- Support USDT for 32-bit applications on 64-bit hosts.\n  [Orabug: 21219315]\n- Convert from sdt_instr_t to asm_instr_t.\n  [Orabug: 21219374]\n- Restructuring to support DTrace on multiple architectures.\n  [Orabug: 21273259]\n- Fix dtrace_helptrace_buffer memory leak.\n  [Orabug: 20514336]\n- Add .gitignore file.\n  [Orabug: 20266608]\n\n[0.4.4-1]\n- Rename dtrace-modules-headers to dtrace-modules-shared-headers.\n  [Orabug: 20508087]\n\n[0.4.3-4]\n- Updated NEWS file: test stress/buffering/tst.resize1.d is XFAIL for now.\n- Align with kernel header file change: FOLL_NOFAULT -\u003e FOLL_IMMED.\n  [Orabug: 18653713]\n\n[0.4.3-3]\n- Rebuild with cleaned up source tree.\n\n[0.4.3-2]\n- Various fixes to handle multi-threaded processes.\n  [Orabug: 18412802]\n\n[0.4.3-1]\n- Implmentation of profile-* probes in the profile provider.\n  [Orabug: 18323513]\n\n[0.4.2-3]\n- Obsolete the old provider headers package.\n  [Orabug: 18061595]\n\n[0.4.2-2]\n- Change name of provider headers package, to avoid conflicts on yum update.\n  [Orabug: 18061595]\n\n[0.4.2-1]\n- Fix 'vtimestamp' implementation.\n  [Orabug: 17741477]\n- Support SDT probes points in kernel modules.\n  [Orabug: 17851716]\n\n[0.4.1-3]\n- Fix 'errno' implementation.\n  [Orabug: 17704568]\n\n[0.4.1-2]\n- Fix lock ordering issues.\n  [Orabug: 17624236]\n\n[0.4.1-1]\n- Align with new cyclic implementation in UEK3 kernel.\n  [Orabug: 17553446]\n- Bugfix for module reference counting.\n- Fix memory leak.\n- Fix race condition in speculative tracing buffer cleaning.\n  [Orabug: 17591351]\n- Ensure safe access to userspace stack memory location.\n  [Orabug: 17591351]\n\n[0.4.0-2]\n- Bugfix for ustack() to avoid using vma data.\n\n[0.4.0-1]\n- Bugfix for module unloading.\n- Support meta-providers, USDT, and fasttrap (for USDT only).\n- Export DTrace kernel headers to userspace.\n- Improved ustack() robustness.\n  [Orabug: 17591351]\n- Reimplemented ustack().\n  (Nick Alcock) [Orabug: 17591351]\n- Bugfixes.\n\n[0.3.2]\n- Release for new kernel and CTF section layout\n\n[0.3.1]\n- Skipped version number\n\n[0.3.0-2]\n- Remove development-only providers because they should not be built/released.\n\n[0.3.0]\n- Release of the DTrace kernel modules for UEK2 2.6.39-201.0.1 (DTrace kernel).\n\n[0.2.5-2]\n- Fix typo causing unconditional depmod at postinstall time\n\n[0.2.5]\n- New kernel, new userspace: no module changes.\n\n[0.2.4]\n- Ban unloading of in-use dtrace modules while dtrace is running.\n\n[0.2.3]\n- There is one new DTrace option now, used internally by the\n  testsuite.\n\n[0.2.2]\n- Switch MUTEX_HELD() from using mutex_is_locked() to new mutex_owned().\n\n[0.2.1]\n- Ensure that allocation attempts are done in atomic fashion so that a failing\n  allocation attempt won't interfere with other allocations.\n- Surpress OOM warnings.\n\n[0.2.0]\n- Release of the DTrace kernel modules for UEK2 2.6.39-101.0.1 (DTrace kernel).\n\n[0.1.0-1.el6]\n- Disable stub-based syscalls in the release pending merging in fixes.\n\n[0.1]\n- Initial release.",
+  "Description": "kernel-uek\n[3.8.13-118.51.2]\n- Revert 'kexec: Validate pe files against the system_lacklist_keyring' (John Donnelly)  [Orabug: 32171714]  {CVE-2020-26541} {CVE-2020-26541}\n\n[3.8.13-118.51.1]\n- usb: cdc-acm: make sure a refcount is taken early enough (Oliver Neukum)  [Orabug: 31351090]  {CVE-2019-19530}\n- kexec: Validate pe files against the system_lacklist_keyring (Eric Snowberg)  [Orabug: 31961121]  {CVE-2020-26541}\n- uek-rpm: Update secure boot UEK signing certificates (Brian Maly)  [Orabug: 31974695]",
   "Platform": [
     "Oracle Linux 6",
     "Oracle Linux 7"
@@ -24,94 +24,104 @@
         "Operator": "AND",
         "Criterias": [
           {
-            "Operator": "OR",
+            "Operator": "AND",
             "Criterias": [
               {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
+                "Operator": "OR",
+                "Criterias": [
                   {
-                    "Comment": "dtrace-modules-3.8.13-118.51.2.el6uek is earlier than 0:0.4.5-3.el6"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "dtrace-modules-3.8.13-118.51.2.el6uek is earlier than 0:0.4.5-3.el6"
+                      },
+                      {
+                        "Comment": "dtrace-modules-3.8.13-118.51.2.el6uek is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "dtrace-modules-3.8.13-118.51.2.el6uek is signed with the Oracle Linux 6 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek is earlier than 0:3.8.13-118.51.2.el6uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek is earlier than 0:3.8.13-118.51.2.el6uek"
+                      },
+                      {
+                        "Comment": "kernel-uek is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek is signed with the Oracle Linux 6 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-debug is earlier than 0:3.8.13-118.51.2.el6uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-debug is earlier than 0:3.8.13-118.51.2.el6uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-debug is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek-debug is signed with the Oracle Linux 6 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-debug-devel is earlier than 0:3.8.13-118.51.2.el6uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-debug-devel is earlier than 0:3.8.13-118.51.2.el6uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-debug-devel is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek-debug-devel is signed with the Oracle Linux 6 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-devel is earlier than 0:3.8.13-118.51.2.el6uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-devel is earlier than 0:3.8.13-118.51.2.el6uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-devel is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek-devel is signed with the Oracle Linux 6 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-doc is earlier than 0:3.8.13-118.51.2.el6uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-doc is earlier than 0:3.8.13-118.51.2.el6uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-doc is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek-doc is signed with the Oracle Linux 6 key"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-firmware is earlier than 0:3.8.13-118.51.2.el6uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-firmware is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-firmware is earlier than 0:3.8.13-118.51.2.el6uek"
-                  },
-                  {
-                    "Comment": "kernel-uek-firmware is signed with the Oracle Linux 6 key"
-                  }
-                ]
+                ],
+                "Criterions": null
               }
             ],
-            "Criterions": null
+            "Criterions": [
+              {
+                "Comment": "Oracle Linux arch is x86_64"
+              }
+            ]
           }
         ],
         "Criterions": [
@@ -124,94 +134,104 @@
         "Operator": "AND",
         "Criterias": [
           {
-            "Operator": "OR",
+            "Operator": "AND",
             "Criterias": [
               {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
+                "Operator": "OR",
+                "Criterias": [
                   {
-                    "Comment": "dtrace-modules-3.8.13-118.51.2.el7uek is earlier than 0:0.4.5-3.el7"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "dtrace-modules-3.8.13-118.51.2.el7uek is earlier than 0:0.4.5-3.el7"
+                      },
+                      {
+                        "Comment": "dtrace-modules-3.8.13-118.51.2.el7uek is signed with the Oracle Linux 7 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "dtrace-modules-3.8.13-118.51.2.el7uek is signed with the Oracle Linux 7 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek is earlier than 0:3.8.13-118.51.2.el7uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek is earlier than 0:3.8.13-118.51.2.el7uek"
+                      },
+                      {
+                        "Comment": "kernel-uek is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek is signed with the Oracle Linux 7 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-debug is earlier than 0:3.8.13-118.51.2.el7uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-debug is earlier than 0:3.8.13-118.51.2.el7uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-debug is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek-debug is signed with the Oracle Linux 7 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-debug-devel is earlier than 0:3.8.13-118.51.2.el7uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-debug-devel is earlier than 0:3.8.13-118.51.2.el7uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-debug-devel is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek-debug-devel is signed with the Oracle Linux 7 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-devel is earlier than 0:3.8.13-118.51.2.el7uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-devel is earlier than 0:3.8.13-118.51.2.el7uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-devel is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek-devel is signed with the Oracle Linux 7 key"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-doc is earlier than 0:3.8.13-118.51.2.el7uek"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-doc is earlier than 0:3.8.13-118.51.2.el7uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-doc is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "kernel-uek-doc is signed with the Oracle Linux 7 key"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "kernel-uek-firmware is earlier than 0:3.8.13-118.51.2.el7uek"
+                      },
+                      {
+                        "Comment": "kernel-uek-firmware is signed with the Oracle Linux 6 key"
+                      }
+                    ]
                   }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "kernel-uek-firmware is earlier than 0:3.8.13-118.51.2.el7uek"
-                  },
-                  {
-                    "Comment": "kernel-uek-firmware is signed with the Oracle Linux 7 key"
-                  }
-                ]
+                ],
+                "Criterions": null
               }
             ],
-            "Criterions": null
+            "Criterions": [
+              {
+                "Comment": "Oracle Linux arch is x86_64"
+              }
+            ]
           }
         ],
         "Criterions": [
