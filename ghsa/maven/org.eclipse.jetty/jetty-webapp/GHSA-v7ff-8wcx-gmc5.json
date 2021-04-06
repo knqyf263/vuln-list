@@ -1,0 +1,49 @@
+{
+  "Severity": "MODERATE",
+  "UpdatedAt": "2021-04-02T20:28:11Z",
+  "Package": {
+    "Ecosystem": "MAVEN",
+    "Name": "org.eclipse.jetty:jetty-webapp"
+  },
+  "Advisory": {
+    "DatabaseId": 3669,
+    "Id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLXY3ZmYtOHdjeC1nbWM1",
+    "GhsaId": "GHSA-v7ff-8wcx-gmc5",
+    "References": [
+      {
+        "Url": "https://github.com/eclipse/jetty.project/security/advisories/GHSA-v7ff-8wcx-gmc5"
+      },
+      {
+        "Url": "https://nvd.nist.gov/vuln/detail/CVE-2021-28164"
+      },
+      {
+        "Url": "https://github.com/advisories/GHSA-v7ff-8wcx-gmc5"
+      }
+    ],
+    "Identifiers": [
+      {
+        "Type": "GHSA",
+        "Value": "GHSA-v7ff-8wcx-gmc5"
+      },
+      {
+        "Type": "CVE",
+        "Value": "CVE-2021-28164"
+      }
+    ],
+    "Description": "### Description\nRelease 9.4.37 introduced a more precise implementation of [RFC3986](https://tools.ietf.org/html/rfc3986#section-3.3) with regards to URI decoding, together with some new compliance modes to optionally allow support of some URI that may have ambiguous interpretation within the Servlet specified API methods behaviours.   The default mode allowed % encoded . characters to be excluded for URI normalisation, which is correct by the RFC, but is not assumed by common Servlet implementations. \n\n### Impact\nThe default compliance mode allows requests with URIs that contain `%2e` or `%2e%2e` segments to access protected resources within the `WEB-INF` directory.  For example a request to `/context/%2e/WEB-INF/web.xml` can retrieve the `web.xml` file.  This can reveal sensitive information regarding the implementation of a web application.\n\n### Workarounds\nThe HttpCompliance mode RFC7230_NO_AMBIGUOUS_URIS can be enabled by updating `start.d/http.ini` to include:\n```\njetty.http.compliance=RFC7230_NO_AMBIGUOUS_URIS\n```",
+    "Origin": "UNSPECIFIED",
+    "PublishedAt": "2021-04-06T17:31:01Z",
+    "Severity": "MODERATE",
+    "Summary": "Authorization Before Parsing and Canonicalization in jetty",
+    "UpdatedAt": "2021-04-06T17:31:01Z",
+    "WithdrawnAt": ""
+  },
+  "Versions": [
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "9.4.39"
+      },
+      "VulnerableVersionRange": "\u003e= 9.4.37, \u003c 9.4.39"
+    }
+  ]
+}
