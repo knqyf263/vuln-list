@@ -1,0 +1,143 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211214",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:1214: libldb security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8.1 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1214",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1214"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-20277",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-20277"
+      }
+    ],
+    "Description": "The libldb packages provide an extensible library that implements an LDAP-like API to access remote LDAP servers, or use local TDB databases.\n\nSecurity Fix(es):\n\n* samba: Out of bounds read in AD DC LDAP server (CVE-2021-20277)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-04-15"
+      },
+      "Updated": {
+        "Date": "2021-04-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-20277",
+          "Cvss3": "7.1/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:H",
+          "Cwe": "CWE-125",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-20277",
+          "Public": "20210324"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1941402",
+          "ID": "1941402"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_e4s:8.1",
+        "cpe:/a:redhat:rhel_e4s:8.1::appstream",
+        "cpe:/a:redhat:rhel_e4s:8.1::highavailability",
+        "cpe:/a:redhat:rhel_e4s:8.1::sap",
+        "cpe:/a:redhat:rhel_e4s:8.1::sap_hana",
+        "cpe:/o:redhat:rhel_e4s:8.1",
+        "cpe:/o:redhat:rhel_e4s:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ldb-tools is earlier than 0:1.5.4-3.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211214001"
+                  },
+                  {
+                    "Comment": "ldb-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211214002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libldb is earlier than 0:1.5.4-3.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211214003"
+                  },
+                  {
+                    "Comment": "libldb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211214004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libldb-devel is earlier than 0:1.5.4-3.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211214005"
+                  },
+                  {
+                    "Comment": "libldb-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211214006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-ldb is earlier than 0:1.5.4-3.el8_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211214007"
+                  },
+                  {
+                    "Comment": "python3-ldb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211214008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
