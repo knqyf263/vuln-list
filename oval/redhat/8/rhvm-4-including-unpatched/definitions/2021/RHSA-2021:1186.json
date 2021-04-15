@@ -1,0 +1,103 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211186",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2021:1186: RHV Manager (ovirt-engine) 4.4.z [ovirt-4.4.5] 0-day security, bug fix, enhance (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.4"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1186",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1186"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-20921",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-20921"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-28458",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-28458"
+      }
+    ],
+    "Description": "The ovirt-engine package provides the manager for virtualization environments.\nThis manager enables admins to define hosts and networks, as well as to add\nstorage, create VMs and manage user permissions.\n\nBug Fix(es):\n* Previously, saving user preferences in the Red Hat Virtualization Manager required the MANIPULATE_USERS permission level. As a result, user preferences were not saved on the server.\nIn this release, the required permission level for saving user preferences was changed to EDIT_PROFILE, which is the permission level assigned by default to all users. As a result, saving user preferences works as expected. (BZ#1920539)\n\nA list of bugs fixed in this update is available in the Technical Notes\nbook:\n\nhttps://access.redhat.com/documentation/en-us/red_hat_virtualization/4.4/html-single/technical_notes\n\nSecurity Fix(es):\n\n* nodejs-bootstrap-select: not escaping title values on \u003coption\u003e may lead to XSS (CVE-2019-20921)\n\n* datatables.net: prototype pollution if 'constructor' were used in a data property name (CVE-2020-28458)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-04-14"
+      },
+      "Updated": {
+        "Date": "2021-04-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-20921",
+          "Cvss3": "6.1/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+          "Cwe": "CWE-79",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-20921",
+          "Public": "20190214"
+        },
+        {
+          "CveID": "CVE-2020-28458",
+          "Cvss3": "7.3/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-400",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-28458",
+          "Public": "20201025"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1882273",
+          "ID": "1882273"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1908441",
+          "ID": "1908441"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/a:redhat:rhev_manager:4.4:el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20166341004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 8 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20166341003"
+          },
+          {
+            "Comment": "ovirt-engine-ui-extensions is earlier than 0:1.2.5-1.el8ev",
+            "TestRef": "oval:com.redhat.rhsa:tst:20211186001"
+          },
+          {
+            "Comment": "ovirt-engine-ui-extensions is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:201920921002"
+          }
+        ]
+      }
+    ]
+  }
+}
