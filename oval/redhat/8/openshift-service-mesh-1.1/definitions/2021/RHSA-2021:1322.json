@@ -1,0 +1,181 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211322",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2021:1322: Red Hat OpenShift Service Mesh 1.1.13 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "OpenShift Service Mesh 1.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1322",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1322"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-25014",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-25014"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-28682",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-28682"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-28683",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-28683"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-29258",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-29258"
+      }
+    ],
+    "Description": "Red Hat OpenShift Service Mesh is Red Hat's distribution of the Istio service mesh project, tailored for installation into an on-premise OpenShift Container Platform installation.\n\nSecurity Fix(es):\n\n* envoyproxy/envoy: integer overflow handling large grpc-timeouts (CVE-2021-28682)\n\n* envoyproxy/envoy: NULL pointer dereference in TLS alert code handling (CVE-2021-28683)\n\n* envoyproxy/envoy: crash with empty HTTP/2 metadata map (CVE-2021-29258)\n\n* istio-pilot: requests to debug api can result in panic (CVE-2019-25014)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-04-22"
+      },
+      "Updated": {
+        "Date": "2021-04-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-25014",
+          "Cvss3": "6.5/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-129-\u003eCWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-25014",
+          "Public": "20191106"
+        },
+        {
+          "CveID": "CVE-2021-28682",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-190",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-28682",
+          "Public": "20210415"
+        },
+        {
+          "CveID": "CVE-2021-28683",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-476",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-28683",
+          "Public": "20210415"
+        },
+        {
+          "CveID": "CVE-2021-29258",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-476",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-29258",
+          "Public": "20210415"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1919066",
+          "ID": "1919066"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1942263",
+          "ID": "1942263"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1942272",
+          "ID": "1942272"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1942280",
+          "ID": "1942280"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:service_mesh:1.1",
+        "cpe:/a:redhat:service_mesh:1.1::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhea:tst:20201416035"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhea:tst:20201416033"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhea:tst:20201416034"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-proxy is earlier than 0:1.1.13-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211322001"
+                  },
+                  {
+                    "Comment": "servicemesh-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20201416012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-pilot-agent is earlier than 0:1.1.13-3.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211322003"
+                  },
+                  {
+                    "Comment": "servicemesh-pilot-agent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20201416026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-pilot-discovery is earlier than 0:1.1.13-3.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211322005"
+                  },
+                  {
+                    "Comment": "servicemesh-pilot-discovery is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20201416028"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
