@@ -1,0 +1,9 @@
+{
+  "ID": "pyup.io-38401",
+  "Advisory": "Aiootp 0.9.0 adds hmac codes to ciphertext for the following functions: 'json_encrypt', 'ajson_encrypt', 'bytes_encrypt', 'abytes_encrypt', 'Database.encrypt' & 'AsyncDatabase.aencrypt'. This change greatly increases the security of ciphertext by ensuring it hasn't been modified or tampered with maliciously. One-time pad ciphertext is maleable, so without hmac validation it can be changed to successfully allow decryption but return the wrong plaintext. These functions are the highest level abstractions of the library for encryption/decryption, which made them excellent targets for this important security update. As well, it isn't easily possible for the library to provide hmac codes for generators that produce ciphertext, because the end of a stream of ciphertext isn't known until after the results have left the scope of library code. So users will need to produce their own hmac codes for generator ciphertext unless we find an elegant solution to this issue. These functions now all return dictionaries with the associated hmac stored in the 'hmac' entry. The bytes functions formerly returned lists, now their ciphertext is available from the '\"ciphertext\"' entry. And, all database files will have an hmac attached to them now. These changes were designed to still be compatible with old ciphertexts but they'll likely be made incompatible by the v0.11.x major release.",
+  "Cve": "",
+  "Specs": [
+    "<0.9.0"
+  ],
+  "v": "<0.9.0"
+}

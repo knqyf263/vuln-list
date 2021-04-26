@@ -1,0 +1,11 @@
+{
+  "ID": "pyup.io-35173",
+  "Advisory": "CVE-2018-6188: Information leakage in ``AuthenticationForm``\r\n============================================================\r\n\r\nA regression in Django 1.11.8 made\r\n:class:`~django.contrib.auth.forms.AuthenticationForm` run its\r\n``confirm_login_allowed()`` method even if an incorrect password is entered.\r\nThis can leak information about a user, depending on what messages\r\n``confirm_login_allowed()`` raises. If ``confirm_login_allowed()`` isn't\r\noverridden, an attacker enter an arbitrary username and see if that user has\r\nbeen set to ``is_active=False``. If ``confirm_login_allowed()`` is overridden,\r\nmore sensitive details could be leaked.\r\n\r\nThis issue is fixed with the caveat that ``AuthenticationForm`` can no longer\r\nraise the \"This account is inactive.\" error if the authentication backend\r\nrejects inactive users (the default authentication backend, ``ModelBackend``,\r\nhas done that since Django 1.10). This issue will be revisited for Django 2.1\r\nas a fix to address the caveat will likely be too invasive for inclusion in\r\nolder versions.",
+  "Cve": "CVE-2018-6188",
+  "Specs": [
+    ">=2.0a1,<2.0.2",
+    "==1.11.8",
+    "==1.11.9"
+  ],
+  "v": ">=2.0a1,<2.0.2,==1.11.8,==1.11.9"
+}

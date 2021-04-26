@@ -1,0 +1,10 @@
+{
+  "ID": "pyup.io-38823",
+  "Advisory": "In Tensorflow before versions 2.2.1 and 2.3.1, the implementation of `dlpack.to_dlpack` can be made to use uninitialized memory resulting in further memory corruption. This is because the pybind11 glue code assumes that the argument is a tensor. However, there is nothing stopping users from passing in a Python object instead of a tensor. The uninitialized memory address is due to a `reinterpret_cast` Since the `PyObject` is a Python object, not a TensorFlow Tensor, the cast to `EagerTensor` fails. The issue is patched in commit 22e07fb204386768e5bcbea563641ea11f96ceb8 and is released in TensorFlow versions 2.2.1, or 2.3.1. See: CVE-2020-15193.",
+  "Cve": "CVE-2020-15193",
+  "Specs": [
+    ">=2.2.0rc0,<2.2.1",
+    ">=2.3.0rc0,<2.3.1"
+  ],
+  "v": ">=2.2.0rc0,<2.2.1,>=2.3.0rc0,<2.3.1"
+}

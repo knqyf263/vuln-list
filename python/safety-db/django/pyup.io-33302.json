@@ -1,0 +1,9 @@
+{
+  "ID": "pyup.io-33302",
+  "Advisory": "Django 1.9.13 fixes two security issues and a bug in 1.9.12. This is the final\r\nrelease of the 1.9.x series.\r\n\r\nCVE-2017-7233: Open redirect and possible XSS attack via user-supplied numeric redirect URLs\r\n============================================================================================\r\n\r\nDjango relies on user input in some cases  (e.g.\r\n:func:`django.contrib.auth.views.login` and :doc:`i18n </topics/i18n/index>`)\r\nto redirect the user to an \"on success\" URL. The security check for these\r\nredirects (namely ``django.utils.http.is_safe_url()``) considered some numeric\r\nURLs (e.g. ``http:999999999``) \"safe\" when they shouldn't be.\r\n\r\nAlso, if a developer relies on ``is_safe_url()`` to provide safe redirect\r\ntargets and puts such a URL into a link, they could suffer from an XSS attack.\r\n\r\nCVE-2017-7234: Open redirect vulnerability in ``django.views.static.serve()``\r\n=============================================================================\r\n\r\nA maliciously crafted URL to a Django site using the\r\n:func:`~django.views.static.serve` view could redirect to any other domain. The\r\nview no longer does any redirects as they don't provide any known, useful\r\nfunctionality.\r\n\r\nNote, however, that this view has always carried a warning that it is not\r\nhardened for production use and should be used only as a development aid.",
+  "Cve": "CVE-2017-7233",
+  "Specs": [
+    ">=1.9,<1.9.13"
+  ],
+  "v": ">=1.9,<1.9.13"
+}
