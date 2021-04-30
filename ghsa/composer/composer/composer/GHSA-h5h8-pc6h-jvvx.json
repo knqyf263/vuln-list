@@ -1,0 +1,55 @@
+{
+  "Severity": "HIGH",
+  "UpdatedAt": "2021-04-27T20:33:49Z",
+  "Package": {
+    "Ecosystem": "COMPOSER",
+    "Name": "composer/composer"
+  },
+  "Advisory": {
+    "DatabaseId": 3997,
+    "Id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLWg1aDgtcGM2aC1qdnZ4",
+    "GhsaId": "GHSA-h5h8-pc6h-jvvx",
+    "References": [
+      {
+        "Url": "https://github.com/composer/composer/security/advisories/GHSA-h5h8-pc6h-jvvx"
+      },
+      {
+        "Url": "https://nvd.nist.gov/vuln/detail/CVE-2021-29472"
+      },
+      {
+        "Url": "https://github.com/advisories/GHSA-h5h8-pc6h-jvvx"
+      }
+    ],
+    "Identifiers": [
+      {
+        "Type": "GHSA",
+        "Value": "GHSA-h5h8-pc6h-jvvx"
+      },
+      {
+        "Type": "CVE",
+        "Value": "CVE-2021-29472"
+      }
+    ],
+    "Description": "URLs for Mercurial repositories in the root composer.json and package source download URLs are not sanitized correctly. Specifically crafted URL values allow commands to be executed in the HgDriver if hg/Mercurial is installed on the system.\n\n### Impact\n- The impact to Composer users directly is limited as the composer.json file is typically under their own control and source download URLs can only be supplied by third party Composer repositories they explicitly trust to download and execute source code from, e.g. Composer plugins.\n- The main impact is to services passing user input to Composer, including Packagist.org and Private Packagist. This allowed users to trigger remote command injection. The vulnerability has been patched on Packagist.org and Private Packagist within 12h of receiving the initial vulnerability report and based on a review of logs, to the best of our knowledge, was not abused by anyone.\n- Other services/tools using VcsRepository/VcsDriver or derivatives may also be vulnerable and should upgrade their composer/composer dependency immediately\n\n### Patches\n1.10.22 and 2.0.13 include patches for this issue.",
+    "Origin": "UNSPECIFIED",
+    "PublishedAt": "2021-04-29T21:52:04Z",
+    "Severity": "HIGH",
+    "Summary": "Missing argument delimiter can lead to code execution via VCS repository URLs or source download URLs on systems with Mercurial in composer",
+    "UpdatedAt": "2021-04-29T21:52:04Z",
+    "WithdrawnAt": ""
+  },
+  "Versions": [
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "2.0.13"
+      },
+      "VulnerableVersionRange": "\u003e= 2.0, \u003c 2.0.13"
+    },
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "1.10.22"
+      },
+      "VulnerableVersionRange": "\u003c 1.10.22"
+    }
+  ]
+}
