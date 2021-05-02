@@ -1,0 +1,125 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130742",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2013:0742: 389-ds-base security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0742",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0742"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1897",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1897"
+      }
+    ],
+    "Description": "The 389 Directory Server is an LDAPv3 compliant server. The base packages\ninclude the Lightweight Directory Access Protocol (LDAP) server and\ncommand-line utilities for server administration.\n \nIt was found that the 389 Directory Server did not properly restrict access\nto entries when the \"nsslapd-allow-anonymous-access\" configuration setting\nwas set to \"rootdse\". An anonymous user could connect to the LDAP database\nand, if the search scope is set to BASE, obtain access to information\noutside of the rootDSE. (CVE-2013-1897)\n\nThis issue was discovered by Martin Kosek of Red Hat.\n\nThis update also fixes the following bugs:\n\n* Previously, the schema-reload plug-in was not thread-safe. Consequently,\nexecuting the schema-reload.pl script under heavy load could have caused\nthe ns-slapd process to terminate unexpectedly with a segmentation fault.\nCurrently, the schema-reload plug-in is re-designed so that it is\nthread-safe, and the schema-reload.pl script can be executed along with\nother LDAP operations. (BZ#929107)\n\n* An out of scope problem for a local variable, in some cases, caused the\nmodrdn operation to terminate unexpectedly with a segmentation fault. This\nupdate declares the local variable at the proper place of the function so\nit does not go out of scope, and the modrdn operation no longer crashes.\n(BZ#929111)\n\n* A task manually constructed an exact value to be removed from the\nconfiguration if the \"replica-force-cleaning\" option was used.\nConsequently, the task configuration was not cleaned up, and every time the\nserver was restarted, the task behaved in the described manner. This update\nsearches the configuration for the exact value to delete, instead of\nmanually building the value, and the task does not restart when the server\nis restarted. (BZ#929114)\n\n* Previously, a NULL pointer dereference could have occurred when\nattempting to get effective rights on an entry that did not exist, leading\nto an unexpected termination due to a segmentation fault. This update\nchecks for NULL entry pointers and returns the appropriate error. Now,\nattempts to get effective rights on an entry that does not exist no longer\ncauses crashes, and the server returns the appropriate error message.\n(BZ#929115)\n\n* A problem in the lock timing in the DNA plug-in caused a deadlock if the\nDNA operation was executed with other plug-ins. This update moves the\nrelease timing of the problematic lock, and the DNA plug-in does not cause\nthe deadlock. (BZ#929196)\n\nAll 389-ds-base users are advised to upgrade to these updated packages,\nwhich contain backported patches to correct these issues. After installing\nthis update, the 389 server service will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-04-15"
+      },
+      "Updated": {
+        "Date": "2013-04-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1897",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1897",
+          "Public": "20130328"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/928105",
+          "ID": "928105"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.5",
+        "cpe:/o:redhat:rhel_tus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base is earlier than 0:1.2.11.15-14.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130742001"
+                  },
+                  {
+                    "Comment": "389-ds-base is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120813002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-devel is earlier than 0:1.2.11.15-14.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130742003"
+                  },
+                  {
+                    "Comment": "389-ds-base-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120813004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-libs is earlier than 0:1.2.11.15-14.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130742005"
+                  },
+                  {
+                    "Comment": "389-ds-base-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120813006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20160189",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2016:0189: polkit security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:0189",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:0189"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3256",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3256"
+      }
+    ],
+    "Description": "PolicyKit is a toolkit for defining and handling authorizations.\n\nA denial of service flaw was found in how polkit handled authorization\nrequests. A local, unprivileged user could send malicious requests to\npolkit, which could then cause the polkit daemon to corrupt its memory and\ncrash. (CVE-2015-3256)\n\nAll polkit users should upgrade to these updated packages, which contain a\nbackported patch to correct this issue. The system must be rebooted for\nthis update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-02-16"
+      },
+      "Updated": {
+        "Date": "2016-02-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-3256",
+          "Cvss2": "4.4/AV:L/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3256",
+          "Public": "20150702"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1245684",
+          "ID": "1245684"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_e4s:7.2",
+        "cpe:/a:redhat:rhel_extras_sap_hana_e4s:7.2",
+        "cpe:/o:redhat:rhel_e4s:7.2",
+        "cpe:/o:redhat:rhel_e4s:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit is earlier than 0:0.112-6.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160189001"
+                  },
+                  {
+                    "Comment": "polkit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160189002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-devel is earlier than 0:0.112-6.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160189003"
+                  },
+                  {
+                    "Comment": "polkit-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160189004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-docs is earlier than 0:0.112-6.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160189005"
+                  },
+                  {
+                    "Comment": "polkit-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160189006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

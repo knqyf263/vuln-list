@@ -1,0 +1,152 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140790",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:0790: dovecot security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0790",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0790"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3430",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3430"
+      }
+    ],
+    "Description": "Dovecot is an IMAP server, written with security primarily in mind, for\nLinux and other UNIX-like systems. It also contains a small POP3 server.\nIt supports mail in both the maildir or mbox format. The SQL drivers and\nauthentication plug-ins are provided as subpackages.\n\nIt was discovered that Dovecot did not properly discard connections trapped\nin the SSL/TLS handshake phase. A remote attacker could use this flaw to\ncause a denial of service on an IMAP/POP3 server by exhausting the pool of\navailable connections and preventing further, legitimate connections to the\nIMAP/POP3 server to be made. (CVE-2014-3430)\n\nAll dovecot users are advised to upgrade to these updated packages, which\ncontain a backported patch to correct this issue. After installing the\nupdated packages, the dovecot service will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-06-25"
+      },
+      "Updated": {
+        "Date": "2014-06-25"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-3430",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3430",
+          "Public": "20140509"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1096402",
+          "ID": "1096402"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.5",
+        "cpe:/o:redhat:rhel_tus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot is earlier than 1:2.0.9-7.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140790001"
+                  },
+                  {
+                    "Comment": "dovecot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot-devel is earlier than 1:2.0.9-7.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140790003"
+                  },
+                  {
+                    "Comment": "dovecot-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot-mysql is earlier than 1:2.0.9-7.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140790005"
+                  },
+                  {
+                    "Comment": "dovecot-mysql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot-pgsql is earlier than 1:2.0.9-7.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140790007"
+                  },
+                  {
+                    "Comment": "dovecot-pgsql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dovecot-pigeonhole is earlier than 1:2.0.9-7.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140790009"
+                  },
+                  {
+                    "Comment": "dovecot-pigeonhole is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110600010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

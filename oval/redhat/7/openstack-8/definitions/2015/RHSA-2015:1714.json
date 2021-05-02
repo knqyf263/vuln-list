@@ -1,0 +1,115 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151714",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2015:1714: spice security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1714",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1714"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3247",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3247"
+      }
+    ],
+    "Description": "The Simple Protocol for Independent Computing Environments (SPICE) is a\nremote display protocol for virtual environments. SPICE users can access a\nvirtualized desktop or server from the local system or any system with\nnetwork access to the server. SPICE is used in Red Hat Enterprise Linux for\nviewing virtualized guests running on the Kernel-based Virtual Machine\n(KVM) hypervisor or on Red Hat Enterprise Virtualization Hypervisors.\n\nA race condition flaw, leading to a heap-based memory corruption, was found\nin spice's worker_update_monitors_config() function, which runs under the\nQEMU-KVM context on the host. A user in a guest could leverage this flaw to\ncrash the host QEMU-KVM process or, possibly, execute arbitrary code with\nthe privileges of the host QEMU-KVM process. (CVE-2015-3247)\n\nThis issue was discovered by Frediano Ziglio of Red Hat.\n\nAll spice users are advised to upgrade to this updated package, which\ncontains a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-09-03"
+      },
+      "Updated": {
+        "Date": "2015-09-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-3247",
+          "Cvss2": "7.7/AV:A/AC:L/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-362",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3247",
+          "Public": "20150903"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1233238",
+          "ID": "1233238"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_e4s:7.2",
+        "cpe:/a:redhat:rhel_extras_sap_hana_e4s:7.2",
+        "cpe:/o:redhat:rhel_e4s:7.2",
+        "cpe:/o:redhat:rhel_e4s:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "spice-server is earlier than 0:0.12.4-9.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151714001"
+                  },
+                  {
+                    "Comment": "spice-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151714002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "spice-server-devel is earlier than 0:0.12.4-9.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151714003"
+                  },
+                  {
+                    "Comment": "spice-server-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151714004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

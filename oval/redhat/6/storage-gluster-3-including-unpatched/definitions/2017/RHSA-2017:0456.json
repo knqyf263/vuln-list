@@ -1,0 +1,745 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170456",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2017:0456: Red Hat JBoss Web Server 3.1.0 security and enhancement update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat JBoss Web Server 3 for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0456",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0456"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-0762",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-0762"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-1240",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-1240"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-3092",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-3092"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5018",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5018"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6325",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6325"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6794",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6794"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6796",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6796"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6797",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6797"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6816",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6816"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8735",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8735"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8745",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8745"
+      }
+    ],
+    "Description": "Red Hat JBoss Web Server is a fully integrated and certified set of components for hosting Java web applications. It is comprised of the Apache HTTP Server, the Apache Tomcat Servlet container, Apache Tomcat Connector (mod_jk), JBoss HTTP Connector (mod_cluster), Hibernate, and the Tomcat Native library.\n\nThis release of Red Hat JBoss Web Server 3.1.0 serves as a replacement for Red Hat JBoss Web Server 3.0.3, and includes enhancements.\n\nSecurity Fix(es):\n\n* It was reported that the Tomcat init script performed unsafe file handling, which could result in local privilege escalation. (CVE-2016-1240)\n\n* It was discovered that the Tomcat packages installed certain configuration files read by the Tomcat initialization script as writeable to the tomcat group. A member of the group or a malicious web application deployed on Tomcat could use this flaw to escalate their privileges. (CVE-2016-6325)\n\n* The JmxRemoteLifecycleListener was not updated to take account of Oracle's fix for CVE-2016-3427. JMXRemoteLifecycleListener is only included in EWS 2.x and JWS 3.x source distributions. If you deploy a Tomcat instance built from source, using the EWS 2.x, or JWS 3.x distributions, an attacker could use this flaw to launch a remote code execution attack on your deployed instance. (CVE-2016-8735)\n\n* A denial of service vulnerability was identified in Commons FileUpload that occurred when the length of the multipart boundary was just below the size of the buffer (4096 bytes) used to read the uploaded file if the boundary was the typical tens of bytes long. (CVE-2016-3092)\n\n* It was discovered that the code that parsed the HTTP request line permitted invalid characters. This could be exploited, in conjunction with a proxy that also permitted the invalid characters but with a different interpretation, to inject data into the HTTP response. By manipulating the HTTP response the attacker could poison a web-cache, perform an XSS attack, or obtain sensitive information from requests other then their own. (CVE-2016-6816)\n\n* A bug was discovered in the error handling of the send file code for the NIO HTTP connector. This led to the current Processor object being added to the Processor cache multiple times allowing information leakage between requests including, and not limited to, session ID and the response body. (CVE-2016-8745)\n\n* The Realm implementations did not process the supplied password if the supplied user name did not exist. This made a timing attack possible to determine valid user names. Note that the default configuration includes the LockOutRealm which makes exploitation of this vulnerability harder. (CVE-2016-0762)\n\n* It was discovered that a malicious web application could bypass a configured SecurityManager via a Tomcat utility method that was accessible to web applications. (CVE-2016-5018)\n\n* It was discovered that when a SecurityManager is configured Tomcat's system property replacement feature for configuration files could be used by a malicious web application to bypass the SecurityManager and read system properties that should not be visible. (CVE-2016-6794)\n\n* It was discovered that a malicious web application could bypass a configured SecurityManager via manipulation of the configuration parameters for the JSP Servlet. (CVE-2016-6796)\n\n* It was discovered that it was possible for a web application to access any global JNDI resource whether an explicit ResourceLink had been configured or not. (CVE-2016-6797)\n\nThe CVE-2016-6325 issue was discovered by Red Hat Product Security.\n\nEnhancement(s):\n\n* This enhancement update adds the Red Hat JBoss Web Server 3.1.0 packages to Red Hat Enterprise Linux 7. These packages provide a number of enhancements over the previous version of Red Hat JBoss Web Server. (JIRA#JWS-268)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-03-07"
+      },
+      "Updated": {
+        "Date": "2017-03-07"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-0762",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Cvss3": "3.7/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-0762",
+          "Public": "20161027"
+        },
+        {
+          "CveID": "CVE-2016-1240",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-284",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-1240",
+          "Public": "20160915"
+        },
+        {
+          "CveID": "CVE-2016-3092",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-3092",
+          "Public": "20160621"
+        },
+        {
+          "CveID": "CVE-2016-5018",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:P/A:N",
+          "Cvss3": "4.2/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5018",
+          "Public": "20161027"
+        },
+        {
+          "CveID": "CVE-2016-6325",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-284",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6325",
+          "Public": "20161010"
+        },
+        {
+          "CveID": "CVE-2016-6794",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Cvss3": "3.1/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6794",
+          "Public": "20161027"
+        },
+        {
+          "CveID": "CVE-2016-6796",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:P/A:N",
+          "Cvss3": "4.2/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6796",
+          "Public": "20161027"
+        },
+        {
+          "CveID": "CVE-2016-6797",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Cvss3": "3.7/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6797",
+          "Public": "20161027"
+        },
+        {
+          "CveID": "CVE-2016-6816",
+          "Cvss2": "5.8/AV:N/AC:M/Au:N/C:P/I:P/A:N",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-444",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6816",
+          "Public": "20161122"
+        },
+        {
+          "CveID": "CVE-2016-8735",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-502",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8735",
+          "Public": "20161122"
+        },
+        {
+          "CveID": "CVE-2016-8745",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8745",
+          "Public": "20161212"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1349468",
+          "ID": "1349468"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1367447",
+          "ID": "1367447"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1376712",
+          "ID": "1376712"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1390493",
+          "ID": "1390493"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1390515",
+          "ID": "1390515"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1390520",
+          "ID": "1390520"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1390525",
+          "ID": "1390525"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1390526",
+          "ID": "1390526"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1397484",
+          "ID": "1397484"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1397485",
+          "ID": "1397485"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1403824",
+          "ID": "1403824"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:jboss_enterprise_web_server:3.0",
+        "cpe:/a:redhat:jboss_enterprise_web_server:3.0::el7",
+        "cpe:/a:redhat:jboss_enterprise_web_server:3.1",
+        "cpe:/a:redhat:jboss_enterprise_web_server:3.1::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20153185018"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhea:tst:20150944135"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-c3p0-eap6 is earlier than 0:4.2.23-1.Final_redhat_1.1.ep6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456001"
+                  },
+                  {
+                    "Comment": "hibernate4-c3p0-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-core-eap6 is earlier than 0:4.2.23-1.Final_redhat_1.1.ep6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456003"
+                  },
+                  {
+                    "Comment": "hibernate4-core-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-eap6 is earlier than 0:4.2.23-1.Final_redhat_1.1.ep6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456005"
+                  },
+                  {
+                    "Comment": "hibernate4-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-entitymanager-eap6 is earlier than 0:4.2.23-1.Final_redhat_1.1.ep6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456007"
+                  },
+                  {
+                    "Comment": "hibernate4-entitymanager-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-envers-eap6 is earlier than 0:4.2.23-1.Final_redhat_1.1.ep6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456009"
+                  },
+                  {
+                    "Comment": "hibernate4-envers-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbcs-httpd24-apache-commons-daemon-jsvc is earlier than 1:1.0.15-17.redhat_2.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456011"
+                  },
+                  {
+                    "Comment": "jbcs-httpd24-apache-commons-daemon-jsvc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_cluster is earlier than 0:1.3.5-2.Final_redhat_2.1.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456013"
+                  },
+                  {
+                    "Comment": "mod_cluster is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20163110008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_cluster-tomcat7 is earlier than 0:1.3.5-2.Final_redhat_2.1.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456015"
+                  },
+                  {
+                    "Comment": "mod_cluster-tomcat7 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20163110004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_cluster-tomcat8 is earlier than 0:1.3.5-2.Final_redhat_2.1.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456017"
+                  },
+                  {
+                    "Comment": "mod_cluster-tomcat8 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20163110006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbcs-httpd24-apache-commons-daemon is earlier than 0:1.0.15-1.redhat_2.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456019"
+                  },
+                  {
+                    "Comment": "jbcs-httpd24-apache-commons-daemon is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbcs-httpd24-runtime is earlier than 0:1-3.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456021"
+                  },
+                  {
+                    "Comment": "jbcs-httpd24-runtime is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-vault is earlier than 0:1.0.8-9.Final_redhat_2.1.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456023"
+                  },
+                  {
+                    "Comment": "tomcat-vault is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152660004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7 is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456025"
+                  },
+                  {
+                    "Comment": "tomcat7 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944116"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-admin-webapps is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456027"
+                  },
+                  {
+                    "Comment": "tomcat7-admin-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944118"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-docs-webapp is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456029"
+                  },
+                  {
+                    "Comment": "tomcat7-docs-webapp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944120"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-el-2.2-api is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456031"
+                  },
+                  {
+                    "Comment": "tomcat7-el-2.2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944122"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-javadoc is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456033"
+                  },
+                  {
+                    "Comment": "tomcat7-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944124"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-jsp-2.2-api is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456035"
+                  },
+                  {
+                    "Comment": "tomcat7-jsp-2.2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944126"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-jsvc is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456037"
+                  },
+                  {
+                    "Comment": "tomcat7-jsvc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-lib is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456039"
+                  },
+                  {
+                    "Comment": "tomcat7-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944128"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-log4j is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456041"
+                  },
+                  {
+                    "Comment": "tomcat7-log4j is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944130"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-selinux is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456043"
+                  },
+                  {
+                    "Comment": "tomcat7-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-servlet-3.0-api is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456045"
+                  },
+                  {
+                    "Comment": "tomcat7-servlet-3.0-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944132"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-webapps is earlier than 0:7.0.70-16.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456047"
+                  },
+                  {
+                    "Comment": "tomcat7-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944134"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8 is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456049"
+                  },
+                  {
+                    "Comment": "tomcat8 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944096"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-admin-webapps is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456051"
+                  },
+                  {
+                    "Comment": "tomcat8-admin-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944098"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-docs-webapp is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456053"
+                  },
+                  {
+                    "Comment": "tomcat8-docs-webapp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944100"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-el-2.2-api is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456055"
+                  },
+                  {
+                    "Comment": "tomcat8-el-2.2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944102"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-javadoc is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456057"
+                  },
+                  {
+                    "Comment": "tomcat8-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944104"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-jsp-2.3-api is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456059"
+                  },
+                  {
+                    "Comment": "tomcat8-jsp-2.3-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944106"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-jsvc is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456061"
+                  },
+                  {
+                    "Comment": "tomcat8-jsvc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-lib is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456063"
+                  },
+                  {
+                    "Comment": "tomcat8-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944108"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-log4j is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456065"
+                  },
+                  {
+                    "Comment": "tomcat8-log4j is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944110"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-selinux is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456067"
+                  },
+                  {
+                    "Comment": "tomcat8-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456068"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-servlet-3.1-api is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456069"
+                  },
+                  {
+                    "Comment": "tomcat8-servlet-3.1-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944112"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-webapps is earlier than 0:8.0.36-17.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456071"
+                  },
+                  {
+                    "Comment": "tomcat8-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944114"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-native is earlier than 0:1.2.8-9.redhat_9.ep7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170456073"
+                  },
+                  {
+                    "Comment": "tomcat-native is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150944004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
