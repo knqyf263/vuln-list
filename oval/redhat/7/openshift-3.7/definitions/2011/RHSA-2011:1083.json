@@ -1,0 +1,162 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111083",
+  "Version": "649",
+  "Metadata": {
+    "Title": "RHSA-2011:1083: fuse security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1083",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1083"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-3879",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-3879"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0541",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0541"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0542",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0542"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0543",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0543"
+      }
+    ],
+    "Description": "FUSE (Filesystem in Userspace) can implement a fully functional file system\nin a user-space program. These packages provide the mount utility,\nfusermount, the tool used to mount FUSE file systems.\n\nMultiple flaws were found in the way fusermount handled the mounting and\nunmounting of directories when symbolic links were present. A local user in\nthe fuse group could use these flaws to unmount file systems, which they\nwould otherwise not be able to unmount and that were not mounted using\nFUSE, via a symbolic link attack. (CVE-2010-3879, CVE-2011-0541,\nCVE-2011-0542, CVE-2011-0543)\n\nNote: The util-linux-ng RHBA-2011:0699 update must also be installed to\nfully correct the above flaws.\n\nAll users should upgrade to these updated packages, which contain\nbackported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-07-20"
+      },
+      "Updated": {
+        "Date": "2011-07-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2010-3879",
+          "Cvss2": "2.6/AV:L/AC:H/Au:N/C:N/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-3879",
+          "Public": "20101102"
+        },
+        {
+          "CveID": "CVE-2011-0541",
+          "Cvss2": "2.6/AV:L/AC:H/Au:N/C:N/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0541",
+          "Public": "20101102"
+        },
+        {
+          "CveID": "CVE-2011-0542",
+          "Cvss2": "2.6/AV:L/AC:H/Au:N/C:N/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0542",
+          "Public": "20101102"
+        },
+        {
+          "CveID": "CVE-2011-0543",
+          "Cvss2": "2.6/AV:L/AC:H/Au:N/C:N/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0543",
+          "Public": "20101102"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/651183",
+          "ID": "651183"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.5",
+        "cpe:/o:redhat:rhel_eus:6.5::computenode",
+        "cpe:/o:redhat:rhel_eus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fuse is earlier than 0:2.8.3-3.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111083001"
+                  },
+                  {
+                    "Comment": "fuse is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111083002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fuse-devel is earlier than 0:2.8.3-3.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111083003"
+                  },
+                  {
+                    "Comment": "fuse-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111083004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fuse-libs is earlier than 0:2.8.3-3.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111083005"
+                  },
+                  {
+                    "Comment": "fuse-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111083006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120095",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2012:0095: ghostscript security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0095",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0095"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2009-3743",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2009-3743"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-2055",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-2055"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4054",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4054"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4820",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4820"
+      }
+    ],
+    "Description": "Ghostscript is a set of software that provides a PostScript interpreter, a\nset of C procedures (the Ghostscript library, which implements the graphics\ncapabilities in the PostScript language) and an interpreter for Portable\nDocument Format (PDF) files.\n\nAn integer overflow flaw was found in Ghostscript's TrueType bytecode\ninterpreter. An attacker could create a specially-crafted PostScript or PDF\nfile that, when interpreted, could cause Ghostscript to crash or,\npotentially, execute arbitrary code. (CVE-2009-3743)\n\nIt was found that Ghostscript always tried to read Ghostscript system\ninitialization files from the current working directory before checking\nother directories, even if a search path that did not contain the current\nworking directory was specified with the \"-I\" option, or the \"-P-\" option\nwas used (to prevent the current working directory being searched first).\nIf a user ran Ghostscript in an attacker-controlled directory containing a\nsystem initialization file, it could cause Ghostscript to execute arbitrary\nPostScript code. (CVE-2010-2055)\n\nGhostscript included the current working directory in its library search\npath by default. If a user ran Ghostscript without the \"-P-\" option in an\nattacker-controlled directory containing a specially-crafted PostScript\nlibrary file, it could cause Ghostscript to execute arbitrary PostScript\ncode. With this update, Ghostscript no longer searches the current working\ndirectory for library files by default. (CVE-2010-4820)\n\nNote: The fix for CVE-2010-4820 could possibly break existing\nconfigurations. To use the previous, vulnerable behavior, run Ghostscript\nwith the \"-P\" option (to always search the current working directory\nfirst).\n\nA flaw was found in the way Ghostscript interpreted PostScript Type 1 and\nPostScript Type 2 font files. An attacker could create a specially-crafted\nPostScript Type 1 or PostScript Type 2 font file that, when interpreted,\ncould cause Ghostscript to crash or, potentially, execute arbitrary code.\n(CVE-2010-4054)\n\nUsers of Ghostscript are advised to upgrade to these updated packages,\nwhich contain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-02-02"
+      },
+      "Updated": {
+        "Date": "2012-02-02"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2009-3743",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-190",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2009-3743",
+          "Public": "20100824"
+        },
+        {
+          "CveID": "CVE-2010-2055",
+          "Cvss2": "4.4/AV:L/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-2055",
+          "Public": "20100526"
+        },
+        {
+          "CveID": "CVE-2010-4054",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-20",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4054",
+          "Public": "20100104"
+        },
+        {
+          "CveID": "CVE-2010-4820",
+          "Cvss2": "4.4/AV:L/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4820",
+          "Public": "20100526"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/599564",
+          "ID": "599564"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/627902",
+          "ID": "627902"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/646086",
+          "ID": "646086"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/771853",
+          "ID": "771853"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.5",
+        "cpe:/o:redhat:rhel_eus:6.5::computenode",
+        "cpe:/o:redhat:rhel_eus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ghostscript is earlier than 0:8.70-11.el6_2.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120095001"
+                  },
+                  {
+                    "Comment": "ghostscript is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120095002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ghostscript-devel is earlier than 0:8.70-11.el6_2.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120095003"
+                  },
+                  {
+                    "Comment": "ghostscript-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120095004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ghostscript-doc is earlier than 0:8.70-11.el6_2.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120095005"
+                  },
+                  {
+                    "Comment": "ghostscript-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120095006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ghostscript-gtk is earlier than 0:8.70-11.el6_2.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120095007"
+                  },
+                  {
+                    "Comment": "ghostscript-gtk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120095008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

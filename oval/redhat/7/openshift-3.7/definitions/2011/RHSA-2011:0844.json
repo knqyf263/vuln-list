@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110844",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2011:0844: apr security update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0844",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0844"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1928",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1928"
+      }
+    ],
+    "Description": "The Apache Portable Runtime (APR) is a portability library used by the\nApache HTTP Server and other projects. It provides a free library of C data\nstructures and routines.\n\nThe fix for CVE-2011-0419 (released via RHSA-2011:0507) introduced an\ninfinite loop flaw in the apr_fnmatch() function when the APR_FNM_PATHNAME\nmatching flag was used. A remote attacker could possibly use this flaw to\ncause a denial of service on an application using the apr_fnmatch()\nfunction. (CVE-2011-1928)\n\nNote: This problem affected httpd configurations using the \"Location\"\ndirective with wildcard URLs. The denial of service could have been\ntriggered during normal operation; it did not specifically require a\nmalicious HTTP request.\n\nThis update also addresses additional problems introduced by the rewrite of\nthe apr_fnmatch() function, which was necessary to address the\nCVE-2011-0419 flaw.\n\nAll apr users should upgrade to these updated packages, which contain a\nbackported patch to correct this issue. Applications using the apr library,\nsuch as httpd, must be restarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-05-31"
+      },
+      "Updated": {
+        "Date": "2011-05-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1928",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1928",
+          "Public": "20110519"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/706203",
+          "ID": "706203"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.5",
+        "cpe:/o:redhat:rhel_eus:6.5::computenode",
+        "cpe:/o:redhat:rhel_eus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apr is earlier than 0:1.3.9-3.el6_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110844001"
+                  },
+                  {
+                    "Comment": "apr is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110507002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apr-devel is earlier than 0:1.3.9-3.el6_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110844003"
+                  },
+                  {
+                    "Comment": "apr-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110507004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

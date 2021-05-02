@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140175",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:0175: piranha security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0175",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0175"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-6492",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-6492"
+      }
+    ],
+    "Description": "Piranha provides high-availability and load-balancing services for Red Hat\nEnterprise Linux. The piranha packages contain various tools to administer\nand configure the Linux Virtual Server (LVS), as well as the heartbeat and\nfailover components. LVS is a dynamically-adjusted kernel routing mechanism\nthat provides load balancing, primarily for Web and FTP servers.\n\nIt was discovered that the Piranha Configuration Tool did not properly\nrestrict access to its web pages. A remote attacker able to connect to the\nPiranha Configuration Tool web server port could use this flaw to read or\nmodify the LVS configuration without providing valid administrative\ncredentials. (CVE-2013-6492)\n\nThis update also fixes the following bug:\n\n* When the lvsd service attempted to start, the sem_timedwait() function\nreceived the interrupted function call (EINTR) error and exited, causing\nthe lvsd service to fail to start. With this update, EINTR errors are\ncorrectly ignored during the start-up of the lvsd service. (BZ#1055709)\n\nAll piranha users are advised to upgrade to this updated package, which\ncontains backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-02-13"
+      },
+      "Updated": {
+        "Date": "2014-02-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-6492",
+          "Cvss2": "5.8/AV:A/AC:L/Au:N/C:P/I:P/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-6492",
+          "Public": "20131211"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1043040",
+          "ID": "1043040"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.5",
+        "cpe:/o:redhat:rhel_eus:6.5::computenode",
+        "cpe:/o:redhat:rhel_eus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "piranha is earlier than 0:0.8.6-4.el6_5.2",
+            "TestRef": "oval:com.redhat.rhsa:tst:20140175001"
+          },
+          {
+            "Comment": "piranha is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20140175002"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120143",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:0143: xulrunner security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0143",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0143"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3026",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3026"
+      }
+    ],
+    "Description": "XULRunner provides the XUL Runtime environment for applications using the\nGecko layout engine.\n\nA heap-based buffer overflow flaw was found in the way XULRunner handled\nPNG (Portable Network Graphics) images. A web page containing a malicious\nPNG image could cause an application linked against XULRunner (such as\nFirefox) to crash or, potentially, execute arbitrary code with the\nprivileges of the user running the application. (CVE-2011-3026)\n\nAll XULRunner users should upgrade to these updated packages, which correct\nthis issue. After installing the update, applications using XULRunner must\nbe restarted for the changes to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-02-16"
+      },
+      "Updated": {
+        "Date": "2012-02-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-3026",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3026",
+          "Public": "20120216"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/790737",
+          "ID": "790737"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.5",
+        "cpe:/o:redhat:rhel_eus:6.5::computenode",
+        "cpe:/o:redhat:rhel_eus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xulrunner is earlier than 0:1.9.2.26-2.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120143001"
+                  },
+                  {
+                    "Comment": "xulrunner is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100861002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xulrunner-devel is earlier than 0:1.9.2.26-2.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120143003"
+                  },
+                  {
+                    "Comment": "xulrunner-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100861004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

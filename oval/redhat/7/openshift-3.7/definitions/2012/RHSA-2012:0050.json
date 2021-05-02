@@ -1,0 +1,127 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120050",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2012:0050: qemu-kvm security, bug fix, and enhancement update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0050",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0050"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-0029",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-0029"
+      }
+    ],
+    "Description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for\nLinux on AMD64 and Intel 64 systems. qemu-kvm is the user-space component\nfor running virtual machines using KVM.\n\nA heap overflow flaw was found in the way QEMU-KVM emulated the e1000\nnetwork interface card. A privileged guest user in a virtual machine whose\nnetwork interface is configured to use the e1000 emulated driver could use\nthis flaw to crash the host or, possibly, escalate their privileges on the\nhost. (CVE-2012-0029)\n\nRed Hat would like to thank Nicolae Mogoreanu for reporting this issue.\n\nThis update also fixes the following bug:\n\n* qemu-kvm has a \"scsi\" option, to be used, for example, with the\n\"-device\" option: \"-device virtio-blk-pci,drive=[drive name],scsi=off\".\nPreviously, however, it only masked the feature bit, and did not reject\nSCSI commands if a malicious guest ignored the feature bit and issued a\nrequest. This update corrects this issue. The \"scsi=off\" option can be\nused to mitigate the virtualization aspect of CVE-2011-4127 before the\nRHSA-2011:1849 kernel update is installed on the host.\n\nThis mitigation is only required if you do not have the RHSA-2011:1849\nkernel update installed on the host and you are using raw format virtio\ndisks backed by a partition or LVM volume.\n\nIf you run guests by invoking /usr/libexec/qemu-kvm directly, use the\n\"-global virtio-blk-pci.scsi=off\" option to apply the mitigation. If you\nare using libvirt, as recommended by Red Hat, and have the RHBA-2012:0013\nlibvirt update installed, no manual action is required: guests will\nautomatically use \"scsi=off\". (BZ#767721)\n\nNote: After installing the RHSA-2011:1849 kernel update, SCSI requests\nissued by guests via the SG_IO IOCTL will not be passed to the underlying\nblock device when using raw format virtio disks backed by a partition or\nLVM volume, even if \"scsi=on\" is used.\n\nAs well, this update adds the following enhancement:\n\n* Prior to this update, qemu-kvm was not built with RELRO or PIE support.\nqemu-kvm is now built with full RELRO and PIE support as a security\nenhancement. (BZ#767906)\n\nAll users of qemu-kvm should upgrade to these updated packages, which\ncorrect these issues and add this enhancement. After installing this\nupdate, shut down all running virtual machines. Once all virtual machines\nhave shut down, start them again for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-01-23"
+      },
+      "Updated": {
+        "Date": "2012-01-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-0029",
+          "Cvss2": "7.4/AV:A/AC:M/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-228-\u003eCWE-119",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-0029",
+          "Public": "20120123"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/772075",
+          "ID": "772075"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.5",
+        "cpe:/o:redhat:rhel_eus:6.5::computenode",
+        "cpe:/o:redhat:rhel_eus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img is earlier than 2:0.12.1.2-2.209.el6_2.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120050001"
+                  },
+                  {
+                    "Comment": "qemu-img is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm is earlier than 2:0.12.1.2-2.209.el6_2.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120050003"
+                  },
+                  {
+                    "Comment": "qemu-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools is earlier than 2:0.12.1.2-2.209.el6_2.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120050005"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
