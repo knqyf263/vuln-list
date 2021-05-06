@@ -1,0 +1,555 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111423",
+  "Version": "658",
+  "Metadata": {
+    "Title": "RHSA-2011:1423: php53 and php security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1423",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1423"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0708",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0708"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1148",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1148"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1466",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1466"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1468",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1468"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1469",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1469"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1471",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1471"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1938",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1938"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2202",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2202"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2483",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2483"
+      }
+    ],
+    "Description": "PHP is an HTML-embedded scripting language commonly used with the Apache\nHTTP Server.\n\nA signedness issue was found in the way the PHP crypt() function handled\n8-bit characters in passwords when using Blowfish hashing. Up to three\ncharacters immediately preceding a non-ASCII character (one with the high\nbit set) had no effect on the hash result, thus shortening the effective\npassword length. This made brute-force guessing more efficient as several\ndifferent passwords were hashed to the same value. (CVE-2011-2483)\n\nNote: Due to the CVE-2011-2483 fix, after installing this update some users\nmay not be able to log in to PHP applications that hash passwords with\nBlowfish using the PHP crypt() function. Refer to the upstream\n\"CRYPT_BLOWFISH security fix details\" document, linked to in the\nReferences, for details.\n\nAn insufficient input validation flaw, leading to a buffer over-read, was\nfound in the PHP exif extension. A specially-crafted image file could cause\nthe PHP interpreter to crash when a PHP script tries to extract\nExchangeable image file format (Exif) metadata from the image file.\n(CVE-2011-0708)\n\nAn integer overflow flaw was found in the PHP calendar extension. A remote\nattacker able to make a PHP script call SdnToJulian() with a large value\ncould cause the PHP interpreter to crash. (CVE-2011-1466)\n\nMultiple memory leak flaws were found in the PHP OpenSSL extension. A\nremote attacker able to make a PHP script use openssl_encrypt() or\nopenssl_decrypt() repeatedly could cause the PHP interpreter to use an\nexcessive amount of memory. (CVE-2011-1468)\n\nA use-after-free flaw was found in the PHP substr_replace() function. If a\nPHP script used the same variable as multiple function arguments, a remote\nattacker could possibly use this to crash the PHP interpreter or, possibly,\nexecute arbitrary code. (CVE-2011-1148)\n\nA bug in the PHP Streams component caused the PHP interpreter to crash if\nan FTP wrapper connection was made through an HTTP proxy. A remote attacker\ncould possibly trigger this issue if a PHP script accepted an untrusted URL\nto connect to. (CVE-2011-1469)\n\nAn integer signedness issue was found in the PHP zip extension. An attacker\ncould use a specially-crafted ZIP archive to cause the PHP interpreter to\nuse an excessive amount of CPU time until the script execution time limit\nis reached. (CVE-2011-1471)\n\nA stack-based buffer overflow flaw was found in the way the PHP socket\nextension handled long AF_UNIX socket addresses. An attacker able to make a\nPHP script connect to a long AF_UNIX socket address could use this flaw to\ncrash the PHP interpreter. (CVE-2011-1938)\n\nAn off-by-one flaw was found in PHP. If an attacker uploaded a file with a\nspecially-crafted file name it could cause a PHP script to attempt to write\na file to the root (/) directory. By default, PHP runs as the \"apache\"\nuser, preventing it from writing to the root directory. (CVE-2011-2202)\n\nAll php53 and php users should upgrade to these updated packages, which\ncontain backported patches to resolve these issues. After installing the\nupdated packages, the httpd daemon must be restarted for the update to take\neffect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-11-02"
+      },
+      "Updated": {
+        "Date": "2011-11-02"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-0708",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0708",
+          "Public": "20110214"
+        },
+        {
+          "CveID": "CVE-2011-1148",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1148",
+          "Public": "20110313"
+        },
+        {
+          "CveID": "CVE-2011-1466",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1466",
+          "Public": "20101219"
+        },
+        {
+          "CveID": "CVE-2011-1468",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-401",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1468",
+          "Public": "20110221"
+        },
+        {
+          "CveID": "CVE-2011-1469",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1469",
+          "Public": "20110224"
+        },
+        {
+          "CveID": "CVE-2011-1471",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1471",
+          "Public": "20090727"
+        },
+        {
+          "CveID": "CVE-2011-1938",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-121",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1938",
+          "Public": "20110523"
+        },
+        {
+          "CveID": "CVE-2011-2202",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:P/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2202",
+          "Public": "20110612"
+        },
+        {
+          "CveID": "CVE-2011-2483",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2483",
+          "Public": "20110620"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/680972",
+          "ID": "680972"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/688958",
+          "ID": "688958"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/689386",
+          "ID": "689386"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/690899",
+          "ID": "690899"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/690905",
+          "ID": "690905"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/690915",
+          "ID": "690915"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/709067",
+          "ID": "709067"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/713194",
+          "ID": "713194"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/715025",
+          "ID": "715025"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423001"
+                  },
+                  {
+                    "Comment": "php is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-bcmath is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423003"
+                  },
+                  {
+                    "Comment": "php-bcmath is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-cli is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423005"
+                  },
+                  {
+                    "Comment": "php-cli is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-common is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423007"
+                  },
+                  {
+                    "Comment": "php-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-dba is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423009"
+                  },
+                  {
+                    "Comment": "php-dba is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-devel is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423011"
+                  },
+                  {
+                    "Comment": "php-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-embedded is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423013"
+                  },
+                  {
+                    "Comment": "php-embedded is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-enchant is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423015"
+                  },
+                  {
+                    "Comment": "php-enchant is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-gd is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423017"
+                  },
+                  {
+                    "Comment": "php-gd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-imap is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423019"
+                  },
+                  {
+                    "Comment": "php-imap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-intl is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423021"
+                  },
+                  {
+                    "Comment": "php-intl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-ldap is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423023"
+                  },
+                  {
+                    "Comment": "php-ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-mbstring is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423025"
+                  },
+                  {
+                    "Comment": "php-mbstring is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-mysql is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423027"
+                  },
+                  {
+                    "Comment": "php-mysql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-odbc is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423029"
+                  },
+                  {
+                    "Comment": "php-odbc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-pdo is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423031"
+                  },
+                  {
+                    "Comment": "php-pdo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-pgsql is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423033"
+                  },
+                  {
+                    "Comment": "php-pgsql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-process is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423035"
+                  },
+                  {
+                    "Comment": "php-process is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-pspell is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423037"
+                  },
+                  {
+                    "Comment": "php-pspell is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-recode is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423039"
+                  },
+                  {
+                    "Comment": "php-recode is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-snmp is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423041"
+                  },
+                  {
+                    "Comment": "php-snmp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-soap is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423043"
+                  },
+                  {
+                    "Comment": "php-soap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-tidy is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423045"
+                  },
+                  {
+                    "Comment": "php-tidy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-xml is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423047"
+                  },
+                  {
+                    "Comment": "php-xml is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-xmlrpc is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423049"
+                  },
+                  {
+                    "Comment": "php-xmlrpc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "php-zts is earlier than 0:5.3.3-3.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111423051"
+                  },
+                  {
+                    "Comment": "php-zts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110195052"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

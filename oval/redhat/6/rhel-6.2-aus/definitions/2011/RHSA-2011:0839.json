@@ -1,0 +1,203 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110839",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2011:0839: gimp security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0839",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0839"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4540",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4540"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4541",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4541"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4542",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4542"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4543",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4543"
+      }
+    ],
+    "Description": "The GIMP (GNU Image Manipulation Program) is an image composition and\nediting program.\n\nA heap-based buffer overflow flaw was found in the GIMP's Paint Shop Pro\n(PSP) image file plug-in. An attacker could create a specially-crafted PSP\nimage file that, when opened, could cause the PSP plug-in to crash or,\npotentially, execute arbitrary code with the privileges of the user running\nthe GIMP. (CVE-2010-4543)\n\nA stack-based buffer overflow flaw was found in the GIMP's Lightning,\nSphere Designer, and Gfig image filters. An attacker could create a\nspecially-crafted Lightning, Sphere Designer, or Gfig filter configuration\nfile that, when opened, could cause the relevant plug-in to crash or,\npotentially, execute arbitrary code with the privileges of the user running\nthe GIMP. (CVE-2010-4540, CVE-2010-4541, CVE-2010-4542)\n\nUsers of the GIMP are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. The GIMP must be\nrestarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-05-31"
+      },
+      "Updated": {
+        "Date": "2011-05-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2010-4540",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-121",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4540",
+          "Public": "20101231"
+        },
+        {
+          "CveID": "CVE-2010-4541",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-121",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4541",
+          "Public": "20101231"
+        },
+        {
+          "CveID": "CVE-2010-4542",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-121",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4542",
+          "Public": "20101231"
+        },
+        {
+          "CveID": "CVE-2010-4543",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4543",
+          "Public": "20101231"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/666793",
+          "ID": "666793"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/703403",
+          "ID": "703403"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/703405",
+          "ID": "703405"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/703407",
+          "ID": "703407"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gimp is earlier than 2:2.6.9-4.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839001"
+                  },
+                  {
+                    "Comment": "gimp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gimp-devel is earlier than 2:2.6.9-4.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839003"
+                  },
+                  {
+                    "Comment": "gimp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gimp-devel-tools is earlier than 2:2.6.9-4.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839005"
+                  },
+                  {
+                    "Comment": "gimp-devel-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gimp-help-browser is earlier than 2:2.6.9-4.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839007"
+                  },
+                  {
+                    "Comment": "gimp-help-browser is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gimp-libs is earlier than 2:2.6.9-4.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839009"
+                  },
+                  {
+                    "Comment": "gimp-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110839010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

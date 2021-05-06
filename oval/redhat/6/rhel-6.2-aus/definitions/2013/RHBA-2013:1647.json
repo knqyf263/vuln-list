@@ -1,0 +1,238 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20131647",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHBA-2013:1647: mysql bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2013:1647",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2013:1647"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1861",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1861"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-3802",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-3802"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-3804",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-3804"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-3839",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-3839"
+      }
+    ],
+    "Description": "MySQL is a multi-user, multi-threaded SQL database server. It consists of the MySQL server daemon (mysqld) and many client programs and libraries.\n\nThis update fixes the following bugs:\n\n* Prior to this update, the mysqld daemon worked with uninitialized memory when accessing non-nullable GEOMETRY types. Cosequenutly, mysqld could terminate unexpectedly when the mysqldump utility was running. With this update, mysqld initializes memory properly and thus no longer crashes in this scenario (BZ#842052)\n\n* Previously, the mysqldump utility expected log tables to be created on the MySQL 5.0.x server, from which it retrieved data. Consequently, mysqldump could not dump the MySQL system table. With this update, mysqldump no longer expects log tables to be created, and it is now able to dump the system table in the described scenario as expected. (BZ#877557) \n\n* Prior to this update, the mysqld init script did not correctly verify the status of the mysqld daemon. Consequently, the script could return an error message even when the daemon had successfully started. The mysqld init script has been fixed, and it now checks the daemon status properly. (BZ#884651) \n\n* Previously, the mysql-server sub-packages did not contain the logrotate script. Consequently, the log rotation had to be configured manually. With this update, the logrotate script has been provided by the mysql-server sub-packages, and users can use the script to log into the mysqld.log file by uncommenting appropriate lines in the script. (BZ#904061)\n\nUsers of mysql are advised to upgrade to these updated packages, which fix these bugs. After installing this update, the MySQL server daemon (mysqld) will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-11-20"
+      },
+      "Updated": {
+        "Date": "2013-11-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1861",
+          "Cvss2": "4.0/AV:N/AC:L/Au:S/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1861",
+          "Public": "20130305"
+        },
+        {
+          "CveID": "CVE-2013-3802",
+          "Cvss2": "3.5/AV:N/AC:M/Au:S/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-3802",
+          "Public": "20130717"
+        },
+        {
+          "CveID": "CVE-2013-3804",
+          "Cvss2": "3.5/AV:N/AC:M/Au:S/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-3804",
+          "Public": "20130717"
+        },
+        {
+          "CveID": "CVE-2013-3839",
+          "Cvss2": "3.5/AV:N/AC:M/Au:S/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-3839",
+          "Public": "20131015"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/919247",
+          "ID": "919247"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/985683",
+          "ID": "985683"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/985687",
+          "ID": "985687"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1019978",
+          "ID": "1019978"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mysql is earlier than 0:5.1.71-1.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647001"
+                  },
+                  {
+                    "Comment": "mysql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mysql-bench is earlier than 0:5.1.71-1.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647003"
+                  },
+                  {
+                    "Comment": "mysql-bench is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mysql-devel is earlier than 0:5.1.71-1.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647005"
+                  },
+                  {
+                    "Comment": "mysql-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mysql-embedded is earlier than 0:5.1.71-1.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647007"
+                  },
+                  {
+                    "Comment": "mysql-embedded is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mysql-embedded-devel is earlier than 0:5.1.71-1.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647009"
+                  },
+                  {
+                    "Comment": "mysql-embedded-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mysql-libs is earlier than 0:5.1.71-1.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647011"
+                  },
+                  {
+                    "Comment": "mysql-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mysql-server is earlier than 0:5.1.71-1.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647013"
+                  },
+                  {
+                    "Comment": "mysql-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mysql-test is earlier than 0:5.1.71-1.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647015"
+                  },
+                  {
+                    "Comment": "mysql-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131647016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

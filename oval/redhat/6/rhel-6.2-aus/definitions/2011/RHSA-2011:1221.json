@@ -1,0 +1,321 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111221",
+  "Version": "646",
+  "Metadata": {
+    "Title": "RHSA-2011:1221: samba and cifs-utils security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1221",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1221"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1678",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1678"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2522",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2522"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2694",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2694"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2724",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2724"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3585",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3585"
+      }
+    ],
+    "Description": "Samba is a suite of programs used by machines to share files, printers, and\nother information. The cifs-utils package contains utilities for mounting\nand managing CIFS (Common Internet File System) shares.\n\nA cross-site scripting (XSS) flaw was found in the password change page of\nthe Samba Web Administration Tool (SWAT). If a remote attacker could trick\na user, who was logged into the SWAT interface, into visiting a\nspecially-crafted URL, it would lead to arbitrary web script execution in\nthe context of the user's SWAT session. (CVE-2011-2694)\n\nIt was found that SWAT web pages did not protect against Cross-Site\nRequest Forgery (CSRF) attacks. If a remote attacker could trick a user,\nwho was logged into the SWAT interface, into visiting a specially-crafted\nURL, the attacker could perform Samba configuration changes with the\nprivileges of the logged in user. (CVE-2011-2522)\n\nIt was found that the fix for CVE-2010-0547, provided in the cifs-utils\npackage included in the GA release of Red Hat Enterprise Linux 6, was\nincomplete. The mount.cifs tool did not properly handle share or directory\nnames containing a newline character, allowing a local attacker to corrupt\nthe mtab (mounted file systems table) file via a specially-crafted CIFS\nshare mount request, if mount.cifs had the setuid bit set. (CVE-2011-2724)\n\nIt was found that the mount.cifs tool did not handle certain errors\ncorrectly when updating the mtab file. If mount.cifs had the setuid bit\nset, a local attacker could corrupt the mtab file by setting a small file\nsize limit before running mount.cifs. (CVE-2011-1678)\n\nNote: mount.cifs from the cifs-utils package distributed by Red Hat does\nnot have the setuid bit set. We recommend that administrators do not\nmanually set the setuid bit for mount.cifs.\n\nRed Hat would like to thank the Samba project for reporting CVE-2011-2694\nand CVE-2011-2522, and Dan Rosenberg for reporting CVE-2011-1678. Upstream\nacknowledges Nobuhiro Tsuji of NTT DATA Security Corporation as the\noriginal reporter of CVE-2011-2694, and Yoshihiro Ishikawa of LAC Co., Ltd.\nas the original reporter of CVE-2011-2522.\n\nThis update also fixes the following bug:\n\n* If plain text passwords were used (\"encrypt passwords = no\" in\n\"/etc/samba/smb.conf\"), Samba clients running the Windows XP or Windows\nServer 2003 operating system may not have been able to access Samba shares\nafter installing the Microsoft Security Bulletin MS11-043. This update\ncorrects this issue, allowing such clients to use plain text passwords to\naccess Samba shares. (BZ#728517)\n\nUsers of samba and cifs-utils are advised to upgrade to these updated\npackages, which contain backported patches to resolve these issues. After\ninstalling this update, the smb service will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-08-29"
+      },
+      "Updated": {
+        "Date": "2011-08-29"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1678",
+          "Cvss2": "3.3/AV:L/AC:M/Au:N/C:N/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1678",
+          "Public": "20110303"
+        },
+        {
+          "CveID": "CVE-2011-2522",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-352",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2522",
+          "Public": "20110726"
+        },
+        {
+          "CveID": "CVE-2011-2694",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2694",
+          "Public": "20110726"
+        },
+        {
+          "CveID": "CVE-2011-2724",
+          "Cvss2": "2.6/AV:L/AC:H/Au:N/C:N/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2724",
+          "Public": "20110729"
+        },
+        {
+          "CveID": "CVE-2011-3585",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3585",
+          "Public": "20100225"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/695925",
+          "ID": "695925"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/721348",
+          "ID": "721348"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/722537",
+          "ID": "722537"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/726691",
+          "ID": "726691"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/742907",
+          "ID": "742907"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cifs-utils is earlier than 0:4.8.1-2.el6_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221001"
+                  },
+                  {
+                    "Comment": "cifs-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsmbclient is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221003"
+                  },
+                  {
+                    "Comment": "libsmbclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsmbclient-devel is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221005"
+                  },
+                  {
+                    "Comment": "libsmbclient-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221007"
+                  },
+                  {
+                    "Comment": "samba is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-client is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221009"
+                  },
+                  {
+                    "Comment": "samba-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-common is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221011"
+                  },
+                  {
+                    "Comment": "samba-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-doc is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221013"
+                  },
+                  {
+                    "Comment": "samba-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-domainjoin-gui is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221015"
+                  },
+                  {
+                    "Comment": "samba-domainjoin-gui is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-swat is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221017"
+                  },
+                  {
+                    "Comment": "samba-swat is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-winbind is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221019"
+                  },
+                  {
+                    "Comment": "samba-winbind is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-winbind-clients is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221021"
+                  },
+                  {
+                    "Comment": "samba-winbind-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-winbind-devel is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221023"
+                  },
+                  {
+                    "Comment": "samba-winbind-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100860022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-winbind-krb5-locator is earlier than 0:3.5.6-86.el6_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221025"
+                  },
+                  {
+                    "Comment": "samba-winbind-krb5-locator is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111221026"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

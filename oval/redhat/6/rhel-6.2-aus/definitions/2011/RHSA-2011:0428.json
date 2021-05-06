@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110428",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2011:0428: dhcp security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0428",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0428"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0997",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0997"
+      }
+    ],
+    "Description": "The Dynamic Host Configuration Protocol (DHCP) is a protocol that allows\nindividual devices on an IP network to get their own network configuration\ninformation, including an IP address, a subnet mask, and a broadcast\naddress.\n\nIt was discovered that the DHCP client daemon, dhclient, did not\nsufficiently sanitize certain options provided in DHCP server replies, such\nas the client hostname. A malicious DHCP server could send such an option\nwith a specially-crafted value to a DHCP client. If this option's value was\nsaved on the client system, and then later insecurely evaluated by a\nprocess that assumes the option is trusted, it could lead to arbitrary code\nexecution with the privileges of that process. (CVE-2011-0997)\n\nRed Hat would like to thank Sebastian Krahmer of the SuSE Security Team for\nreporting this issue.\n\nAll dhclient users should upgrade to these updated packages, which contain\na backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-04-08"
+      },
+      "Updated": {
+        "Date": "2011-04-08"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-0997",
+          "Cvss2": "7.9/AV:A/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-78",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0997",
+          "Public": "20110405"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/689832",
+          "ID": "689832"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_mission_critical:6.2",
+        "cpe:/o:redhat:rhel_mission_critical:6.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhclient is earlier than 12:4.1.1-12.P1.el6_0.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110428001"
+                  },
+                  {
+                    "Comment": "dhclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100923002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp is earlier than 12:4.1.1-12.P1.el6_0.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110428003"
+                  },
+                  {
+                    "Comment": "dhcp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100923004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-devel is earlier than 12:4.1.1-12.P1.el6_0.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110428005"
+                  },
+                  {
+                    "Comment": "dhcp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100923006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

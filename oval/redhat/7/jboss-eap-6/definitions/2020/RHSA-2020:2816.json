@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202816",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2020:2816: RH-SSO 7.4.1 adapters for Red Hat JBoss Enterprise Application Platform 6 (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat JBoss Enterprise Application Platform 6.4 for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2816",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2816"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1714",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1714"
+      }
+    ],
+    "Description": "Packages: Red Hat Single Sign-On 7.4.1 adapters for Red Hat JBoss Enterprise Application Platform 6\n\nSecurity Fix(es):\n\n* keycloak: Lack of checks in ObjectInputStream leading to Remote Code Execution (CVE-2020-1714)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE page(s)\nlisted in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-07-02"
+      },
+      "Updated": {
+        "Date": "2020-07-02"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-1714",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-20",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1714",
+          "Public": "20200511"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1705975",
+          "ID": "1705975"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6",
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhea:tst:20151074152"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhea:tst:20151074151"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "keycloak-adapter-sso7_4-eap6 is earlier than 0:9.0.4-1.redhat_00001.1.ep6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202816001"
+                  },
+                  {
+                    "Comment": "keycloak-adapter-sso7_4-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202816002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "keycloak-saml-adapter-sso7_4-eap6 is earlier than 0:9.0.4-1.redhat_00001.1.ep6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202816003"
+                  },
+                  {
+                    "Comment": "keycloak-saml-adapter-sso7_4-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202816004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

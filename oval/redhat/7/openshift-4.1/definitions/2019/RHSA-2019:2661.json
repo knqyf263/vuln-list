@@ -70,7 +70,7 @@
       ],
       "AffectedCpeList": [
         "cpe:/a:redhat:openshift:4.1",
-        "cpe:/a:redhat:openshift:4.1::el7"
+        "cpe:/a:redhat:openshift:4.1::el8"
       ]
     }
   },
@@ -79,19 +79,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20192794016"
+        "TestRef": "oval:com.redhat.rhba:tst:20192794009"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 7 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20192794015"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20192794007"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20192794008"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -99,11 +106,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "atomic-enterprise-service-catalog is earlier than 1:4.1.14-201908290858.git.1.28cc9ff.el7",
+                    "Comment": "openshift-clients is earlier than 0:4.1.14-201908290858.git.0.3bd3467.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192661001"
                   },
                   {
-                    "Comment": "atomic-enterprise-service-catalog is signed with Red Hat redhatrelease2 key",
+                    "Comment": "openshift-clients is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhba:tst:20192794002"
                   }
                 ]
@@ -112,11 +119,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "atomic-enterprise-service-catalog-svcat is earlier than 1:4.1.14-201908290858.git.1.28cc9ff.el7",
+                    "Comment": "openshift-clients-redistributable is earlier than 0:4.1.14-201908290858.git.0.3bd3467.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192661003"
                   },
                   {
-                    "Comment": "atomic-enterprise-service-catalog-svcat is signed with Red Hat redhatrelease2 key",
+                    "Comment": "openshift-clients-redistributable is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhba:tst:20192794004"
                   }
                 ]
@@ -125,38 +132,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "openshift-clients is earlier than 0:4.1.14-201908290858.git.0.3bd3467.el7",
+                    "Comment": "openshift-hyperkube is earlier than 0:4.1.14-201908290858.git.0.3bd3467.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192661005"
                   },
                   {
-                    "Comment": "openshift-clients is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhba:tst:20192794008"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "openshift-clients-redistributable is earlier than 0:4.1.14-201908290858.git.0.3bd3467.el7",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192661007"
-                  },
-                  {
-                    "Comment": "openshift-clients-redistributable is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhba:tst:20192794010"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "openshift-hyperkube is earlier than 0:4.1.14-201908290858.git.0.3bd3467.el7",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192661009"
-                  },
-                  {
                     "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhba:tst:20192794012"
+                    "TestRef": "oval:com.redhat.rhba:tst:20192794006"
                   }
                 ]
               }

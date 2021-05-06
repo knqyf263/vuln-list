@@ -1,0 +1,418 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20203303",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:3303: Red Hat JBoss Web Server 3.1 Service Pack 10 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat JBoss Web Server 3 for RHEL 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:3303",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:3303"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-13935",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-13935"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1935",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1935"
+      }
+    ],
+    "Description": "Red Hat JBoss Web Server is a fully integrated and certified set of components for hosting Java web applications. It is comprised of the Apache HTTP Server, the Apache Tomcat Servlet container, Apache Tomcat Connector (mod_jk), JBoss HTTP Connector (mod_cluster), Hibernate, and the Tomcat Native library.\n\nThis release of Red Hat JBoss Web Server 3.1 Service Pack 10 serves as a replacement for Red Hat JBoss Web Server 3.1, and includes bug fixes, which are documented in the Release Notes document linked to in the References.\n\nSecurity Fix(es):\n\n* tomcat: multiple requests with invalid payload length in a WebSocket frame could lead to DoS (CVE-2020-13935)\n* tomcat: Mishandling of Transfer-Encoding header allows for HTTP request smuggling (CVE-2020-1935)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-08-04"
+      },
+      "Updated": {
+        "Date": "2020-08-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-13935",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-13935",
+          "Public": "20200715"
+        },
+        {
+          "CveID": "CVE-2020-1935",
+          "Cvss3": "4.3/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-444",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1935",
+          "Public": "20200224"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1806835",
+          "ID": "1806835"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1857024",
+          "ID": "1857024"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:jboss_enterprise_web_server:3.0",
+        "cpe:/a:redhat:jboss_enterprise_web_server:3.0::el6",
+        "cpe:/a:redhat:jboss_enterprise_web_server:3.1",
+        "cpe:/a:redhat:jboss_enterprise_web_server:3.1::el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20153185018"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20153185017"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7 is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303001"
+                  },
+                  {
+                    "Comment": "tomcat7 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945134"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-admin-webapps is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303003"
+                  },
+                  {
+                    "Comment": "tomcat7-admin-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945136"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-docs-webapp is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303005"
+                  },
+                  {
+                    "Comment": "tomcat7-docs-webapp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945138"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-el-2.2-api is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303007"
+                  },
+                  {
+                    "Comment": "tomcat7-el-2.2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945140"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-javadoc is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303009"
+                  },
+                  {
+                    "Comment": "tomcat7-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945142"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-jsp-2.2-api is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303011"
+                  },
+                  {
+                    "Comment": "tomcat7-jsp-2.2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945144"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-jsvc is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303013"
+                  },
+                  {
+                    "Comment": "tomcat7-jsvc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170455038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-lib is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303015"
+                  },
+                  {
+                    "Comment": "tomcat7-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945146"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-log4j is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303017"
+                  },
+                  {
+                    "Comment": "tomcat7-log4j is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945148"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-selinux is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303019"
+                  },
+                  {
+                    "Comment": "tomcat7-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170455044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-servlet-3.0-api is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303021"
+                  },
+                  {
+                    "Comment": "tomcat7-servlet-3.0-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945150"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat7-webapps is earlier than 0:7.0.70-41.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303023"
+                  },
+                  {
+                    "Comment": "tomcat7-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945152"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8 is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303025"
+                  },
+                  {
+                    "Comment": "tomcat8 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945114"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-admin-webapps is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303027"
+                  },
+                  {
+                    "Comment": "tomcat8-admin-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945116"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-docs-webapp is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303029"
+                  },
+                  {
+                    "Comment": "tomcat8-docs-webapp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945118"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-el-2.2-api is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303031"
+                  },
+                  {
+                    "Comment": "tomcat8-el-2.2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945120"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-javadoc is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303033"
+                  },
+                  {
+                    "Comment": "tomcat8-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945122"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-jsp-2.3-api is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303035"
+                  },
+                  {
+                    "Comment": "tomcat8-jsp-2.3-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945124"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-jsvc is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303037"
+                  },
+                  {
+                    "Comment": "tomcat8-jsvc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170455062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-lib is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303039"
+                  },
+                  {
+                    "Comment": "tomcat8-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945126"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-log4j is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303041"
+                  },
+                  {
+                    "Comment": "tomcat8-log4j is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945128"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-selinux is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303043"
+                  },
+                  {
+                    "Comment": "tomcat8-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170455068"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-servlet-3.1-api is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303045"
+                  },
+                  {
+                    "Comment": "tomcat8-servlet-3.1-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945130"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat8-webapps is earlier than 0:8.0.36-45.ep7.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203303047"
+                  },
+                  {
+                    "Comment": "tomcat8-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20150945132"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
