@@ -18,6 +18,7 @@ Collect vulnerability information and save it in parsable format automatically
 | cvrf/suse   | OpenSUSE/SLES    | SUSE Security CVRF              | http://ftp.suse.com/pub/projects/security/cvrf/                                                                       |
 | photon/     | Photon           | Photon Security Advisory        | https://github.com/vmware/photon/wiki/Security-Advisories<br>https://packages.vmware.com/photon/photon_cve_metadata/  |
 | ghsa/       | -                | GitHub Advisory Database        | https://github.com/advisories/                                                                                        |
+| glad/       | -                | GitLab Advisory Database        | https://gitlab.com/gitlab-org/advisories-community                                                                    |
 
 ## Update frequency
 daily
