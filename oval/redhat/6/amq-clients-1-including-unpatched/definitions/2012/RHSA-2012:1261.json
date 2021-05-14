@@ -1,0 +1,152 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20121261",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:1261: dbus security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:1261",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:1261"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-3524",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-3524"
+      }
+    ],
+    "Description": "D-Bus is a system for sending messages between applications. It is used for\nthe system-wide message bus service and as a per-user-login-session\nmessaging facility.\n\nIt was discovered that the D-Bus library honored environment settings even\nwhen running with elevated privileges. A local attacker could possibly use\nthis flaw to escalate their privileges, by setting specific environment\nvariables before running a setuid or setgid application linked against the\nD-Bus library (libdbus). (CVE-2012-3524)\n\nNote: With this update, libdbus ignores environment variables when used by\nsetuid or setgid applications. The environment is not ignored when an\napplication gains privileges via file system capabilities; however, no\napplication shipped in Red Hat Enterprise Linux 6 gains privileges via file\nsystem capabilities.\n\nRed Hat would like to thank Sebastian Krahmer of the SUSE Security Team for\nreporting this issue.\n\nAll users are advised to upgrade to these updated packages, which contain a\nbackported patch to correct this issue. For the update to take effect, all\nrunning instances of dbus-daemon and all running applications using the\nlibdbus library must be restarted, or the system rebooted.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-09-13"
+      },
+      "Updated": {
+        "Date": "2012-09-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-3524",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-426",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-3524",
+          "Public": "20120912"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/847402",
+          "ID": "847402"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.5",
+        "cpe:/o:redhat:rhel_tus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dbus is earlier than 1:1.2.24-7.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121261001"
+                  },
+                  {
+                    "Comment": "dbus is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110376002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dbus-devel is earlier than 1:1.2.24-7.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121261003"
+                  },
+                  {
+                    "Comment": "dbus-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110376004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dbus-doc is earlier than 1:1.2.24-7.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121261005"
+                  },
+                  {
+                    "Comment": "dbus-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110376006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dbus-libs is earlier than 1:1.2.24-7.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121261007"
+                  },
+                  {
+                    "Comment": "dbus-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110376008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dbus-x11 is earlier than 1:1.2.24-7.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121261009"
+                  },
+                  {
+                    "Comment": "dbus-x11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110376010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

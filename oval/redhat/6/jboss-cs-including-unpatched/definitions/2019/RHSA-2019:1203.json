@@ -1,0 +1,411 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20191203",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2019:1203: vdsm security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization 4 for Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:1203",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:1203"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12126",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12126"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12127",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12127"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12130",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12130"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11091",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11091"
+      }
+    ],
+    "Description": "The VDSM service is required by a Virtualization Manager to manage the Linux hosts. VDSM manages and monitors the host's storage, memory and networks as well as virtual machine creation, other host administration tasks, statistics gathering, and log collection.\n\nSecurity Fix(es):\n\n* A flaw was found in the implementation of the \"fill buffer\", a mechanism used by modern CPUs when a cache-miss is made on L1 CPU cache. If an attacker can generate a load operation that would create a page fault, the execution will continue speculatively with incorrect data from the fill buffer while the data is fetched from higher level caches. This response time can be measured to infer data in the fill buffer. (CVE-2018-12130)\n\n* Modern Intel microprocessors implement hardware-level micro-optimizations to improve the performance of writing data back to CPU caches. The write operation is split into STA (STore Address) and STD (STore Data) sub-operations. These sub-operations allow the processor to hand-off address generation logic into these sub-operations for optimized writes. Both of these sub-operations write to a shared distributed processor structure called the 'processor store buffer'. As a result, an unprivileged attacker could use this flaw to read private data resident within the CPU's processor store buffer. (CVE-2018-12126)\n\n* Microprocessors use a ‘load port’ subcomponent to perform load operations from memory or IO. During a load operation, the load port receives data from the memory or IO subsystem and then provides the data to the CPU registers and operations in the CPU’s pipelines. Stale load operations results are stored in the 'load port' table until overwritten by newer operations. Certain load-port operations triggered by an attacker can be used to reveal data about previous stale requests leaking data back to the attacker via a timing side-channel. (CVE-2018-12127)\n\n* Uncacheable memory on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access. (CVE-2019-11091)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-05-14"
+      },
+      "Updated": {
+        "Date": "2019-05-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-12126",
+          "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12126",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2018-12127",
+          "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12127",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2018-12130",
+          "Cvss3": "6.2/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-203-\u003eCWE-385-\u003eCWE-226",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12130",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2019-11091",
+          "Cvss3": "3.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11091",
+          "Public": "20190514:1700"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1646781",
+          "ID": "1646781"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1646784",
+          "ID": "1646784"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1667782",
+          "ID": "1667782"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1705312",
+          "ID": "1705312"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20181000018004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20181000018003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203001"
+                  },
+                  {
+                    "Comment": "vdsm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-api is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203003"
+                  },
+                  {
+                    "Comment": "vdsm-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-client is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203005"
+                  },
+                  {
+                    "Comment": "vdsm-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-common is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203007"
+                  },
+                  {
+                    "Comment": "vdsm-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-gluster is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203009"
+                  },
+                  {
+                    "Comment": "vdsm-gluster is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-checkips is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203011"
+                  },
+                  {
+                    "Comment": "vdsm-hook-checkips is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-cpuflags is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203013"
+                  },
+                  {
+                    "Comment": "vdsm-hook-cpuflags is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-ethtool-options is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203015"
+                  },
+                  {
+                    "Comment": "vdsm-hook-ethtool-options is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-extra-ipv4-addrs is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203017"
+                  },
+                  {
+                    "Comment": "vdsm-hook-extra-ipv4-addrs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-fcoe is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203019"
+                  },
+                  {
+                    "Comment": "vdsm-hook-fcoe is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-localdisk is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203021"
+                  },
+                  {
+                    "Comment": "vdsm-hook-localdisk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-macspoof is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203023"
+                  },
+                  {
+                    "Comment": "vdsm-hook-macspoof is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-nestedvt is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203025"
+                  },
+                  {
+                    "Comment": "vdsm-hook-nestedvt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-openstacknet is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203027"
+                  },
+                  {
+                    "Comment": "vdsm-hook-openstacknet is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-vhostmd is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203029"
+                  },
+                  {
+                    "Comment": "vdsm-hook-vhostmd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-hook-vmfex-dev is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203031"
+                  },
+                  {
+                    "Comment": "vdsm-hook-vmfex-dev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-http is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203033"
+                  },
+                  {
+                    "Comment": "vdsm-http is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-jsonrpc is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203035"
+                  },
+                  {
+                    "Comment": "vdsm-jsonrpc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-network is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203037"
+                  },
+                  {
+                    "Comment": "vdsm-network is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-python is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203039"
+                  },
+                  {
+                    "Comment": "vdsm-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "vdsm-yajsonrpc is earlier than 0:4.30.13-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191203041"
+                  },
+                  {
+                    "Comment": "vdsm-yajsonrpc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20182624042"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170025",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2017:0025: puppet-tripleo security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 10.0 (Newton)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0025",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0025"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9599",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9599"
+      }
+    ],
+    "Description": "puppet-tripleo is a key component of the Red Hat OpenStack Platform director, which is a toolset for installing and managing a complete OpenStack environment.\n\nSecurity Fix(es):\n\n* An access-control flaw was discovered in puppet-tripleo's IPtables rules management, which allowed the creation of TCP/UDP rules with empty port values. Some API services in Red Hat OpenStack Platform director are not exposed to public networks, which meant their $public_ssl_port value was set to empty (for example, openstack-glance, which is deployed by default on both undercloud and overcloud). If SSL was enabled, a malicious user could use these open ports to gain access to unauthorized resources. (CVE-2016-9599)\n\nThis issue was discovered by Ben Nemec (Red Hat).",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-01-05"
+      },
+      "Updated": {
+        "Date": "2017-01-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-9599",
+          "Cvss3": "7.1/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N",
+          "Cwe": "CWE-284",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9599",
+          "Public": "20161222"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1409687",
+          "ID": "1409687"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:10",
+        "cpe:/a:redhat:openstack-optools:10::el7",
+        "cpe:/a:redhat:openstack:10",
+        "cpe:/a:redhat:openstack:10::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170025004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025003"
+          },
+          {
+            "Comment": "puppet-tripleo is earlier than 0:5.4.0-4.el7ost",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025001"
+          },
+          {
+            "Comment": "puppet-tripleo is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025002"
+          }
+        ]
+      }
+    ]
+  }
+}

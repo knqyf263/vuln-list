@@ -1,0 +1,323 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20171595",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2017:1595: openstack-nova and python-novaclient security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 10.0 (Newton)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:1595",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:1595"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7214",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7214"
+      }
+    ],
+    "Description": "OpenStack Compute (nova) launches and schedules large networks of virtual machines, creating a redundant and scalable cloud computing platform. Compute provides the software, control panels, and APIs required to orchestrate a cloud, including running virtual machine instances and controlling access through users and projects.\n\npython-novaclient is the python client for the OpenStack Nova API. The client's Python API (the novaclient module) and command-line script (nova) both implement 100% of the OpenStack Nova API.\n\nThe following packages have been upgraded to a later upstream version: python-novaclient (6.0.0), openstack-nova (14.0.6). (BZ#1421265, BZ#1431802, BZ#1429924, BZ#1454629, BZ#1454630)\n\nSecurity Fix(es):\n\n* An information exposure issue was discovered in OpenStack Compute's exception_wrapper.py. Legacy notification exception contexts appearing in ERROR-level logs could include sensitive information such as account passwords and authorization tokens. (CVE-2017-7214)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-06-28"
+      },
+      "Updated": {
+        "Date": "2017-06-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-7214",
+          "Cvss3": "6.1/CVSS:3.0/AV:A/AC:L/PR:L/UI:R/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7214",
+          "Public": "20170321"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1434844",
+          "ID": "1434844"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:10",
+        "cpe:/a:redhat:openstack-optools:10::el7",
+        "cpe:/a:redhat:openstack:10",
+        "cpe:/a:redhat:openstack:10::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170025004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-novaclient is earlier than 1:6.0.0-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595001"
+                  },
+                  {
+                    "Comment": "python-novaclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595003"
+                  },
+                  {
+                    "Comment": "openstack-nova is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-api is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595005"
+                  },
+                  {
+                    "Comment": "openstack-nova-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-cells is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595007"
+                  },
+                  {
+                    "Comment": "openstack-nova-cells is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-cert is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595009"
+                  },
+                  {
+                    "Comment": "openstack-nova-cert is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-common is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595011"
+                  },
+                  {
+                    "Comment": "openstack-nova-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-compute is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595013"
+                  },
+                  {
+                    "Comment": "openstack-nova-compute is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-conductor is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595015"
+                  },
+                  {
+                    "Comment": "openstack-nova-conductor is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-console is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595017"
+                  },
+                  {
+                    "Comment": "openstack-nova-console is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-migration is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595019"
+                  },
+                  {
+                    "Comment": "openstack-nova-migration is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-network is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595021"
+                  },
+                  {
+                    "Comment": "openstack-nova-network is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-novncproxy is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595023"
+                  },
+                  {
+                    "Comment": "openstack-nova-novncproxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-placement-api is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595025"
+                  },
+                  {
+                    "Comment": "openstack-nova-placement-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-scheduler is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595027"
+                  },
+                  {
+                    "Comment": "openstack-nova-scheduler is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-serialproxy is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595029"
+                  },
+                  {
+                    "Comment": "openstack-nova-serialproxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-spicehtml5proxy is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595031"
+                  },
+                  {
+                    "Comment": "openstack-nova-spicehtml5proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-nova is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595033"
+                  },
+                  {
+                    "Comment": "python-nova is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-nova-tests is earlier than 1:14.0.6-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171595035"
+                  },
+                  {
+                    "Comment": "python-nova-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242036"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

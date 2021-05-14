@@ -1,0 +1,91 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20173226",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2017:3226: redis security update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 10.0 (Newton)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:3226",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:3226"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2121",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2121"
+      }
+    ],
+    "Description": "Redis is an advanced key-value store. It is often referred to as a data-structure server since keys can contain strings, hashes, lists, sets, and sorted sets. For performance, Redis works with an in-memory data set. You can persist it either by dumping the data set to disk every once in a while, or by appending each command to a log.\n\nSecurity Fix(es):\n\n* A permissions flaw was found in redis, which sets weak permissions on certain files and directories that could potentially contain sensitive information. A local, unprivileged user could possibly use this flaw to access unauthorized system information. (CVE-2016-2121)\n\nThis issue was discovered by Honza Horak (Red Hat) and Remi Collet (Red Hat).",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-11-15"
+      },
+      "Updated": {
+        "Date": "2017-11-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-2121",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:P/I:N/A:N",
+          "Cvss3": "4.0/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-732",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2121",
+          "Public": "20161101"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1390588",
+          "ID": "1390588"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:10",
+        "cpe:/a:redhat:openstack-optools:10::el7",
+        "cpe:/a:redhat:openstack:10",
+        "cpe:/a:redhat:openstack:10::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170025004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025003"
+          },
+          {
+            "Comment": "redis is earlier than 0:3.0.6-2.el7ost",
+            "TestRef": "oval:com.redhat.rhsa:tst:20173226001"
+          },
+          {
+            "Comment": "redis is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20173226002"
+          }
+        ]
+      }
+    ]
+  }
+}
