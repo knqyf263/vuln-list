@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200964",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2020:0964: OpenShift Container Platform 3.11 jenkins-2-plugins security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 3.11"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0964",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0964"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-2167",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-2167"
+      }
+    ],
+    "Description": "Jenkins is a continuous integration server that monitors executions of repeated jobs, such as building a software project or jobs run by cron.\n\nSecurity Fix(es):\n\n* openshift/jenkins-plugin: Deserialization in snakeyaml YAML() objects allowed for remote code execution (CVE-2020-2167)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-03-26"
+      },
+      "Updated": {
+        "Date": "2020-03-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-2167",
+          "Cvss3": "8.8/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-502",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-2167",
+          "Public": "20200325:1400"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1816433",
+          "ID": "1816433"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:3.11",
+        "cpe:/a:redhat:openshift:3.11::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20130169006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20130169005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jenkins is earlier than 0:2.204.2.1585048146-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200964001"
+                  },
+                  {
+                    "Comment": "jenkins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202017521002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jenkins-2-plugins is earlier than 0:3.11.1585050035-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200964003"
+                  },
+                  {
+                    "Comment": "jenkins-2-plugins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181000411002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
