@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20172966",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2017:2966: ansible security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:2966",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:2966"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7550",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7550"
+      }
+    ],
+    "Description": "Ansible is a simple model-driven configuration management, multi-node deployment, and remote-task execution system. Ansible works over SSH and does not require any software or daemons to be installed on remote nodes. Extension modules can be written in any language and are transferred to managed machines automatically.\n\nThe ansible packages have been upgraded to upstream version 2.4.0, which provides a number of bug fixes and enhancements over the previous version. For more information, please see the Ansible 2.4 Porting Guide linked in the References section. (BZ#1492477)\n\nSecurity Fix(es):\n\n* A flaw was found in the way Ansible passed certain parameters to the jenkins_plugin module. A remote attacker could use this flaw to expose sensitive information from a remote host's logs. This flaw was fixed by not allowing passwords to be specified in the \"params\" argument, and noting this in the module documentation. (CVE-2017-7550)\n\nRed Hat would like to thank Stefano Mazzucco (Kirontech) for reporting this issue.\n\nBug Fix(es):\n\n* A bug in the SELinux module, which caused a corruption of the SELinux configuration file, has been fixed.\n\n* Previously, some of the functionality of Ansible (the json_query filter) was unavailable, because the dependency on the python2-jmespath package was missing. Now, the missing dependency has been added. (BZ#1484910)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-10-19"
+      },
+      "Updated": {
+        "Date": "2017-10-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-7550",
+          "Cvss3": "8.5/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7550",
+          "Public": "20170925"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1473645",
+          "ID": "1473645"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20141977004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20141977003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible is earlier than 0:2.4.0.0-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172966001"
+                  },
+                  {
+                    "Comment": "ansible is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172966002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible-doc is earlier than 0:2.4.0.0-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172966003"
+                  },
+                  {
+                    "Comment": "ansible-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172966004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

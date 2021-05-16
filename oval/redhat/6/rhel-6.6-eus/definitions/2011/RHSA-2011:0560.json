@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110560",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2011:0560: sssd security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0560",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0560"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4341",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4341"
+      }
+    ],
+    "Description": "The System Security Services Daemon (SSSD) provides a set of daemons to\nmanage access to remote directories and authentication mechanisms. It\nprovides an NSS and PAM interface toward the system and a pluggable\nback-end system to connect to multiple different account sources. It is\nalso the basis to provide client auditing and policy services for projects\nsuch as FreeIPA.\n\nA flaw was found in the SSSD PAM responder that could allow a local\nattacker to crash SSSD via a carefully-crafted packet. With SSSD\nunresponsive, legitimate users could be denied the ability to log in to the\nsystem. (CVE-2010-4341)\n\nRed Hat would like to thank Sebastian Krahmer for reporting this issue.\n\nThis update also fixes several bugs and adds various enhancements.\nDocumentation for these bug fixes and enhancements will be available\nshortly from the Technical Notes document, linked to in the References\nsection.\n\nUsers of SSSD should upgrade to these updated packages, which upgrade SSSD\nto upstream version 1.5.1 to correct this issue, and fix the bugs and add\nthe enhancements noted in the Technical Notes.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-05-19"
+      },
+      "Updated": {
+        "Date": "2011-05-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2010-4341",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4341",
+          "Public": "20110111"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/661163",
+          "ID": "661163"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.6",
+        "cpe:/o:redhat:rhel_eus:6.6::computenode",
+        "cpe:/o:redhat:rhel_eus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd is earlier than 0:1.5.1-34.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110560001"
+                  },
+                  {
+                    "Comment": "sssd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141375020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-client is earlier than 0:1.5.1-34.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110560003"
+                  },
+                  {
+                    "Comment": "sssd-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141375024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-tools is earlier than 0:1.5.1-34.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110560005"
+                  },
+                  {
+                    "Comment": "sssd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141375042"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

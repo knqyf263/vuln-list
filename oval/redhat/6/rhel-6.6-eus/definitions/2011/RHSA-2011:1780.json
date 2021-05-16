@@ -1,0 +1,288 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111780",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2011:1780: tomcat6 security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1780",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1780"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1184",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1184"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2204",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2204"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2526",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2526"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3190",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3190"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-5062",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-5062"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-5063",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-5063"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-5064",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-5064"
+      }
+    ],
+    "Description": "Apache Tomcat is a servlet container for the Java Servlet and JavaServer\nPages (JSP) technologies.\n\nAPR (Apache Portable Runtime) as mentioned in the CVE-2011-3190 and\nCVE-2011-2526 descriptions does not refer to APR provided by the apr\npackages. It refers to the implementation of APR provided by the Tomcat\nNative library, which provides support for using APR with Tomcat. This\nlibrary is not shipped with Red Hat Enterprise Linux 6. This update\nincludes fixes for users who have elected to use APR with Tomcat by taking\nthe Tomcat Native library from a different product. Such a configuration is\nnot supported by Red Hat, however.\n\nMultiple flaws were found in the way Tomcat handled HTTP DIGEST\nauthentication. These flaws weakened the Tomcat HTTP DIGEST authentication\nimplementation, subjecting it to some of the weaknesses of HTTP BASIC\nauthentication, for example, allowing remote attackers to perform session\nreplay attacks. (CVE-2011-1184)\n\nA flaw was found in the way the Coyote (org.apache.coyote.ajp.AjpProcessor)\nand APR (org.apache.coyote.ajp.AjpAprProcessor) Tomcat AJP (Apache JServ\nProtocol) connectors processed certain POST requests. An attacker could\nsend a specially-crafted request that would cause the connector to treat\nthe message body as a new request. This allows arbitrary AJP messages to be\ninjected, possibly allowing an attacker to bypass a web application's\nauthentication checks and gain access to information they would otherwise\nbe unable to access. The JK (org.apache.jk.server.JkCoyoteHandler)\nconnector is used by default when the APR libraries are not present. The JK\nconnector is not affected by this flaw. (CVE-2011-3190)\n\nA flaw was found in the Tomcat MemoryUserDatabase. If a runtime exception\noccurred when creating a new user with a JMX client, that user's password\nwas logged to Tomcat log files. Note: By default, only administrators have\naccess to such log files. (CVE-2011-2204)\n\nA flaw was found in the way Tomcat handled sendfile request attributes when\nusing the HTTP APR or NIO (Non-Blocking I/O) connector. A malicious web\napplication running on a Tomcat instance could use this flaw to bypass\nsecurity manager restrictions and gain access to files it would otherwise\nbe unable to access, or possibly terminate the Java Virtual Machine (JVM).\nThe HTTP blocking IO (BIO) connector, which is not vulnerable to this\nissue, is used by default in Red Hat Enterprise Linux 6. (CVE-2011-2526)\n\nRed Hat would like to thank the Apache Tomcat project for reporting the\nCVE-2011-2526 issue.\n\nThis update also fixes the following bug:\n\n* Previously, in certain cases, if \"LANG=fr_FR\" or \"LANG=fr_FR.UTF-8\" was\nset as an environment variable or in \"/etc/sysconfig/tomcat6\" on 64-bit\nPowerPC systems, Tomcat may have failed to start correctly. With this\nupdate, Tomcat works as expected when LANG is set to \"fr_FR\" or\n\"fr_FR.UTF-8\". (BZ#748807)\n\nUsers of Tomcat should upgrade to these updated packages, which contain\nbackported patches to correct these issues. Tomcat must be restarted for\nthis update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-12-05"
+      },
+      "Updated": {
+        "Date": "2011-12-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1184",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1184",
+          "Public": "20110926"
+        },
+        {
+          "CveID": "CVE-2011-2204",
+          "Cvss2": "2.1/AV:N/AC:H/Au:S/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2204",
+          "Public": "20110627"
+        },
+        {
+          "CveID": "CVE-2011-2526",
+          "Cvss2": "2.6/AV:L/AC:H/Au:N/C:P/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2526",
+          "Public": "20110713"
+        },
+        {
+          "CveID": "CVE-2011-3190",
+          "Cvss2": "5.8/AV:N/AC:M/Au:N/C:P/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3190",
+          "Public": "20110820"
+        },
+        {
+          "CveID": "CVE-2011-5062",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-5062",
+          "Public": "20110926"
+        },
+        {
+          "CveID": "CVE-2011-5063",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-5063",
+          "Public": "20110926"
+        },
+        {
+          "CveID": "CVE-2011-5064",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-5064",
+          "Public": "20110926"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/717013",
+          "ID": "717013"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/720948",
+          "ID": "720948"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/734868",
+          "ID": "734868"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/741401",
+          "ID": "741401"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.6",
+        "cpe:/o:redhat:rhel_eus:6.6::computenode",
+        "cpe:/o:redhat:rhel_eus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6 is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780001"
+                  },
+                  {
+                    "Comment": "tomcat6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-admin-webapps is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780003"
+                  },
+                  {
+                    "Comment": "tomcat6-admin-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-docs-webapp is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780005"
+                  },
+                  {
+                    "Comment": "tomcat6-docs-webapp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-el-2.1-api is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780007"
+                  },
+                  {
+                    "Comment": "tomcat6-el-2.1-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-javadoc is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780009"
+                  },
+                  {
+                    "Comment": "tomcat6-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-jsp-2.1-api is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780011"
+                  },
+                  {
+                    "Comment": "tomcat6-jsp-2.1-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-lib is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780013"
+                  },
+                  {
+                    "Comment": "tomcat6-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-servlet-2.5-api is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780015"
+                  },
+                  {
+                    "Comment": "tomcat6-servlet-2.5-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-webapps is earlier than 0:6.0.24-35.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111780017"
+                  },
+                  {
+                    "Comment": "tomcat6-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

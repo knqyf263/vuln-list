@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20150776",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2015:0776: docker security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:0776",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:0776"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-1843",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-1843"
+      }
+    ],
+    "Description": "Docker is a service providing container management on Linux.\n\nIt was found that the fix for the CVE-2014-5277 issue was incomplete: the\ndocker client could under certain circumstances erroneously fall back to\nHTTP when an HTTPS connection to a registry failed. This could allow a\nman-in-the-middle attacker to obtain authentication and image data from\ntraffic sent from a client to the registry. (CVE-2015-1843)\n\nRed Hat would like to thank Eric Windisch of Docker Inc. for reporting\nthis issue.\n\nAll docker users are advised to upgrade to these updated packages, which\ncorrect this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-04-02"
+      },
+      "Updated": {
+        "Date": "2015-04-02"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-1843",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-300-\u003eCWE-494",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-1843",
+          "Public": "20150327"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1206443",
+          "ID": "1206443"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20141977004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20141977003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic is earlier than 0:0-0.9.git4ff7dbd.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150776001"
+                  },
+                  {
+                    "Comment": "atomic is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151167002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker is earlier than 0:1.5.0-28.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150776003"
+                  },
+                  {
+                    "Comment": "docker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141977002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-logrotate is earlier than 0:1.5.0-28.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150776005"
+                  },
+                  {
+                    "Comment": "docker-logrotate is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151167006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-python is earlier than 0:1.0.0-22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150776007"
+                  },
+                  {
+                    "Comment": "docker-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151167008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-websocket-client is earlier than 0:0.14.1-65.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150776009"
+                  },
+                  {
+                    "Comment": "python-websocket-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151167012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
