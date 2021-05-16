@@ -1,0 +1,122 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20204283",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:4283: openstack-cinder security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 16.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:4283",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:4283"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10755",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10755"
+      }
+    ],
+    "Description": "OpenStack Block Storage (cinder) manages block storage mounting and the\npresentation of such mounted block storage to instances. The backend\nphysical storage can consist of local disks, or Fiber Channel, iSCSI, and\nNFS mounts attached to Compute nodes. In addition, Block Storage supports\nvolume backups, and snapshots for temporary save and restore operations.\nProgrammatic management is available via Block Storage's API.\n\nSecurity Fix(es):\n\n* Improper handling of ScaleIO backend credentials (CVE-2020-10755)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE\npage listed in the References section.\n\nFor more information about the bug fixes and enhancements included with this update, see the \"Technical Notes\" section of the Release Notes linked in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-10-28"
+      },
+      "Updated": {
+        "Date": "2020-10-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-10755",
+          "Cvss3": "6.5/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-522",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10755",
+          "Public": "20200603"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1842748",
+          "ID": "1842748"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack:16",
+        "cpe:/a:redhat:openstack:16.1",
+        "cpe:/a:redhat:openstack:16.1::el8",
+        "cpe:/a:redhat:openstack:16::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20161000107048"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:20161000107047"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhea:tst:202002831502"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-cinder is earlier than 1:15.3.1-1.20200914173114.00ac80b.el8ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204283001"
+                  },
+                  {
+                    "Comment": "openstack-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:202002831466"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-cinder is earlier than 1:15.3.1-1.20200914173114.00ac80b.el8ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204283003"
+                  },
+                  {
+                    "Comment": "python3-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:202002831468"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
