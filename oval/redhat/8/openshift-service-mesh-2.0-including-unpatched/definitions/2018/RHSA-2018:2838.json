@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20182838",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2018:2838: ceph-iscsi-cli security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Ceph Storage 3.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:2838",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:2838"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-14649",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-14649"
+      }
+    ],
+    "Description": "ceph-iscsi-cli provides a CLI interface similar to the targetcli tool used to interact with the kernel LIO subsystem.\n\nSecurity Fix(es):\n\n* It was found that rbd-target-api service provided by ceph-iscsi-cli was running in debug mode. An unauthenticated attacker could use this to remotely execute arbitrary code and escalate privileges. (CVE-2018-14649)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-10-01"
+      },
+      "Updated": {
+        "Date": "2018-10-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-14649",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-77",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-14649",
+          "Public": "20180924"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1632078",
+          "ID": "1632078"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:ceph_storage:3",
+        "cpe:/a:redhat:ceph_storage:3::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201610745004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201610745003"
+          },
+          {
+            "Comment": "ceph-iscsi-cli is earlier than 0:2.7-7.el7cp",
+            "TestRef": "oval:com.redhat.rhsa:tst:20182838001"
+          },
+          {
+            "Comment": "ceph-iscsi-cli is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20182838002"
+          }
+        ]
+      }
+    ]
+  }
+}
