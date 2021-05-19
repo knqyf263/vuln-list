@@ -1,0 +1,120 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20194358",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2019:4358: openstack-keystone security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 15.0 (Stein)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:4358",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:4358"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-19687",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-19687"
+      }
+    ],
+    "Description": "The OpenStack Identity service (keystone) authenticates and authorizes\nOpenStack users by keeping track of users and their permitted activities.\nThe Identity service supports multiple forms of authentication, including\nuser name and password credentials, token-based systems, and AWS-style\nlogins.\n\nSecurity Fix(es):\n\n* Credentials API allows non-admin to list and retrieve all users\ncredentials (CVE-2019-19687)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE\npage listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-12-19"
+      },
+      "Updated": {
+        "Date": "2019-12-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-19687",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+          "Cwe": "CWE-522",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-19687",
+          "Public": "20191204"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1781470",
+          "ID": "1781470"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack:15",
+        "cpe:/a:redhat:openstack:15::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20159543030"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:20159543029"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20194358006"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-keystone is earlier than 1:15.0.1-0.20190720060412.5f27c4b.1.el8ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194358001"
+                  },
+                  {
+                    "Comment": "openstack-keystone is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194358002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-keystone is earlier than 1:15.0.1-0.20190720060412.5f27c4b.1.el8ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194358003"
+                  },
+                  {
+                    "Comment": "python3-keystone is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194358004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
