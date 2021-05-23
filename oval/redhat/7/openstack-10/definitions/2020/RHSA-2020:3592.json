@@ -1,0 +1,116 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20203592",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:3592: bash security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7.7 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:3592",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:3592"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9924",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9924"
+      }
+    ],
+    "Description": "The bash packages provide Bash (Bourne-again shell), which is the default shell for Red Hat Enterprise Linux.\n\nSecurity Fix(es):\n\n* bash: BASH_CMD is writable in restricted bash shells (CVE-2019-9924)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-09-01"
+      },
+      "Updated": {
+        "Date": "2020-09-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-9924",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-138",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9924",
+          "Public": "20190307"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1691774",
+          "ID": "1691774"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.7",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7::computenode",
+        "cpe:/o:redhat:rhel_eus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bash is earlier than 0:4.2.46-34.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203592001"
+                  },
+                  {
+                    "Comment": "bash is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141293002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bash-doc is earlier than 0:4.2.46-34.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203592003"
+                  },
+                  {
+                    "Comment": "bash-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141293004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

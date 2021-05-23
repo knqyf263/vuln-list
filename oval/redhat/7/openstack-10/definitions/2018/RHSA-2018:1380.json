@@ -1,0 +1,142 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20181380",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2018:1380: 389-ds-base security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:1380",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:1380"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1089",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1089"
+      }
+    ],
+    "Description": "389 Directory Server is an LDAP version 3 (LDAPv3) compliant server. The base packages include the Lightweight Directory Access Protocol (LDAP) server and command-line utilities for server administration.\n\nSecurity Fix(es):\n\n* 389-ds-base: ns-slapd crash via large filter value in ldapsearch (CVE-2018-1089)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nRed Hat would like to thank Greg Kubok for reporting this issue.\n\nBug Fix(es):\n\n* Indexing tasks in Directory Server contain the nsTaskStatus attribute to monitor whether the task is completed and the database is ready to receive updates. Before this update, the server set the value that indexing had completed before the database was ready to receive updates. Applications which monitor nsTaskStatus could start sending updates as soon as indexing completed, but before the database was ready. As a consequence, the server rejected updates with an UNWILLING_TO_PERFORM error. The problem has been fixed. As a result, the nsTaskStatus attribute now shows that indexing is completed after the database is ready to receive updates. (BZ#1553605)\n\n* Previously, Directory Server did not remember when the first operation, bind, or a connection was started. As a consequence, the server applied in certain situations anonymous resource limits to an authenticated client. With this update, Directory Server properly marks authenticated client connections. As a result, it applies the correct resource limits, and authenticated clients no longer get randomly restricted by anonymous resource limits. (BZ#1554720)\n\n* When debug replication logging is enabled, Directory Server incorrectly logged an error that updating the replica update vector (RUV) failed when in fact the update succeeded. The problem has been fixed, and the server no longer logs an error if updating the RUV succeeds. (BZ#1559464)\n\n* This update adds the -W option to the ds-replcheck utility. With this option, ds-replcheck asks for the password, similar to OpenLDAP utilities. As a result, the password is not stored in the shell's history file when the -W option is used. (BZ#1559760)\n\n* If an administrator moves a group in Directory Server from one subtree to another, the memberOf plug-in deletes the memberOf attribute with the old value and adds a new memberOf attribute with the new group's distinguished name (DN) in affected user entries. Previously, if the old subtree was not within the scope of the memberOf plug-in, deleting the old memberOf attribute failed because the values did not exist. As a consequence, the plug-in did not add the new memberOf value, and the user entry contained an incorrect memberOf value. With this update, the plug-in now checks the return code when deleting the old value. If the return code is \"no such value\", the plug-in only adds the new memberOf value. As a result, the memberOf attribute information is correct. (BZ#1559764)\n\n* In a Directory Server replication topology, updates are managed by using Change Sequence Numbers (CSN) based on time stamps. New CSNs must be higher than the highest CSN present in the relative update vector (RUV). In case the server generates a new CSN in the same second as the most recent CSN, the sequence number is increased to ensure that it is higher. However, if the most recent CSN and the new CSN were identical, the sequence number was not increased. In this situation, the new CSN was, except the replica ID, identical to the most recent one. As a consequence, a new update in the directory appeared in certain situations older than the most recent update. With this update, Directory Server increases the CSN if the sequence number is lower or equal to the most recent one. As a result, new updates are no longer considered older than the most recent data. (BZ#1563079)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-05-14"
+      },
+      "Updated": {
+        "Date": "2018-05-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-1089",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1089",
+          "Public": "20180507:1500"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1559802",
+          "ID": "1559802"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.7",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7::computenode",
+        "cpe:/o:redhat:rhel_eus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base is earlier than 0:1.3.7.5-21.el7_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181380001"
+                  },
+                  {
+                    "Comment": "389-ds-base is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151554002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-devel is earlier than 0:1.3.7.5-21.el7_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181380003"
+                  },
+                  {
+                    "Comment": "389-ds-base-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151554004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-libs is earlier than 0:1.3.7.5-21.el7_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181380005"
+                  },
+                  {
+                    "Comment": "389-ds-base-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151554006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-snmp is earlier than 0:1.3.7.5-21.el7_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181380007"
+                  },
+                  {
+                    "Comment": "389-ds-base-snmp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162594008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

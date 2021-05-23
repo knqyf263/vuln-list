@@ -1,0 +1,104 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141999",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2014:1999: mailx security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1999",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1999"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2004-2771",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2004-2771"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-7844",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-7844"
+      }
+    ],
+    "Description": "The mailx packages contain a mail user agent that is used to manage mail\nusing scripts.\n\nA flaw was found in the way mailx handled the parsing of email addresses.\nA syntactically valid email address could allow a local attacker to cause\nmailx to execute arbitrary shell commands through shell meta-characters and\nthe direct command execution functionality. (CVE-2004-2771, CVE-2014-7844)\n\nNote: Applications using mailx to send email to addresses obtained from\nuntrusted sources will still remain vulnerable to other attacks if they\naccept email addresses which start with \"-\" (so that they can be confused\nwith mailx options). To counteract this issue, this update also introduces\nthe \"--\" option, which will treat the remaining command line arguments as\nemail addresses.\n\nAll mailx users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-12-16"
+      },
+      "Updated": {
+        "Date": "2014-12-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2004-2771",
+          "Cvss2": "3.6/AV:L/AC:L/Au:N/C:P/I:P/A:N",
+          "Cwe": "CWE-78",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2004-2771",
+          "Public": "20141216"
+        },
+        {
+          "CveID": "CVE-2014-7844",
+          "Cvss2": "3.6/AV:L/AC:L/Au:N/C:P/I:P/A:N",
+          "Cwe": "CWE-78",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-7844",
+          "Public": "20141216"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1162783",
+          "ID": "1162783"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.7",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7::computenode",
+        "cpe:/o:redhat:rhel_eus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          },
+          {
+            "Comment": "mailx is earlier than 0:12.5-12.el7_0",
+            "TestRef": "oval:com.redhat.rhsa:tst:20141999001"
+          },
+          {
+            "Comment": "mailx is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20141999002"
+          }
+        ]
+      }
+    ]
+  }
+}

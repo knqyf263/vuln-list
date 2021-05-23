@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161086",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2016:1086: libndp security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1086",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1086"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-3698",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-3698"
+      }
+    ],
+    "Description": "Libndp is a library (used by NetworkManager) that provides a wrapper for the IPv6 Neighbor Discovery Protocol. It also provides a tool named ndptool for sending and receiving NDP messages.\n\nSecurity Fix(es):\n\n* It was found that libndp did not properly validate and check the origin of Neighbor Discovery Protocol (NDP) messages. An attacker on a non-local network could use this flaw to advertise a node as a router, allowing them to perform man-in-the-middle attacks on a connecting client, or disrupt the network connectivity of that client. (CVE-2016-3698)\n\nRed Hat would like to thank Julien Bernard (Viagénie) for reporting this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-05-17"
+      },
+      "Updated": {
+        "Date": "2016-05-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-3698",
+          "Cvss2": "5.4/AV:A/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-3698",
+          "Public": "20160517"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1329366",
+          "ID": "1329366"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.2",
+        "cpe:/o:redhat:rhel_aus:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libndp is earlier than 0:1.2-6.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161086001"
+                  },
+                  {
+                    "Comment": "libndp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161086002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libndp-devel is earlier than 0:1.2-6.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161086003"
+                  },
+                  {
+                    "Comment": "libndp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161086004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

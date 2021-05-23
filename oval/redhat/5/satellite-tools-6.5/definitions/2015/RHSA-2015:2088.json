@@ -1,0 +1,225 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20152088",
+  "Version": "647",
+  "Metadata": {
+    "Title": "RHSA-2015:2088: openssh security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:2088",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:2088"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5600",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5600"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-6563",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-6563"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-6564",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-6564"
+      }
+    ],
+    "Description": "OpenSSH is OpenBSD's SSH (Secure Shell) protocol implementation. These\npackages include the core files necessary for both the OpenSSH client and\nserver.\n\nA flaw was found in the way OpenSSH handled PAM authentication when using\nprivilege separation. An attacker with valid credentials on the system and\nable to fully compromise a non-privileged pre-authentication process using\na different flaw could use this flaw to authenticate as other users.\n(CVE-2015-6563)\n\nA use-after-free flaw was found in OpenSSH. An attacker able to fully\ncompromise a non-privileged pre-authentication process using a different\nflaw could possibly cause sshd to crash or execute arbitrary code with\nroot privileges. (CVE-2015-6564)\n\nIt was discovered that the OpenSSH sshd daemon did not check the list of\nkeyboard-interactive authentication methods for duplicates. A remote\nattacker could use this flaw to bypass the MaxAuthTries limit, making it\neasier to perform password guessing attacks. (CVE-2015-5600)\n\nIt was found that the OpenSSH ssh-agent, a program to hold private keys\nused for public key authentication, was vulnerable to password guessing\nattacks. An attacker able to connect to the agent could use this flaw to\nconduct a brute-force attack to unlock keys in the ssh-agent. (BZ#1238238)\n\nThis update fixes the following bugs:\n\n* Previously, the sshd_config(5) man page was misleading and could thus\nconfuse the user. This update improves the man page text to clearly\ndescribe the AllowGroups feature. (BZ#1150007)\n\n* The limit for the function for restricting the number of files listed using the wildcard character (*) that prevents the Denial of Service (DoS) for both server and client was previously set too low. Consequently, the user reaching the limit was prevented from listing a directory with a large number of files over Secure File Transfer Protocol (SFTP). This update increases the aforementioned limit, thus fixing this bug. (BZ#1160377)\n\n* When the ForceCommand option with a pseudoterminal was used and the\nMaxSession option was set to \"2\", multiplexed SSH connections did not work\nas expected. After the user attempted to open a second multiplexed\nconnection, the attempt failed if the first connection was still open. This\nupdate modifies OpenSSH to issue only one audit message per session, and\nthe user is thus able to open two multiplexed connections in this\nsituation. (BZ#1199112)\n\n* The ssh-copy-id utility failed if the account on the remote server did\nnot use an sh-like shell. Remote commands have been modified to run in an\nsh-like shell, and ssh-copy-id now works also with non-sh-like shells.\n(BZ#1201758)\n\n* Due to a race condition between auditing messages and answers when using\nControlMaster multiplexing, one session in the shared connection randomly\nand unexpectedly exited the connection. This update fixes the race\ncondition in the auditing code, and multiplexing connections now work as\nexpected even with a number of sessions created at once. (BZ#1240613)\n\nIn addition, this update adds the following enhancements:\n\n* As not all Lightweight Directory Access Protocol (LDAP) servers possess\na default schema, as expected by the ssh-ldap-helper program, this update\nprovides the user with an ability to adjust the LDAP query to get public\nkeys from servers with a different schema, while the default functionality\nstays untouched. (BZ#1201753)\n\n* With this enhancement update, the administrator is able to set\npermissions for files uploaded using Secure File Transfer Protocol (SFTP).\n(BZ#1197989)\n\n* This update provides the LDAP schema in LDAP Data Interchange Format (LDIF) format as a complement to the old schema previously accepted\nby OpenLDAP. (BZ#1184938)\n\n* With this update, the user can selectively disable the Generic Security\nServices API (GSSAPI) key exchange algorithms as any normal key exchange.\n(BZ#1253062)\n\nUsers of openssh are advised to upgrade to these updated packages, which\ncorrect these issues and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-11-19"
+      },
+      "Updated": {
+        "Date": "2015-11-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5600",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-304",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5600",
+          "Public": "20150716"
+        },
+        {
+          "CveID": "CVE-2015-6563",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-266",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-6563",
+          "Public": "20150811"
+        },
+        {
+          "CveID": "CVE-2015-6564",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:P/A:N",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-6564",
+          "Public": "20150811"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1245969",
+          "ID": "1245969"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1252844",
+          "ID": "1252844"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1252852",
+          "ID": "1252852"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.2",
+        "cpe:/o:redhat:rhel_aus:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh is earlier than 0:6.6.1p1-22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152088001"
+                  },
+                  {
+                    "Comment": "openssh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150425002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-askpass is earlier than 0:6.6.1p1-22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152088003"
+                  },
+                  {
+                    "Comment": "openssh-askpass is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150425004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-clients is earlier than 0:6.6.1p1-22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152088005"
+                  },
+                  {
+                    "Comment": "openssh-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150425006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-keycat is earlier than 0:6.6.1p1-22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152088007"
+                  },
+                  {
+                    "Comment": "openssh-keycat is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150425008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-ldap is earlier than 0:6.6.1p1-22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152088009"
+                  },
+                  {
+                    "Comment": "openssh-ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150425010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-server is earlier than 0:6.6.1p1-22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152088011"
+                  },
+                  {
+                    "Comment": "openssh-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150425012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssh-server-sysvinit is earlier than 0:6.6.1p1-22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152088013"
+                  },
+                  {
+                    "Comment": "openssh-server-sysvinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150425014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pam_ssh_agent_auth is earlier than 0:0.9.3-9.22.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152088015"
+                  },
+                  {
+                    "Comment": "pam_ssh_agent_auth is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150425016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20150325",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2015:0325: httpd security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:0325",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:0325"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-5704",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-5704"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3581",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3581"
+      }
+    ],
+    "Description": "The httpd packages provide the Apache HTTP Server, a powerful, efficient, and extensible web server.\n\nA flaw was found in the way httpd handled HTTP Trailer headers when processing requests using chunked encoding. A malicious client could use Trailer headers to set additional HTTP headers after header processing was performed by other modules. This could, for example, lead to a bypass of header restrictions defined with mod_headers. (CVE-2013-5704)\n\nA NULL pointer dereference flaw was found in the way the mod_cache httpd module handled Content-Type headers. A malicious HTTP server could cause the httpd child process to crash when the Apache HTTP server was configured to proxy to a server with caching enabled. (CVE-2014-3581)\n\nThis update also fixes the following bugs:\n\n* Previously, the mod_proxy_fcgi Apache module always kept the back-end connections open even when they should have been closed. As a consequence, the number of open file descriptors was increasing over the time. With this update, mod_proxy_fcgi has been fixed to check the state of the back-end connections, and it closes the idle back-end connections as expected. (BZ#1168050)\n\n* An integer overflow occurred in the ab utility when a large request count was used. Consequently, ab terminated unexpectedly with a segmentation fault while printing statistics after the benchmark. This bug has been fixed, and ab no longer crashes in this scenario. (BZ#1092420)\n\n* Previously, when httpd was running in the foreground and the user pressed Ctrl+C to interrupt the httpd processes, a race condition in signal handling occurred. The SIGINT signal was sent to all children followed by SIGTERM from the main process, which interrupted the SIGINT handler. Consequently, the affected processes became unresponsive or terminated unexpectedly. With this update, the SIGINT signals in the child processes are ignored, and httpd no longer hangs or crashes in this scenario. (BZ#1131006)\n\nIn addition, this update adds the following enhancements:\n\n* With this update, the mod_proxy module of the Apache HTTP Server supports the Unix Domain Sockets (UDS). This allows mod_proxy back ends to listen on UDS sockets instead of TCP sockets, and as a result, mod_proxy can be used to connect UDS back ends. (BZ#1168081)\n\n* This update adds support for using the SetHandler directive together with the mod_proxy module. As a result, it is possible to configure SetHandler to use proxy for incoming requests, for example, in the following format: SetHandler \"proxy:fcgi://127.0.0.1:9000\". (BZ#1136290)\n\n* The htaccess API changes introduced in httpd 2.4.7 have been backported to httpd shipped with Red Hat Enterprise Linux 7.1. These changes allow for the MPM-ITK module to be compiled as an httpd module. (BZ#1059143)\n\nAll httpd users are advised to upgrade to these updated packages, which contain backported patches to correct these issues and add these enhancements. After installing the updated packages, the httpd daemon will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-03-05"
+      },
+      "Updated": {
+        "Date": "2015-03-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-5704",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-287",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-5704",
+          "Public": "20131019"
+        },
+        {
+          "CveID": "CVE-2014-3581",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-476",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3581",
+          "Public": "20140908"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1082903",
+          "ID": "1082903"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1149709",
+          "ID": "1149709"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.7",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7::computenode",
+        "cpe:/o:redhat:rhel_eus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd is earlier than 0:2.4.6-31.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150325001"
+                  },
+                  {
+                    "Comment": "httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152194002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-devel is earlier than 0:2.4.6-31.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150325003"
+                  },
+                  {
+                    "Comment": "httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152194004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-manual is earlier than 0:2.4.6-31.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150325005"
+                  },
+                  {
+                    "Comment": "httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152194006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-tools is earlier than 0:2.4.6-31.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150325007"
+                  },
+                  {
+                    "Comment": "httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152194008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ldap is earlier than 0:2.4.6-31.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150325009"
+                  },
+                  {
+                    "Comment": "mod_ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152194010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_proxy_html is earlier than 1:2.4.6-31.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150325011"
+                  },
+                  {
+                    "Comment": "mod_proxy_html is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152194012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_session is earlier than 0:2.4.6-31.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150325013"
+                  },
+                  {
+                    "Comment": "mod_session is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152194014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ssl is earlier than 1:2.4.6-31.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150325015"
+                  },
+                  {
+                    "Comment": "mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152194016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141319",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2014:1319: xerces-j2 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1319",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1319"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4002",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4002"
+      }
+    ],
+    "Description": "Apache Xerces for Java (Xerces-J) is a high performance, standards\ncompliant, validating XML parser written in Java. The xerces-j2 packages\nprovide Xerces-J version 2.\n\nA resource consumption issue was found in the way Xerces-J handled XML\ndeclarations. A remote attacker could use an XML document with a specially\ncrafted declaration using a long pseudo-attribute name that, when parsed by\nan application using Xerces-J, would cause that application to use an\nexcessive amount of CPU. (CVE-2013-4002)\n\nAll xerces-j2 users are advised to upgrade to these updated packages, which\ncontain a backported patch to correct this issue. Applications using the\nXerces-J must be restarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-09-29"
+      },
+      "Updated": {
+        "Date": "2014-09-29"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-4002",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4002",
+          "Public": "20131015"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1019176",
+          "ID": "1019176"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.7",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7",
+        "cpe:/o:redhat:rhel_eus:7.7::computenode",
+        "cpe:/o:redhat:rhel_eus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xerces-j2 is earlier than 0:2.11.0-17.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141319001"
+                  },
+                  {
+                    "Comment": "xerces-j2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141319002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xerces-j2-demo is earlier than 0:2.11.0-17.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141319003"
+                  },
+                  {
+                    "Comment": "xerces-j2-demo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141319004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xerces-j2-javadoc is earlier than 0:2.11.0-17.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141319005"
+                  },
+                  {
+                    "Comment": "xerces-j2-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141319006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
