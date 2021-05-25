@@ -1,0 +1,176 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193255",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2019:3255: heketi security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Native Client for RHEL 7 for Red Hat Storage",
+          "Red Hat Gluster Storage 3.5 for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3255",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3255"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-3899",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-3899"
+      }
+    ],
+    "Description": "Heketi provides a RESTful management interface that can be used to manage the life cycle of GlusterFS volumes. With Heketi, cloud services like OpenStack Manila, Kubernetes, and OpenShift can dynamically provision GlusterFS volumes with any of the supported durability types. Heketi will automatically determine the location for bricks across the cluster, making sure to place bricks and its replicas across different failure domains. Heketi also supports any number of GlusterFS clusters, allowing cloud services to provide network file storage without being limited to a single GlusterFS cluster.\n\nThe following packages have been upgraded to a later upstream version: heketi (9.0.0). (BZ#1710080)\n\nSecurity Fix(es):\n\n* heketi: heketi can be installed using insecure defaults (CVE-2019-3899)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Previously, it was easy to inadvertently set Heketi up in an unsecured way which increased the risk of unauthorized users to make changes to the storage managed by Heketi. The default settings have changed to require users to configure authentication and to make disabling authentication unintentionally more difficult. (BZ#1701838)\n\n* Previously, when Heketi executed commands within OpenShift/Kubernetes pods, the commands were executed without a timeout specified. Hence, some commands never returned which differed from the SSH executor which always executes commands with a timeout. With this update, the commands that are executed in the gluster containers have a timeout specified. The timeout values are the same regardless of what connection type is used. (BZ#1636912)\n\n* Previously, if Heketi managed multiple clusters and it failed to create volumes on any of the clusters it would return a generic \"No space\" error message. With this update, error messages produced when heketi manages multiple gluster clusters have been improved. Heketi now displays specific errors for when the cluster has no nodes or none of the nodes have usable devices and also reports on each cluster's error by prefixing cluster errors with the cluster ID. (BZ#1577803)\n\n* Previously, if operation cleanup was requested from the server simultaneously, the server would try to initiate cleanup for the same operation twice. This triggered panic in the server. With this update, the server no longer panics if two operation cleanups are requested at the same time. (BZ#1702162)\n\nEnhancement(s):\n\n* When a node is removed or added to a gluster trusted storage pool using heketi, the existing endpoints do not get updated automatically. With this update, to update the endpoints after node addition/removal, users can now execute the following commands:\n1. heketi-cli volume endpoint patch \u003cvolume-id\u003e\n2. oc patch ep \u003cheketi-db-endpoint-name\u003e -p \u003cchanges\u003e (BZ#1660681)\n\n* With this update, Heketi tracks additional metadata associated with disk devices even if the path of the device changes. The outputs of some commands have been updated to reflect the additional metadata. (BZ#1609553)\n\nUsers of Heketi are advised to upgrade to these updated packages, which adds these enhancements and fix these bugs.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-10-30"
+      },
+      "Updated": {
+        "Date": "2019-10-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-3899",
+          "Cvss3": "7.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-287",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-3899",
+          "Public": "20190418"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1701091",
+          "ID": "1701091"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:storage:3",
+        "cpe:/a:redhat:storage:3.1",
+        "cpe:/a:redhat:storage:3.1:bigdata:el7",
+        "cpe:/a:redhat:storage:3.1:console:el7",
+        "cpe:/a:redhat:storage:3.1:nagios:el7",
+        "cpe:/a:redhat:storage:3.1:nfs:el7",
+        "cpe:/a:redhat:storage:3.1:samba:el7",
+        "cpe:/a:redhat:storage:3.1:server:el7",
+        "cpe:/a:redhat:storage:3.1:splunk:el7",
+        "cpe:/a:redhat:storage:3.2",
+        "cpe:/a:redhat:storage:3.2:nagios:el7",
+        "cpe:/a:redhat:storage:3.2:nfs:el7",
+        "cpe:/a:redhat:storage:3.2:samba:el7",
+        "cpe:/a:redhat:storage:3.2:server:el7",
+        "cpe:/a:redhat:storage:3.3",
+        "cpe:/a:redhat:storage:3.3:na:el7",
+        "cpe:/a:redhat:storage:3.3:nagios:el7",
+        "cpe:/a:redhat:storage:3.3:nfs:el7",
+        "cpe:/a:redhat:storage:3.3:samba:el7",
+        "cpe:/a:redhat:storage:3.3:server:el7",
+        "cpe:/a:redhat:storage:3.3:wa:el7",
+        "cpe:/a:redhat:storage:3.4",
+        "cpe:/a:redhat:storage:3.4:na:el7",
+        "cpe:/a:redhat:storage:3.4:nfs:el7",
+        "cpe:/a:redhat:storage:3.4:samba:el7",
+        "cpe:/a:redhat:storage:3.4:server:el7",
+        "cpe:/a:redhat:storage:3.4:wa:el7",
+        "cpe:/a:redhat:storage:3.5",
+        "cpe:/a:redhat:storage:3.5:na:el7",
+        "cpe:/a:redhat:storage:3.5:nfs:el7",
+        "cpe:/a:redhat:storage:3.5:samba:el7",
+        "cpe:/a:redhat:storage:3.5:server:el7",
+        "cpe:/a:redhat:storage:3.5:wa:el7",
+        "cpe:/a:redhat:storage:3:client:el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20137459006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20137459005"
+          },
+          {
+            "Comment": "heketi-client is earlier than 0:9.0.0-7.el7rhgs",
+            "TestRef": "oval:com.redhat.rhsa:tst:20193255001"
+          },
+          {
+            "Comment": "heketi-client is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:20191002100004"
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20137459005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "heketi is earlier than 0:9.0.0-7.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193255004"
+                  },
+                  {
+                    "Comment": "heketi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "heketi-client is earlier than 0:9.0.0-7.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193255001"
+                  },
+                  {
+                    "Comment": "heketi-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-heketi is earlier than 0:9.0.0-7.el7rhgs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193255007"
+                  },
+                  {
+                    "Comment": "python-heketi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20191002100006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
