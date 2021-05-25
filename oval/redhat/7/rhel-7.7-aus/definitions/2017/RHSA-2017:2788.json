@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20172788",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2017:2788: augeas security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:2788",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:2788"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7555",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7555"
+      }
+    ],
+    "Description": "Augeas is a configuration editing tool. It parses configuration files in their native formats and transforms them into a tree. Configuration changes are made by manipulating this tree and saving it back into native config files.\n\nSecurity Fix(es):\n\n* A vulnerability was discovered in augeas affecting the handling of escaped strings. An attacker could send crafted strings that would cause the application using augeas to copy past the end of a buffer, leading to a crash or possible code execution. (CVE-2017-7555)\n\nThis issue was discovered by Han Han (Red Hat).",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-09-21"
+      },
+      "Updated": {
+        "Date": "2018-01-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-7555",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-20-\u003eCWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7555",
+          "Public": "20170817"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1478373",
+          "ID": "1478373"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.7",
+        "cpe:/o:redhat:rhel_aus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "augeas is earlier than 0:1.4.0-2.el7_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172788001"
+                  },
+                  {
+                    "Comment": "augeas is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172788002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "augeas-devel is earlier than 0:1.4.0-2.el7_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172788003"
+                  },
+                  {
+                    "Comment": "augeas-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172788004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "augeas-libs is earlier than 0:1.4.0-2.el7_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172788005"
+                  },
+                  {
+                    "Comment": "augeas-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172788006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

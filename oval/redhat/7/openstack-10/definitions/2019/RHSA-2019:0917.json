@@ -1,0 +1,128 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20190917",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2019:0917: openstack-cinder security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 10.0 (Newton)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:0917",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:0917"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-15139",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-15139"
+      }
+    ],
+    "Description": "OpenStack Block Storage (cinder) manages block storage mounting and the presentation of such mounted block storage to instances. The backend physical storage can consist of local disks, or Fibre Channel, iSCSI, and NFS mounts attached to Compute nodes. In addition, Block Storage supports volume backups, and snapshots for temporary save and restore operations. Programmatic management is available via Block Storage's API.\n\nSecurity Fix(es):\n\n* openstack-cinder: Data retained after deletion of a ScaleIO volume (CVE-2017-15139)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Previously, image operations in cinder failed due to file I/O issues.\n\nWith this update, you can create volumes from an image in cinder without file I/O issues. (BZ#1476213)\n\n* Previously, the cinder logs contained fixed_key value.\n\nWith this update, the fixed_key value is not logged. (BZ#1655742)\n\n* Previously, it was not possible to attach a volume on the host due to an issue with 3PAR driver and Fibre Channel World Wide Name. \n\nWith this update, you can attach Fibre Channel volumes even with a wrong host configuration at the backend. (BZ#1667997)\n\n* Previously, only admin users could set the Volume Type in the glance image using cinder_img_vol_type custom property.\n\nWith this update, non-admin users can also set the Volume Type in a glance image. (BZ#1671260)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-04-30"
+      },
+      "Updated": {
+        "Date": "2019-04-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-15139",
+          "Cvss3": "4.8/CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-15139",
+          "Public": "20180710"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1599899",
+          "ID": "1599899"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:10",
+        "cpe:/a:redhat:openstack-optools:10::el7",
+        "cpe:/a:redhat:openstack:10",
+        "cpe:/a:redhat:openstack:10::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170025004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-cinder is earlier than 1:9.1.4-50.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190917001"
+                  },
+                  {
+                    "Comment": "openstack-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190917002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-cinder is earlier than 1:9.1.4-50.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190917003"
+                  },
+                  {
+                    "Comment": "python-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190917004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-cinder-tests is earlier than 1:9.1.4-50.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190917005"
+                  },
+                  {
+                    "Comment": "python-cinder-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190917006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

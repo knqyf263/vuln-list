@@ -1,0 +1,297 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161940",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2016:1940: openssl security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1940",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1940"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2177",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2177"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2178",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2178"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2179",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2179"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2180",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2180"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2181",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2181"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2182",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2182"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6302",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6302"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6304",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6304"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-6306",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-6306"
+      }
+    ],
+    "Description": "OpenSSL is a toolkit that implements the Secure Sockets Layer (SSL) and Transport Layer Security (TLS) protocols, as well as a full-strength general-purpose cryptography library.\n\nSecurity Fix(es):\n\n* A memory leak flaw was found in the way OpenSSL handled TLS status request extension data during session renegotiation. A remote attacker could cause a TLS server using OpenSSL to consume an excessive amount of memory and, possibly, exit unexpectedly after exhausting all available memory, if it enabled OCSP stapling support. (CVE-2016-6304)\n\n* It was discovered that OpenSSL did not always use constant time operations when computing Digital Signature Algorithm (DSA) signatures. A local attacker could possibly use this flaw to obtain a private DSA key belonging to another user or service running on the same system. (CVE-2016-2178)\n\n* It was discovered that the Datagram TLS (DTLS) implementation could fail to release memory in certain cases. A malicious DTLS client could cause a DTLS server using OpenSSL to consume an excessive amount of memory and, possibly, exit unexpectedly after exhausting all available memory. (CVE-2016-2179)\n\n* A flaw was found in the Datagram TLS (DTLS) replay protection implementation in OpenSSL. A remote attacker could possibly use this flaw to make a DTLS server using OpenSSL to reject further packets sent from a DTLS client over an established DTLS connection. (CVE-2016-2181)\n\n* An out of bounds write flaw was discovered in the OpenSSL BN_bn2dec() function. An attacker able to make an application using OpenSSL to process a large BIGNUM could cause the application to crash or, possibly, execute arbitrary code. (CVE-2016-2182)\n\n* A flaw was found in the DES/3DES cipher was used as part of the TLS/SSL protocol. A man-in-the-middle attacker could use this flaw to recover some plaintext data by capturing large amounts of encrypted traffic between TLS/SSL server and client if the communication used a DES/3DES based ciphersuite. (CVE-2016-2183)\n\nThis update mitigates the CVE-2016-2183 issue by lowering priority of DES cipher suites so they are not preferred over cipher suites using AES. For compatibility reasons, DES cipher suites remain enabled by default and included in the set of cipher suites identified by the HIGH cipher string. Future updates may move them to MEDIUM or not enable them by default.\n\n* An integer underflow flaw leading to a buffer over-read was found in the way OpenSSL parsed TLS session tickets. A remote attacker could use this flaw to crash a TLS server using OpenSSL if it used SHA-512 as HMAC for session tickets. (CVE-2016-6302)\n\n* Multiple integer overflow flaws were found in the way OpenSSL performed pointer arithmetic. A remote attacker could possibly use these flaws to cause a TLS/SSL server or client using OpenSSL to crash. (CVE-2016-2177)\n\n* An out of bounds read flaw was found in the way OpenSSL formatted Public Key Infrastructure Time-Stamp Protocol data for printing. An attacker could possibly cause an application using OpenSSL to crash if it printed time stamp data from the attacker. (CVE-2016-2180)\n\n* Multiple out of bounds read flaws were found in the way OpenSSL handled certain TLS/SSL protocol handshake messages. A remote attacker could possibly use these flaws to crash a TLS/SSL server or client using OpenSSL. (CVE-2016-6306)\n\nRed Hat would like to thank the OpenSSL project for reporting CVE-2016-6304 and CVE-2016-6306 and OpenVPN for reporting CVE-2016-2183. Upstream acknowledges Shi Lei (Gear Team of Qihoo 360 Inc.) as the original reporter of CVE-2016-6304 and CVE-2016-6306; and Karthikeyan Bhargavan (Inria) and Gaëtan Leurent (Inria) as the original reporters of CVE-2016-2183.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-09-27"
+      },
+      "Updated": {
+        "Date": "2016-09-27"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-2177",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-190",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2177",
+          "Public": "20160505"
+        },
+        {
+          "CveID": "CVE-2016-2178",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:P/I:N/A:N",
+          "Cvss3": "5.1/CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2178",
+          "Public": "20160523"
+        },
+        {
+          "CveID": "CVE-2016-2179",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-772",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2179",
+          "Public": "20160630"
+        },
+        {
+          "CveID": "CVE-2016-2180",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.1/CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-125",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2180",
+          "Public": "20160721"
+        },
+        {
+          "CveID": "CVE-2016-2181",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2181",
+          "Public": "20160705"
+        },
+        {
+          "CveID": "CVE-2016-2182",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cvss3": "6.2/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-391",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2182",
+          "Public": "20160816"
+        },
+        {
+          "CveID": "CVE-2016-6302",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-190-\u003eCWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6302",
+          "Public": "20160823"
+        },
+        {
+          "CveID": "CVE-2016-6304",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6304",
+          "Public": "20160922"
+        },
+        {
+          "CveID": "CVE-2016-6306",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-125",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-6306",
+          "Public": "20160921"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1341705",
+          "ID": "1341705"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1343400",
+          "ID": "1343400"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1359615",
+          "ID": "1359615"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1367340",
+          "ID": "1367340"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1369113",
+          "ID": "1369113"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1369504",
+          "ID": "1369504"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1369855",
+          "ID": "1369855"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1377594",
+          "ID": "1377594"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1377600",
+          "ID": "1377600"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.7",
+        "cpe:/o:redhat:rhel_aus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl is earlier than 1:1.0.1e-51.el7_2.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161940001"
+                  },
+                  {
+                    "Comment": "openssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171929002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-devel is earlier than 1:1.0.1e-51.el7_2.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161940003"
+                  },
+                  {
+                    "Comment": "openssl-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171929004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-libs is earlier than 1:1.0.1e-51.el7_2.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161940005"
+                  },
+                  {
+                    "Comment": "openssl-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171929006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-perl is earlier than 1:1.0.1e-51.el7_2.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161940007"
+                  },
+                  {
+                    "Comment": "openssl-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171929008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openssl-static is earlier than 1:1.0.1e-51.el7_2.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161940009"
+                  },
+                  {
+                    "Comment": "openssl-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171929010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

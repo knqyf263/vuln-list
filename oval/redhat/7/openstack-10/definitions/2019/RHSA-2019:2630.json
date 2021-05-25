@@ -1,0 +1,90 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20192630",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2019:2630: redis security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 10.0 (Newton)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:2630",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:2630"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10192",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10192"
+      }
+    ],
+    "Description": "Redis is an advanced key-value store. It is often referred to as a data-structure server since keys can contain strings, hashes, lists, sets, and sorted sets. For performance, Redis works with an in-memory data set. You can persist it either by dumping the data set to disk every once in a while, or by appending each command to a log.\n\nSecurity Fix(es):\n\n* redis: Heap buffer overflow in HyperLogLog triggered by malicious client (CVE-2019-10192)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-09-04"
+      },
+      "Updated": {
+        "Date": "2019-09-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-10192",
+          "Cvss3": "7.2/CVSS:3.0/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10192",
+          "Public": "20190619"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1723918",
+          "ID": "1723918"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:10",
+        "cpe:/a:redhat:openstack-optools:10::el7",
+        "cpe:/a:redhat:openstack:10",
+        "cpe:/a:redhat:openstack:10::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170025004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025003"
+          },
+          {
+            "Comment": "redis is earlier than 0:3.0.6-5.el7ost",
+            "TestRef": "oval:com.redhat.rhsa:tst:20192630001"
+          },
+          {
+            "Comment": "redis is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20173226002"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151897",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2015:1897: openstack-glance security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux OpenStack Platform 7.0 (Kilo) for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1897",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1897"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5251",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5251"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5286",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5286"
+      }
+    ],
+    "Description": "OpenStack Image service (glance) provides discovery, registration, and\ndelivery services for disk and server images. It provides the ability to\ncopy or snapshot a server image, and immediately store it away. Stored\nimages can be used as a template to get new servers up and running quickly\nand more consistently than installing a server operating system and\nindividually configuring additional services.\n\nA flaw was discovered in the OpenStack Image service where a\ntenant could manipulate the status of their images by submitting an\nHTTP PUT request together with an 'x-image-meta-status' header. A\nmalicious tenant could exploit this flaw to reactivate disabled images,\nbypass storage quotas, and in some cases replace image contents (where\nthey have owner access). Setups using the Image service's v1 API could\nallow the illegal modification of image status. Additionally, setups\nwhich also use the v2 API could allow a subsequent re-upload of image\ncontents. (CVE-2015-5251)\n\nA race-condition flaw was discovered in the OpenStack Image service.\nWhen images in the upload state were deleted using a token close to\nexpiration, untracked image data could accumulate in the back end.\nBecause untracked data does not count towards the storage quota, an\nattacker could use this flaw to cause a denial of service through\nresource exhaustion. (CVE-2015-5286)\n\nRed Hat would like to thank the OpenStack project for reporting these\nissues. Upstream acknowledges Hemanth Makkapati of Rackspace as the\noriginal reporter of CVE-2015-5251, and Mike Fedosin and Alexei Galkin of\nMirantis as the original reporters of CVE-2015-5286.\n\nAll openstack-glance users are advised to upgrade to these updated\npackages, which correct these issues. After installing the updated\npackages, running Image service services will be restarted\nautomatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-10-15"
+      },
+      "Updated": {
+        "Date": "2015-10-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5251",
+          "Cvss2": "6.0/AV:N/AC:M/Au:S/C:P/I:P/A:P",
+          "Cwe": "CWE-285",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5251",
+          "Public": "20150922"
+        },
+        {
+          "CveID": "CVE-2015-5286",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5286",
+          "Public": "20151001"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1263511",
+          "ID": "1263511"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1267516",
+          "ID": "1267516"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:7",
+        "cpe:/a:redhat:openstack-director:7::el7",
+        "cpe:/a:redhat:openstack-director_els:7",
+        "cpe:/a:redhat:openstack-director_els:7::el7.4",
+        "cpe:/a:redhat:openstack-optools:7",
+        "cpe:/a:redhat:openstack-optools:7::el7",
+        "cpe:/a:redhat:openstack:7",
+        "cpe:/a:redhat:openstack:7::el7",
+        "cpe:/a:redhat:openstack_els:7",
+        "cpe:/a:redhat:openstack_els:7::el7.4"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20132099008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20132099007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-glance is earlier than 0:2015.1.1-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151897001"
+                  },
+                  {
+                    "Comment": "openstack-glance is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20164383002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-glance-doc is earlier than 0:2015.1.1-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151897003"
+                  },
+                  {
+                    "Comment": "openstack-glance-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20164383006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-glance is earlier than 0:2015.1.1-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151897005"
+                  },
+                  {
+                    "Comment": "python-glance is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20164383004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

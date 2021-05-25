@@ -1,0 +1,190 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20160155",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2016:0155: openstack-swift security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux OpenStack Platform 7.0 (Kilo) for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:0155",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:0155"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-0737",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-0737"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-0738",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-0738"
+      }
+    ],
+    "Description": "OpenStack Object Storage (swift) provides object storage in virtual\ncontainers, which allows users to store and retrieve files (arbitrary\ndata). The service's distributed architecture supports horizontal scaling;\nredundancy as failure-proofing is provided through software-based data\nreplication. Because Object Storage supports asynchronous eventual\nconsistency replication, it is well suited to multiple data-center\ndeployment.\n\nA memory-leak issue was found in OpenStack Object Storage (swift), in the\nproxy-to-server connection. An OpenStack-authenticated attacker could\nremotely trigger this flaw to cause denial of service through excess memory\nconsumption. (CVE-2016-0738)\n\nA memory-leak issue was found in OpenStack Object Storage (swift), in the\nclient-to-proxy connection. An OpenStack-authenticated attacker could\nremotely trigger this flaw to cause denial of service through excess memory\nconsumption. (CVE-2016-0737)\n\nRed Hat would like to thank the OpenStack project for reporting these \nissues. Upstream acknowledges Romain Le Disez from OVH and Örjan Persson\nfrom Kiliaro as the original reporters.\n\nAll users of openstack-swift are advised to upgrade to these updated\npackages, which correct these issues. After installing this update, the\nOpenStack Object Storage services will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-02-09"
+      },
+      "Updated": {
+        "Date": "2016-02-09"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-0737",
+          "Cvss2": "6.8/AV:N/AC:L/Au:S/C:N/I:N/A:C",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-0737",
+          "Public": "20160120"
+        },
+        {
+          "CveID": "CVE-2016-0738",
+          "Cvss2": "6.8/AV:N/AC:L/Au:S/C:N/I:N/A:C",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-0738",
+          "Public": "20160120"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1298905",
+          "ID": "1298905"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1298924",
+          "ID": "1298924"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:7",
+        "cpe:/a:redhat:openstack-director:7::el7",
+        "cpe:/a:redhat:openstack-director_els:7",
+        "cpe:/a:redhat:openstack-director_els:7::el7.4",
+        "cpe:/a:redhat:openstack-optools:7",
+        "cpe:/a:redhat:openstack-optools:7::el7",
+        "cpe:/a:redhat:openstack:7",
+        "cpe:/a:redhat:openstack:7::el7",
+        "cpe:/a:redhat:openstack_els:7",
+        "cpe:/a:redhat:openstack_els:7::el7.4"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20132099008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20132099007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-swift is earlier than 0:2.3.0-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160155001"
+                  },
+                  {
+                    "Comment": "openstack-swift is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151895002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-swift-account is earlier than 0:2.3.0-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160155003"
+                  },
+                  {
+                    "Comment": "openstack-swift-account is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151895004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-swift-container is earlier than 0:2.3.0-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160155005"
+                  },
+                  {
+                    "Comment": "openstack-swift-container is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151895006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-swift-doc is earlier than 0:2.3.0-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160155007"
+                  },
+                  {
+                    "Comment": "openstack-swift-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151895008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-swift-object is earlier than 0:2.3.0-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160155009"
+                  },
+                  {
+                    "Comment": "openstack-swift-object is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151895010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-swift-proxy is earlier than 0:2.3.0-3.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160155011"
+                  },
+                  {
+                    "Comment": "openstack-swift-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151895012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20172489",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2017:2489: mercurial security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:2489",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:2489"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-1000115",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-1000115"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-1000116",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-1000116"
+      }
+    ],
+    "Description": "Mercurial is a fast, lightweight source control management system designed for efficient handling of very large distributed projects.\n\nSecurity Fix(es):\n\n* A vulnerability was found in the way Mercurial handles path auditing and caches the results. An attacker could abuse a repository with a series of commits mixing symlinks and regular files/directories to trick Mercurial into writing outside of a given repository. (CVE-2017-1000115)\n\n* A shell command injection flaw related to the handling of \"ssh\" URLs has been discovered in Mercurial. This can be exploited to execute shell commands with the privileges of the user running the Mercurial client, for example, when performing a \"checkout\" or \"update\" action on a sub-repository within a malicious repository or a legitimate repository containing a malicious commit. (CVE-2017-1000116)\n\nRed Hat would like to thank the Mercurial Security Team for reporting CVE-2017-1000115 and the Subversion Team for reporting CVE-2017-1000116.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-08-17"
+      },
+      "Updated": {
+        "Date": "2017-08-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-1000115",
+          "Cvss3": "5.4/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:L",
+          "Cwe": "CWE-22",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-1000115",
+          "Public": "20170810"
+        },
+        {
+          "CveID": "CVE-2017-1000116",
+          "Cvss3": "6.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-20",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-1000116",
+          "Public": "20170810"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1479915",
+          "ID": "1479915"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1480330",
+          "ID": "1480330"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.7",
+        "cpe:/o:redhat:rhel_aus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "emacs-mercurial is earlier than 0:2.6.2-8.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172489001"
+                  },
+                  {
+                    "Comment": "emacs-mercurial is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160706002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "emacs-mercurial-el is earlier than 0:2.6.2-8.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172489003"
+                  },
+                  {
+                    "Comment": "emacs-mercurial-el is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160706004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mercurial is earlier than 0:2.6.2-8.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172489005"
+                  },
+                  {
+                    "Comment": "mercurial is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160706006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mercurial-hgk is earlier than 0:2.6.2-8.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172489007"
+                  },
+                  {
+                    "Comment": "mercurial-hgk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160706008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

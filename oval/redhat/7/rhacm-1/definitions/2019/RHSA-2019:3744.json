@@ -1,0 +1,124 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193744",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2019:3744: ansible security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 14.0 (Rocky)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3744",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3744"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10156",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10156"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10206",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10206"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-3828",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-3828"
+      }
+    ],
+    "Description": "Ansible is a simple model-driven configuration management, multi-node deployment, and remote-task execution system. Ansible works over SSH and does not require any software or daemons to be installed on remote nodes. Extension modules can be written in any language and are transferred to managed machines automatically.\n\nSecurity Fix(es):\n\n* Ansible: path traversal in the fetch module (CVE-2019-3828)\n\n* ansible: unsafe template evaluation of returned module data can lead to information disclosure (CVE-2019-10156)\n\n* Ansible: disclosure data when prompted for password and template characters are passed (CVE-2019-10206)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-06"
+      },
+      "Updated": {
+        "Date": "2019-11-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-10156",
+          "Cvss3": "4.6/CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10156",
+          "Public": "20190604"
+        },
+        {
+          "CveID": "CVE-2019-10206",
+          "Cvss3": "6.4/CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:N",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10206",
+          "Public": "20190724"
+        },
+        {
+          "CveID": "CVE-2019-3828",
+          "Cvss3": "4.2/CVSS:3.0/AV:L/AC:L/PR:H/UI:R/S:C/C:L/I:L/A:N",
+          "Cwe": "CWE-22",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-3828",
+          "Public": "20190212"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1676689",
+          "ID": "1676689"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1717311",
+          "ID": "1717311"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1732623",
+          "ID": "1732623"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:14",
+        "cpe:/a:redhat:openstack-optools:14::el7",
+        "cpe:/a:redhat:openstack:14",
+        "cpe:/a:redhat:openstack:14::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20190944144"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20190944143"
+          },
+          {
+            "Comment": "ansible is earlier than 0:2.6.19-1.el7ae",
+            "TestRef": "oval:com.redhat.rhsa:tst:20193744001"
+          },
+          {
+            "Comment": "ansible is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20190590002"
+          }
+        ]
+      }
+    ]
+  }
+}

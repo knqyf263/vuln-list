@@ -1,0 +1,2619 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130834",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2013:0834: JBoss Enterprise Application Platform 6.1.0 update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat JBoss Enterprise Application Platform 6 for RHEL 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0834",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0834"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-4529",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-4529"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-4572",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-4572"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-5575",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-5575"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-2067",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-2067"
+      }
+    ],
+    "Description": "JBoss Enterprise Application Platform 6 is a platform for Java applications\nbased on JBoss Application Server 7.\n\nThis release serves as a replacement for JBoss Enterprise Application\nPlatform 6.0.1, and includes bug fixes and enhancements. Refer to the 6.1.0\nRelease Notes for information on the most significant of these changes,\navailable shortly from https://access.redhat.com/site/documentation/\n\nSecurity fixes:\n\nXML encryption backwards compatibility attacks were found against various\nframeworks, including Apache CXF. An attacker could force a server to use\ninsecure, legacy cryptosystems, even when secure cryptosystems were enabled\non endpoints. By forcing the use of legacy cryptosystems, flaws such as\nCVE-2011-1096 and CVE-2011-2487 would be exposed, allowing plain text to be\nrecovered from cryptograms and symmetric keys. (CVE-2012-5575)\n\nNote: Automatic checks to prevent CVE-2012-5575 are only run when\nWS-SecurityPolicy is used to enforce security requirements. It is best\npractice to use WS-SecurityPolicy to enforce security requirements.\n\nWhen applications running on JBoss Web used the COOKIE session tracking\nmethod, the org.apache.catalina.connector.Response.encodeURL() method\nreturned the URL with the jsessionid appended as a query string parameter\nwhen processing the first request of a session. An attacker could possibly\nexploit this flaw by performing a man-in-the-middle attack to obtain a\nuser's jsessionid and hijack their session, or by extracting the jsessionid\nfrom log files. Note that no session tracking method is used by default,\none must be configured. (CVE-2012-4529)\n\nIf multiple applications used the same custom authorization module class\nname, and provided their own implementations of it, the first application\nto be loaded will have its implementation used for all other applications\nusing the same custom authorization module class name. A local attacker\ncould use this flaw to deploy a malicious application that provides\nimplementations of custom authorization modules that permit or deny user\naccess according to rules supplied by the attacker. (CVE-2012-4572)\n\nRed Hat would like to thank Tibor Jager, Kenneth G. Paterson and Juraj\nSomorovsky of Ruhr-University Bochum for reporting CVE-2012-5575.\nCVE-2012-4572 was discovered by Josef Cacek of the Red Hat JBoss EAP\nQuality Engineering team.\n\nWarning: Before applying this update, back up your existing JBoss\nEnterprise Application Platform installation and deployed applications.\nRefer to the Solution section for further details.\n\nAll users of JBoss Enterprise Application Platform 6.0.1 on Red Hat\nEnterprise Linux 6 are advised to upgrade to these updated packages. The\nJBoss server process must be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-05-20"
+      },
+      "Updated": {
+        "Date": "2013-05-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-4529",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-4529",
+          "Public": "20121010"
+        },
+        {
+          "CveID": "CVE-2012-4572",
+          "Cvss2": "3.7/AV:L/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-4572",
+          "Public": "20130520"
+        },
+        {
+          "CveID": "CVE-2012-5575",
+          "Cvss2": "7.8/AV:N/AC:L/Au:N/C:C/I:N/A:N",
+          "Cwe": "CWE-327",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-5575",
+          "Public": "20130308"
+        },
+        {
+          "CveID": "CVE-2013-2067",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-384",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-2067",
+          "Public": "20130510"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/868202",
+          "ID": "868202"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/872059",
+          "ID": "872059"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/880443",
+          "ID": "880443"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/961779",
+          "ID": "961779"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6",
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6::el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20151073006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20151073005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-servlet-api_3.0_spec is earlier than 0:1.0.2-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834001"
+                  },
+                  {
+                    "Comment": "jboss-servlet-api_3.0_spec is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592238"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-logmanager is earlier than 0:1.4.0-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834003"
+                  },
+                  {
+                    "Comment": "jboss-logmanager is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592196"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-threads is earlier than 0:2.1.0-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834005"
+                  },
+                  {
+                    "Comment": "jboss-threads is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592242"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-dmr is earlier than 0:1.1.6-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834007"
+                  },
+                  {
+                    "Comment": "jboss-dmr is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592164"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-msc is earlier than 0:1.0.4-1.GA_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834009"
+                  },
+                  {
+                    "Comment": "jboss-msc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592222"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-remoting3-jmx is earlier than 0:1.1.0-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834011"
+                  },
+                  {
+                    "Comment": "jboss-remoting3-jmx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592224"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbosgi-metadata is earlier than 0:2.2.0-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834013"
+                  },
+                  {
+                    "Comment": "jbosgi-metadata is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592144"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbosgi-spi is earlier than 0:3.2.0-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834015"
+                  },
+                  {
+                    "Comment": "jbosgi-spi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592314"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbosgi-repository is earlier than 0:2.1.0-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834017"
+                  },
+                  {
+                    "Comment": "jbosgi-repository is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbosgi-vfs is earlier than 0:1.2.1-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834019"
+                  },
+                  {
+                    "Comment": "jbosgi-vfs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbosgi-resolver is earlier than 0:3.0.1-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834021"
+                  },
+                  {
+                    "Comment": "jbosgi-resolver is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592138"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-metadata is earlier than 0:7.0.8-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834023"
+                  },
+                  {
+                    "Comment": "jboss-metadata is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-metadata-appclient is earlier than 0:7.0.8-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834025"
+                  },
+                  {
+                    "Comment": "jboss-metadata-appclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-metadata-common is earlier than 0:7.0.8-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834027"
+                  },
+                  {
+                    "Comment": "jboss-metadata-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-metadata-ear is earlier than 0:7.0.8-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834029"
+                  },
+                  {
+                    "Comment": "jboss-metadata-ear is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-metadata-ejb is earlier than 0:7.0.8-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834031"
+                  },
+                  {
+                    "Comment": "jboss-metadata-ejb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-metadata-web is earlier than 0:7.0.8-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834033"
+                  },
+                  {
+                    "Comment": "jboss-metadata-web is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apache-cxf-xjc-utils is earlier than 0:2.6.0-1.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834035"
+                  },
+                  {
+                    "Comment": "apache-cxf-xjc-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592086"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cxf-xjc-boolean is earlier than 0:2.6.0-1.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834037"
+                  },
+                  {
+                    "Comment": "cxf-xjc-boolean is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592088"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cxf-xjc-dv is earlier than 0:2.6.0-1.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834039"
+                  },
+                  {
+                    "Comment": "cxf-xjc-dv is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592090"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cxf-xjc-ts is earlier than 0:2.6.0-1.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834041"
+                  },
+                  {
+                    "Comment": "cxf-xjc-ts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592092"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glassfish-javamail is earlier than 0:1.4.5-1.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834043"
+                  },
+                  {
+                    "Comment": "glassfish-javamail is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592100"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-common-beans is earlier than 0:1.1.0-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834045"
+                  },
+                  {
+                    "Comment": "jboss-common-beans is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592146"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossws-api is earlier than 0:1.0.1-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834047"
+                  },
+                  {
+                    "Comment": "jbossws-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592250"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xml-security is earlier than 0:1.5.3-1.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834049"
+                  },
+                  {
+                    "Comment": "xml-security is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592300"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "slf4j-jboss-logmanager is earlier than 0:1.0.2-1.GA_redhat_1.3.ep6.el6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834051"
+                  },
+                  {
+                    "Comment": "slf4j-jboss-logmanager is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592274"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossws-common-tools is earlier than 0:1.1.0-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834053"
+                  },
+                  {
+                    "Comment": "jbossws-common-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592332"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossws-native is earlier than 0:4.1.1-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834055"
+                  },
+                  {
+                    "Comment": "jbossws-native is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592334"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jul-to-slf4j-stub is earlier than 0:1.0.1-1.Final_redhat_1.1.ep6.el6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834057"
+                  },
+                  {
+                    "Comment": "jul-to-slf4j-stub is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592264"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jgroups is earlier than 1:3.2.7-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834059"
+                  },
+                  {
+                    "Comment": "jgroups is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592256"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "guava is earlier than 0:13.0.1-1.redhat_1.ep6.el6.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834061"
+                  },
+                  {
+                    "Comment": "guava is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592098"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-marshalling is earlier than 0:1.3.16-.GA.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834063"
+                  },
+                  {
+                    "Comment": "jboss-marshalling is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592202"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "netty is earlier than 0:3.6.2-1_redhat_1.1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834065"
+                  },
+                  {
+                    "Comment": "netty is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592266"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "org.osgi.core is earlier than 0:4.2.0-9.redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834067"
+                  },
+                  {
+                    "Comment": "org.osgi.core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "org.osgi.enterprise is earlier than 0:4.2.0-9.redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834069"
+                  },
+                  {
+                    "Comment": "org.osgi.enterprise is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592052"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "opensaml is earlier than 0:2.5.1-1.redhat_1.ep6.el6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834071"
+                  },
+                  {
+                    "Comment": "opensaml is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834072"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossweb is earlier than 0:7.2.0-2.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834073"
+                  },
+                  {
+                    "Comment": "jbossweb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ecj3 is earlier than 1:3.7.2-6.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834075"
+                  },
+                  {
+                    "Comment": "ecj3 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834076"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glassfish-jsf is earlier than 0:2.1.19-2.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834077"
+                  },
+                  {
+                    "Comment": "glassfish-jsf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592312"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atinject is earlier than 0:1-9.redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834079"
+                  },
+                  {
+                    "Comment": "atinject is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jcip-annotations is earlier than 0:1.0-3.redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834081"
+                  },
+                  {
+                    "Comment": "jcip-annotations is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4 is earlier than 0:4.2.0-3.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834083"
+                  },
+                  {
+                    "Comment": "hibernate4 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592372"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-core is earlier than 0:4.2.0-3.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834085"
+                  },
+                  {
+                    "Comment": "hibernate4-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592374"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-entitymanager is earlier than 0:4.2.0-3.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834087"
+                  },
+                  {
+                    "Comment": "hibernate4-entitymanager is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592376"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-envers is earlier than 0:4.2.0-3.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834089"
+                  },
+                  {
+                    "Comment": "hibernate4-envers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592378"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-infinispan is earlier than 0:4.2.0-3.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834091"
+                  },
+                  {
+                    "Comment": "hibernate4-infinispan is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592380"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbosgi-deployment is earlier than 0:1.3.0-2.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834093"
+                  },
+                  {
+                    "Comment": "jbosgi-deployment is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592140"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbosgi-framework-core is earlier than 0:2.1.0-2.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834095"
+                  },
+                  {
+                    "Comment": "jbosgi-framework-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592136"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apache-commons-pool-eap6 is earlier than 0:1.6-6.redhat_4.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834097"
+                  },
+                  {
+                    "Comment": "apache-commons-pool-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592132"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "wss4j is earlier than 0:1.6.9-2.redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834099"
+                  },
+                  {
+                    "Comment": "wss4j is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592328"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-console is earlier than 0:1.5.2-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834101"
+                  },
+                  {
+                    "Comment": "jboss-as-console is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592346"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jansi is earlier than 0:1.9-2.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834103"
+                  },
+                  {
+                    "Comment": "jansi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834104"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-jaxrs-api_1.1_spec is earlier than 0:1.0.1-7.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834105"
+                  },
+                  {
+                    "Comment": "jboss-jaxrs-api_1.1_spec is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592186"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hibernate4-validator is earlier than 0:4.3.1-1.Final_redhat_1.1.ep6.el6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834107"
+                  },
+                  {
+                    "Comment": "hibernate4-validator is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592112"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atinject-eap6 is earlier than 0:1-3.redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834109"
+                  },
+                  {
+                    "Comment": "atinject-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834110"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jcip-annotations-eap6 is earlier than 0:1.0-3.1.redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834111"
+                  },
+                  {
+                    "Comment": "jcip-annotations-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834112"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "velocity-eap6 is earlier than 0:1.7-2.1.redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834113"
+                  },
+                  {
+                    "Comment": "velocity-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dom4j is earlier than 0:1.6.1-19.redhat_5.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834115"
+                  },
+                  {
+                    "Comment": "dom4j is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592340"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "resteasy is earlier than 0:2.3.6-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834117"
+                  },
+                  {
+                    "Comment": "resteasy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592344"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jacorb-jboss is earlier than 0:2.3.2-11.redhat_4.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834119"
+                  },
+                  {
+                    "Comment": "jacorb-jboss is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-aesh is earlier than 0:0.33.3-1_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834121"
+                  },
+                  {
+                    "Comment": "jboss-aesh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834122"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-remoting3 is earlier than 0:3.2.16-1.GA_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834123"
+                  },
+                  {
+                    "Comment": "jboss-remoting3 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592506"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossws-spi is earlier than 0:2.1.2-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834125"
+                  },
+                  {
+                    "Comment": "jbossws-spi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592252"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dom4j-eap6 is earlier than 0:1.6.1-19.redhat_5.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834127"
+                  },
+                  {
+                    "Comment": "dom4j-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834128"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apache-commons-daemon-jsvc-eap6 is earlier than 1:1.0.15-1.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834129"
+                  },
+                  {
+                    "Comment": "apache-commons-daemon-jsvc-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592066"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "picketlink-federation is earlier than 0:2.1.6-3.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834131"
+                  },
+                  {
+                    "Comment": "picketlink-federation is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592290"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-jbossweb-native is earlier than 0:1.1.27-4.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834133"
+                  },
+                  {
+                    "Comment": "jbossas-jbossweb-native is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-native is earlier than 0:1.1.27-4.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834135"
+                  },
+                  {
+                    "Comment": "tomcat-native is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592064"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossws-common is earlier than 0:2.1.1-1.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834137"
+                  },
+                  {
+                    "Comment": "jbossws-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592436"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-jms-api_1.1_spec is earlier than 0:1.0.1-6.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834139"
+                  },
+                  {
+                    "Comment": "jboss-jms-api_1.1_spec is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592180"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-transaction-api_1.1_spec is earlier than 0:1.0.1-6.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834141"
+                  },
+                  {
+                    "Comment": "jboss-transaction-api_1.1_spec is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592240"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-jaxrpc-api_1.1_spec is earlier than 0:1.0.1-4.Final_redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834143"
+                  },
+                  {
+                    "Comment": "jboss-jaxrpc-api_1.1_spec is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592190"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sun-ws-metadata-2.0-api is earlier than 0:1.0.MR1-12_MR1_redhat_3.ep6.el6.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834145"
+                  },
+                  {
+                    "Comment": "sun-ws-metadata-2.0-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592056"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "codehaus-jackson is earlier than 0:1.9.9-4.redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834147"
+                  },
+                  {
+                    "Comment": "codehaus-jackson is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "codehaus-jackson-core-asl is earlier than 0:1.9.9-4.redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834149"
+                  },
+                  {
+                    "Comment": "codehaus-jackson-core-asl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "codehaus-jackson-jaxrs is earlier than 0:1.9.9-4.redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834151"
+                  },
+                  {
+                    "Comment": "codehaus-jackson-jaxrs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "codehaus-jackson-mapper-asl is earlier than 0:1.9.9-4.redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834153"
+                  },
+                  {
+                    "Comment": "codehaus-jackson-mapper-asl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "codehaus-jackson-xc is earlier than 0:1.9.9-4.redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834155"
+                  },
+                  {
+                    "Comment": "codehaus-jackson-xc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "weld-cdi-1.0-api is earlier than 0:1.0-8.SP4_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834157"
+                  },
+                  {
+                    "Comment": "weld-cdi-1.0-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592296"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apache-cxf is earlier than 0:2.6.6-20.redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834159"
+                  },
+                  {
+                    "Comment": "apache-cxf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592336"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glassfish-jsf12 is earlier than 0:1.2_15-12_b01_redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834161"
+                  },
+                  {
+                    "Comment": "glassfish-jsf12 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "relaxngDatatype is earlier than 0:2011.1-4.redhat_6.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834163"
+                  },
+                  {
+                    "Comment": "relaxngDatatype is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592068"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "wsdl4j-eap6 is earlier than 0:1.6.2-12.3.redhat_4.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834165"
+                  },
+                  {
+                    "Comment": "wsdl4j-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592326"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "objectweb-asm-eap6 is earlier than 0:3.3.1-6.2.redhat_4.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834167"
+                  },
+                  {
+                    "Comment": "objectweb-asm-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "relaxngDatatype-eap6 is earlier than 0:2011.1-4.redhat_6.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834169"
+                  },
+                  {
+                    "Comment": "relaxngDatatype-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834170"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "slf4j-eap6 is earlier than 0:1.7.2-10.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834171"
+                  },
+                  {
+                    "Comment": "slf4j-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592324"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-modules is earlier than 0:1.2.0-2.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834173"
+                  },
+                  {
+                    "Comment": "jboss-modules is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592208"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "apache-commons-daemon-eap6 is earlier than 1:1.0.15-4.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834175"
+                  },
+                  {
+                    "Comment": "apache-commons-daemon-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834176"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xmltooling is earlier than 0:1.3.2-10.redhat_4.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834177"
+                  },
+                  {
+                    "Comment": "xmltooling is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834178"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glassfish-jaxb is earlier than 0:2.2.5-14.redhat_5.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834179"
+                  },
+                  {
+                    "Comment": "glassfish-jaxb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592310"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-remote-naming is earlier than 0:1.0.6-2.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834181"
+                  },
+                  {
+                    "Comment": "jboss-remote-naming is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossws-cxf is earlier than 0:4.1.3-1.Final_redhat_3.ep6.el6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834183"
+                  },
+                  {
+                    "Comment": "jbossws-cxf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592438"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ironjacamar is earlier than 0:1.0.17-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834185"
+                  },
+                  {
+                    "Comment": "ironjacamar is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592366"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "h2database is earlier than 0:1.3.168-3_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834187"
+                  },
+                  {
+                    "Comment": "h2database is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xerces-j2-eap6 is earlier than 0:2.9.1-14_redhat_4.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834189"
+                  },
+                  {
+                    "Comment": "xerces-j2-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592070"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xml-commons-resolver-eap6 is earlier than 0:1.2-10.redhat_3.ep6.el6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834191"
+                  },
+                  {
+                    "Comment": "xml-commons-resolver-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_cluster is earlier than 0:1.2.4-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834193"
+                  },
+                  {
+                    "Comment": "mod_cluster is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592368"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_cluster-demo is earlier than 0:1.2.4-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834195"
+                  },
+                  {
+                    "Comment": "mod_cluster-demo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592370"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_cluster-native is earlier than 0:1.2.4-1.Final.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834197"
+                  },
+                  {
+                    "Comment": "mod_cluster-native is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592384"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "joda-time is earlier than 0:1.6.2-5.redhat_4.ep6.el6.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834199"
+                  },
+                  {
+                    "Comment": "joda-time is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592258"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpclient is earlier than 0:4.2.1-7.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834201"
+                  },
+                  {
+                    "Comment": "httpclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834202"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpcomponents-client is earlier than 0:4.2.1-7.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834203"
+                  },
+                  {
+                    "Comment": "httpcomponents-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834204"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpcomponents-core is earlier than 0:4.2.1-7.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834205"
+                  },
+                  {
+                    "Comment": "httpcomponents-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834206"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpcomponents-project is earlier than 0:6-7.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834207"
+                  },
+                  {
+                    "Comment": "httpcomponents-project is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834208"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpcore is earlier than 0:4.2.1-7.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834209"
+                  },
+                  {
+                    "Comment": "httpcore is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834210"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpmime is earlier than 0:4.2.1-7.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834211"
+                  },
+                  {
+                    "Comment": "httpmime is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834212"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jaxbintros is earlier than 0:1.0.2-14.GA_redhat_4.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834213"
+                  },
+                  {
+                    "Comment": "jaxbintros is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592120"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glassfish-jaxb-eap6 is earlier than 0:2.2.5-14.redhat_5.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834215"
+                  },
+                  {
+                    "Comment": "glassfish-jaxb-eap6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834216"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-javadocs is earlier than 0:7.2.0-7.Final_redhat_7.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834217"
+                  },
+                  {
+                    "Comment": "jbossas-javadocs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openws is earlier than 0:1.4.2-9_redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834219"
+                  },
+                  {
+                    "Comment": "openws is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834220"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-jsf-api_2.1_spec is earlier than 0:2.1.19.1-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834221"
+                  },
+                  {
+                    "Comment": "jboss-jsf-api_2.1_spec is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592316"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "infinispan is earlier than 0:5.2.6-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834223"
+                  },
+                  {
+                    "Comment": "infinispan is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592356"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "infinispan-cachestore-jdbc is earlier than 0:5.2.6-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834225"
+                  },
+                  {
+                    "Comment": "infinispan-cachestore-jdbc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592358"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "infinispan-cachestore-remote is earlier than 0:5.2.6-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834227"
+                  },
+                  {
+                    "Comment": "infinispan-cachestore-remote is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592360"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "infinispan-client-hotrod is earlier than 0:5.2.6-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834229"
+                  },
+                  {
+                    "Comment": "infinispan-client-hotrod is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592362"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "infinispan-core is earlier than 0:5.2.6-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834231"
+                  },
+                  {
+                    "Comment": "infinispan-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592364"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hornetq is earlier than 0:2.3.1-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834233"
+                  },
+                  {
+                    "Comment": "hornetq is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592440"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "picketbox is earlier than 0:4.0.17-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834235"
+                  },
+                  {
+                    "Comment": "picketbox is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592510"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "hornetq-native is earlier than 0:2.3.1-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834237"
+                  },
+                  {
+                    "Comment": "hornetq-native is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592306"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-hornetq-native is earlier than 0:2.3.1-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834239"
+                  },
+                  {
+                    "Comment": "jbossas-hornetq-native is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592308"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-ejb-client is earlier than 0:1.0.21-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834241"
+                  },
+                  {
+                    "Comment": "jboss-ejb-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossts is earlier than 1:4.17.4-3.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834243"
+                  },
+                  {
+                    "Comment": "jbossts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592318"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_jk-ap22 is earlier than 0:1.2.37-2.redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834245"
+                  },
+                  {
+                    "Comment": "mod_jk-ap22 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592072"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-security-negotiation is earlier than 0:2.2.5-1.Final_redhat_1.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834247"
+                  },
+                  {
+                    "Comment": "jboss-security-negotiation is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "woodstox-core-asl is earlier than 0:4.2.0-7.redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834249"
+                  },
+                  {
+                    "Comment": "woodstox-core-asl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834250"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "woodstox-stax2-api is earlier than 0:3.1.1-7.redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834251"
+                  },
+                  {
+                    "Comment": "woodstox-stax2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592060"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd is earlier than 0:2.2.22-18.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834253"
+                  },
+                  {
+                    "Comment": "httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592348"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-devel is earlier than 0:2.2.22-18.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834255"
+                  },
+                  {
+                    "Comment": "httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592350"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-tools is earlier than 0:2.2.22-18.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834257"
+                  },
+                  {
+                    "Comment": "httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592352"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ssl is earlier than 1:2.2.22-18.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834259"
+                  },
+                  {
+                    "Comment": "mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121592354"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "weld-core is earlier than 0:1.1.13-1.Final_redhat_1.ep6.el6.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834261"
+                  },
+                  {
+                    "Comment": "weld-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-appclient is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834263"
+                  },
+                  {
+                    "Comment": "jboss-as-appclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075130"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-client-all is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834265"
+                  },
+                  {
+                    "Comment": "jboss-as-client-all is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-cmp is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834267"
+                  },
+                  {
+                    "Comment": "jboss-as-cmp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075072"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-clustering is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834269"
+                  },
+                  {
+                    "Comment": "jboss-as-clustering is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-cli is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834271"
+                  },
+                  {
+                    "Comment": "jboss-as-cli is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075094"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-controller-client is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834273"
+                  },
+                  {
+                    "Comment": "jboss-as-controller-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075084"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-configadmin is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834275"
+                  },
+                  {
+                    "Comment": "jboss-as-configadmin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-ee is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834277"
+                  },
+                  {
+                    "Comment": "jboss-as-ee is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075064"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-controller is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834279"
+                  },
+                  {
+                    "Comment": "jboss-as-controller is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-connector is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834281"
+                  },
+                  {
+                    "Comment": "jboss-as-connector is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-ejb3 is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834283"
+                  },
+                  {
+                    "Comment": "jboss-as-ejb3 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075052"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-deployment-repository is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834285"
+                  },
+                  {
+                    "Comment": "jboss-as-deployment-repository is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075128"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-domain-management is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834287"
+                  },
+                  {
+                    "Comment": "jboss-as-domain-management is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-ee-deployment is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834289"
+                  },
+                  {
+                    "Comment": "jboss-as-ee-deployment is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075082"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-domain-http is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834291"
+                  },
+                  {
+                    "Comment": "jboss-as-domain-http is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-jmx is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834293"
+                  },
+                  {
+                    "Comment": "jboss-as-jmx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075110"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-deployment-scanner is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834295"
+                  },
+                  {
+                    "Comment": "jboss-as-deployment-scanner is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075076"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-host-controller is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834297"
+                  },
+                  {
+                    "Comment": "jboss-as-host-controller is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-logging is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834299"
+                  },
+                  {
+                    "Comment": "jboss-as-logging is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075126"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-jacorb is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834301"
+                  },
+                  {
+                    "Comment": "jboss-as-jacorb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075074"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-jdr is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834303"
+                  },
+                  {
+                    "Comment": "jboss-as-jdr is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075116"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-embedded is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834305"
+                  },
+                  {
+                    "Comment": "jboss-as-embedded is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075054"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-jpa is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834307"
+                  },
+                  {
+                    "Comment": "jboss-as-jpa is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-jaxrs is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834309"
+                  },
+                  {
+                    "Comment": "jboss-as-jaxrs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075098"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-jsr77 is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834311"
+                  },
+                  {
+                    "Comment": "jboss-as-jsr77 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075108"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-jaxr is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834313"
+                  },
+                  {
+                    "Comment": "jboss-as-jaxr is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075112"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-jsf is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834315"
+                  },
+                  {
+                    "Comment": "jboss-as-jsf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-messaging is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834317"
+                  },
+                  {
+                    "Comment": "jboss-as-messaging is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075118"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-network is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834319"
+                  },
+                  {
+                    "Comment": "jboss-as-network is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075088"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-mail is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834321"
+                  },
+                  {
+                    "Comment": "jboss-as-mail is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075102"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-sar is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834323"
+                  },
+                  {
+                    "Comment": "jboss-as-sar is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-osgi-configadmin is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834325"
+                  },
+                  {
+                    "Comment": "jboss-as-osgi-configadmin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075086"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-platform-mbean is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834327"
+                  },
+                  {
+                    "Comment": "jboss-as-platform-mbean is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075132"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-web is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834329"
+                  },
+                  {
+                    "Comment": "jboss-as-web is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075124"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-naming is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834331"
+                  },
+                  {
+                    "Comment": "jboss-as-naming is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075090"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-management-client-content is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834333"
+                  },
+                  {
+                    "Comment": "jboss-as-management-client-content is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075106"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-remoting is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834335"
+                  },
+                  {
+                    "Comment": "jboss-as-remoting is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075078"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-xts is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834337"
+                  },
+                  {
+                    "Comment": "jboss-as-xts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075134"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-protocol is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834339"
+                  },
+                  {
+                    "Comment": "jboss-as-protocol is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075092"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-osgi-service is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834341"
+                  },
+                  {
+                    "Comment": "jboss-as-osgi-service is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075114"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-server is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834343"
+                  },
+                  {
+                    "Comment": "jboss-as-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075060"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-weld is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834345"
+                  },
+                  {
+                    "Comment": "jboss-as-weld is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075080"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-webservices is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834347"
+                  },
+                  {
+                    "Comment": "jboss-as-webservices is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075066"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-modcluster is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834349"
+                  },
+                  {
+                    "Comment": "jboss-as-modcluster is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-threads is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834351"
+                  },
+                  {
+                    "Comment": "jboss-as-threads is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075068"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-transactions is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834353"
+                  },
+                  {
+                    "Comment": "jboss-as-transactions is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075100"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-system-jmx is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834355"
+                  },
+                  {
+                    "Comment": "jboss-as-system-jmx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075120"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-osgi is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834357"
+                  },
+                  {
+                    "Comment": "jboss-as-osgi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075122"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-process-controller is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834359"
+                  },
+                  {
+                    "Comment": "jboss-as-process-controller is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-pojo is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834361"
+                  },
+                  {
+                    "Comment": "jboss-as-pojo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075096"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-security is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834363"
+                  },
+                  {
+                    "Comment": "jboss-as-security is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075070"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-as-version is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834365"
+                  },
+                  {
+                    "Comment": "jboss-as-version is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075104"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-core is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834367"
+                  },
+                  {
+                    "Comment": "jbossas-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075136"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-appclient is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834369"
+                  },
+                  {
+                    "Comment": "jbossas-appclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075142"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-domain is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834371"
+                  },
+                  {
+                    "Comment": "jbossas-domain is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075144"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-bundles is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834373"
+                  },
+                  {
+                    "Comment": "jbossas-bundles is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075148"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-product-eap is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834375"
+                  },
+                  {
+                    "Comment": "jbossas-product-eap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075140"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-welcome-content-eap is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834377"
+                  },
+                  {
+                    "Comment": "jbossas-welcome-content-eap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075138"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-standalone is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834379"
+                  },
+                  {
+                    "Comment": "jbossas-standalone is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075146"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jbossas-modules-eap is earlier than 0:7.2.0-8.Final_redhat_8.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130834381"
+                  },
+                  {
+                    "Comment": "jbossas-modules-eap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhea:tst:20151075150"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

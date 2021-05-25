@@ -1,0 +1,125 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202508",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2020:2508: expat security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7.7 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2508",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2508"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-2716",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-2716"
+      }
+    ],
+    "Description": "Expat is a C library for parsing XML documents.\n\nSecurity Fix(es):\n\n* expat: Integer overflow leading to buffer overflow in XML_GetBuffer() (CVE-2015-2716)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-06-12"
+      },
+      "Updated": {
+        "Date": "2020-06-12"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-2716",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-2716",
+          "Public": "20150512"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1220607",
+          "ID": "1220607"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.7",
+        "cpe:/o:redhat:rhel_aus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "expat is earlier than 0:2.1.0-11.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202508001"
+                  },
+                  {
+                    "Comment": "expat is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162824002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "expat-devel is earlier than 0:2.1.0-11.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202508003"
+                  },
+                  {
+                    "Comment": "expat-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162824004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "expat-static is earlier than 0:2.1.0-11.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202508005"
+                  },
+                  {
+                    "Comment": "expat-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162824006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20181593",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2018:1593: Red Hat OpenStack Platform director security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 10.0 (Newton)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:1593",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:1593"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12155",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12155"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1000115",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1000115"
+      }
+    ],
+    "Description": "Red Hat OpenStack Platform director provides the facilities for deploying and monitoring a private or public infrastructure-as-a-service (IaaS) cloud based on Red Hat OpenStack Platform.\n\nSecurity Fix(es):\n\n* A resource-permission flaw was found in the python-tripleo and openstack-tripleo-heat-templates packages where ceph.client.openstack.keyring is created as world-readable. A local attacker with access to the key could read or modify data on Ceph cluster pools for OpenStack as though the attacker were the OpenStack service, thus potentially reading or modifying data in an OpenStack Block Storage volume. \n\nTo exploit this flaw, the attacker must have local access to an overcloud node. However by default, access to overcloud nodes is restricted and accessible only from the management undercloud server on an internal network. (CVE-2017-12155)\n\nThis issue was discovered by Katuya Kawakami (NEC).\n\n* It was discovered that the memcached connections using UDP transport protocol can be abused for efficient traffic amplification distributed denial of service (DDoS) attacks. A remote attacker could send a malicious UDP request using a spoofed source IP address of a target system to memcached, causing it to send a significantly larger response to the target. (CVE-2018-1000115)\n\nThis advisory also addresses the following issues:\n\n* This release adds support for deploying Dell EMC VMAX Block Storage backend using the Red Hat OpenStack Platform director. (BZ#1503896)\n\n* Using composable roles for deploying Dell SC and PS Block Storage backend caused errors. The backends could only be deploying using 'cinder::config::cinder_config' hiera data.\nWith this update, the composable role support for deploying the Dell SC and PS Block Storage backends is updated. As a result, they can be now deployed using composable roles. (BZ#1552980)\n\n* Previously, the iptables rules were managed by the Red Hat OpenStack Platform director and the OpenStack Networking service, which resulted in the rules created by the OpenStack Networking service to persist on to the disk. As a result, the rules that should not be loaded after an iptables restart or a system reboot would be loaded causing traffic issues. \nWith this update, the Red Hat OpenStack Platform director has been updated to exclude the OpenStack Networking rules from '/etc/sysconfig/iptables' when the director saves the firewall rules. As a result, iptables restart or a system reboot should work without causing traffic problems. \nNote: It might be necessary to perform a rolling restart of the controller nodes to ensure that any orphaned managed neutron rules are no longer reloaded. (BZ#1541528)\n\n* OS::TripleO::SwiftStorage::Ports* resources have been renamed to OS::TripleO::ObjectStorage::Port* to ensure standalone Object Storage nodes using the 'ObjectStorage' roles can be deployed correctly. Operators need to modify their custom templates that previously used OS::TripleO::SwiftStorage::Ports* settings. (BZ#1544802)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-05-17"
+      },
+      "Updated": {
+        "Date": "2018-05-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-12155",
+          "Cvss3": "8.4/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:N",
+          "Cwe": "CWE-732",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12155",
+          "Public": "20170919"
+        },
+        {
+          "CveID": "CVE-2018-1000115",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1000115",
+          "Public": "20180302"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1489360",
+          "ID": "1489360"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1551182",
+          "ID": "1551182"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:10",
+        "cpe:/a:redhat:openstack-optools:10::el7",
+        "cpe:/a:redhat:openstack:10",
+        "cpe:/a:redhat:openstack:10::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170025004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-tripleo-heat-templates is earlier than 0:5.3.10-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181593001"
+                  },
+                  {
+                    "Comment": "openstack-tripleo-heat-templates is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171242044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "puppet-tripleo is earlier than 0:5.6.8-6.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181593003"
+                  },
+                  {
+                    "Comment": "puppet-tripleo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170025002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

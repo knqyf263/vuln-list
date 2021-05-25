@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20151073",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHBA-2015:1073: jboss-ec2-eap enhancement update for EAP 6.4.1 (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat JBoss Enterprise Application Platform 6.4 for RHEL 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2015:1073",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2015:1073"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-1849",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-1849"
+      }
+    ],
+    "Description": "Red Hat JBoss Enterprise Application Platform 6 is a platform for Java EE\napplications. It is based on JBoss Application Server 7 and incorporates\nmultiple open-source projects to provide a complete Java EE platform solution.\n\n* The jboss-ec2-eap packages provide scripts for Red Hat JBoss Enterprise\nApplication Platform running on the Amazon Web Services (AWS) Elastic Compute\nCloud (EC2). With this update, the packages have been updated to ensure\ncompatibility with Red Hat JBoss Enterprise Application Platform 6.4.1.\n\nUsers of EAP 6.4.0 jboss-ec2-eap are advised to upgrade to these updated\npackages, which add this enhancement.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-06-04"
+      },
+      "Updated": {
+        "Date": "2015-06-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-1849",
+          "Cvss2": "1.7/AV:L/AC:L/Au:S/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-1849",
+          "Public": "20150323"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1208580",
+          "ID": "1208580"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6",
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6::el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20151073006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20151073005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-ec2-eap is earlier than 0:7.5.1-3.Final_redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151073001"
+                  },
+                  {
+                    "Comment": "jboss-ec2-eap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151073002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-ec2-eap-samples is earlier than 0:7.5.1-3.Final_redhat_3.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151073003"
+                  },
+                  {
+                    "Comment": "jboss-ec2-eap-samples is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151073004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20180275",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2018:0275: jboss-ec2-eap security, bug fix, and enhancement update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat JBoss Enterprise Application Platform 6.4 for RHEL 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:0275",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:0275"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12174",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12174"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12617",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12617"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1041",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1041"
+      }
+    ],
+    "Description": "The jboss-ec2-eap packages provide scripts for Red Hat JBoss Enterprise Application Platform running on the Amazon Web Services (AWS) Elastic Compute Cloud (EC2).\n\nWith this update, the jboss-ec2-eap package has been updated to ensure compatibility with Red Hat JBoss Enterprise Application Platform 6.4.19.\n\nSecurity Fix(es):\n\n* It was found that when Artemis and HornetQ are configured with UDP discovery and JGroups discovery a huge byte array is created when receiving an unexpected multicast message. This may result in a heap memory exhaustion, full GC, or OutOfMemoryError. (CVE-2017-12174)\n\n* A vulnerability was discovered in Tomcat where if a servlet context was configured with readonly=false and HTTP PUT requests were allowed, an attacker could upload a JSP file to that context and achieve code execution. (CVE-2017-12617)\n\n* A vulnerability was found in the way RemoteMessageChannel, introduced in jboss-remoting versions 3.3.10.Final-redhat-1, reads from an empty buffer. An attacker could use this flaw to cause denial of service via high CPU caused by an infinite loop. (CVE-2018-1041)\n\nThe CVE-2017-12174 issue was discovered by Masafumi Miura (Red Hat).",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-02-05"
+      },
+      "Updated": {
+        "Date": "2018-02-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-12174",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-20",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12174",
+          "Public": "20180205"
+        },
+        {
+          "CveID": "CVE-2017-12617",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-20",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12617",
+          "Public": "20170921"
+        },
+        {
+          "CveID": "CVE-2018-1041",
+          "Cvss3": "4.3/CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-835",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1041",
+          "Public": "20180205"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1494283",
+          "ID": "1494283"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1498378",
+          "ID": "1498378"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1530457",
+          "ID": "1530457"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6",
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6::el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20151073006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20151073005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-ec2-eap is earlier than 0:7.5.19-2.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180275001"
+                  },
+                  {
+                    "Comment": "jboss-ec2-eap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151073002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jboss-ec2-eap-samples is earlier than 0:7.5.19-2.Final_redhat_2.ep6.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180275003"
+                  },
+                  {
+                    "Comment": "jboss-ec2-eap-samples is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151073004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

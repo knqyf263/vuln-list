@@ -1,0 +1,206 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20173227",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2017:3227: openstack-aodh security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 10.0 (Newton)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:3227",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:3227"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12440",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12440"
+      }
+    ],
+    "Description": "openstack-aodh provides the ability to trigger actions based on defined rules against metric or event data collected by OpenStack Telemetry (ceilometer) or Time-Series-Database-as-a-Service (gnocchi).\n\nSecurity Fix(es):\n\n* A verification flaw was found in openstack-aodh. As part of an HTTP alarm action, a user could pass in a trust ID. However, the trust could be from anyone because it was not verified. Because the trust was then used by openstack-aodh to obtain a keystone token for the alarm action, a malicious user could pass in another person's trust ID and obtain a keystone token containing the delegated authority of that user. (CVE-2017-12440)\n\nThis issue was discovered by Luke Hinds (Red Hat). Upstream acknowledges Zane Bitter (Red Hat) as the original reporter.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-11-15"
+      },
+      "Updated": {
+        "Date": "2017-11-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-12440",
+          "Cvss3": "4.9/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:N",
+          "Cwe": "CWE-345",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12440",
+          "Public": "20170817"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1478834",
+          "ID": "1478834"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:10",
+        "cpe:/a:redhat:openstack-optools:10::el7",
+        "cpe:/a:redhat:openstack:10",
+        "cpe:/a:redhat:openstack:10::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170025004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-aodh-api is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227001"
+                  },
+                  {
+                    "Comment": "openstack-aodh-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-aodh-common is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227003"
+                  },
+                  {
+                    "Comment": "openstack-aodh-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-aodh-compat is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227005"
+                  },
+                  {
+                    "Comment": "openstack-aodh-compat is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-aodh-evaluator is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227007"
+                  },
+                  {
+                    "Comment": "openstack-aodh-evaluator is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-aodh-expirer is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227009"
+                  },
+                  {
+                    "Comment": "openstack-aodh-expirer is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-aodh-listener is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227011"
+                  },
+                  {
+                    "Comment": "openstack-aodh-listener is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-aodh-notifier is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227013"
+                  },
+                  {
+                    "Comment": "openstack-aodh-notifier is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-aodh is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227015"
+                  },
+                  {
+                    "Comment": "python-aodh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-aodh-tests is earlier than 0:3.0.4-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227017"
+                  },
+                  {
+                    "Comment": "python-aodh-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173227018"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
