@@ -1,0 +1,127 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20120468",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:0468: libtiff security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:0468",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:0468"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-1173",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-1173"
+      }
+    ],
+    "Description": "The libtiff packages contain a library of functions for manipulating Tagged\nImage File Format (TIFF) files.\n\nTwo integer overflow flaws, leading to heap-based buffer overflows, were\nfound in the way libtiff attempted to allocate space for a tile in a TIFF\nimage file. An attacker could use these flaws to create a specially-crafted\nTIFF file that, when opened, would cause an application linked against\nlibtiff to crash or, possibly, execute arbitrary code. (CVE-2012-1173)\n\nAll libtiff users should upgrade to these updated packages, which contain a\nbackported patch to resolve these issues. All running applications linked\nagainst libtiff must be restarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-04-10"
+      },
+      "Updated": {
+        "Date": "2012-04-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-1173",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-1173",
+          "Public": "20120404"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/803078",
+          "ID": "803078"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.6",
+        "cpe:/o:redhat:rhel_eus:6.6::computenode",
+        "cpe:/o:redhat:rhel_eus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtiff is earlier than 0:3.9.4-5.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120468001"
+                  },
+                  {
+                    "Comment": "libtiff is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110318002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtiff-devel is earlier than 0:3.9.4-5.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120468003"
+                  },
+                  {
+                    "Comment": "libtiff-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110318004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtiff-static is earlier than 0:3.9.4-5.el6_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120468005"
+                  },
+                  {
+                    "Comment": "libtiff-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110318006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

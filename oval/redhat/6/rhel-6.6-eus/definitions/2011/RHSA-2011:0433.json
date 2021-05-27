@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110433",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2011:0433: xorg-x11-server-utils security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0433",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0433"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0465",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0465"
+      }
+    ],
+    "Description": "The xorg-x11-server-utils package contains a collection of utilities used\nto modify and query the runtime configuration of the X.Org server. X.Org is\nan open source implementation of the X Window System.\n\nA flaw was found in the X.Org X server resource database utility, xrdb.\nCertain variables were not properly sanitized during the launch of a user's\ngraphical session, which could possibly allow a remote attacker to execute\narbitrary code with root privileges, if they were able to make the display\nmanager execute xrdb with a specially-crafted X client hostname. For\nexample, by configuring the hostname on the target system via a crafted\nDHCP reply, or by using the X Display Manager Control Protocol (XDMCP) to\nconnect to that system from a host that has a special DNS name.\n(CVE-2011-0465)\n\nRed Hat would like to thank Matthieu Herrb for reporting this issue.\nUpstream acknowledges Sebastian Krahmer of the SuSE Security Team as the\noriginal reporter.\n\nUsers of xorg-x11-server-utils should upgrade to this updated package,\nwhich contains a backported patch to resolve this issue. All running X.Org\nserver instances must be restarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-04-11"
+      },
+      "Updated": {
+        "Date": "2011-04-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-0465",
+          "Cvss2": "6.8/AV:A/AC:H/Au:N/C:C/I:C/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0465",
+          "Public": "20110405"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/680196",
+          "ID": "680196"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.6",
+        "cpe:/o:redhat:rhel_eus:6.6::computenode",
+        "cpe:/o:redhat:rhel_eus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "xorg-x11-server-utils is earlier than 0:7.4-15.el6_0.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110433001"
+          },
+          {
+            "Comment": "xorg-x11-server-utils is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhba:tst:20141376154"
+          }
+        ]
+      }
+    ]
+  }
+}

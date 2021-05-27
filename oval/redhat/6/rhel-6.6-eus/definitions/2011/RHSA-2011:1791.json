@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111791",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2011:1791: squid security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1791",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1791"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-4096",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-4096"
+      }
+    ],
+    "Description": "Squid is a high-performance proxy caching server for web clients,\nsupporting FTP, Gopher, and HTTP data objects. \n\nAn input validation flaw was found in the way Squid calculated the total\nnumber of resource records in the answer section of multiple name server\nresponses. An attacker could use this flaw to cause Squid to crash. \n(CVE-2011-4096)\n\nUsers of squid should upgrade to this updated package, which contains a\nbackported patch to correct this issue. After installing this update, the\nsquid service will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-12-06"
+      },
+      "Updated": {
+        "Date": "2011-12-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-4096",
+          "Cvss2": "3.3/AV:A/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-4096",
+          "Public": "20110606"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/750316",
+          "ID": "750316"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.6",
+        "cpe:/o:redhat:rhel_eus:6.6::computenode",
+        "cpe:/o:redhat:rhel_eus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "squid is earlier than 7:3.1.10-1.el6_2.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20111791001"
+          },
+          {
+            "Comment": "squid is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110545002"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20152101",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2015:2101: python security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:2101",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:2101"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1752",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1752"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1753",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1753"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-4616",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-4616"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-4650",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-4650"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-7185",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-7185"
+      }
+    ],
+    "Description": "Python is an interpreted, interactive, object-oriented programming language\noften compared to Tcl, Perl, Scheme, or Java. Python includes modules,\nclasses, exceptions, very high level dynamic data types and dynamic typing.\nPython supports interfaces to many system calls and libraries, as well as\nto various windowing systems (X11, Motif, Tk, Mac and MFC).\n\nIt was discovered that the Python xmlrpclib module did not restrict the\nsize of gzip-compressed HTTP responses. A malicious XMLRPC server could\ncause an XMLRPC client using xmlrpclib to consume an excessive amount of\nmemory. (CVE-2013-1753)\n\nIt was discovered that multiple Python standard library modules\nimplementing network protocols (such as httplib or smtplib) failed to\nrestrict the sizes of server responses. A malicious server could cause a\nclient using one of the affected modules to consume an excessive amount of\nmemory. (CVE-2013-1752)\n\nIt was discovered that the CGIHTTPServer module incorrectly handled URL\nencoded paths. A remote attacker could use this flaw to execute scripts\noutside of the cgi-bin directory, or disclose the source code of the\nscripts in the cgi-bin directory. (CVE-2014-4650)\n\nAn integer overflow flaw was found in the way the buffer() function handled\nits offset and size arguments. An attacker able to control these arguments\ncould use this flaw to disclose portions of the application memory or cause\nit to crash. (CVE-2014-7185)\n\nA flaw was found in the way the json module handled negative index\narguments passed to certain functions (such as raw_decode()). An attacker\nable to control the index value passed to one of the affected functions\ncould possibly use this flaw to disclose portions of the application\nmemory. (CVE-2014-4616)\n\nThe Python standard library HTTP client modules (such as httplib or urllib)\ndid not perform verification of TLS/SSL certificates when connecting to\nHTTPS servers. A man-in-the-middle attacker could use this flaw to hijack\nconnections and eavesdrop or modify transferred data. (CVE-2014-9365)\n\nNote: The Python standard library was updated to make it possible to enable\ncertificate verification by default. However, for backwards compatibility,\nverification remains disabled by default. Future updates may change this\ndefault. Refer to the Knowledgebase article 2039753 linked to in the\nReferences section for further details about this change. (BZ#1219108)\n\nThis update also fixes the following bugs:\n\n* Subprocesses used with the Eventlet library or regular threads previously\ntried to close epoll file descriptors twice, which led to an \"Invalid\nargument\" error. Subprocesses have been fixed to close the file descriptors\nonly once. (BZ#1103452)\n\n* When importing the readline module from a Python script, Python no longer\nproduces erroneous random characters on stdout. (BZ#1189301)\n\n* The cProfile utility has been fixed to print all values that the \"-s\"\noption supports when this option is used without a correct value.\n(BZ#1237107)\n\n* The load_cert_chain() function now accepts \"None\" as a keyfile argument.\n(BZ#1250611)\n\nIn addition, this update adds the following enhancements:\n\n* Security enhancements as described in PEP 466 have been backported to the\nPython standard library, for example, new features of the ssl module:\nServer Name Indication (SNI) support, support for new TLSv1.x protocols,\nnew hash algorithms in the hashlib module, and many more. (BZ#1111461)\n\n* Support for the ssl.PROTOCOL_TLSv1_2 protocol has been added to the ssl\nlibrary. (BZ#1192015)\n\n* The ssl.SSLSocket.version() method is now available to access information\nabout the version of the SSL protocol used in a connection. (BZ#1259421)\n\nAll python users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add these\nenhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-11-19"
+      },
+      "Updated": {
+        "Date": "2015-11-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1752",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1752",
+          "Public": "20120925"
+        },
+        {
+          "CveID": "CVE-2013-1753",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1753",
+          "Public": "20120925"
+        },
+        {
+          "CveID": "CVE-2014-4616",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:N/A:P",
+          "Cwe": "CWE-129-\u003eCWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-4616",
+          "Public": "20140519"
+        },
+        {
+          "CveID": "CVE-2014-4650",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-138",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-4650",
+          "Public": "20140623"
+        },
+        {
+          "CveID": "CVE-2014-7185",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:N/A:P",
+          "Cwe": "CWE-190-\u003eCWE-125-\u003eCWE-200",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-7185",
+          "Public": "20140623"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1046170",
+          "ID": "1046170"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1046174",
+          "ID": "1046174"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1112285",
+          "ID": "1112285"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1113527",
+          "ID": "1113527"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1146026",
+          "ID": "1146026"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.3",
+        "cpe:/o:redhat:rhel_tus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python is earlier than 0:2.7.5-34.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101001"
+                  },
+                  {
+                    "Comment": "python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-debug is earlier than 0:2.7.5-34.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101003"
+                  },
+                  {
+                    "Comment": "python-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-devel is earlier than 0:2.7.5-34.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101005"
+                  },
+                  {
+                    "Comment": "python-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-libs is earlier than 0:2.7.5-34.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101007"
+                  },
+                  {
+                    "Comment": "python-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-test is earlier than 0:2.7.5-34.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101009"
+                  },
+                  {
+                    "Comment": "python-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-tools is earlier than 0:2.7.5-34.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101011"
+                  },
+                  {
+                    "Comment": "python-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tkinter is earlier than 0:2.7.5-34.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101013"
+                  },
+                  {
+                    "Comment": "tkinter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152101014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

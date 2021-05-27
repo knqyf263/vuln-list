@@ -1,0 +1,109 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20204807",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:4807: prometheus-jmx-exporter security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:4807",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:4807"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-18640",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-18640"
+      }
+    ],
+    "Description": "Prometheus JMX Exporter is a JMX to Prometheus exporter: a collector that can be configured to scrape and expose MBeans of a JMX target.\n\nSecurity Fix(es):\n\n* snakeyaml: Billion laughs attack via alias feature (CVE-2017-18640)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.3 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-04"
+      },
+      "Updated": {
+        "Date": "2020-11-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-18640",
+          "Cvss3": "7.6/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:H",
+          "Cwe": "CWE-776-\u003eCWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-18640",
+          "Public": "20191212"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1785376",
+          "ID": "1785376"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_linux:8",
+        "cpe:/a:redhat:enterprise_linux:8::appstream",
+        "cpe:/a:redhat:enterprise_linux:8::crb",
+        "cpe:/a:redhat:enterprise_linux:8::highavailability",
+        "cpe:/a:redhat:enterprise_linux:8::nfv",
+        "cpe:/a:redhat:enterprise_linux:8::realtime",
+        "cpe:/a:redhat:enterprise_linux:8::resilientstorage",
+        "cpe:/a:redhat:enterprise_linux:8::sap",
+        "cpe:/a:redhat:enterprise_linux:8::sap_hana",
+        "cpe:/a:redhat:enterprise_linux:8::supplementary",
+        "cpe:/o:redhat:enterprise_linux:8",
+        "cpe:/o:redhat:enterprise_linux:8::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20137488004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "prometheus-jmx-exporter is earlier than 0:0.12.0-6.el8",
+            "TestRef": "oval:com.redhat.rhsa:tst:20204807001"
+          },
+          {
+            "Comment": "prometheus-jmx-exporter is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20204807002"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:20137488003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

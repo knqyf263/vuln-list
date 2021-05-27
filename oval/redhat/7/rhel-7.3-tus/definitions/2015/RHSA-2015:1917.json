@@ -1,0 +1,177 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151917",
+  "Version": "646",
+  "Metadata": {
+    "Title": "RHSA-2015:1917: libwmf security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1917",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1917"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-0848",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-0848"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-4588",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-4588"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-4695",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-4695"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-4696",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-4696"
+      }
+    ],
+    "Description": "libwmf is a library for reading and converting Windows Metafile Format\n(WMF) vector graphics. libwmf is used by applications such as GIMP and\nImageMagick.\n\nIt was discovered that libwmf did not correctly process certain WMF\n(Windows Metafiles) with embedded BMP images. By tricking a victim into\nopening a specially crafted WMF file in an application using libwmf, a\nremote attacker could possibly use this flaw to execute arbitrary code with\nthe privileges of the user running the application. (CVE-2015-0848,\nCVE-2015-4588)\n\nIt was discovered that libwmf did not properly process certain WMF files.\nBy tricking a victim into opening a specially crafted WMF file in an\napplication using libwmf, a remote attacker could possibly exploit this\nflaw to cause a crash or execute arbitrary code with the privileges of the\nuser running the application. (CVE-2015-4696)\n\nIt was discovered that libwmf did not properly process certain WMF files.\nBy tricking a victim into opening a specially crafted WMF file in an\napplication using libwmf, a remote attacker could possibly exploit this\nflaw to cause a crash. (CVE-2015-4695)\n\nAll users of libwmf are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. After installing the\nupdate, all applications using libwmf must be restarted for the update to\ntake effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-10-20"
+      },
+      "Updated": {
+        "Date": "2015-10-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-0848",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-0848",
+          "Public": "20150601"
+        },
+        {
+          "CveID": "CVE-2015-4588",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-4588",
+          "Public": "20150601"
+        },
+        {
+          "CveID": "CVE-2015-4695",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Cwe": "(CWE-122|CWE-125)",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-4695",
+          "Public": "20150504"
+        },
+        {
+          "CveID": "CVE-2015-4696",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:N/A:P",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-4696",
+          "Public": "20150503"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1227243",
+          "ID": "1227243"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1235665",
+          "ID": "1235665"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1235669",
+          "ID": "1235669"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1272993",
+          "ID": "1272993"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.3",
+        "cpe:/o:redhat:rhel_tus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libwmf is earlier than 0:0.2.8.4-41.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151917001"
+                  },
+                  {
+                    "Comment": "libwmf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151917002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libwmf-devel is earlier than 0:0.2.8.4-41.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151917003"
+                  },
+                  {
+                    "Comment": "libwmf-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151917004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libwmf-lite is earlier than 0:0.2.8.4-41.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151917005"
+                  },
+                  {
+                    "Comment": "libwmf-lite is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151917006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

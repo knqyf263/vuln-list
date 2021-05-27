@@ -1,0 +1,208 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20100894",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2010:0894: systemtap security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2010:0894",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2010:0894"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4170",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4170"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-4171",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-4171"
+      }
+    ],
+    "Description": "SystemTap is an instrumentation system for systems running the Linux\nkernel, version 2.6. Developers can write scripts to collect data on the\noperation of the system. staprun, the SystemTap runtime tool, is used for\nmanaging SystemTap kernel modules (for example, loading them).\n\nIt was discovered that staprun did not properly sanitize the environment\nbefore executing the modprobe command to load an additional kernel module.\nA local, unprivileged user could use this flaw to escalate their\nprivileges. (CVE-2010-4170)\n\nIt was discovered that staprun did not check if the module to be unloaded\nwas previously loaded by SystemTap. A local, unprivileged user could use\nthis flaw to unload an arbitrary kernel module that was not in use.\n(CVE-2010-4171)\n\nNote: After installing this update, users already in the stapdev group must\nbe added to the stapusr group in order to be able to run the staprun tool.\n\nRed Hat would like to thank Tavis Ormandy for reporting these issues.\n\nSystemTap users should upgrade to these updated packages, which contain\nbackported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2010 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2010-11-17"
+      },
+      "Updated": {
+        "Date": "2010-11-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2010-4170",
+          "Cvss2": "7.2/AV:L/AC:L/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-284",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4170",
+          "Public": "20101117"
+        },
+        {
+          "CveID": "CVE-2010-4171",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-4171",
+          "Public": "20101117"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/653604",
+          "ID": "653604"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/653606",
+          "ID": "653606"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.6",
+        "cpe:/o:redhat:rhel_eus:6.6::computenode",
+        "cpe:/o:redhat:rhel_eus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemtap is earlier than 0:1.2-11.el6_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894001"
+                  },
+                  {
+                    "Comment": "systemtap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemtap-client is earlier than 0:1.2-11.el6_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894003"
+                  },
+                  {
+                    "Comment": "systemtap-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemtap-grapher is earlier than 0:1.2-11.el6_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894005"
+                  },
+                  {
+                    "Comment": "systemtap-grapher is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemtap-initscript is earlier than 0:1.2-11.el6_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894007"
+                  },
+                  {
+                    "Comment": "systemtap-initscript is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemtap-runtime is earlier than 0:1.2-11.el6_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894009"
+                  },
+                  {
+                    "Comment": "systemtap-runtime is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemtap-sdt-devel is earlier than 0:1.2-11.el6_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894011"
+                  },
+                  {
+                    "Comment": "systemtap-sdt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemtap-server is earlier than 0:1.2-11.el6_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894013"
+                  },
+                  {
+                    "Comment": "systemtap-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "systemtap-testsuite is earlier than 0:1.2-11.el6_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894015"
+                  },
+                  {
+                    "Comment": "systemtap-testsuite is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100894016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

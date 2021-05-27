@@ -1,0 +1,557 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20161615",
+  "Version": "647",
+  "Metadata": {
+    "Title": "RHBA-2016:1615: Satellite 6.2.1 bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Satellite 6.2 for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2016:1615",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2016:1615"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4475",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4475"
+      }
+    ],
+    "Description": "Red Hat Satellite is a system management solution that allows organizations to configure and maintain their systems without the necessity to provide public Internet access to their servers or other client systems. It performs provisioning and configuration management of predefined standard operating environments.\n\nThis update fixes the following bugs:\n\n* Different virt-who instances were reporting UUIDs and host names which resulted in duplicate host names. A new virt-who has been delivered which allows users to standardize on a single virt-who instance. (BZ#1227986)\n\n* Failures in Puppet module upload were not being propagated to the command line. These failures are now reported correctly. (BZ#1234619)\n\n* A new hammer plug-in is now available which allows users to more easily enable and disable all logging on a Satellite Server. (BZ#1305085)\n\n* The katello-remove command was leaving behind artifacts which was inhibiting the re-installation of the Satellite. These artifacts are now removed, and customers can now re-install as expected. (BZ#1311313)\n\n* Navigating across plug-ins caused an error in the web UI. The navigation has been fixed. (BZ#1311739)\n\n* Certain API calls were allowing users to cross organization boundaries. These calls will now respect the organizational roles. (BZ#1342665)\n\n* Satellite 6.2 did not include the 'ovirt_provision_plugin' to connect with RHEV. This package is now included. (BZ#1343927)\n\n* Deleting a host did not clean up all the subscriptions associated with that host, which was blocking the delete. This subscription data is now cleaned up correctly. (BZ#1344053)\n\n* The installation process was failing to create keys if the /var/lib/puppet/ssl directory was deleted. The installer has been fixed to handle this case. (BZ#1347228)\n\n* Orchestration tasks which should only occur if provisioning was successful were being executed during a process which failed. The exception handling has been improved to not call these orchestration tasks if a provisioning process fails. (BZ#1347992)\n\n* Docker tags were not handled correctly when re-syncing from the Docker Repository. These tags are processed correctly now. (BZ#1349980)\n\n* When a repository sync process was started on the command line and when attempting to start another sync via the web UI, the request failed. With this update, checks are included for existing running sync processes. Duplicate requests no longer result in an error and the progress is correctly reported in the web UI. (BZ#1351103)\n\n* Satellite 6.2 was not calling NSS correctly for DNS updates. The correct number of parameters are now provided. (BZ#1359125)\n\n* Hammer was not requesting the organization ID parameter correctly with certain commands. (BZ#1359665)\n\n* Hammer did not allow users to specify a list of organizations to a host group. This feature has been added. (BZ#1359694)\n\n* The performance of upgrades has been improved on networked file systems. (BZ#1362135)\n\n* The Puppet reports page was not accessible due to an internal server error. The error is now handled correctly and the page can be viewed. (BZ#1364049)\n\nUsers of Red Hat Satellite are advised to upgrade to these updated packages, which fix these bugs.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-08-16"
+      },
+      "Updated": {
+        "Date": "2016-08-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-4475",
+          "Cvss2": "4.9/AV:N/AC:M/Au:S/C:P/I:P/A:N",
+          "Cwe": "CWE-284",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4475",
+          "Public": "20160602"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1342439",
+          "ID": "1342439"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:satellite:6.2",
+        "cpe:/a:redhat:satellite:6.2::el7",
+        "cpe:/a:redhat:satellite_capsule:6.2",
+        "cpe:/a:redhat:satellite_capsule:6.2::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20161500362"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20161500361"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pulp-admin-client is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615001"
+                  },
+                  {
+                    "Comment": "pulp-admin-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501118"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pulp-nodes-child is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615003"
+                  },
+                  {
+                    "Comment": "pulp-nodes-child is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501120"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pulp-nodes-common is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615005"
+                  },
+                  {
+                    "Comment": "pulp-nodes-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501122"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pulp-nodes-parent is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615007"
+                  },
+                  {
+                    "Comment": "pulp-nodes-parent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501124"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pulp-selinux is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615009"
+                  },
+                  {
+                    "Comment": "pulp-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501126"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pulp-server is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615011"
+                  },
+                  {
+                    "Comment": "pulp-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501128"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-pulp-agent-lib is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615013"
+                  },
+                  {
+                    "Comment": "python-pulp-agent-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501130"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-pulp-bindings is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615015"
+                  },
+                  {
+                    "Comment": "python-pulp-bindings is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501132"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-pulp-client-lib is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615017"
+                  },
+                  {
+                    "Comment": "python-pulp-client-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501134"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-pulp-common is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615019"
+                  },
+                  {
+                    "Comment": "python-pulp-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501136"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-pulp-oid_validation is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615021"
+                  },
+                  {
+                    "Comment": "python-pulp-oid_validation is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501138"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-pulp-repoauth is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615023"
+                  },
+                  {
+                    "Comment": "python-pulp-repoauth is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501140"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-pulp-streamer is earlier than 0:2.8.3.4-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615025"
+                  },
+                  {
+                    "Comment": "python-pulp-streamer is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501142"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tfm-rubygem-ovirt_provision_plugin is earlier than 0:1.0.2-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615027"
+                  },
+                  {
+                    "Comment": "tfm-rubygem-ovirt_provision_plugin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tfm-rubygem-hammer_cli_katello is earlier than 0:0.0.22.25-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615029"
+                  },
+                  {
+                    "Comment": "tfm-rubygem-hammer_cli_katello is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501210"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-proxy is earlier than 0:1.11.0.5-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615031"
+                  },
+                  {
+                    "Comment": "foreman-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tfm-rubygem-foreman_discovery is earlier than 0:5.0.0.9-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615033"
+                  },
+                  {
+                    "Comment": "tfm-rubygem-foreman_discovery is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501066"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-installer is earlier than 1:1.11.0.10-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615035"
+                  },
+                  {
+                    "Comment": "foreman-installer is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501106"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tfm-rubygem-katello is earlier than 0:3.0.0.70-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615037"
+                  },
+                  {
+                    "Comment": "tfm-rubygem-katello is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501232"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tfm-rubygem-katello_ostree is earlier than 0:3.0.0.70-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615039"
+                  },
+                  {
+                    "Comment": "tfm-rubygem-katello_ostree is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501234"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615041"
+                  },
+                  {
+                    "Comment": "foreman is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501188"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-compute is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615043"
+                  },
+                  {
+                    "Comment": "foreman-compute is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501190"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-debug is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615045"
+                  },
+                  {
+                    "Comment": "foreman-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501192"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-ec2 is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615047"
+                  },
+                  {
+                    "Comment": "foreman-ec2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501194"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-gce is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615049"
+                  },
+                  {
+                    "Comment": "foreman-gce is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501196"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-libvirt is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615051"
+                  },
+                  {
+                    "Comment": "foreman-libvirt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501198"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-openstack is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615053"
+                  },
+                  {
+                    "Comment": "foreman-openstack is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501200"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-ovirt is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615055"
+                  },
+                  {
+                    "Comment": "foreman-ovirt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501202"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-postgresql is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615057"
+                  },
+                  {
+                    "Comment": "foreman-postgresql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501204"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-rackspace is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615059"
+                  },
+                  {
+                    "Comment": "foreman-rackspace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501206"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "foreman-vmware is earlier than 0:1.11.0.51-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615061"
+                  },
+                  {
+                    "Comment": "foreman-vmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501208"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tfm-rubygem-hammer_cli_foreman_admin is earlier than 0:0.0.5-1.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615063"
+                  },
+                  {
+                    "Comment": "tfm-rubygem-hammer_cli_foreman_admin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615064"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "satellite is earlier than 0:6.2.1-1.2.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615065"
+                  },
+                  {
+                    "Comment": "satellite is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501224"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "satellite-capsule is earlier than 0:6.2.1-1.2.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615067"
+                  },
+                  {
+                    "Comment": "satellite-capsule is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501226"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "satellite-cli is earlier than 0:6.2.1-1.2.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615069"
+                  },
+                  {
+                    "Comment": "satellite-cli is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501228"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "satellite-debug-tools is earlier than 0:6.2.1-1.2.el7sat",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161615071"
+                  },
+                  {
+                    "Comment": "satellite-debug-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20161501230"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

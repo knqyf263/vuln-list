@@ -1,0 +1,462 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170180",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2017:0180: java-1.8.0-openjdk security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0180",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0180"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5546",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5546"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5547",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5547"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5548",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5548"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5552",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5552"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3231",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3231"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3241",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3241"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3252",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3252"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3253",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3253"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3261",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3261"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3272",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3272"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3289",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3289"
+      }
+    ],
+    "Description": "The java-1.8.0-openjdk packages provide the OpenJDK 8 Java Runtime Environment and the OpenJDK 8 Java Software Development Kit.\n\nSecurity Fix(es):\n\n* It was discovered that the RMI registry and DCG implementations in the RMI component of OpenJDK performed deserialization of untrusted inputs. A remote attacker could possibly use this flaw to execute arbitrary code with the privileges of RMI registry or a Java RMI application. (CVE-2017-3241)\n\nThis issue was addressed by introducing whitelists of classes that can be deserialized by RMI registry or DCG. These whitelists can be customized using the newly introduced sun.rmi.registry.registryFilter and sun.rmi.transport.dgcFilter security properties.\n\n* Multiple flaws were discovered in the Libraries and Hotspot components in OpenJDK. An untrusted Java application or applet could use these flaws to completely bypass Java sandbox restrictions. (CVE-2017-3272, CVE-2017-3289)\n\n* A covert timing channel flaw was found in the DSA implementation in the Libraries component of OpenJDK. A remote attacker could possibly use this flaw to extract certain information about the used key via a timing side channel. (CVE-2016-5548)\n\n* It was discovered that the Libraries component of OpenJDK accepted ECSDA signatures using non-canonical DER encoding. This could cause a Java application to accept signature in an incorrect format not accepted by other cryptographic tools. (CVE-2016-5546)\n\n* It was discovered that the 2D component of OpenJDK performed parsing of iTXt and zTXt PNG image chunks even when configured to ignore metadata. An attacker able to make a Java application parse a specially crafted PNG image could cause the application to consume an excessive amount of memory. (CVE-2017-3253)\n\n* It was discovered that the Libraries component of OpenJDK did not validate the length of the object identifier read from the DER input before allocating memory to store the OID. An attacker able to make a Java application decode a specially crafted DER input could cause the application to consume an excessive amount of memory. (CVE-2016-5547)\n\n* It was discovered that the JAAS component of OpenJDK did not use the correct way to extract user DN from the result of the user search LDAP query. A specially crafted user LDAP entry could cause the application to use an incorrect DN. (CVE-2017-3252)\n\n* It was discovered that the Networking component of OpenJDK failed to properly parse user info from the URL. A remote attacker could cause a Java application to incorrectly parse an attacker supplied URL and interpret it differently from other applications processing the same URL. (CVE-2016-5552)\n\n* Multiple flaws were found in the Networking components in OpenJDK. An untrusted Java application or applet could use these flaws to bypass certain Java sandbox restrictions. (CVE-2017-3261, CVE-2017-3231)\n\n* A flaw was found in the way the DES/3DES cipher was used as part of the TLS/SSL protocol. A man-in-the-middle attacker could use this flaw to recover some plaintext data by capturing large amounts of encrypted traffic between TLS/SSL server and client if the communication used a DES/3DES based ciphersuite. (CVE-2016-2183)\n\nThis update mitigates the CVE-2016-2183 issue by adding 3DES cipher suites to the list of legacy algorithms (defined using the jdk.tls.legacyAlgorithms security property) so they are only used if connecting TLS/SSL client and server do not share any other non-legacy cipher suite.\n\nNote: If the web browser plug-in provided by the icedtea-web package was installed, the issues exposed via Java applets could have been exploited without user interaction if a user visited a malicious website.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-01-20"
+      },
+      "Updated": {
+        "Date": "2017-01-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-5546",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5546",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2016-5547",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-770",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5547",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2016-5548",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-385",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5548",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2016-5552",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5552",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2017-3231",
+          "Cvss3": "4.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3231",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2017-3241",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-502",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3241",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2017-3252",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3252",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2017-3253",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-770",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3253",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2017-3261",
+          "Cvss3": "4.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-190-\u003eCWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3261",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2017-3272",
+          "Cvss3": "8.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3272",
+          "Public": "20170117"
+        },
+        {
+          "CveID": "CVE-2017-3289",
+          "Cvss3": "8.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3289",
+          "Public": "20170117"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1413554",
+          "ID": "1413554"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413562",
+          "ID": "1413562"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413583",
+          "ID": "1413583"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413653",
+          "ID": "1413653"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413717",
+          "ID": "1413717"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413764",
+          "ID": "1413764"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413882",
+          "ID": "1413882"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413906",
+          "ID": "1413906"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413911",
+          "ID": "1413911"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413920",
+          "ID": "1413920"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1413955",
+          "ID": "1413955"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.3",
+        "cpe:/o:redhat:rhel_tus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180001"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150809002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-accessibility is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180003"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-accessibility is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150809004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-accessibility-debug is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180005"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-accessibility-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160049006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-debug is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180007"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160049008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-demo is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180009"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-demo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150809006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-demo-debug is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180011"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-demo-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160049012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-devel is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180013"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150809008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-devel-debug is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180015"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-devel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160049016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-headless is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180017"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-headless is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150809010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-headless-debug is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180019"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-headless-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160049020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-javadoc is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180021"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150809012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-javadoc-debug is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180023"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-javadoc-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160049024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-javadoc-zip is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180025"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-javadoc-zip-debug is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180027"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-javadoc-zip-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-src is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180029"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-src is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150809014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.8.0-openjdk-src-debug is earlier than 1:1.8.0.121-0.b13.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170180031"
+                  },
+                  {
+                    "Comment": "java-1.8.0-openjdk-src-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160049028"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

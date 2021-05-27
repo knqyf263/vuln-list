@@ -1,0 +1,227 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151705",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2015:1705: bind security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1705",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1705"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5722",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5722"
+      }
+    ],
+    "Description": "The Berkeley Internet Name Domain (BIND) is an implementation of the Domain\nName System (DNS) protocols. BIND includes a DNS server (named); a resolver\nlibrary (routines for applications to use when interfacing with DNS); and\ntools for verifying that the DNS server is operating correctly.\n\nA denial of service flaw was found in the way BIND parsed certain malformed\nDNSSEC keys. A remote attacker could use this flaw to send a specially\ncrafted DNS query (for example, a query requiring a response from a zone\ncontaining a deliberately malformed key) that would cause named functioning\nas a validating resolver to crash. (CVE-2015-5722)\n\nRed Hat would like to thank ISC for reporting this issue. Upstream\nacknowledges Hanno Böck as the original reporter.\n\nAll bind users are advised to upgrade to these updated packages, which\ncontain a backported patch to correct this issue. After installing the\nupdate, the BIND daemon (named) will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-09-03"
+      },
+      "Updated": {
+        "Date": "2015-09-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5722",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-617",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5722",
+          "Public": "20150902"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1259087",
+          "ID": "1259087"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705001"
+                  },
+                  {
+                    "Comment": "bind is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-chroot is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705003"
+                  },
+                  {
+                    "Comment": "bind-chroot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-devel is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705005"
+                  },
+                  {
+                    "Comment": "bind-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-libs is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705007"
+                  },
+                  {
+                    "Comment": "bind-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-libs-lite is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705009"
+                  },
+                  {
+                    "Comment": "bind-libs-lite is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-license is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705011"
+                  },
+                  {
+                    "Comment": "bind-license is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-lite-devel is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705013"
+                  },
+                  {
+                    "Comment": "bind-lite-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-sdb is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705015"
+                  },
+                  {
+                    "Comment": "bind-sdb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-sdb-chroot is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705017"
+                  },
+                  {
+                    "Comment": "bind-sdb-chroot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-utils is earlier than 32:9.9.4-18.el7_1.5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151705019"
+                  },
+                  {
+                    "Comment": "bind-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20171767028"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

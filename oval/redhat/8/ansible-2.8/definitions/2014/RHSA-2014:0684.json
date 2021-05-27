@@ -1,0 +1,179 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140684",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:0684: gnutls security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0684",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0684"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3465",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3465"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3466",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3466"
+      }
+    ],
+    "Description": "The GnuTLS library provides support for cryptographic algorithms and for\nprotocols such as Transport Layer Security (TLS).\n\nA flaw was found in the way GnuTLS parsed session IDs from ServerHello\nmessages of the TLS/SSL handshake. A malicious server could use this flaw\nto send an excessively long session ID value, which would trigger a buffer\noverflow in a connecting TLS/SSL client application using GnuTLS, causing\nthe client application to crash or, possibly, execute arbitrary code.\n(CVE-2014-3466)\n\nA NULL pointer dereference flaw was found in the way GnuTLS parsed X.509\ncertificates. A specially crafted certificate could cause a server or\nclient application using GnuTLS to crash. (CVE-2014-3465)\n\nRed Hat would like to thank GnuTLS upstream for reporting these issues.\nUpstream acknowledges Joonas Kuorilehto of Codenomicon as the original\nreporter of CVE-2014-3466.\n\nUsers of GnuTLS are advised to upgrade to these updated packages, which\ncorrect these issues. For the update to take effect, all applications\nlinked to the GnuTLS library must be restarted.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-06-10"
+      },
+      "Updated": {
+        "Date": "2014-06-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-3465",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-476",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3465",
+          "Public": "20140131"
+        },
+        {
+          "CveID": "CVE-2014-3466",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-130-\u003eCWE-119",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3466",
+          "Public": "20140530"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1101734",
+          "ID": "1101734"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1101932",
+          "ID": "1101932"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls is earlier than 0:3.1.18-9.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684001"
+                  },
+                  {
+                    "Comment": "gnutls is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-c++ is earlier than 0:3.1.18-9.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684003"
+                  },
+                  {
+                    "Comment": "gnutls-c++ is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-dane is earlier than 0:3.1.18-9.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684005"
+                  },
+                  {
+                    "Comment": "gnutls-dane is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-devel is earlier than 0:3.1.18-9.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684007"
+                  },
+                  {
+                    "Comment": "gnutls-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-utils is earlier than 0:3.1.18-9.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684009"
+                  },
+                  {
+                    "Comment": "gnutls-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140684010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

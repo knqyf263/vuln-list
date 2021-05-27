@@ -1,0 +1,123 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193067",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2019:3067: jss security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3067",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3067"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14823",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14823"
+      }
+    ],
+    "Description": "Java Security Services (JSS) provides an interface between Java Virtual Machine and Network Security Services (NSS). It supports most of the security standards and encryption technologies supported by NSS including communication through SSL/TLS network protocols. JSS is primarily utilized by the Certificate Server as a part of the Identity Management System.\n\nSecurity Fix(es):\n\n* JSS: OCSP policy \"Leaf and Chain\" implicitly trusts the root certificate (CVE-2019-14823)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-10-16"
+      },
+      "Updated": {
+        "Date": "2019-10-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-14823",
+          "Cvss3": "6.8/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N",
+          "Cwe": "CWE-358",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14823",
+          "Public": "20191014:1200"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1747435",
+          "ID": "1747435"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jss is earlier than 0:4.4.6-3.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193067001"
+                  },
+                  {
+                    "Comment": "jss is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193067002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jss-javadoc is earlier than 0:4.4.6-3.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193067003"
+                  },
+                  {
+                    "Comment": "jss-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193067004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
