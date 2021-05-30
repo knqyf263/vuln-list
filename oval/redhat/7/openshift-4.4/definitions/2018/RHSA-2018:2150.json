@@ -1,0 +1,130 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20182150",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2018:2150: ansible security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Ansible Engine 2.5 for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:2150",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:2150"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-10874",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-10874"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-10875",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-10875"
+      }
+    ],
+    "Description": "Ansible is a simple model-driven configuration management, multi-node deployment, and remote-task execution system. Ansible works over SSH and does not require any software or daemons to be installed on remote nodes. Extension modules can be written in any language and are transferred to managed machines automatically.\n\nThe following packages have been upgraded to a newer upstream version: ansible (2.5.6)\n\nSecurity fix(es):\n\n* ansible: Inventory variables are loaded from current working directory when running ad-hoc command that can lead to code execution (CVE-2018-10874)\n\n* ansible: ansible.cfg is being read from current working directory allowing possible code execution (CVE-2018-10875)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nThis issue was discovered by Brian Coca (Red Hat), and Michael Scherer (OSAS).\n\nBug Fix(es):\n\n* Restore module_utils.basic.BOOLEANS variable for backwards compatibility with the module API in older ansible releases.\n\n* lineinfile - add warning when using an empty regexp (https://github.com/ansible/ansible/issues/29443)\n\n* apt - fix apt-mark on debian6 (https://github.com/ansible/ansible/pull/41530)\n\n* copy module - fixed recursive copy with relative paths (https://github.com/ansible/ansible/pull/40166)\n\n* correct debug display for all cases https://github.com/ansible/ansible/pull/41331\n\n* eos_l2_interface - fix eapi (https://github.com/ansible/ansible/pull/42270)\n\n* group_by - support implicit localhost (https://github.com/ansible/ansible/pull/41860)\n\n* influxdb_query - fixed the use of the common return 'results' caused an unexpected fault. The return is renamed to 'query_results'\n\n* junos_config - fix confirm commit timeout issue (https://github.com/ansible/ansible/pull/41527)\n\n* lineinfile - fix insertbefore when used with BOF to not insert duplicate lines (https://github.com/ansible/ansible/issues/38219)\n\n* nsupdate - allow hmac-sha384 https://github.com/ansible/ansible/pull/42209\n\n* nxos_linkagg - fix issue (https://github.com/ansible/ansible/pull/41550).\n\n* nxos_vxlan_vtep_vni - fix issue (https://github.com/ansible/ansible/pull/42240)\n\n* uses correct conn info for reset_connection  https://github.com/ansible/ansible/issues/27520\n\n* correct service facts systemd detection of state https://github.com/ansible/ansible/issues/40809\n\n* correctly check hostvars for vars term https://github.com/ansible/ansible/pull/41819\n\n* vyos_vlan - fix aggregate configuration issues (https://github.com/ansible/ansible/pull/41638)\n\n* win_domain - fixes typo in one of the AD cmdlets https://github.com/ansible/ansible/issues/41536\n\n* win_iis_webapppool - redirect some module output to null so Ansible can read the output JSON https://github.com/ansible/ansible/issues/40874\n\n* win_updates - Fixed issue where running win_updates on async fails without any error\n\n* winrm - ensure pexpect is set to not echo the input on a failure and have a manual sanity check afterwards https://github.com/ansible/ansible/issues/41865",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-07-10"
+      },
+      "Updated": {
+        "Date": "2018-07-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-10874",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-426",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-10874",
+          "Public": "20180629"
+        },
+        {
+          "CveID": "CVE-2018-10875",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-426",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-10875",
+          "Public": "20180629"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1596528",
+          "ID": "1596528"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1596533",
+          "ID": "1596533"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:ansible_engine:2.5",
+        "cpe:/a:redhat:ansible_engine:2.5::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20181949006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20181949005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible is earlier than 0:2.5.6-1.el7ae",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182150001"
+                  },
+                  {
+                    "Comment": "ansible is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181949002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible-doc is earlier than 0:2.5.6-1.el7ae",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182150003"
+                  },
+                  {
+                    "Comment": "ansible-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181949004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20182308",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2018:2308: openslp security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:2308",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:2308"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-17833",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-17833"
+      }
+    ],
+    "Description": "OpenSLP is an open source implementation of the Service Location Protocol (SLP) which is an Internet Engineering Task Force (IETF) standards track protocol and provides a framework to allow networking applications to discover the existence, location, and configuration of networked services in enterprise networks.\n\nSecurity Fix(es):\n\n* openslp: Heap memory corruption in slpd/slpd_process.c allows denial of service or potentially code execution (CVE-2017-17833)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-07-31"
+      },
+      "Updated": {
+        "Date": "2018-07-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-17833",
+          "Cvss3": "7.5/CVSS:3.0/AV:A/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-17833",
+          "Public": "20180419"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1572166",
+          "ID": "1572166"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openslp is earlier than 1:2.0.0-3.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182308001"
+                  },
+                  {
+                    "Comment": "openslp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182308002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openslp-devel is earlier than 1:2.0.0-3.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182308003"
+                  },
+                  {
+                    "Comment": "openslp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182308004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openslp-server is earlier than 1:2.0.0-3.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182308005"
+                  },
+                  {
+                    "Comment": "openslp-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182308006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

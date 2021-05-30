@@ -1,0 +1,121 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130568",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2013:0568: dbus-glib security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0568",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0568"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0292",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0292"
+      }
+    ],
+    "Description": "dbus-glib is an add-on library to integrate the standard D-Bus library with\nthe GLib main loop and threading model.\n\nA flaw was found in the way dbus-glib filtered the message sender (message\nsource subject) when the \"NameOwnerChanged\" signal was received. This\ncould trick a system service using dbus-glib (such as fprintd) into\nbelieving a signal was sent from a privileged process, when it was not. A\nlocal attacker could use this flaw to escalate their privileges.\n(CVE-2013-0292)\n\nAll dbus-glib users are advised to upgrade to these updated packages, which\ncontain a backported patch to correct this issue. All running applications\nlinked against dbus-glib, such as fprintd and NetworkManager, must be\nrestarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-26"
+      },
+      "Updated": {
+        "Date": "2013-02-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-0292",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0292",
+          "Public": "20130214"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/911658",
+          "ID": "911658"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dbus-glib is earlier than 0:0.86-6.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130568001"
+                  },
+                  {
+                    "Comment": "dbus-glib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130568002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dbus-glib-devel is earlier than 0:0.86-6.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130568003"
+                  },
+                  {
+                    "Comment": "dbus-glib-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130568004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20181713",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2018:1713: unboundid-ldapsdk security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:1713",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:1713"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1000134",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1000134"
+      }
+    ],
+    "Description": "The UnboundID LDAP SDK for Java is a free Java library for communicating with LDAP directory servers and performing related tasks like reading and writing LDIF, encoding and decoding data using base64 and ASN.1 BER, and performing secure communications.\n\nThe following packages have been upgraded to a later upstream version: unboundid-ldapsdk (4.0.5). (BZ#1558308)\n\nSecurity Fix(es):\n\n* unboundid-ldapsdk: Incorrect Access Control vulnerability in process function in SimpleBindRequest class (CVE-2018-1000134)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-05-24"
+      },
+      "Updated": {
+        "Date": "2018-05-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-1000134",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-284",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1000134",
+          "Public": "20180316"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1557531",
+          "ID": "1557531"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4",
+        "cpe:/a:redhat:rhev_manager:4.2",
+        "cpe:/a:redhat:rhev_manager:4.3",
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20143577006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20143577005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "unboundid-ldapsdk is earlier than 0:4.0.5-1.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181713001"
+                  },
+                  {
+                    "Comment": "unboundid-ldapsdk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181713002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "unboundid-ldapsdk-javadoc is earlier than 0:4.0.5-1.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181713003"
+                  },
+                  {
+                    "Comment": "unboundid-ldapsdk-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181713004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

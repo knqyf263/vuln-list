@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151482",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2015:1482: libuser security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1482",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1482"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3245",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3245"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3246",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3246"
+      }
+    ],
+    "Description": "The libuser library implements a standardized interface for manipulating\nand administering user and group accounts. Sample applications that are\nmodeled after applications from the shadow password suite (shadow-utils)\nare included in these packages.\n\nTwo flaws were found in the way the libuser library handled the /etc/passwd\nfile. A local attacker could use an application compiled against libuser\n(for example, userhelper) to manipulate the /etc/passwd file, which could\nresult in a denial of service or possibly allow the attacker to escalate\ntheir privileges to root. (CVE-2015-3245, CVE-2015-3246)\n\nRed Hat would like to thank Qualys for reporting these issues.\n\nAll libuser users are advised to upgrade to these updated packages, which\ncontain a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-07-23"
+      },
+      "Updated": {
+        "Date": "2015-07-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-3245",
+          "Cvss2": "1.7/AV:L/AC:L/Au:S/C:N/I:N/A:P",
+          "Cwe": "CWE-138",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3245",
+          "Public": "20150723"
+        },
+        {
+          "CveID": "CVE-2015-3246",
+          "Cvss2": "6.8/AV:L/AC:L/Au:S/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3246",
+          "Public": "20150723"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1233043",
+          "ID": "1233043"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1233052",
+          "ID": "1233052"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libuser is earlier than 0:0.56.13-8.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151482001"
+                  },
+                  {
+                    "Comment": "libuser is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110170002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libuser-devel is earlier than 0:0.56.13-8.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151482003"
+                  },
+                  {
+                    "Comment": "libuser-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110170004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libuser-python is earlier than 0:0.56.13-8.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151482005"
+                  },
+                  {
+                    "Comment": "libuser-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110170006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

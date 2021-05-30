@@ -1,0 +1,304 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20152504",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2015:2504: libreport security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:2504",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:2504"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5302",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5302"
+      }
+    ],
+    "Description": "libreport provides an API for reporting different problems in applications\nto different bug targets, such as Bugzilla, FTP, and Trac. ABRT (Automatic\nBug Reporting Tool) uses libreport.\n\nIt was found that ABRT may have exposed unintended information to Red Hat\nBugzilla during crash reporting. A bug in the libreport library caused\nchanges made by a user in files included in a crash report to be discarded.\nAs a result, Red Hat Bugzilla attachments may contain data that was not\nintended to be made public, including host names, IP addresses, or command\nline options. (CVE-2015-5302)\n\nThis flaw did not affect default installations of ABRT on Red Hat\nEnterprise Linux as they do not post data to Red Hat Bugzilla. This feature\ncan however be enabled, potentially impacting modified ABRT instances.\n\nAs a precaution, Red Hat has identified bugs filed by such non-default Red\nHat Enterprise Linux users of ABRT and marked them private.\n\nThis issue was discovered by Bastien Nocera of Red Hat.\n\nAll users of libreport are advised to upgrade to these updated packages,\nwhich corrects this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-11-23"
+      },
+      "Updated": {
+        "Date": "2015-11-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5302",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-201",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5302",
+          "Public": "20151015"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1270903",
+          "ID": "1270903"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504001"
+                  },
+                  {
+                    "Comment": "libreport is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-cli is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504003"
+                  },
+                  {
+                    "Comment": "libreport-cli is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-compat is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504005"
+                  },
+                  {
+                    "Comment": "libreport-compat is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151210032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-devel is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504007"
+                  },
+                  {
+                    "Comment": "libreport-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-filesystem is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504009"
+                  },
+                  {
+                    "Comment": "libreport-filesystem is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151210036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-gtk is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504011"
+                  },
+                  {
+                    "Comment": "libreport-gtk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-gtk-devel is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504013"
+                  },
+                  {
+                    "Comment": "libreport-gtk-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-newt is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504015"
+                  },
+                  {
+                    "Comment": "libreport-newt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-bugzilla is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504017"
+                  },
+                  {
+                    "Comment": "libreport-plugin-bugzilla is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-kerneloops is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504019"
+                  },
+                  {
+                    "Comment": "libreport-plugin-kerneloops is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-logger is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504021"
+                  },
+                  {
+                    "Comment": "libreport-plugin-logger is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-mailx is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504023"
+                  },
+                  {
+                    "Comment": "libreport-plugin-mailx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-reportuploader is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504025"
+                  },
+                  {
+                    "Comment": "libreport-plugin-reportuploader is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841052"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-rhtsupport is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504027"
+                  },
+                  {
+                    "Comment": "libreport-plugin-rhtsupport is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841054"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-plugin-ureport is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504029"
+                  },
+                  {
+                    "Comment": "libreport-plugin-ureport is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libreport-python is earlier than 0:2.0.9-25.el6_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152504031"
+                  },
+                  {
+                    "Comment": "libreport-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120841056"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202864",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2020:2864: Red Hat OpenShift Service Mesh 1.0 servicemesh-proxy security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "OpenShift Service Mesh 1.0"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2864",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2864"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-12603",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-12603"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-12604",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-12604"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-12605",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-12605"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8663",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8663"
+      }
+    ],
+    "Description": "Red Hat OpenShift Service Mesh is Red Hat's distribution of the Istio service mesh project, tailored for installation into an on-premise OpenShift Container Platform installation.\n\nSecurity Fix(es):\n\n* envoy: Resource exhaustion when accepting too many connections (CVE-2020-8663)\n\n* envoy: Resource exhaustion when proxying HTTP/2 requests or responses with small data frames (CVE-2020-12603)\n\n* envoy: Resource exhaustion when processing HTTP/1.1 headers with long field names (CVE-2020-12605)\n\n* envoy: Resource exhaustion via HTTP/2 client requests with large payloads and improper stream windows (CVE-2020-12604)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-07-07"
+      },
+      "Updated": {
+        "Date": "2020-07-07"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-12603",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-12603",
+          "Public": "20200630:1900"
+        },
+        {
+          "CveID": "CVE-2020-12604",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-12604",
+          "Public": "20200630:1900"
+        },
+        {
+          "CveID": "CVE-2020-12605",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-12605",
+          "Public": "20200630:1900"
+        },
+        {
+          "CveID": "CVE-2020-8663",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8663",
+          "Public": "20200630:1900"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1844251",
+          "ID": "1844251"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1844252",
+          "ID": "1844252"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1844254",
+          "ID": "1844254"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1844255",
+          "ID": "1844255"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:service_mesh:1.0",
+        "cpe:/a:redhat:service_mesh:1.0::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhea:tst:20193809033"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "servicemesh-proxy is earlier than 0:1.0.11-1.el8",
+            "TestRef": "oval:com.redhat.rhsa:tst:20202864001"
+          },
+          {
+            "Comment": "servicemesh-proxy is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhea:tst:20193809028"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhea:tst:20193809031"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhea:tst:20193809032"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

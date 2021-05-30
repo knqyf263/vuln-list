@@ -1,0 +1,546 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20202396",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHBA-2020:2396: Red Hat Virtualization Engine security, bug fix 4.3.10 (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.3"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2020:2396",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2020:2396"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1720",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1720"
+      }
+    ],
+    "Description": "The ovirt-engine package provides the Red Hat Virtualization Manager, a\ncentralized management platform that allows system administrators to view and manage virtual machines. The Manager provides a comprehensive range of features including search capabilities, resource management, live migrations, and virtual infrastructure provisioning.\n\nThe Manager is a JBoss Application Server application that provides several interfaces through which the virtual environment can be accessed and interacted with, including an Administration Portal, a VM Portal, and a Representational State Transfer (REST) Application Programming Interface (API).\n\nPostgreSQL is an open-source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.  \n\nChanges to the ovirt-engine component:\n\n* Previously, a new DB was introduced as part of the cinderlib (managed block storage) support, but did not include a backup and restore option. The current release fixes this issue by providing a backup and restore option. (BZ#1820642)\n\n* Previously, the landing page for the RHV Manager did not support scrolling. As a result, with specific resolutions or zoom ratios, some areas of the landing page were not visible, including the link to the Administration Portal. The current release fixes this issue by enabling users to scroll the landing page and access any of the links on it. (BZ#1796136)\n\n* Previously, using the Administration Portal to import a storage domain omitted custom mount options for NFS storage servers. The current release fixes this issue by including the custom mount options. (BZ#1828067)\n\nChanges to the Documentation component:\n\n* The current release adds support for installing Red Hat OpenShift Container Platform (RHOCP) version 4.4 on Red Hat Virtualization (RHV). The installer that deploys RHOCP on RHV automates the process using “installer-provisioned infrastructure.” This installer is available for Linux and macOS only. The resulting RHOCP cluster runs the master and worker nodes on virtual machines in RHV. (BZ#1764779)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-06-04"
+      },
+      "Updated": {
+        "Date": "2020-06-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-1720",
+          "Cvss3": "3.1/CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-285",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1720",
+          "Public": "20200213"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1798852",
+          "ID": "1798852"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4",
+        "cpe:/a:redhat:rhev_manager:4.2",
+        "cpe:/a:redhat:rhev_manager:4.3",
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20143577006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20143577005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396001"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-contrib is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396003"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-contrib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-contrib-syspaths is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396005"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-contrib-syspaths is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-devel is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396007"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-docs is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396009"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-libs is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396011"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-plperl is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396013"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-plperl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-plpython is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396015"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-plpython is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-pltcl is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396017"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-pltcl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-server is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396019"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-server-syspaths is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396021"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-server-syspaths is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-static is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396023"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-syspaths is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396025"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-syspaths is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql10-postgresql-test is earlier than 0:10.12-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396027"
+                  },
+                  {
+                    "Comment": "rh-postgresql10-postgresql-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201910164008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396029"
+                  },
+                  {
+                    "Comment": "ovirt-engine is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20166341002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-backend is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396031"
+                  },
+                  {
+                    "Comment": "ovirt-engine-backend is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-dbscripts is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396033"
+                  },
+                  {
+                    "Comment": "ovirt-engine-dbscripts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-extensions-api-impl is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396035"
+                  },
+                  {
+                    "Comment": "ovirt-engine-extensions-api-impl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-extensions-api-impl-javadoc is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396037"
+                  },
+                  {
+                    "Comment": "ovirt-engine-extensions-api-impl-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-health-check-bundler is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396039"
+                  },
+                  {
+                    "Comment": "ovirt-engine-health-check-bundler is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20190802012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-restapi is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396041"
+                  },
+                  {
+                    "Comment": "ovirt-engine-restapi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396043"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-base is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396045"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-base is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-cinderlib is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396047"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-cinderlib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-ovirt-engine is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396049"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-ovirt-engine is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-ovirt-engine-common is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396051"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-ovirt-engine-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-vmconsole-proxy-helper is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396053"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-vmconsole-proxy-helper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-websocket-proxy is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396055"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-websocket-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-tools is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396057"
+                  },
+                  {
+                    "Comment": "ovirt-engine-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-tools-backup is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396059"
+                  },
+                  {
+                    "Comment": "ovirt-engine-tools-backup is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-vmconsole-proxy-helper is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396061"
+                  },
+                  {
+                    "Comment": "ovirt-engine-vmconsole-proxy-helper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-webadmin-portal is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396063"
+                  },
+                  {
+                    "Comment": "ovirt-engine-webadmin-portal is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-websocket-proxy is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396065"
+                  },
+                  {
+                    "Comment": "ovirt-engine-websocket-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python2-ovirt-engine-lib is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396067"
+                  },
+                  {
+                    "Comment": "python2-ovirt-engine-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396068"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rhvm is earlier than 0:4.3.10.3-0.2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396069"
+                  },
+                  {
+                    "Comment": "rhvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20190802040"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
