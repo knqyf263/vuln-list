@@ -1,0 +1,165 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20100892",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2010:0892: openswan security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2010:0892",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2010:0892"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-3302",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-3302"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-3308",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-3308"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-3752",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-3752"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-3753",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-3753"
+      }
+    ],
+    "Description": "Openswan is a free implementation of Internet Protocol Security (IPsec)\nand Internet Key Exchange (IKE). IPsec uses strong cryptography to provide\nboth authentication and encryption services. These services allow you to\nbuild secure tunnels through untrusted networks.\n\nTwo buffer overflow flaws were found in the Openswan client-side XAUTH\nhandling code used when connecting to certain Cisco gateways. A malicious\nor compromised VPN gateway could use these flaws to execute arbitrary code\non the connecting Openswan client. (CVE-2010-3302, CVE-2010-3308)\n\nTwo input sanitization flaws were found in the Openswan client-side\nhandling of Cisco gateway banners. A malicious or compromised VPN gateway\ncould use these flaws to execute arbitrary code on the connecting Openswan\nclient. (CVE-2010-3752, CVE-2010-3753)\n\nRed Hat would like to thank the Openswan project for reporting these\nissues. Upstream acknowledges D. Hugh Redelmeier and Paul Wouters as the\noriginal reporters.\n\nAll users of openswan are advised to upgrade to these updated packages,\nwhich contain backported patches to correct these issues. After installing\nthis update, the ipsec service will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2010 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2010-11-16"
+      },
+      "Updated": {
+        "Date": "2010-11-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2010-3302",
+          "Cvss2": "7.1/AV:N/AC:H/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-3302",
+          "Public": "20100927"
+        },
+        {
+          "CveID": "CVE-2010-3308",
+          "Cvss2": "7.1/AV:N/AC:H/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-3308",
+          "Public": "20100927"
+        },
+        {
+          "CveID": "CVE-2010-3752",
+          "Cvss2": "7.1/AV:N/AC:H/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-78",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-3752",
+          "Public": "20100927"
+        },
+        {
+          "CveID": "CVE-2010-3753",
+          "Cvss2": "7.1/AV:N/AC:H/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-78",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-3753",
+          "Public": "20100927"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/634264",
+          "ID": "634264"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/637924",
+          "ID": "637924"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/640711",
+          "ID": "640711"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/640715",
+          "ID": "640715"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.4",
+        "cpe:/o:redhat:rhel_aus:6.4::computenode",
+        "cpe:/o:redhat:rhel_aus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openswan is earlier than 0:2.6.24-8.el6_0.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100892001"
+                  },
+                  {
+                    "Comment": "openswan is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100892002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openswan-doc is earlier than 0:2.6.24-8.el6_0.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100892003"
+                  },
+                  {
+                    "Comment": "openswan-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100892004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

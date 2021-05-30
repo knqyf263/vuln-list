@@ -1,0 +1,168 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111391",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2011:1391: httpd security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1391",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1391"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3348",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3348"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3368",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3368"
+      }
+    ],
+    "Description": "The Apache HTTP Server is a popular web server.\n\nIt was discovered that the Apache HTTP Server did not properly validate the\nrequest URI for proxied requests. In certain configurations, if a reverse\nproxy used the ProxyPassMatch directive, or if it used the RewriteRule\ndirective with the proxy flag, a remote attacker could make the proxy\nconnect to an arbitrary server, possibly disclosing sensitive information\nfrom internal web servers not directly accessible to the attacker.\n(CVE-2011-3368)\n\nIt was discovered that mod_proxy_ajp incorrectly returned an \"Internal\nServer Error\" response when processing certain malformed HTTP requests,\nwhich caused the back-end server to be marked as failed in configurations\nwhere mod_proxy was used in load balancer mode. A remote attacker could\ncause mod_proxy to not send requests to back-end AJP (Apache JServ\nProtocol) servers for the retry timeout period or until all back-end\nservers were marked as failed. (CVE-2011-3348)\n\nRed Hat would like to thank Context Information Security for reporting the\nCVE-2011-3368 issue.\n\nThis update also fixes the following bug:\n\n* The fix for CVE-2011-3192 provided by the RHSA-2011:1245 update\nintroduced regressions in the way httpd handled certain Range HTTP header\nvalues. This update corrects those regressions. (BZ#736592)\n\nAll httpd users should upgrade to these updated packages, which contain\nbackported patches to correct these issues. After installing the updated\npackages, the httpd daemon must be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-10-20"
+      },
+      "Updated": {
+        "Date": "2011-10-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-3348",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3348",
+          "Public": "20110914"
+        },
+        {
+          "CveID": "CVE-2011-3368",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3368",
+          "Public": "20111005"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/736690",
+          "ID": "736690"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/740045",
+          "ID": "740045"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.4",
+        "cpe:/o:redhat:rhel_aus:6.4::computenode",
+        "cpe:/o:redhat:rhel_aus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd is earlier than 0:2.2.15-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111391001"
+                  },
+                  {
+                    "Comment": "httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-devel is earlier than 0:2.2.15-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111391003"
+                  },
+                  {
+                    "Comment": "httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-manual is earlier than 0:2.2.15-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111391005"
+                  },
+                  {
+                    "Comment": "httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-tools is earlier than 0:2.2.15-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111391007"
+                  },
+                  {
+                    "Comment": "httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ssl is earlier than 1:2.2.15-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111391009"
+                  },
+                  {
+                    "Comment": "mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111245010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

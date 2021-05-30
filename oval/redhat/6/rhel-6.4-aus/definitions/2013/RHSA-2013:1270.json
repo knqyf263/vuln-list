@@ -1,0 +1,140 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20131270",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2013:1270: polkit security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:1270",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:1270"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4288",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4288"
+      }
+    ],
+    "Description": "PolicyKit is a toolkit for defining and handling authorizations.\n\nA race condition was found in the way the PolicyKit pkcheck utility\nchecked process authorization when the process was specified by its process\nID via the --process option. A local user could use this flaw to bypass\nintended PolicyKit authorizations and escalate their privileges.\n(CVE-2013-4288)\n\nNote: Applications that invoke pkcheck with the --process option need to be\nmodified to use the pid,pid-start-time,uid argument for that option, to\nallow pkcheck to check process authorization correctly.\n\nRed Hat would like to thank Sebastian Krahmer of the SUSE Security Team for\nreporting this issue.\n\nAll polkit users should upgrade to these updated packages, which contain a\nbackported patch to correct this issue. The system must be rebooted for\nthis update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-09-19"
+      },
+      "Updated": {
+        "Date": "2013-09-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-4288",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-362",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4288",
+          "Public": "20130918"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1002375",
+          "ID": "1002375"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.4",
+        "cpe:/o:redhat:rhel_aus:6.4::computenode",
+        "cpe:/o:redhat:rhel_aus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit is earlier than 0:0.96-5.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131270001"
+                  },
+                  {
+                    "Comment": "polkit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110455002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-desktop-policy is earlier than 0:0.96-5.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131270003"
+                  },
+                  {
+                    "Comment": "polkit-desktop-policy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110455004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-devel is earlier than 0:0.96-5.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131270005"
+                  },
+                  {
+                    "Comment": "polkit-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110455006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-docs is earlier than 0:0.96-5.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131270007"
+                  },
+                  {
+                    "Comment": "polkit-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110455008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

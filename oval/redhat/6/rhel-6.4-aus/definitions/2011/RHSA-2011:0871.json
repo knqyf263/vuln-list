@@ -1,0 +1,139 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110871",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2011:0871: tigervnc security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0871",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0871"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1775",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1775"
+      }
+    ],
+    "Description": "Virtual Network Computing (VNC) is a remote display system which allows you\nto view a computer's desktop environment not only on the machine where it\nis running, but from anywhere on the Internet and from a wide variety of\nmachine architectures. TigerVNC is a suite of VNC servers and clients.\n\nIt was discovered that vncviewer could prompt for and send authentication\ncredentials to a remote server without first properly validating the\nserver's X.509 certificate. As vncviewer did not indicate that the\ncertificate was bad or missing, a man-in-the-middle attacker could use this\nflaw to trick a vncviewer client into connecting to a spoofed VNC server,\nallowing the attacker to obtain the client's credentials. (CVE-2011-1775)\n\nAll tigervnc users should upgrade to these updated packages, which contain\na backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-06-15"
+      },
+      "Updated": {
+        "Date": "2011-06-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1775",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1775",
+          "Public": "20110504"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/702470",
+          "ID": "702470"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.4",
+        "cpe:/o:redhat:rhel_aus:6.4::computenode",
+        "cpe:/o:redhat:rhel_aus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tigervnc is earlier than 0:1.0.90-0.15.20110314svn4359.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110871001"
+                  },
+                  {
+                    "Comment": "tigervnc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110871002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tigervnc-server is earlier than 0:1.0.90-0.15.20110314svn4359.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110871003"
+                  },
+                  {
+                    "Comment": "tigervnc-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110871004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tigervnc-server-applet is earlier than 0:1.0.90-0.15.20110314svn4359.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110871005"
+                  },
+                  {
+                    "Comment": "tigervnc-server-applet is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110871006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tigervnc-server-module is earlier than 0:1.0.90-0.15.20110314svn4359.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110871007"
+                  },
+                  {
+                    "Comment": "tigervnc-server-module is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110871008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

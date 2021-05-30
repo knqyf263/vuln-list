@@ -1,0 +1,320 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141101",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2014:1101: kernel security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.4 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1101",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1101"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-7339",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-7339"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-2672",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-2672"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-2678",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-2678"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-2706",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-2706"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-2851",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-2851"
+      }
+    ],
+    "Description": "The kernel packages contain the Linux kernel, the core of any Linux\noperating system.\n\n* A use-after-free flaw was found in the way the ping_init_sock() function\nof the Linux kernel handled the group_info reference counter. A local,\nunprivileged user could use this flaw to crash the system or, potentially,\nescalate their privileges on the system. (CVE-2014-2851, Important)\n\n* A NULL pointer dereference flaw was found in the rds_ib_laddr_check()\nfunction in the Linux kernel's implementation of Reliable Datagram Sockets\n(RDS). A local, unprivileged user could use this flaw to crash the system.\n(CVE-2013-7339, Moderate)\n\n* It was found that a remote attacker could use a race condition flaw in\nthe ath_tx_aggr_sleep() function to crash the system by creating large\nnetwork traffic on the system's Atheros 9k wireless network adapter.\n(CVE-2014-2672, Moderate)\n\n* A NULL pointer dereference flaw was found in the rds_iw_laddr_check()\nfunction in the Linux kernel's implementation of Reliable Datagram Sockets\n(RDS). A local, unprivileged user could use this flaw to crash the system.\n(CVE-2014-2678, Moderate)\n\n* A race condition flaw was found in the way the Linux kernel's mac80211\nsubsystem implementation handled synchronization between TX and STA wake-up\ncode paths. A remote attacker could use this flaw to crash the system.\n(CVE-2014-2706, Moderate)\n\nThis update also fixes the following bugs:\n\n* The Completely Fair Scheduler (CFS) did not verify whether the CFS\nperiod timer is running while throttling tasks on the CFS run queue.\nTherefore under certain circumstances, the CFS run queue became stuck\nbecause the CFS period timer was inactive and could not be restarted. To\nfix this problem, the CFS now restarts the CFS period timer inside the\nthrottling function if it is inactive. (BZ#1120666)\n\n* A previous change to the SCSI code fixed a race condition that could\noccur when removing a SCSI device. However, that change caused performance\ndegradation because it used a certain function from the block layer code\nthat was returning different values compared with later versions of the\nkernel. This update alters the SCSI code to properly utilize the values\nreturned by the block layer code. (BZ#1117581)\n\n* If a statically defined gateway became unreachable and its corresponding\nneighbor entry entered a FAILED state, the gateway stayed in the FAILED\nstate even after it became reachable again. This prevented routing of the\ntraffic through that gateway. This update allows probing such a gateway\nautomatically and routing the traffic through the gateway again once it\nbecomes reachable. (BZ#1115262)\n\n* A miscalculation in the \"radix_tree\" swap encoding corrupted swap area\nindexes bigger than 8 by truncating lower bits of swap entries.\nConsequently, systems with more than 8 swap areas could trigger a bogus\nOOM scenario when swapping out to such a swap area. This update fixes this\nproblem by reducing a return value of the SWP_TYPE_SHIFT() function and\nremoving a broken function call from the read_swap_header() function.\n(BZ#1099727)\n\n* The automatic route cache rebuilding feature could incorrectly compute\nthe length of a route hash chain if the cache contained multiple entries\nwith the same key but a different TOS, mark, or OIF bit. Consequently, the\nfeature could reach the rebuild limit and disable the routing cache on the\nsystem. This problem is fixed by using a helper function that avoids\ncounting such duplicate routes. (BZ#1113823)\n\n* When booting a guest in the Hyper-V environment and enough of\nProgrammable Interval Timer (PIT) interrupts were lost or not injected\ninto the guest on time, the kernel panicked and the guest failed to boot.\nThis problem has been fixed by bypassing the relevant PIT check when the\nguest is running under the Hyper-V environment. (BZ#1112225)\n\nAll kernel users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. The system must be\nrebooted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-08-27"
+      },
+      "Updated": {
+        "Date": "2014-08-27"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-7339",
+          "Cvss2": "4.7/AV:L/AC:M/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-7339",
+          "Public": "20131219"
+        },
+        {
+          "CveID": "CVE-2014-2672",
+          "Cvss2": "5.4/AV:N/AC:H/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-2672",
+          "Public": "20140220"
+        },
+        {
+          "CveID": "CVE-2014-2678",
+          "Cvss2": "4.7/AV:L/AC:M/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-2678",
+          "Public": "20140329"
+        },
+        {
+          "CveID": "CVE-2014-2706",
+          "Cvss2": "5.4/AV:N/AC:H/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-2706",
+          "Public": "20140220"
+        },
+        {
+          "CveID": "CVE-2014-2851",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-2851",
+          "Public": "20140411"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1079214",
+          "ID": "1079214"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1083246",
+          "ID": "1083246"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1083274",
+          "ID": "1083274"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1083512",
+          "ID": "1083512"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1086730",
+          "ID": "1086730"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.4",
+        "cpe:/o:redhat:rhel_aus:6.4::computenode",
+        "cpe:/o:redhat:rhel_aus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:2.6.32-358.48.1.el6 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20141101025"
+              },
+              {
+                "Comment": "kernel earlier than 0:2.6.32-358.48.1.el6 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20141101026"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-bootwrapper is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101003"
+                  },
+                  {
+                    "Comment": "kernel-bootwrapper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101005"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101007"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101009"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-doc is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101011"
+                  },
+                  {
+                    "Comment": "kernel-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-firmware is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101013"
+                  },
+                  {
+                    "Comment": "kernel-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-headers is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101015"
+                  },
+                  {
+                    "Comment": "kernel-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101017"
+                  },
+                  {
+                    "Comment": "kernel-kdump is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump-devel is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101019"
+                  },
+                  {
+                    "Comment": "kernel-kdump-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perf is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101021"
+                  },
+                  {
+                    "Comment": "perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-perf is earlier than 0:2.6.32-358.48.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141101023"
+                  },
+                  {
+                    "Comment": "python-perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111530024"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

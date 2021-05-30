@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130628",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2013:0628: 389-ds-base security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0628",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0628"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0312",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0312"
+      }
+    ],
+    "Description": "The 389 Directory Server is an LDAPv3 compliant server. The base packages\ninclude the Lightweight Directory Access Protocol (LDAP) server and\ncommand-line utilities for server administration.\n\nA flaw was found in the way LDAPv3 control data was handled by 389\nDirectory Server. If a malicious user were able to bind to the directory\n(even anonymously) and send an LDAP request containing crafted LDAPv3\ncontrol data, they could cause the server to crash, denying service to the\ndirectory. (CVE-2013-0312)\n\nThe CVE-2013-0312 issue was discovered by Thierry Bordaz of Red Hat.\n\nThis update also fixes the following bugs:\n\n* After an upgrade from Red Hat Enterprise Linux 6.3 to version 6.4, the\nupgrade script did not update the schema file for the PamConfig object\nclass. Consequently, new features for PAM such as configuration of multiple\ninstances and pamFilter attribute could not be used because of the schema\nviolation. With this update, the upgrade script updates the schema file for\nthe PamConfig object class and new features function properly. (BZ#910994)\n\n* Previously, the valgrind test suite reported recurring memory leaks in\nthe modify_update_last_modified_attr() function. The size of the leaks\naveraged between 60-80 bytes per modify call. In environments where modify\noperations were frequent, this caused significant problems. Now, memory\nleaks no longer occur in the modify_update_last_modified_attr() function.\n(BZ#910995)\n\n* The Directory Server (DS) failed when multi-valued attributes were\nreplaced. The problem occurred when replication was enabled, while the\nserver executing the modification was configured as a single master and\nthere was at least one replication agreement. Consequently, the\nmodification requests were refused by the master server, which returned a\ncode 20 \"Type or value exists\" error message. These requests were\nreplacements of multi-valued attributes, and the error only occurred when\none of the new values matched one of the current values of the attribute,\nbut had a different letter case. Now, modification requests function\nproperly and no longer return code 20 errors. (BZ#910996)\n\n* The DNA (distributed numeric assignment) plug-in, under certain\nconditions, could log error messages with the \"DB_LOCK_DEADLOCK\" error\ncode when attempting to create an entry with a uidNumber attribute. Now,\nDNA handles this case properly and errors no longer occur during attempts\nto create entries with uidNumber attributes. (BZ#911467)\n\n* Posix Winsync plugin was calling an internal modify function which was\nnot necessary. The internal modify call failed and logged an error message\n\"slapi_modify_internal_set_pb: NULL parameter\" which was not clear. This\npatch stops calling the internal modify function if it is not necessary and\nthe cryptic error message is not observed. (BZ#911468)\n\n* Previously, under certain conditions, the dse.ldif file had 0 bytes after\na server termination or when the machine was powered off. Consequently,\nafter the system was brought up, a DS or IdM system could be unable to\nrestart, leading to production server outages. Now, the server mechanism by\nwhich the dse.ldif is written is more robust, and tries all available\nbackup dse.ldif files, and outages no longer occur. (BZ#911469)\n\n* Due to an incorrect interpretation of an error code, a directory server\nconsidered an invalid chaining configuration setting as the disk full error\nand shut down unexpectedly. Now, a more appropriate error code is in use\nand the server no longer shuts down from invalid chaining configuration\nsettings. (BZ#911474)\n\n* While trying to remove a tombstone entry, the ns-slapd daemon terminated\nunexpectedly with a segmentation fault. With this update, removal of\ntombstone entries no longer causes crashes. (BZ#914305)\n\nAll 389-ds-base users are advised to upgrade to these updated packages,\nwhich contain backported patches to correct these issues. After installing\nthis update, the 389 server service will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-03-11"
+      },
+      "Updated": {
+        "Date": "2013-03-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-0312",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0312",
+          "Public": "20130311"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/912964",
+          "ID": "912964"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.4",
+        "cpe:/o:redhat:rhel_aus:6.4::computenode",
+        "cpe:/o:redhat:rhel_aus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base is earlier than 0:1.2.11.15-12.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130628001"
+                  },
+                  {
+                    "Comment": "389-ds-base is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120813002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-devel is earlier than 0:1.2.11.15-12.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130628003"
+                  },
+                  {
+                    "Comment": "389-ds-base-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120813004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-libs is earlier than 0:1.2.11.15-12.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130628005"
+                  },
+                  {
+                    "Comment": "389-ds-base-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120813006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

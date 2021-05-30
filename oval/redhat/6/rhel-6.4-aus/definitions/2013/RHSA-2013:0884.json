@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130884",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2013:0884: libtirpc security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0884",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0884"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1950",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1950"
+      }
+    ],
+    "Description": "These packages provide a transport-independent RPC (remote procedure call)\nimplementation.\n\nA flaw was found in the way libtirpc decoded RPC requests. A\nspecially-crafted RPC request could cause libtirpc to attempt to free a\nbuffer provided by an application using the library, even when the buffer\nwas not dynamically allocated. This could cause an application using\nlibtirpc, such as rpcbind, to crash. (CVE-2013-1950)\n\nRed Hat would like to thank Michael Armstrong for reporting this issue.\n\nUsers of libtirpc should upgrade to these updated packages, which contain a\nbackported patch to correct this issue. All running applications using\nlibtirpc must be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-05-30"
+      },
+      "Updated": {
+        "Date": "2013-05-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1950",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1950",
+          "Public": "20130418"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/948378",
+          "ID": "948378"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.4",
+        "cpe:/o:redhat:rhel_aus:6.4::computenode",
+        "cpe:/o:redhat:rhel_aus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtirpc is earlier than 0:0.2.1-6.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130884001"
+                  },
+                  {
+                    "Comment": "libtirpc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130884002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtirpc-devel is earlier than 0:0.2.1-6.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130884003"
+                  },
+                  {
+                    "Comment": "libtirpc-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130884004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
