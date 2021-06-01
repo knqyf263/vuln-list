@@ -1,0 +1,99 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211184",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2021:1184: RHV RHEL Host (ovirt-host) 4.4.z [ovirt-4.4.5] security, bug fix, enhancement (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization 4 for Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1184",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1184"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-28458",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-28458"
+      }
+    ],
+    "Description": "The ovirt-hosted-engine-setup package provides a self-hosted engine tool for the Red Hat Virtualization Manager. A self-hosted engine is a virtualized environment in which the Manager runs on a virtual machine on the hosts managed by the Manager.\nBug Fix(es):\n\n* In this release, it is now possible to enter a path to the OVA archive for local appliance installation using the cockpit-ovirt UI. (BZ#1755156)\n\n* Previously, following a successful migration on the Self-hosted Engine, he HA agent on the source host immediately moved to the state EngineDown, and shorly thereafter tried to start the engine locally, if the destination host didn't update the shared storage quickly enough, marking the Manager virtual machine as being up.\nAs a result, starting the virtual machine failed due to a shared lock held by the destination host. This also resulted in generating false alarms and notifications.\nIn this release, the HA agent first moves to the state EngineMaybeAway, providing the destination host more time to update the shared storage with the updated state. As a result, no notifications or false alarms are generated. \nNote: in scenarios where the virtual machine needs to be started on the source host, this fix slightly increases the time it takes the Manager virtual\nmachine on the source host to start. (BZ#1815589)\n\n* Previously, if a host in the Self-hosted Engine had an ID number higher than 64, other hosts did not recognize that host, and the host did not appear in 'hosted-engine --vm-status'.\nIn this release, the Self-hosted Engine allows host ID numbers of up to 2000. (BZ#1916032)\n\n* ovirt-hosted-engine-setup now requires ansible-2.9.17. (BZ#1921108)\n\n* Previously the logical names for disks without a mounted filesystem were not displayed in the Red Hat Virtualization Manager. \nIn this release, logical names for such disks are properly reported provided the version of QEMU Guest Agent in the virtual machine is 5.2 or higher. (BZ#1836661)\n\n* Previously, if the Seal option was used when creating a template for Linux virtual machines, the original host name was not removed from the template. \nIn this release, the host name is set to localhost or the new virtual machine host name. (BZ#1860492)\n\n* Previously, the used memory of the host didn't take the SReclaimable memory into consideration while it did for free memory. As a result, there were discrepancies in the host statistics. \nIn this release, the SReclaimable memory is a part of the used memory calculation. (BZ#1916519)\n\nSecurity Fix(es):\n\n* datatables.net: prototype pollution if 'constructor' were used in a data property name (CVE-2020-28458)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-04-14"
+      },
+      "Updated": {
+        "Date": "2021-04-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-28458",
+          "Cvss3": "7.3/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-28458",
+          "Public": "20201025"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1908441",
+          "ID": "1908441"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:8",
+        "cpe:/o:redhat:enterprise_linux:8::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20204172009"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "cockpit-ovirt-dashboard is earlier than 0:0.14.20-1.el8ev",
+            "TestRef": "oval:com.redhat.rhsa:tst:20211184001"
+          },
+          {
+            "Comment": "cockpit-ovirt-dashboard is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20205611002"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20204172007"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20204172008"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

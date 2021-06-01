@@ -1,0 +1,150 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212180",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2021:2180: RHV Engine and Host Common Packages security update [ovirt-4.4.6] (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.4"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2180",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2180"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-20178",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-20178"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-20180",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-20180"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-20191",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-20191"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-20228",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-20228"
+      }
+    ],
+    "Description": "The ovirt-engine package provides the Red Hat Virtualization Manager, a centralized management platform that allows system administrators to view and manage virtual machines. The Manager provides a comprehensive range of features including search capabilities, resource management, live migrations, and virtual infrastructure provisioning.\n\nSecurity Fix(es):\n\n* ansible: user data leak in snmp_facts module (CVE-2021-20178)\n\n* ansible module: bitbucket_pipeline_variable exposes secured values (CVE-2021-20180)\n\n* ansible: multiple modules expose secured values (CVE-2021-20191)\n\n* ansible: basic.py no_log with fallback option (CVE-2021-20228)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Red Hat Virtualization 4.4.6 now requires Ansible 2.9.18 (BZ#1933672)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-06-01"
+      },
+      "Updated": {
+        "Date": "2021-06-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-20178",
+          "Cvss3": "5.0/CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-20178",
+          "Public": "20210111"
+        },
+        {
+          "CveID": "CVE-2021-20180",
+          "Cvss3": "5.0/CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-20180",
+          "Public": "20210113"
+        },
+        {
+          "CveID": "CVE-2021-20191",
+          "Cvss3": "5.0/CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-20191",
+          "Public": "20210115"
+        },
+        {
+          "CveID": "CVE-2021-20228",
+          "Cvss3": "5.0/CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-200-\u003eCWE-522",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-20228",
+          "Public": "20210129"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1914774",
+          "ID": "1914774"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1915808",
+          "ID": "1915808"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1916813",
+          "ID": "1916813"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1925002",
+          "ID": "1925002"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/a:redhat:rhev_manager:4.4:el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20166341004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "ansible is earlier than 0:2.9.18-1.el8ae",
+            "TestRef": "oval:com.redhat.rhsa:tst:20212180001"
+          },
+          {
+            "Comment": "ansible is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20212180002"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:20166341003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20203247050"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
