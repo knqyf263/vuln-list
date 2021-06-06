@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161330",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2016:1330: Red Hat JBoss Enterprise Application Platform 6.4 security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat JBoss Enterprise Application Platform 6.4 for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1330",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1330"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2141",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2141"
+      }
+    ],
+    "Description": "Red Hat JBoss Enterprise Application Platform 6 is a platform for Java applications based on JBoss Application Server 7.\n\nThis asynchronous patch is a security update for JGroups package in Red Hat JBoss Enterprise Application Platform 6.4 More information about this vulnerability is available at: https://access.redhat.com/articles/2360521\n\nSecurity Fix(es):\n\n* It was found that JGroups did not require necessary headers for encrypt and auth protocols from new nodes joining the cluster. An attacker could use this flaw to bypass security restrictions, and use this vulnerability to send and receive messages within the cluster, leading to information disclosure, message spoofing, or further possible attacks. (CVE-2016-2141)\n\nThe CVE-2016-2141 issue was discovered by Dennis Reed (Red Hat).",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-06-23"
+      },
+      "Updated": {
+        "Date": "2016-06-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-2141",
+          "Cvss2": "7.5/AV:N/AC:L/Au:N/C:P/I:P/A:P",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2141",
+          "Public": "20160623"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1313589",
+          "ID": "1313589"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6",
+        "cpe:/a:redhat:jboss_enterprise_application_platform:6::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhea:tst:20151074152"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhea:tst:20151074151"
+          },
+          {
+            "Comment": "jgroups is earlier than 1:3.2.16-1.Final_redhat_1.1.ep6.el7",
+            "TestRef": "oval:com.redhat.rhsa:tst:20161330001"
+          },
+          {
+            "Comment": "jgroups is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20160123042"
+          }
+        ]
+      }
+    ]
+  }
+}

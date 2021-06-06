@@ -1,0 +1,339 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20162991",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2016:2991: openstack-cinder, openstack-glance, and openstack-nova update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 8.0 (Liberty)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:2991",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:2991"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5162",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5162"
+      }
+    ],
+    "Description": "OpenStack Compute (nova) launches and schedules large networks of virtual machines, creating a redundant and scalable cloud computing platform. Compute provides the software, control panels, and APIs required to orchestrate a cloud, including running virtual machine instances and controlling access through users and projects.\n\nOpenStack Block Storage (cinder) manages block storage mounting and the presentation of such mounted block storage to instances. The backend physical storage can consist of local disks, or Fiber Channel, iSCSI, and NFS mounts attached to Compute nodes. In addition, Block Storage supports volume backups, and snapshots for temporary save and restore operations. Programatic management is available via Block Storage's API.\n\nOpenStack Image Service (glance) provides discovery, registration, and delivery services for disk and server images. The service provides the ability to copy or snapshot a server image, and immediately store it away. Stored images can be used as a template to get new servers up and running quickly and more consistently than installing a server operating system and individually configuring additional services.\n\nThe following packages have been upgraded to a newer upstream version: openstack-nova (12.0.5), openstack-cinder (7.0.3), openstack-glance (11.0.1). (BZ#1381466, BZ#1396263)\n\nSecurity Fix(es):\n\n* A resource vulnerability in the OpenStack Compute (nova), Block Storage (cinder), and Image (glance) services was found in their use of qemu-img. An unprivileged user could consume as much as 4 GB of RAM on the compute host by uploading a malicious image. This flaw could lead possibly to host out-of-memory errors and negatively affect other running tenant instances. (CVE-2015-5162)\n\nThis issue was discovered by Richard W.M. Jones (Red Hat).\n\nBug Fix(es):\n\n* There is a known issue with Unicode string handling in the OSProfiler library. Consequently, the creation of a Block Storage (cinder) snapshot will fail if it uses non-ASCII characters. With this update, the OSProfiler library is not loaded unless it is specifically enabled in the cinder configuration. As a result, the Unicode handling issue in OSProfiler is still present, and will result in the same failure if OSProfiler is used, however it will be unlikely to occur in most cinder configurations. A more in-depth resolution for this issue is not currently in scope. (BZ#1383899)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-12-21"
+      },
+      "Updated": {
+        "Date": "2016-12-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5162",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5162",
+          "Public": "20150629"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1268303",
+          "ID": "1268303"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:8",
+        "cpe:/a:redhat:openstack-director:8::el7",
+        "cpe:/a:redhat:openstack-optools:8",
+        "cpe:/a:redhat:openstack-optools:8::el7",
+        "cpe:/a:redhat:openstack:8",
+        "cpe:/a:redhat:openstack:8::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20161002014"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20161002013"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-glance is earlier than 1:11.0.1-6.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991001"
+                  },
+                  {
+                    "Comment": "openstack-glance is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-glance is earlier than 1:11.0.1-6.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991003"
+                  },
+                  {
+                    "Comment": "python-glance is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-cinder is earlier than 1:7.0.3-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991005"
+                  },
+                  {
+                    "Comment": "openstack-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-cinder is earlier than 1:7.0.3-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991007"
+                  },
+                  {
+                    "Comment": "python-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991009"
+                  },
+                  {
+                    "Comment": "openstack-nova is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-api is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991011"
+                  },
+                  {
+                    "Comment": "openstack-nova-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-cells is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991013"
+                  },
+                  {
+                    "Comment": "openstack-nova-cells is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-cert is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991015"
+                  },
+                  {
+                    "Comment": "openstack-nova-cert is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-common is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991017"
+                  },
+                  {
+                    "Comment": "openstack-nova-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-compute is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991019"
+                  },
+                  {
+                    "Comment": "openstack-nova-compute is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-conductor is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991021"
+                  },
+                  {
+                    "Comment": "openstack-nova-conductor is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-console is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991023"
+                  },
+                  {
+                    "Comment": "openstack-nova-console is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-network is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991025"
+                  },
+                  {
+                    "Comment": "openstack-nova-network is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-novncproxy is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991027"
+                  },
+                  {
+                    "Comment": "openstack-nova-novncproxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-objectstore is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991029"
+                  },
+                  {
+                    "Comment": "openstack-nova-objectstore is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-scheduler is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991031"
+                  },
+                  {
+                    "Comment": "openstack-nova-scheduler is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-serialproxy is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991033"
+                  },
+                  {
+                    "Comment": "openstack-nova-serialproxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-nova-spicehtml5proxy is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991035"
+                  },
+                  {
+                    "Comment": "openstack-nova-spicehtml5proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-nova is earlier than 1:12.0.5-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991037"
+                  },
+                  {
+                    "Comment": "python-nova is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162991038"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

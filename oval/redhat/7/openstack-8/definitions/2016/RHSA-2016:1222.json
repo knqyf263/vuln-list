@@ -1,0 +1,116 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161222",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2016:1222: rhosp-director-images security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 8.0 (Liberty) director"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1222",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1222"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4474",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4474"
+      }
+    ],
+    "Description": "Red Hat OpenStack Platform director provides the facilities for deploying and monitoring a private or public infrastructure-as-a-service (IaaS) cloud based on Red Hat OpenStack Platform.\n\nSecurity Fix(es):\n\n* An issue was discovered in the image build process for the overcloud images, as used by director, resulting in all previous images to have a default root password of \"rootpw\". Remote root access via SSH is disabled by default. (CVE-2016-4474)\n\nRed Hat would like to thank David Patterson (Dell) for reporting this\nissue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-06-13"
+      },
+      "Updated": {
+        "Date": "2016-06-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-4474",
+          "Cvss2": "7.4/AV:A/AC:M/Au:S/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4474",
+          "Public": "20160613"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1342412",
+          "ID": "1342412"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:8",
+        "cpe:/a:redhat:openstack-director:8::el7",
+        "cpe:/a:redhat:openstack-optools:8",
+        "cpe:/a:redhat:openstack-optools:8::el7",
+        "cpe:/a:redhat:openstack:8",
+        "cpe:/a:redhat:openstack:8::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20161002014"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20161002013"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rhosp-director-images is earlier than 0:8.0-20160603.2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161222001"
+                  },
+                  {
+                    "Comment": "rhosp-director-images is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161222002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rhosp-director-images-ipa is earlier than 0:8.0-20160603.2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161222003"
+                  },
+                  {
+                    "Comment": "rhosp-director-images-ipa is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161222004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
