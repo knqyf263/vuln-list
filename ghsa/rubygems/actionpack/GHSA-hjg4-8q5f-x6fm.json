@@ -1,5 +1,5 @@
 {
-  "Severity": "MODERATE",
+  "Severity": "HIGH",
   "UpdatedAt": "2021-05-05T19:48:10Z",
   "Package": {
     "Ecosystem": "RUBYGEMS",
@@ -30,9 +30,9 @@
     "Description": "Impact\n------\nThere is a possible information disclosure / unintended method execution\nvulnerability in Action Pack when using the `redirect_to` or `polymorphic_url`\nhelper with untrusted user input.\n\nVulnerable code will look like this.\n\n```\nredirect_to(params[:some_param])\n```\n\nAll users running an affected release should either upgrade or use one of the\nworkarounds immediately.\n\nReleases\n--------\nThe FIXED releases are available at the normal locations.\n\nWorkarounds\n-----------\nTo work around this problem, it is recommended to use an allow list for valid\nparameters passed from the user.  For example,\n\n```\nprivate def check(param)\n  case param\n  when \"valid\"\n    param\n  else\n    \"/\"\n  end\nend\n\ndef index\n  redirect_to(check(params[:some_param]))\nend\n```\n\nOr force the user input to be cast to a string like this,\n\n```\ndef index\n  redirect_to(params[:some_param].to_s)\nend\n```\n\nPatches\n-------\nTo aid users who aren't able to upgrade immediately we have provided patches for\nthe two supported release series. They are in git-am format and consist of a\nsingle changeset.\n\n* 5-2-information-disclosure.patch - Patch for 5.2 series\n* 6-0-information-disclosure.patch - Patch for 6.0 series\n* 6-1-information-disclosure.patch - Patch for 6.1 series\n\nPlease note that only the 5.2, 6.0, and 6.1 series are supported at present. Users\nof earlier unsupported releases are advised to upgrade as soon as possible as we\ncannot guarantee the continued availability of security fixes for unsupported\nreleases.\n\nCredits\n-------\n\nThanks to Benoit Côté-Jodoin from Shopify for reporting this.",
     "Origin": "UNSPECIFIED",
     "PublishedAt": "2021-05-05T19:49:02Z",
-    "Severity": "MODERATE",
+    "Severity": "HIGH",
     "Summary": "Information Disclosure / Unintended Method Execution in Action Pack",
-    "UpdatedAt": "2021-05-28T14:52:06Z",
+    "UpdatedAt": "2021-06-11T13:11:39Z",
     "WithdrawnAt": ""
   },
   "Versions": [
