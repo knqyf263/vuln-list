@@ -1,0 +1,115 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20204391",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2020:4391: openstack-cinder security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 13.0 (Queens)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:4391",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:4391"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10755",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10755"
+      }
+    ],
+    "Description": "OpenStack Block Storage (cinder) manages block storage mounting and the\npresentation of such mounted block storage to instances. The backend\nphysical storage can consist of local disks, or Fiber Channel, iSCSI, and\nNFS mounts attached to Compute nodes. In addition, Block Storage supports\nvolume backups, and snapshots for temporary save and restore operations.\nProgrammatic management is available via Block Storage's API.\n\nSecurity Fix(es):\n\n* Improper handling of ScaleIO backend credentials (CVE-2020-10755)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Before this update, FC live migration was failing. With this update, the correct device information is now sent to os-brick for FC for the corresponding host. Also, the device is now removed from the correct masking view when the live migration process has failed on the Compute node. (BZ#1841157)\n\n* Before this update, the 3PAR driver did not look at the `_name_id` field for a possible volume ID, which caused volumes to be unusable after a live migration. With this update, the driver is now aware of the `_name_id` field as an alternative location for the volume ID, and live migrated volumes now work as expected. (BZ#1841866)\n\n* Before this update, the internal temporary snapshot, created during async migration when creating a volume from a snapshot, was not being deleted from the VNX storage.\n\nFor example, if we create a new volume, V2, from snapshot S1, which we created from volume V1, an internal temporary snapshot, S2, is created from copying S1. V1 now has two snapshots, S1 and S2. Although we delete V1, V2 and S1 from OpenStack Block Storage (cinder), S2 is not deleted. This causes both V1 and S2 to remain on the VNX storage.\n\nWith this update, the temporary snapshot, S2, is deleted, and V1 can be successfully deleted. (BZ#1843196)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-10-28"
+      },
+      "Updated": {
+        "Date": "2020-10-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-10755",
+          "Cvss3": "6.5/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-522",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10755",
+          "Public": "20200603"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1842748",
+          "ID": "1842748"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:13",
+        "cpe:/a:redhat:openstack-optools:13::el7",
+        "cpe:/a:redhat:openstack:13",
+        "cpe:/a:redhat:openstack:13::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20115034004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20115034003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-cinder is earlier than 1:12.0.10-19.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204391001"
+                  },
+                  {
+                    "Comment": "openstack-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183601002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-cinder is earlier than 1:12.0.10-19.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204391003"
+                  },
+                  {
+                    "Comment": "python-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183601004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200889",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2020:0889: slirp4netns security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0889",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0889"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14378",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14378"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-15890",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-15890"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-7039",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-7039"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8608",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8608"
+      }
+    ],
+    "Description": "The slirp4netns package contains user-mode networking for unprivileged network namespaces. It is required to enable networking for rootless containers.\n\nSecurity Fix(es):\n\n* QEMU: slirp: heap buffer overflow during packet reassembly (CVE-2019-14378)\n\n* QEMU: slirp: OOB buffer access while emulating tcp protocols in tcp_emu() (CVE-2020-7039)\n\n* CVE-2020-8608 slirp4netns: QEMU: Slirp: potential OOB access due to unsafe snprintf() usages\n\n* CVE-2019-15890 QEMU: Slirp: use-after-free during packet reassembly\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-03-17"
+      },
+      "Updated": {
+        "Date": "2020-03-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-14378",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14378",
+          "Public": "20190728"
+        },
+        {
+          "CveID": "CVE-2019-15890",
+          "Cvss3": "5.6/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:N/I:N/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-15890",
+          "Public": "20190825"
+        },
+        {
+          "CveID": "CVE-2020-7039",
+          "Cvss3": "5.6/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-7039",
+          "Public": "20200107"
+        },
+        {
+          "CveID": "CVE-2020-8608",
+          "Cvss3": "5.6/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8608",
+          "Public": "20200127"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1734745",
+          "ID": "1734745"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1749716",
+          "ID": "1749716"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1791551",
+          "ID": "1791551"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1798453",
+          "ID": "1798453"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20140047030"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20140047029"
+          },
+          {
+            "Comment": "slirp4netns is earlier than 0:0.3.0-8.el7_7",
+            "TestRef": "oval:com.redhat.rhsa:tst:20200889001"
+          },
+          {
+            "Comment": "slirp4netns is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:202010756002"
+          }
+        ]
+      }
+    ]
+  }
+}

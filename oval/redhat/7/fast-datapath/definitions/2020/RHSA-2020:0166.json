@@ -1,0 +1,139 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200166",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2020:0166: openvswitch2.11 security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Fast Datapath for Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0166",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0166"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14818",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14818"
+      }
+    ],
+    "Description": "Open vSwitch provides standard network bridging functions and support for the OpenFlow protocol for remote per-flow control of traffic.\n\nSecurity Fix(es):\n\n* dpdk: possible memory leak leads to denial of service (CVE-2019-14818)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* [openvswitch] No traffic over GRE IPv6 tunnel  - OVS issue (userspace) (BZ#1725623)\n\n* [RHEL 7] [ovsdb-server] Allow replicating from older schema servers (BZ#1766586)\n\n* measure the time needed by ovn-controller to resync to a new SB db (BZ#1776883)\n\n* [ovs2.11] SSL connections drops are constantly logged in ovsdb-server-nb.log (BZ#1780745)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-01-21"
+      },
+      "Updated": {
+        "Date": "2020-01-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-14818",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14818",
+          "Public": "20191112:1500"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1737327",
+          "ID": "1737327"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::fastdatapath"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20205306010"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20205306009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch2.11 is earlier than 0:2.11.0-35.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200166001"
+                  },
+                  {
+                    "Comment": "openvswitch2.11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205307002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch2.11-devel is earlier than 0:2.11.0-35.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200166003"
+                  },
+                  {
+                    "Comment": "openvswitch2.11-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205307004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch2.11-test is earlier than 0:2.11.0-35.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200166005"
+                  },
+                  {
+                    "Comment": "openvswitch2.11-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205307006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-openvswitch2.11 is earlier than 0:2.11.0-35.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200166007"
+                  },
+                  {
+                    "Comment": "python-openvswitch2.11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205307008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

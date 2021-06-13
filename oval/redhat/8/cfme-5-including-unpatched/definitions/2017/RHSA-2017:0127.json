@@ -1,0 +1,86 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170127",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2017:0127: runc security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0127",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0127"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9962",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9962"
+      }
+    ],
+    "Description": "The runC tool is a lightweight, portable implementation of the Open Container Format (OCF) that provides container runtime.\n\nSecurity Fix(es):\n\n* The runc component used by `docker exec` feature of docker allowed additional container processes via to be ptraced by the pid 1 of the container. This allows the main processes of the container, if running as root, to gain low-level access to these new processes during initialization. An attacker can, depending on the nature of the incoming process, leverage this to elevate access to the host. This ranges from accessing host content through the file descriptors of the incoming process to, potentially, a complete container escape by leveraging memory access or syscall interception. (CVE-2016-9962)\n\nRed Hat would like to thank the Docker project for reporting this issue. Upstream acknowledges Aleksa Sarai (SUSE) and Tonis Tiigi (Docker) as the original reporters.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-01-17"
+      },
+      "Updated": {
+        "Date": "2017-01-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-9962",
+          "Cvss3": "7.5/CVSS:3.1/AV:L/AC:H/PR:H/UI:N/S:C/C:H/I:H/A:H",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9962",
+          "Public": "20170111"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1409531",
+          "ID": "1409531"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20140047030"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20140047029"
+          },
+          {
+            "Comment": "runc is earlier than 0:1.0.0-1.rc2.el7",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170127001"
+          },
+          {
+            "Comment": "runc is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhba:tst:20201232002"
+          }
+        ]
+      }
+    ]
+  }
+}

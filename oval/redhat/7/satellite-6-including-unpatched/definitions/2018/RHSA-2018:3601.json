@@ -1,0 +1,115 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20183601",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2018:3601: openstack-cinder security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 13.0 (Queens)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:3601",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:3601"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-15139",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-15139"
+      }
+    ],
+    "Description": "OpenStack Block Storage (cinder) manages block storage mounting and the presentation of such mounted block storage to instances. The backend physical storage can consist of local disks, or Fiber Channel, iSCSI, and NFS mounts attached to Compute nodes. In addition, Block Storage supports volume backups, and snapshots for temporary save and restore operations. Programmatic management is available via Block Storage's API.\n\nSecurity Fix(es):\n\n* openstack-cinder: Data retained after deletion of a ScaleIO volume (CVE-2017-15139)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* This fix enables the NetApp ONTAP FC/iSCSI drivers to succeed in the force_detach action, which terminates every connection between the specified volume and any host it is mapped to. (BZ#1622535)\n\n* The driver for the Block Storage service's SolidFire backend would crash when attempting to delete a consistency group snapshot. This issue has been fixed so the driver no longer crashes attempting to delete a consistency group snapshot. (BZ#1629049)\n\n* This backport adds the configuration option rbd_exclusive_cinder_pool, which defaults to True. This option improves statistics collection for large numbers of RBD volumes. This option should be set to False if your pool is not used exclusively by Cinder. (BZ#1624482)\n\n* The Block Storage service's NetApp ONTAP driver could not format URLs properly when they contained IPv6 addresses resulting in malformed URLs in the management path and driver malfunction. The driver now properly handles IPv6 addresses so the properly formatted URLs facilitate correct functioning. (BZ#1635620)\n\n* The driver for the Block Storage service's SolidFire backend contained a bug related to the force-detach operation. The driver would crash when attempting to force-detach a volume. This issue has been fixed so attempts to force-detach a volume no longer crash the driver. (BZ#1638406)\n\n* Support was added for volume retype and migration operations to the Block Storage service's HPE Nimble Storage driver. (BZ#1640833)\n\n* The Block Storage service's Nimble backend driver did not support the forced detach functionality using empty connector information. The Nimble driver would fail when a forced detach was issued. The Nimble driver has been updated to support a forced detach with empty connector information. The driver properly supports the Block Storage service's forced detach API. (BZ#1640834)\n\n* The Block Storage service (cinder) uses two volume cache limit settings. When only one cache limit was configured, adding a new entry to the cache would always cause an existing entry to be ejected from the cache. Only a single entry would be cached, regardless of the configured cache limit. The Block Storage service now correctly handles volume cache limits. (BZ#1641111)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-11-13"
+      },
+      "Updated": {
+        "Date": "2018-11-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-15139",
+          "Cvss3": "4.8/CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-15139",
+          "Public": "20180710"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1599899",
+          "ID": "1599899"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:13",
+        "cpe:/a:redhat:openstack-optools:13::el7",
+        "cpe:/a:redhat:openstack:13",
+        "cpe:/a:redhat:openstack:13::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20115034004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20115034003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-cinder is earlier than 1:12.0.4-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183601001"
+                  },
+                  {
+                    "Comment": "openstack-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183601002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-cinder is earlier than 1:12.0.4-2.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183601003"
+                  },
+                  {
+                    "Comment": "python-cinder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183601004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

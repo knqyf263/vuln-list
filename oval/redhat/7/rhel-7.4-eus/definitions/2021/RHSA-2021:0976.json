@@ -1,0 +1,133 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210976",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2021:0976: Red Hat Virtualization Host security, bug fix and enhancement update (4.4.4-2) (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization 4 for Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0976",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0976"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-27827",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-27827"
+      }
+    ],
+    "Description": "The redhat-virtualization-host packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks. \n\nThe ovirt-node-ng packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nThe following packages have been upgraded to a later upstream version: redhat-release-virtualization-host (4.4.4), redhat-virtualization-host (4.4.4)\n\nChanges to the imgbased component:\n\n* Previously, the chronyd symlink was removed during the upgrade process. As a result, the chronyd service was disabled following the upgrade.\nIn this release, the chronyd service is enabled after upgrade. (BZ#1903777)\n\nSecurity Fix(es):\n\n* lldp/openvswitch: denial of service via externally triggered memory leak (CVE-2020-27827)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-03-23"
+      },
+      "Updated": {
+        "Date": "2021-03-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-27827",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-27827",
+          "Public": "20210113"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1921438",
+          "ID": "1921438"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:8",
+        "cpe:/o:redhat:enterprise_linux:8::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20204172009"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20204172007"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20204172008"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-release-virtualization-host is earlier than 0:4.4.4-2.el8ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210976001"
+                  },
+                  {
+                    "Comment": "redhat-release-virtualization-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204172002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is earlier than 0:4.4.4-2.el8ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210976003"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204172004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is earlier than 0:4.4.4-20210307.0.el8_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210976005"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204172006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

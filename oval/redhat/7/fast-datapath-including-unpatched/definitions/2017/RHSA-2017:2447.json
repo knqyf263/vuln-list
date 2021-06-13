@@ -1,0 +1,247 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20172447",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2017:2447: openstack-neutron security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 9.0 (Mitaka)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:2447",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:2447"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7543",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7543"
+      }
+    ],
+    "Description": "OpenStack Networking (neutron) is a pluggable, scalable, and API-driven system that provisions networking services to virtual machines. Its main function is to manage connectivity to and from virtual machines.\n\nSecurity Fix(es):\n\n* A race-condition flaw was discovered in openstack-neutron where, following a minor overcloud update, neutron security groups were disabled. Specifically, the following were reset to 0: net.bridge.bridge-nf-call-arptables, net.bridge.bridge-nf-call-ip6tables, and net.bridge.bridge-nf-call-iptables. The race was only triggered by an update, at which point an attacker could access exposed tenant VMs and network resources. (CVE-2017-7543)\n\nThis issue was discovered by Paul Needle (Red Hat).",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-08-08"
+      },
+      "Updated": {
+        "Date": "2017-08-08"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-7543",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-362",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7543",
+          "Public": "20170808"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1473792",
+          "ID": "1473792"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:9",
+        "cpe:/a:redhat:openstack-director:9::el7",
+        "cpe:/a:redhat:openstack-optools:9",
+        "cpe:/a:redhat:openstack-optools:9::el7",
+        "cpe:/a:redhat:openstack:9",
+        "cpe:/a:redhat:openstack:9::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20137458004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20137458003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447001"
+                  },
+                  {
+                    "Comment": "openstack-neutron is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-bgp-dragent is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447003"
+                  },
+                  {
+                    "Comment": "openstack-neutron-bgp-dragent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-common is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447005"
+                  },
+                  {
+                    "Comment": "openstack-neutron-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-linuxbridge is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447007"
+                  },
+                  {
+                    "Comment": "openstack-neutron-linuxbridge is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-macvtap-agent is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447009"
+                  },
+                  {
+                    "Comment": "openstack-neutron-macvtap-agent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-metering-agent is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447011"
+                  },
+                  {
+                    "Comment": "openstack-neutron-metering-agent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-ml2 is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447013"
+                  },
+                  {
+                    "Comment": "openstack-neutron-ml2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-openvswitch is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447015"
+                  },
+                  {
+                    "Comment": "openstack-neutron-openvswitch is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-rpc-server is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447017"
+                  },
+                  {
+                    "Comment": "openstack-neutron-rpc-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-neutron-sriov-nic-agent is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447019"
+                  },
+                  {
+                    "Comment": "openstack-neutron-sriov-nic-agent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-neutron is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447021"
+                  },
+                  {
+                    "Comment": "python-neutron is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-neutron-tests is earlier than 1:8.3.0-11.1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172447023"
+                  },
+                  {
+                    "Comment": "python-neutron-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20158914018"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

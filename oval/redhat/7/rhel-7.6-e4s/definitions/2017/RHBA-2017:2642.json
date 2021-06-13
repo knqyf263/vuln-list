@@ -1,0 +1,567 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20172642",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHBA-2017:2642: OpenShift Container Platform 3.6.1 bug fix and enhancement update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 3.6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2017:2642",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2017:2642"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-1000085",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-1000085"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-1000089",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-1000089"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-1000092",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-1000092"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-1000096",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-1000096"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is the company's cloud computing Platform-as-a-Service (PaaS) solution designed for on-premise or private cloud deployments.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container Platform 3.6.1. See the following advisory for the container images for this release:\n\nhttps://access.redhat.com/errata/RHEA-2017:2644\n\nThis update fixes the following bugs:\n\n* When the atomic-openshift-node service got restarted, all processes in its control group are terminated, including the glusterfs-mounted points. Each glusterfs volume in OpenShift corresponds to one mounted point. If all mounting points are lost, so are all of the volumes. Set the control group mode to terminate only the main process and leave the remaining glusterfs mounting points untouched. When the atomic-openshift-node service is restarted, no glusterfs mounting point is terminated.\n(BZ#1423640)\n\n* A route can front up to four services that handle the requests. The load balancing strategy governs which endpoint gets each request. When round-robin is chosen, the portion of the requests that each\nservice handles is governed by the weight assigned to the service. Each endpoint in the service gets a fraction of the service's requests. (BZ#1473736)\n\n* When fluentd was reading from the journald and the output buffer queue wass full, the fluentd log was filled up with KubeClient messages. This is a bug in the fluentd filter_kubernetes_metadata plug-in. Ignore fluentd log messages from Kubeclient::Common::WatchNotice. (BZ#1476731)\n\n* Previously, the Copy Service Labels link in the Create Route form did not correctly copy the labels from the service to the new route. It has been fixed to copy the selected service's labels.\n(BZ#1477933)\n\n* Permissions on directories injected as a build input via the image source input mechanism have user-only access permissions. Therefore, the resulting application image cannot access the content when run as a random user ID. With this bug fix, the directories will be injected with group permissions, which will allow the user access to the container. (BZ#1479130)\n\n* Kibana nodejs runtime was not the same as the version distributed by Elastic. With this bug fix, the versioning is updated. (BZ#1479928)\n\n* Previously, the ScaleIO volume plug-in was missing in OpenShift Container Platform. With this bug fix, it is now fully enabled. (BZ#1482273)\n\n* Namespaces that use reserved names and were not created by infrastructure components should be blocked, as they will cause the upgrade to fail. (BZ#1484958)\n\nThis update includes the following enhancement:\n\n* There is now the ability to set reference policy with `oc import-image`. Set reference policy using the `--reference-policy` flag when invoking `oc import-image`. When importing all tags (using the `--all` flag), all tags will get passed to reference policy, including overwriting the already present one. (BZ#1420976)\n\nAll OpenShift Container Platform 3.6 users are advised to upgrade to these updated packages and images.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-09-08"
+      },
+      "Updated": {
+        "Date": "2017-09-08"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-1000085",
+          "Cvss3": "3.1/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-352",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-1000085",
+          "Public": "20170710"
+        },
+        {
+          "CveID": "CVE-2017-1000089",
+          "Cvss3": "3.7/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-287",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-1000089",
+          "Public": "20170710"
+        },
+        {
+          "CveID": "CVE-2017-1000092",
+          "Cvss3": "3.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-352",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-1000092",
+          "Public": "20170710"
+        },
+        {
+          "CveID": "CVE-2017-1000096",
+          "Cvss3": "8.8/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-184",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-1000096",
+          "Public": "20170710"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1471046",
+          "ID": "1471046"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1471050",
+          "ID": "1471050"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1471053",
+          "ID": "1471053"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1471064",
+          "ID": "1471064"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:3.6",
+        "cpe:/a:redhat:openshift:3.6::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20172642068"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20172642067"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642001"
+                  },
+                  {
+                    "Comment": "atomic-openshift is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-clients is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642003"
+                  },
+                  {
+                    "Comment": "atomic-openshift-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-clients-redistributable is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642005"
+                  },
+                  {
+                    "Comment": "atomic-openshift-clients-redistributable is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-cluster-capacity is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642007"
+                  },
+                  {
+                    "Comment": "atomic-openshift-cluster-capacity is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-docker-excluder is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642009"
+                  },
+                  {
+                    "Comment": "atomic-openshift-docker-excluder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-dockerregistry is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642011"
+                  },
+                  {
+                    "Comment": "atomic-openshift-dockerregistry is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-excluder is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642013"
+                  },
+                  {
+                    "Comment": "atomic-openshift-excluder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-federation-services is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642015"
+                  },
+                  {
+                    "Comment": "atomic-openshift-federation-services is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-master is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642017"
+                  },
+                  {
+                    "Comment": "atomic-openshift-master is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-node is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642019"
+                  },
+                  {
+                    "Comment": "atomic-openshift-node is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-pod is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642021"
+                  },
+                  {
+                    "Comment": "atomic-openshift-pod is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-sdn-ovs is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642023"
+                  },
+                  {
+                    "Comment": "atomic-openshift-sdn-ovs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-service-catalog is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642025"
+                  },
+                  {
+                    "Comment": "atomic-openshift-service-catalog is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-tests is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642027"
+                  },
+                  {
+                    "Comment": "atomic-openshift-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tuned-profiles-atomic-openshift-node is earlier than 0:3.6.173.0.21-1.git.0.f95b0e7.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642029"
+                  },
+                  {
+                    "Comment": "tuned-profiles-atomic-openshift-node is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fluentd is earlier than 0:0.12.39-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642031"
+                  },
+                  {
+                    "Comment": "fluentd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fluentd-doc is earlier than 0:0.12.39-2.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642033"
+                  },
+                  {
+                    "Comment": "fluentd-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jenkins-2-plugins is earlier than 0:3.7.1502412812-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642035"
+                  },
+                  {
+                    "Comment": "jenkins-2-plugins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kibana is earlier than 0:4.6.4-3.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642037"
+                  },
+                  {
+                    "Comment": "kibana is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-cool.io is earlier than 0:1.5.1-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642039"
+                  },
+                  {
+                    "Comment": "rubygem-cool.io is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-cool.io-doc is earlier than 0:1.5.1-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642041"
+                  },
+                  {
+                    "Comment": "rubygem-cool.io-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-excon is earlier than 0:0.58.0-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642043"
+                  },
+                  {
+                    "Comment": "rubygem-excon is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-excon-doc is earlier than 0:0.58.0-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642045"
+                  },
+                  {
+                    "Comment": "rubygem-excon-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-faraday is earlier than 0:0.13.0-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642047"
+                  },
+                  {
+                    "Comment": "rubygem-faraday is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-faraday-doc is earlier than 0:0.13.0-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642049"
+                  },
+                  {
+                    "Comment": "rubygem-faraday-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-fluent-plugin-kubernetes_metadata_filter is earlier than 0:0.29.0-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642051"
+                  },
+                  {
+                    "Comment": "rubygem-fluent-plugin-kubernetes_metadata_filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642052"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-fluent-plugin-kubernetes_metadata_filter-doc is earlier than 0:0.29.0-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642053"
+                  },
+                  {
+                    "Comment": "rubygem-fluent-plugin-kubernetes_metadata_filter-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642054"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-fluent-plugin-viaq_data_model is earlier than 0:0.0.5-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642055"
+                  },
+                  {
+                    "Comment": "rubygem-fluent-plugin-viaq_data_model is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642056"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-fluent-plugin-viaq_data_model-doc is earlier than 0:0.0.5-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642057"
+                  },
+                  {
+                    "Comment": "rubygem-fluent-plugin-viaq_data_model-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642058"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-i18n is earlier than 0:0.8.6-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642059"
+                  },
+                  {
+                    "Comment": "rubygem-i18n is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642060"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-i18n-doc is earlier than 0:0.8.6-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642061"
+                  },
+                  {
+                    "Comment": "rubygem-i18n-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-systemd-journal is earlier than 0:1.3.0-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642063"
+                  },
+                  {
+                    "Comment": "rubygem-systemd-journal is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642064"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-systemd-journal-doc is earlier than 0:1.3.0-1.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642065"
+                  },
+                  {
+                    "Comment": "rubygem-systemd-journal-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172642066"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

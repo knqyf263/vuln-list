@@ -1,0 +1,117 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20171462",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2017:1462: python-django security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 9.0 (Mitaka)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:1462",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:1462"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7233",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7233"
+      }
+    ],
+    "Description": "Django is a high-level Python Web framework that encourages rapid development and a clean, pragmatic design. It focuses on automating as much as possible and adhering to the DRY (Don't Repeat Yourself) principle.\n\nSecurity Fix(es):\n\n* A redirect flaw, where the is_safe_url() function did not correctly sanitize numeric-URL user input, was found in python-django. A remote attacker could exploit this flaw to perform XSS attacks against the OpenStack dashboard. (CVE-2017-7233)\n\nRed Hat would like to thank the Django project for reporting this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-06-14"
+      },
+      "Updated": {
+        "Date": "2017-06-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-7233",
+          "Cvss3": "6.1/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7233",
+          "Public": "20170404"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1437234",
+          "ID": "1437234"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:9",
+        "cpe:/a:redhat:openstack-director:9::el7",
+        "cpe:/a:redhat:openstack-optools:9",
+        "cpe:/a:redhat:openstack-optools:9::el7",
+        "cpe:/a:redhat:openstack:9",
+        "cpe:/a:redhat:openstack:9::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20137458004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20137458003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-django is earlier than 0:1.8.18-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171462001"
+                  },
+                  {
+                    "Comment": "python-django is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20169014002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-django-bash-completion is earlier than 0:1.8.18-1.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171462003"
+                  },
+                  {
+                    "Comment": "python-django-bash-completion is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20169014006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

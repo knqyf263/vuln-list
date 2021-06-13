@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20181948",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2018:1948: ansible security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Ansible Engine 2 for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:1948",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:1948"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-10855",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-10855"
+      }
+    ],
+    "Description": "Ansible is a simple model-driven configuration management, multi-node deployment, and remote-task execution system. Ansible works over SSH and does not require any software or daemons to be installed on remote nodes. Extension modules can be written in any language and are transferred to managed machines automatically.\n\nThe following packages have been upgraded to a newer upstream version: ansible (2.5.5)\n\nSecurity fix(es):\n\n* ansible: Ansible through version 2.5 does not properly honour the no_log option with failed task iterations. When a list of secret items is supplied to a task and a task iteration fails, secrets can be disclosed in logs despite the no_log option being enabled. (CVE-2018-10855)\n\nRed Hat would like to thank Tobias Henkel (BMW Car IT GmbH) for\nreporting these issues.\n\nBug Fix(es):\n\n* Changed the admin_users config option to not include \"admin\" by default\nas admin is frequently used for a non-privileged account\n(https://github.com/ansible/ansible/pull/41164)\n\n* aws_s3 - add async support to the action plugin\n(https://github.com/ansible/ansible/pull/40826)\n\n* aws_s3 - fix decrypting vault files\n(https://github.com/ansible/ansible/pull/39634)\n\n* ec2_ami - cast the device_mapping volume size to an int\n(https://github.com/ansible/ansible/pull/40938)\n\n* eos_logging - fix idempotency issues\n(https://github.com/ansible/ansible/pull/40604)\n\n* cache plugins - a cache timeout of 0 means the cache will not expire.\n\n* ios_logging - fix idempotency issues\n(https://github.com/ansible/ansible/pull/41029)\n\n* ios/nxos/eos_config - don't retrieve config in running_config when config\nis provided for diff (https://github.com/ansible/ansible/pull/41400)\n\n* nxos_banner - fix multiline banner issue\n(https://github.com/ansible/ansible/pull/41026).\n\n* nxos terminal plugin - fix output truncation\n(https://github.com/ansible/ansible/pull/40960)\n\n* nxos_l3_interface - fix no switchport issue with loopback and svi\ninterfaces (https://github.com/ansible/ansible/pull/37392).\n\n* nxos_snapshot - fix compare_option\n(https://github.com/ansible/ansible/pull/41386)\n\nSee\nhttps://github.com/ansible/ansible/blob/v2.5.5/changelogs/CHANGELOG-v2.5.rst\nfor details on this release.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-06-19"
+      },
+      "Updated": {
+        "Date": "2018-06-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-10855",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-10855",
+          "Public": "20180611"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1588855",
+          "ID": "1588855"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:ansible_engine:2",
+        "cpe:/a:redhat:ansible_engine:2::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20180646004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20180646003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible is earlier than 0:2.5.5-1.el7ae",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181948001"
+                  },
+                  {
+                    "Comment": "ansible is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181948002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ansible-doc is earlier than 0:2.5.5-1.el7ae",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181948003"
+                  },
+                  {
+                    "Comment": "ansible-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181948004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

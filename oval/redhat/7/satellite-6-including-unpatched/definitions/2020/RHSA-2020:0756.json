@@ -1,0 +1,124 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200756",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2020:0756: ansible security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 13.0 (Queens)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0756",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0756"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14846",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14846"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14856",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14856"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14858",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14858"
+      }
+    ],
+    "Description": "Ansible is a simple model-driven configuration management, multi-node deployment, and remote-task execution system. Ansible works over SSH and does not require any software or daemons to be installed on remote nodes. Extension modules can be written in any language and are transferred to managed machines automatically.\n\nSecurity Fix(es):\n\n* ansible: secrets disclosed on logs when no_log enabled (CVE-2019-14846)\n\n* ansible: Incomplete fix for CVE-2019-10206 (CVE-2019-14856)\n\n* ansible: sub parameters marked as no_log are not masked in certain failure scenarios (CVE-2019-14858)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-03-10"
+      },
+      "Updated": {
+        "Date": "2020-03-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-14846",
+          "Cvss3": "7.3/CVSS:3.0/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-117-\u003eCWE-532",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14846",
+          "Public": "20191008"
+        },
+        {
+          "CveID": "CVE-2019-14856",
+          "Cvss3": "6.4/CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:N",
+          "Cwe": "CWE-287",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14856",
+          "Public": "20191008"
+        },
+        {
+          "CveID": "CVE-2019-14858",
+          "Cvss3": "5.0/CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-117-\u003eCWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14858",
+          "Public": "20191011"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1755373",
+          "ID": "1755373"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1760593",
+          "ID": "1760593"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1760829",
+          "ID": "1760829"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:13",
+        "cpe:/a:redhat:openstack-optools:13::el7",
+        "cpe:/a:redhat:openstack:13",
+        "cpe:/a:redhat:openstack:13::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20115034004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20115034003"
+          },
+          {
+            "Comment": "ansible is earlier than 0:2.6.20-1.el7ae",
+            "TestRef": "oval:com.redhat.rhsa:tst:20200756001"
+          },
+          {
+            "Comment": "ansible is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:201816859002"
+          }
+        ]
+      }
+    ]
+  }
+}
