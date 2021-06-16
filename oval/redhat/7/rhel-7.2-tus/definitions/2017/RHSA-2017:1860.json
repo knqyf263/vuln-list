@@ -1,0 +1,144 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20171860",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2017:1860: libtasn1 security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:1860",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:1860"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-2806",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-2806"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3622",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3622"
+      }
+    ],
+    "Description": "Libtasn1 is a library that provides Abstract Syntax Notation One (ASN.1, as specified by the X.680 ITU-T recommendation) parsing and structures management, and Distinguished Encoding Rules (DER, as per X.690) encoding and decoding functions.\n\nThe following packages have been upgraded to a later upstream version: libtasn1 (4.10). (BZ#1360639)\n\nSecurity Fix(es):\n\n* A heap-based buffer overflow flaw was found in the way the libtasn1 library decoded certain DER-encoded inputs. A specially crafted DER-encoded input could cause an application using libtasn1 to perform an invalid read, causing the application to crash. (CVE-2015-3622)\n\n* A stack-based buffer overflow was found in the way libtasn1 decoded certain DER encoded data. An attacker could use this flaw to crash an application using the libtasn1 library. (CVE-2015-2806)\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 7.4 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-08-01"
+      },
+      "Updated": {
+        "Date": "2017-08-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-2806",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:N/I:N/A:P",
+          "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-2806",
+          "Public": "20150326"
+        },
+        {
+          "CveID": "CVE-2015-3622",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3622",
+          "Public": "20150430"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1207192",
+          "ID": "1207192"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1218141",
+          "ID": "1218141"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.2",
+        "cpe:/o:redhat:rhel_tus:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtasn1 is earlier than 0:4.10-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171860001"
+                  },
+                  {
+                    "Comment": "libtasn1 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtasn1-devel is earlier than 0:4.10-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171860003"
+                  },
+                  {
+                    "Comment": "libtasn1-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtasn1-tools is earlier than 0:4.10-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171860005"
+                  },
+                  {
+                    "Comment": "libtasn1-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

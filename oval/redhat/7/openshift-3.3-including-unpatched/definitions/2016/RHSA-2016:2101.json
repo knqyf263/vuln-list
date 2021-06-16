@@ -1,0 +1,157 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20162101",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2016:2101: nodejs and nodejs-tough-cookie security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 3.3"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:2101",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:2101"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-1000232",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-1000232"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5325",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5325"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is the company's cloud computing \nPlatform-as-a-Service (PaaS) solution designed for on-premise or private \ncloud deployments.\n\nSecurity Fix(es):\n\n* A regular expression denial of service flaw was found in Tough-Cookie. An \nattacker able to make an application using Touch-Cookie to parse a \nsufficiently large HTTP request Cookie header could cause the application \nto consume an excessive amount of CPU. (CVE-2016-1000232)\n\n* It was found that the reason argument in ServerResponse#writeHead() was \nnot properly validated. A remote attacker could possibly use this flaw to \nconduct an HTTP response splitting attack via a specially-crafted HTTP \nrequest. (CVE-2016-5325)\n\nThis advisory contains the RPM packages for this release. See the following\nadvisory for the container images fixes for this release:\n\nhttps://access.redhat.com/errata/RHBA-2016:2100",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-10-27"
+      },
+      "Updated": {
+        "Date": "2016-10-27"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-1000232",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-1000232",
+          "Public": "20160722"
+        },
+        {
+          "CveID": "CVE-2016-5325",
+          "Cvss2": "4.0/AV:N/AC:H/Au:N/C:P/I:P/A:N",
+          "Cvss3": "4.8/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5325",
+          "Public": "20160613"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1346910",
+          "ID": "1346910"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1359818",
+          "ID": "1359818"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:3.3",
+        "cpe:/a:redhat:openshift:3.3::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201410077006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201410077005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs-tough-cookie is earlier than 0:2.3.1-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162101001"
+                  },
+                  {
+                    "Comment": "nodejs-tough-cookie is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162101002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs is earlier than 0:0.10.47-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162101003"
+                  },
+                  {
+                    "Comment": "nodejs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812116006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs-devel is earlier than 0:0.10.47-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162101005"
+                  },
+                  {
+                    "Comment": "nodejs-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812116002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs-docs is earlier than 0:0.10.47-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162101007"
+                  },
+                  {
+                    "Comment": "nodejs-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812116004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

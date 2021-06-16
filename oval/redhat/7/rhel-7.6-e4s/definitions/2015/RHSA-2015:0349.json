@@ -1,0 +1,230 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20150349",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2015:0349: qemu-kvm security, bug fix, and enhancement update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:0349",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:0349"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3640",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3640"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-7815",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-7815"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-7840",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-7840"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-8106",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-8106"
+      }
+    ],
+    "Description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for Linux on AMD64 and Intel 64 systems. The qemu-kvm packages provide the user-space component for running virtual machines using KVM.\n\nIt was found that the Cirrus blit region checks were insufficient. A privileged guest user could use this flaw to write outside of VRAM-allocated buffer boundaries in the host's QEMU process address space with attacker-provided data. (CVE-2014-8106)\n\nAn uninitialized data structure use flaw was found in the way the set_pixel_format() function sanitized the value of bits_per_pixel. An attacker able to access a guest's VNC console could use this flaw to crash the guest. (CVE-2014-7815)\n\nIt was found that certain values that were read when loading RAM during migration were not validated. A user able to alter the savevm data (either on the disk or over the wire during migration) could use either of these flaws to corrupt QEMU process memory on the (destination) host, which could potentially result in arbitrary code execution on the host with the privileges of the QEMU process. (CVE-2014-7840)\n\nA NULL pointer dereference flaw was found in the way QEMU handled UDP packets with a source port and address of 0 when QEMU's user networking was in use. A local guest user could use this flaw to crash the guest. (CVE-2014-3640)\n\nRed Hat would like to thank James Spadaro of Cisco for reporting CVE-2014-7815, and Xavier Mehrenberger and Stephane Duverger of Airbus for reporting CVE-2014-3640. The CVE-2014-8106 issue was found by Paolo Bonzini of Red Hat, and the CVE-2014-7840 issue was discovered by Michael S. Tsirkin of Red Hat.\n\nBug fixes:\n\n* The KVM utility executed demanding routing update system calls every time it performed an MSI vector mask/unmask operation. Consequently, guests running legacy systems such as Red Hat Enterprise Linux 5 could, under certain circumstances, experience significant slowdown. Now, the routing system calls during mask/unmask operations are skipped, and the performance of legacy guests is now more consistent. (BZ#1098976)\n\n* Due to a bug in the Internet Small Computer System Interface (iSCSI) driver, a qemu-kvm process terminated unexpectedly with a segmentation fault when the \"write same\" command was executed in guest mode under the iSCSI protocol. This update fixes the bug, and the \"write same\" command now functions in guest mode under iSCSI as intended. (BZ#1083413)\n\n* The QEMU command interface did not properly handle resizing of cache memory during guest migration, causing QEMU to terminate unexpectedly with a segmentation fault. This update fixes the related code, and QEMU no longer crashes in the described situation. (BZ#1066338)\n\nEnhancements:\n\n* The maximum number of supported virtual CPUs (vCPUs) in a KVM guest has been increased to 240. This increases the number of virtual processing units that the user can assign to the guest, and therefore improves its performance potential. (BZ#1134408)\n\n* Support for the 5th Generation Intel Core processors has been added to the QEMU hypervisor, the KVM kernel code, and the libvirt API. This allows KVM guests to use the following instructions and features: ADCX, ADOX, RDSFEED, PREFETCHW, and supervisor mode access prevention (SMAP). (BZ#1116117)\n\n* The \"dump-guest-memory\" command now supports crash dump compression. This makes it possible for users who cannot use the \"virsh dump\" command to require less hard disk space for guest crash dumps. In addition, saving a compressed guest crash dump frequently takes less time than saving a non-compressed one. (BZ#1157798)\n\n* This update introduces support for flight recorder tracing, which uses SystemTap to automatically capture qemu-kvm data while the guest machine is running. For detailed instructions on how to configure and use flight recorder tracing, see the Virtualization Deployment and Administration Guide, linked to in the References section below. (BZ#1088112)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-03-05"
+      },
+      "Updated": {
+        "Date": "2015-03-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-3640",
+          "Cvss2": "4.4/AV:L/AC:M/Au:S/C:N/I:N/A:C",
+          "Cwe": "CWE-476",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3640",
+          "Public": "20140917"
+        },
+        {
+          "CveID": "CVE-2014-7815",
+          "Cvss2": "5.2/AV:A/AC:M/Au:S/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-7815",
+          "Public": "20141027"
+        },
+        {
+          "CveID": "CVE-2014-7840",
+          "Cvss2": "3.7/AV:L/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-20-\u003eCWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-7840",
+          "Public": "20141112"
+        },
+        {
+          "CveID": "CVE-2014-8106",
+          "Cvss2": "4.9/AV:A/AC:M/Au:S/C:P/I:P/A:P",
+          "Cwe": "CWE-20-\u003eCWE-119",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-8106",
+          "Public": "20141204"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1144818",
+          "ID": "1144818"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1157641",
+          "ID": "1157641"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1163075",
+          "ID": "1163075"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1169454",
+          "ID": "1169454"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_e4s:7.6",
+        "cpe:/a:redhat:rhel_extras_sap_hana_e4s:7.6",
+        "cpe:/o:redhat:rhel_e4s:7.6",
+        "cpe:/o:redhat:rhel_e4s:7.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcacard is earlier than 10:1.5.3-86.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150349001"
+                  },
+                  {
+                    "Comment": "libcacard is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcacard-devel is earlier than 10:1.5.3-86.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150349003"
+                  },
+                  {
+                    "Comment": "libcacard-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcacard-tools is earlier than 10:1.5.3-86.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150349005"
+                  },
+                  {
+                    "Comment": "libcacard-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img is earlier than 10:1.5.3-86.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150349007"
+                  },
+                  {
+                    "Comment": "qemu-img is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm is earlier than 10:1.5.3-86.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150349009"
+                  },
+                  {
+                    "Comment": "qemu-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-common is earlier than 10:1.5.3-86.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150349011"
+                  },
+                  {
+                    "Comment": "qemu-kvm-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools is earlier than 10:1.5.3-86.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150349013"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

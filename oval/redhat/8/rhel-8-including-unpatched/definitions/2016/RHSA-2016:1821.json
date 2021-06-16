@@ -1,0 +1,573 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161821",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2016:1821: rh-postgresql95-postgresql security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.1 EUS",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.2 EUS"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1821",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1821"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5423",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5423"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5424",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5424"
+      }
+    ],
+    "Description": "PostgreSQL is an advanced object-relational database management system (DBMS).\n\nThe following packages have been upgraded to a newer upstream version: rh-postgresql95-postgresql (9.5.4)\n\nSecurity Fix(es):\n\n* A flaw was found in the way PostgreSQL server handled certain SQL statements containing CASE/WHEN commands. A remote, authenticated attacker could use a specially crafted SQL statement to cause PostgreSQL to crash or disclose a few bytes of server memory or possibly execute arbitrary code. (CVE-2016-5423)\n\n* A flaw was found in the way PostgreSQL client programs handled database and role names containing newlines, carriage returns, double quotes, or backslashes. By crafting such an object name, roles with the CREATEDB or CREATEROLE option could escalate their privileges to superuser when a superuser next executes maintenance with a vulnerable client program. (CVE-2016-5424)\n\nRed Hat would like to thank the PostgreSQL project for reporting these issues. Upstream acknowledges Heikki Linnakangas as the original reporter of CVE-2016-5423; and Nathan Bossart as the original reporter of CVE-2016-5424.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-09-07"
+      },
+      "Updated": {
+        "Date": "2016-09-07"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-5423",
+          "Cvss2": "6.5/AV:N/AC:L/Au:S/C:P/I:P/A:P",
+          "Cvss3": "8.5/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-822",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5423",
+          "Public": "20160811"
+        },
+        {
+          "CveID": "CVE-2016-5424",
+          "Cvss2": "6.0/AV:N/AC:M/Au:S/C:P/I:P/A:P",
+          "Cvss3": "7.6/CVSS:3.0/AV:N/AC:H/PR:H/UI:R/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5424",
+          "Public": "20160811"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1364001",
+          "ID": "1364001"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1364002",
+          "ID": "1364002"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_software_collections:1",
+        "cpe:/a:redhat:rhel_software_collections:1::el7",
+        "cpe:/a:redhat:rhel_software_collections:2",
+        "cpe:/a:redhat:rhel_software_collections:2::el7",
+        "cpe:/a:redhat:rhel_software_collections:3",
+        "cpe:/a:redhat:rhel_software_collections:3::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20105312010"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821001"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-contrib is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821003"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-contrib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-devel is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821005"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-docs is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821007"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-libs is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821009"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plperl is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821011"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plperl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plpython is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821013"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plpython is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-pltcl is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821015"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-pltcl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-server is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821017"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-static is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821019"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-test is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821021"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821022"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821001"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-contrib is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821003"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-contrib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-devel is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821005"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-docs is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821007"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-libs is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821009"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plperl is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821011"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plperl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plpython is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821013"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plpython is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-pltcl is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821015"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-pltcl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-server is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821017"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-static is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821019"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-test is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821021"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821022"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821001"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-contrib is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821003"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-contrib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-devel is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821005"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-docs is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821007"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-libs is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821009"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plperl is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821011"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plperl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plpython is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821013"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-plpython is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-pltcl is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821015"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-pltcl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-server is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821017"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-static is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821019"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-postgresql95-postgresql-test is earlier than 0:9.5.4-1.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821021"
+                  },
+                  {
+                    "Comment": "rh-postgresql95-postgresql-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161821022"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

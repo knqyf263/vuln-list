@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151154",
+  "Version": "650",
+  "Metadata": {
+    "Title": "RHSA-2015:1154: libreswan security, bug fix and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1154",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1154"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3204",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3204"
+      }
+    ],
+    "Description": "Libreswan is an implementation of IPsec \u0026 IKE for Linux. IPsec is the\nInternet Protocol Security and uses strong cryptography to provide both\nauthentication and encryption services. These services allow you to build\nsecure tunnels through untrusted networks such as virtual private network\n(VPN).\n\nA flaw was discovered in the way Libreswan's IKE daemon processed certain\nIKEv1 payloads. A remote attacker could send specially crafted IKEv1\npayloads that, when processed, would lead to a denial of service (daemon\ncrash). (CVE-2015-3204)\n\nRed Hat would like to thank Javantea for reporting this issue.\n\nThis update fixes the following bugs:\n\n* Previously, the programs/pluto/state.h and\nprograms/pluto/kernel_netlink.c files had a maximum SELinux context size\nof 257 and 1024 respectively. These restrictions set by libreswan limited\nthe size of the context that can be exchanged by pluto (the IPSec daemon)\nwhen using a Labeled Internet Protocol Security (IPsec). The SElinux\nlabels for Labeled IPsec have been extended to 4096 bytes and the\nmentioned restrictions no longer exist. (BZ#1198650)\n\n* On some architectures, the kernel AES_GCM IPsec algorithm did not work\nproperly with acceleration drivers. On those kernels, some acceleration\nmodules are added to the modprobe blacklist. However, Libreswan was\nignoring this blacklist, leading to AES_GCM failures. This update adds\nsupport for the module blacklist to the libreswan packages and thus\nprevents the AES_GCM failures from occurring. (BZ#1208022)\n\n* An IPv6 issue has been resolved that prevented ipv6-icmp Neighbour\nDiscovery from working properly once an IPsec tunnel is established (and\none endpoint reboots). When upgrading, ensure that /etc/ipsec.conf is\nloading all /etc/ipsec.d/*conf files using the /etc/ipsec.conf \"include\"\nstatement, or explicitly include this new configuration file in\n/etc/ipsec.conf. (BZ#1208023)\n\n* A FIPS self-test prevented libreswan from properly starting in FIPS mode.\nThis bug has been fixed and libreswan now works in FIPS mode as expected.\n(BZ#1211146)\n\nIn addition, this update adds the following enhancements:\n\n* A new option \"seedbits=\" has been added to pre-seed the Network Security\nServices (NSS) pseudo random number generator (PRNG) function with entropy\nfrom the /dev/random file on startup. This option is disabled by default.\nIt can be enabled by setting the \"seedbits=\" option in the \"config setup\"\nsection in the /etc/ipsec.conf file. (BZ#1198649)\n\n* The build process now runs a Cryptographic Algorithm Validation Program\n(CAVP) certification test on the Internet Key Exchange version 1 and 2\n(IKEv1 and IKEv2) PRF/PRF+ functions. (BZ#1213652)\n\nAll libreswan users are advised to upgrade to these updated packages,\nwhich contain backported patches to correct these issues and add these\nenhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-06-23"
+      },
+      "Updated": {
+        "Date": "2015-06-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-3204",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-617",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3204",
+          "Public": "20150601"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1223361",
+          "ID": "1223361"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.2",
+        "cpe:/o:redhat:rhel_tus:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          },
+          {
+            "Comment": "libreswan is earlier than 0:3.12-10.1.el7_1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151154001"
+          },
+          {
+            "Comment": "libreswan is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151154002"
+          }
+        ]
+      }
+    ]
+  }
+}

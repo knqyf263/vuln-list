@@ -1,0 +1,203 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161380",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2016:1380: nodejs010-node-gyp and nodejs010-nodejs-qs security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.1 EUS",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.2 EUS"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1380",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1380"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-7191",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-7191"
+      }
+    ],
+    "Description": "Node.js is a software development platform for building fast and scalable network applications in the JavaScript programming language.\n\nSecurity Fix(es):\n\n* The nodejs-qs module has the ability to create sparse arrays during parsing. By specifying a high index in a querystring parameter it is possible to create a large array that will eventually take up all the allocated memory of the running process, resulting in a crash. (CVE-2014-7191)\n\nBug Fix(es):\n\n* A previous patch to the nodejs010-node-gyp RPM package introduced a bug, which caused the node-gyp module to work incorrectly. As a consequence, users were unable to install or build native Node.js modules. A new patch has been applied, the node-gyp module now works as expected, and it no longer affects other modules. (BZ#1255594)\n\nAll nodejs010-nodejs-qs and nodejs010-node-gyp users are advised to upgrade to these updated packages, which contain a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-07-05"
+      },
+      "Updated": {
+        "Date": "2016-07-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-7191",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-7191",
+          "Public": "20140806"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1146054",
+          "ID": "1146054"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_software_collections:1",
+        "cpe:/a:redhat:rhel_software_collections:1::el7",
+        "cpe:/a:redhat:rhel_software_collections:2",
+        "cpe:/a:redhat:rhel_software_collections:2::el7",
+        "cpe:/a:redhat:rhel_software_collections:3",
+        "cpe:/a:redhat:rhel_software_collections:3::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20105312010"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs010-nodejs-qs is earlier than 0:0.6.5-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380001"
+                  },
+                  {
+                    "Comment": "nodejs010-nodejs-qs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs010-node-gyp is earlier than 0:3.2.0-3.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380003"
+                  },
+                  {
+                    "Comment": "nodejs010-node-gyp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs010-nodejs-qs is earlier than 0:0.6.5-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380001"
+                  },
+                  {
+                    "Comment": "nodejs010-nodejs-qs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs010-node-gyp is earlier than 0:3.2.0-3.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380003"
+                  },
+                  {
+                    "Comment": "nodejs010-node-gyp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs010-nodejs-qs is earlier than 0:0.6.5-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380001"
+                  },
+                  {
+                    "Comment": "nodejs010-nodejs-qs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nodejs010-node-gyp is earlier than 0:3.2.0-3.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380003"
+                  },
+                  {
+                    "Comment": "nodejs010-node-gyp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161380004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

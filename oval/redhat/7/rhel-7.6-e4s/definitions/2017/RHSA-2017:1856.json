@@ -1,0 +1,178 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20171856",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2017:1856: qemu-kvm security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:1856",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:1856"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4020",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4020"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-2633",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-2633"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-5898",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-5898"
+      }
+    ],
+    "Description": "Kernel-based Virtual Machine (KVM) is a full virtualization solution for Linux on a variety of architectures. The qemu-kvm package provides the user-space component for running virtual machines that use KVM.\n\nSecurity Fix(es):\n\n* An out-of-bounds memory access issue was found in Quick Emulator (QEMU) in the VNC display driver. This flaw could occur while refreshing the VNC display surface area in the 'vnc_refresh_server_surface'. A user inside a guest could use this flaw to crash the QEMU process. (CVE-2017-2633)\n\n* An integer overflow flaw was found in Quick Emulator (QEMU) in the CCID Card device support. The flaw could occur while passing messages via command/response packets to and from the host. A privileged user inside a guest could use this flaw to crash the QEMU process. (CVE-2017-5898)\n\n* An information exposure flaw was found in Quick Emulator (QEMU) in Task Priority Register (TPR) optimizations for 32-bit Windows guests. The flaw could occur while accessing TPR. A privileged user inside a guest could use this issue to read portions of the host memory. (CVE-2016-4020)\n\nRed Hat would like to thank Li Qiang (360.cn Inc.) for reporting CVE-2017-5898 and Donghai Zdh (Alibaba Inc.) for reporting CVE-2016-4020.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 7.4 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-08-01"
+      },
+      "Updated": {
+        "Date": "2017-08-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-4020",
+          "Cvss2": "2.9/AV:A/AC:M/Au:N/C:P/I:N/A:N",
+          "Cvss3": "3.4/CVSS:3.0/AV:A/AC:H/PR:N/UI:N/S:C/C:L/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4020",
+          "Public": "20160407"
+        },
+        {
+          "CveID": "CVE-2017-2633",
+          "Cvss2": "3.8/AV:A/AC:M/Au:S/C:N/I:P/A:P",
+          "Cvss3": "5.4/CVSS:3.0/AV:A/AC:L/PR:L/UI:N/S:C/C:N/I:L/A:L",
+          "Cwe": "CWE-120",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-2633",
+          "Public": "20161201"
+        },
+        {
+          "CveID": "CVE-2017-5898",
+          "Cvss2": "3.8/AV:A/AC:M/Au:S/C:N/I:P/A:P",
+          "Cvss3": "4.0/CVSS:3.0/AV:A/AC:H/PR:H/UI:N/S:C/C:N/I:L/A:L",
+          "Cwe": "CWE-190",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-5898",
+          "Public": "20170203"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1313686",
+          "ID": "1313686"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1419699",
+          "ID": "1419699"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1425939",
+          "ID": "1425939"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_e4s:7.6",
+        "cpe:/a:redhat:rhel_extras_sap_hana_e4s:7.6",
+        "cpe:/o:redhat:rhel_e4s:7.6",
+        "cpe:/o:redhat:rhel_e4s:7.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img is earlier than 10:1.5.3-141.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171856001"
+                  },
+                  {
+                    "Comment": "qemu-img is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm is earlier than 10:1.5.3-141.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171856003"
+                  },
+                  {
+                    "Comment": "qemu-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-common is earlier than 10:1.5.3-141.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171856005"
+                  },
+                  {
+                    "Comment": "qemu-kvm-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools is earlier than 10:1.5.3-141.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171856007"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

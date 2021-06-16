@@ -1,0 +1,192 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20191178",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2019:1178: qemu-kvm security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:1178",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:1178"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12126",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12126"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12127",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12127"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12130",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12130"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11091",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11091"
+      }
+    ],
+    "Description": "Kernel-based Virtual Machine (KVM) is a full virtualization solution for Linux on a variety of architectures. The qemu-kvm packages provide the user-space component for running virtual machines that use KVM.\n\nSecurity Fix(es):\n\n* A flaw was found in the implementation of the \"fill buffer\", a mechanism used by modern CPUs when a cache-miss is made on L1 CPU cache. If an attacker can generate a load operation that would create a page fault, the execution will continue speculatively with incorrect data from the fill buffer while the data is fetched from higher level caches. This response time can be measured to infer data in the fill buffer. (CVE-2018-12130)\n\n* Modern Intel microprocessors implement hardware-level micro-optimizations to improve the performance of writing data back to CPU caches. The write operation is split into STA (STore Address) and STD (STore Data) sub-operations. These sub-operations allow the processor to hand-off address generation logic into these sub-operations for optimized writes. Both of these sub-operations write to a shared distributed processor structure called the 'processor store buffer'. As a result, an unprivileged attacker could use this flaw to read private data resident within the CPU's processor store buffer. (CVE-2018-12126)\n\n* Microprocessors use a ‘load port’ subcomponent to perform load operations from memory or IO. During a load operation, the load port receives data from the memory or IO subsystem and then provides the data to the CPU registers and operations in the CPU’s pipelines. Stale load operations results are stored in the 'load port' table until overwritten by newer operations. Certain load-port operations triggered by an attacker can be used to reveal data about previous stale requests leaking data back to the attacker via a timing side-channel. (CVE-2018-12127)\n\n* Uncacheable memory on some microprocessors utilizing speculative execution may allow an authenticated user to potentially enable information disclosure via a side channel with local access. (CVE-2019-11091)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-05-14"
+      },
+      "Updated": {
+        "Date": "2019-05-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-12126",
+          "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12126",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2018-12127",
+          "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12127",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2018-12130",
+          "Cvss3": "6.2/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-203-\u003eCWE-385-\u003eCWE-226",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12130",
+          "Public": "20190514:1700"
+        },
+        {
+          "CveID": "CVE-2019-11091",
+          "Cvss3": "3.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11091",
+          "Public": "20190514:1700"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1646781",
+          "ID": "1646781"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1646784",
+          "ID": "1646784"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1667782",
+          "ID": "1667782"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1705312",
+          "ID": "1705312"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_e4s:7.6",
+        "cpe:/a:redhat:rhel_extras_sap_hana_e4s:7.6",
+        "cpe:/o:redhat:rhel_e4s:7.6",
+        "cpe:/o:redhat:rhel_e4s:7.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img is earlier than 10:1.5.3-160.el7_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191178001"
+                  },
+                  {
+                    "Comment": "qemu-img is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm is earlier than 10:1.5.3-160.el7_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191178003"
+                  },
+                  {
+                    "Comment": "qemu-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-common is earlier than 10:1.5.3-160.el7_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191178005"
+                  },
+                  {
+                    "Comment": "qemu-kvm-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools is earlier than 10:1.5.3-160.el7_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191178007"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

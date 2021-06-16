@@ -1,0 +1,145 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141144",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:1144: firefox security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1144",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1144"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-1562",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-1562"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-1567",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-1567"
+      }
+    ],
+    "Description": "Mozilla Firefox is an open source web browser. XULRunner provides the XUL\nRuntime environment for Mozilla Firefox.\n\nSeveral flaws were found in the processing of malformed web content. A web\npage containing malicious content could cause Firefox to crash or,\npotentially, execute arbitrary code with the privileges of the user running\nFirefox. (CVE-2014-1562, CVE-2014-1567)\n\nRed Hat would like to thank the Mozilla project for reporting these issues.\nUpstream acknowledges Jan de Mooij as the original reporter of\nCVE-2014-1562, and regenrecht as the original reporter of CVE-2014-1567.\n\nFor technical details regarding these flaws, refer to the Mozilla security\nadvisories for Firefox 24.8.0 ESR. You can find a link to the Mozilla\nadvisories in the References section of this erratum.\n\nAll Firefox users should upgrade to these updated packages, which contain\nFirefox version 24.8.0 ESR, which corrects these issues. After installing\nthe update, Firefox must be restarted for the changes to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-09-03"
+      },
+      "Updated": {
+        "Date": "2014-09-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-1562",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-1562",
+          "Public": "20140903"
+        },
+        {
+          "CveID": "CVE-2014-1567",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-416",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-1567",
+          "Public": "20140903"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1135862",
+          "ID": "1135862"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1135869",
+          "ID": "1135869"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.4",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.4",
+        "cpe:/o:redhat:rhel_eus:7.4",
+        "cpe:/o:redhat:rhel_eus:7.4::computenode",
+        "cpe:/o:redhat:rhel_eus:7.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "firefox is earlier than 0:24.8.0-1.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141144001"
+                  },
+                  {
+                    "Comment": "firefox is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140741002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xulrunner is earlier than 0:24.8.0-1.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141144003"
+                  },
+                  {
+                    "Comment": "xulrunner is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140741004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xulrunner-devel is earlier than 0:24.8.0-1.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141144005"
+                  },
+                  {
+                    "Comment": "xulrunner-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140741006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

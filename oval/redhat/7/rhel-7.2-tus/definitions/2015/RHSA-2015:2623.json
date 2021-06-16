@@ -1,0 +1,139 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20152623",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2015:2623: grub2 security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:2623",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:2623"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-8370",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-8370"
+      }
+    ],
+    "Description": "The grub2 packages provide version 2 of the Grand Unified Bootloader\n(GRUB), a highly configurable and customizable bootloader with modular\narchitecture. The packages support a variety of kernel formats, file\nsystems, computer architectures, and hardware devices.\n\nA flaw was found in the way the grub2 handled backspace characters entered\nin username and password prompts. An attacker with access to the system\nconsole could use this flaw to bypass grub2 password protection and gain\nadministrative access to the system. (CVE-2015-8370)\n\nThis update also fixes the following bug:\n\n* When upgrading from Red Hat Enterprise Linux 7.1 and earlier, a\nconfigured boot password was not correctly migrated to the newly introduced\nuser.cfg configuration files. This could possibly prevent system\nadministrators from changing grub2 configuration during system boot even if\nthey provided the correct password. This update corrects the password\nmigration script and the incorrectly generated user.cfg file. (BZ#1290089)\n\nAll grub2 users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. For this update to take\neffect on BIOS-based machines, grub2 needs to be reinstalled as documented\nin the \"Reinstalling GRUB 2 on BIOS-Based Machines\" section of the Red Hat\nEnterprise Linux 7 System Administrator's Guide linked to in the References\nsection. No manual action is needed on UEFI-based machines.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-12-15"
+      },
+      "Updated": {
+        "Date": "2016-01-27"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-8370",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-787",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-8370",
+          "Public": "20151210"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1286966",
+          "ID": "1286966"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.2",
+        "cpe:/o:redhat:rhel_tus:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "grub2 is earlier than 1:2.02-0.33.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152623001"
+                  },
+                  {
+                    "Comment": "grub2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "grub2-efi is earlier than 1:2.02-0.33.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152623003"
+                  },
+                  {
+                    "Comment": "grub2-efi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "grub2-efi-modules is earlier than 1:2.02-0.33.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152623005"
+                  },
+                  {
+                    "Comment": "grub2-efi-modules is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "grub2-tools is earlier than 1:2.02-0.33.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152623007"
+                  },
+                  {
+                    "Comment": "grub2-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,583 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20192746",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2019:2746: rh-nginx112-nginx security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.4 EUS",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.5 EUS",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.6 EUS",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.7 EUS"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:2746",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:2746"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9511",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9511"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9513",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9513"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9516",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9516"
+      }
+    ],
+    "Description": "nginx is a web and proxy server supporting HTTP and other protocols, with a focus on high concurrency, performance, and low memory usage.\n\nSecurity Fix(es):\n\n* HTTP/2: large amount of data request leads to denial of service (CVE-2019-9511)\n\n* HTTP/2: flood using PRIORITY frames resulting in excessive resource consumption (CVE-2019-9513)\n\n* HTTP/2: 0-length headers leads to denial of service (CVE-2019-9516)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-09-13"
+      },
+      "Updated": {
+        "Date": "2019-09-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-9511",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9511",
+          "Public": "20190813"
+        },
+        {
+          "CveID": "CVE-2019-9513",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9513",
+          "Public": "20190813:1700"
+        },
+        {
+          "CveID": "CVE-2019-9516",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9516",
+          "Public": "20190813"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1735741",
+          "ID": "1735741"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1741860",
+          "ID": "1741860"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1741864",
+          "ID": "1741864"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_software_collections:1",
+        "cpe:/a:redhat:rhel_software_collections:1::el7",
+        "cpe:/a:redhat:rhel_software_collections:2",
+        "cpe:/a:redhat:rhel_software_collections:2::el7",
+        "cpe:/a:redhat:rhel_software_collections:3",
+        "cpe:/a:redhat:rhel_software_collections:3::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20105312010"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746001"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746003"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746005"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746007"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746009"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746011"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746014"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746015"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746005"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746017"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746018"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746019"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746014"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746015"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746005"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746017"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746018"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746019"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746014"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746015"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746005"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746017"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746018"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746019"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20105312009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746014"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746015"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-image-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746005"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746017"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-http-xslt-filter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746018"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-mail is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is earlier than 1:1.12.1-3.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192746019"
+                  },
+                  {
+                    "Comment": "rh-nginx112-nginx-mod-stream is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183680012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
