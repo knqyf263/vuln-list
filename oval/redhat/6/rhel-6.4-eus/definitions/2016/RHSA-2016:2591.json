@@ -1,0 +1,198 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20162591",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2016:2591: krb5 security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:2591",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:2591"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-3119",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-3119"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-3120",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-3120"
+      }
+    ],
+    "Description": "Kerberos is a network authentication system, which can improve the security of your network by eliminating the insecure practice of sending passwords over the network in unencrypted form. It allows clients and servers to authenticate to each other with the help of a trusted third party, the Kerberos key distribution center (KDC).\n\nThe following packages have been upgraded to a newer upstream version: krb5 (1.14.1). (BZ#1292153)\n\nSecurity Fix(es):\n\n* A NULL pointer dereference flaw was found in MIT Kerberos kadmind service. An authenticated attacker with permission to modify a principal entry could use this flaw to cause kadmind to dereference a null pointer and crash by supplying an empty DB argument to the modify_principal command, if kadmind was configured to use the LDAP KDB module. (CVE-2016-3119)\n\n* A NULL pointer dereference flaw was found in MIT Kerberos krb5kdc service. An authenticated attacker could use this flaw to cause krb5kdc to dereference a null pointer and crash by making an S4U2Self request, if the restrict_anonymous_to_tgt option was set to true. (CVE-2016-3120)\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 7.3 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-11-03"
+      },
+      "Updated": {
+        "Date": "2016-11-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-3119",
+          "Cvss2": "2.1/AV:N/AC:H/Au:S/C:N/I:N/A:P",
+          "Cwe": "CWE-476",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-3119",
+          "Public": "20160314"
+        },
+        {
+          "CveID": "CVE-2016-3120",
+          "Cvss2": "3.5/AV:N/AC:M/Au:S/C:N/I:N/A:P",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-476",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-3120",
+          "Public": "20160719"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1319616",
+          "ID": "1319616"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1361050",
+          "ID": "1361050"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_e4s:7.4",
+        "cpe:/a:redhat:rhel_extras_sap_hana_e4s:7.4",
+        "cpe:/o:redhat:rhel_e4s:7.4",
+        "cpe:/o:redhat:rhel_e4s:7.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-devel is earlier than 0:1.14.1-26.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162591001"
+                  },
+                  {
+                    "Comment": "krb5-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150439002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-libs is earlier than 0:1.14.1-26.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162591003"
+                  },
+                  {
+                    "Comment": "krb5-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150439004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-pkinit is earlier than 0:1.14.1-26.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162591005"
+                  },
+                  {
+                    "Comment": "krb5-pkinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150439006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-server is earlier than 0:1.14.1-26.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162591007"
+                  },
+                  {
+                    "Comment": "krb5-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150439008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-server-ldap is earlier than 0:1.14.1-26.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162591009"
+                  },
+                  {
+                    "Comment": "krb5-server-ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150439010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-workstation is earlier than 0:1.14.1-26.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162591011"
+                  },
+                  {
+                    "Comment": "krb5-workstation is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150439012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libkadm5 is earlier than 0:1.14.1-26.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162591013"
+                  },
+                  {
+                    "Comment": "libkadm5 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162591014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
