@@ -1,0 +1,101 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20204381",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:4381: openstack-selinux security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 16.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:4381",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:4381"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1690",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1690"
+      }
+    ],
+    "Description": "The openstack-selinux package is a collection of SELinux policies for running OpenStack on Red Hat Enterprise Linux.\n\nSecurity Fix(es):\n\n* policy flaw allows dbus messaging (CVE-2020-1690)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE\npage listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-10-28"
+      },
+      "Updated": {
+        "Date": "2020-10-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-1690",
+          "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:N/I:N/A:H",
+          "Cwe": "CWE-285",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1690",
+          "Public": "20200212:2300"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1789640",
+          "ID": "1789640"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack:16",
+        "cpe:/a:redhat:openstack:16.1",
+        "cpe:/a:redhat:openstack:16.1::el8",
+        "cpe:/a:redhat:openstack:16::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20161000107048"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "openstack-selinux is earlier than 0:0.8.24-1.20200914163011.26243bf.el8ost",
+            "TestRef": "oval:com.redhat.rhsa:tst:20204381001"
+          },
+          {
+            "Comment": "openstack-selinux is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhea:tst:202002831462"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:20161000107047"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhea:tst:202002831502"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

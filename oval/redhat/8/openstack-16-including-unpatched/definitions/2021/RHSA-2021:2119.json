@@ -1,0 +1,101 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212119",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2021:2119: Red Hat OpenStack Platform 16.1.6 (tripleo-ansible) security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 16.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2119",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2119"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-31918",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-31918"
+      }
+    ],
+    "Description": "Ansible project for TripleO.\n\nSecurity Fix(es):\n\n* ansible.log file is visible to unprivileged users (CVE-2021-31918)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE\npage listed in the References section.\n\nChanges to the tripleo-ansible component:\n\nThis update prevents Relax and Recover (ReaR) from automatically creating an unrequested backup. Previously, ReaR automatically created the cron file /etc/cron.d/rear, which ran a backup at 1:30 AM. This update prevents the automatic creation of the cron job. (BZ#1919174)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-05-26"
+      },
+      "Updated": {
+        "Date": "2021-05-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-31918",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-31918",
+          "Public": "20210429"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1954250",
+          "ID": "1954250"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack:16",
+        "cpe:/a:redhat:openstack:16.1",
+        "cpe:/a:redhat:openstack:16.1::el8",
+        "cpe:/a:redhat:openstack:16::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20161000107048"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "tripleo-ansible is earlier than 0:0.5.1-1.20210323173506.el8ost",
+            "TestRef": "oval:com.redhat.rhsa:tst:20212119001"
+          },
+          {
+            "Comment": "tripleo-ansible is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhea:tst:202002831424"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:20161000107047"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhea:tst:202002831502"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
