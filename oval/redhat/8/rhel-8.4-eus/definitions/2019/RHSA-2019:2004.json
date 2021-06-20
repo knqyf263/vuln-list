@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20192004",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2019:2004: icedtea-web security update (Important)",
     "AffectedList": [
@@ -57,7 +57,8 @@
         {
           "CveID": "CVE-2019-10182",
           "Cvss3": "8.2/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:H/A:L",
-          "Cwe": "CWE-22 CWE-94",
+          "Cwe": "CWE-22-\u003eCWE-94",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-10182",
           "Public": "20190731:1340"
         },
@@ -65,6 +66,7 @@
           "CveID": "CVE-2019-10185",
           "Cvss3": "8.2/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:H/A:L",
           "Cwe": "CWE-22",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-10185",
           "Public": "20190731:1341"
         }
@@ -84,8 +86,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -94,19 +106,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [

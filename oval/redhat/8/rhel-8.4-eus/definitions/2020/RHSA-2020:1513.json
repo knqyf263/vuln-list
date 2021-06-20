@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20201513",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2020:1513: git security update (Important)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2020-5260",
           "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
           "Cwe": "CWE-20",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-5260",
           "Public": "20200414:1800"
         }
@@ -51,8 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -61,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -146,11 +164,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "git-debugsource is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "git-email is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513011"
                   },
                   {
-                    "Comment": "git-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "git-email is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20194356012"
                   }
                 ]
@@ -159,11 +177,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "git-email is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "git-gui is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513013"
                   },
                   {
-                    "Comment": "git-email is signed with Red Hat redhatrelease2 key",
+                    "Comment": "git-gui is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20194356014"
                   }
                 ]
@@ -172,11 +190,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "git-gui is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "git-instaweb is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513015"
                   },
                   {
-                    "Comment": "git-gui is signed with Red Hat redhatrelease2 key",
+                    "Comment": "git-instaweb is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20194356016"
                   }
                 ]
@@ -185,11 +203,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "git-instaweb is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "git-subtree is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513017"
                   },
                   {
-                    "Comment": "git-instaweb is signed with Red Hat redhatrelease2 key",
+                    "Comment": "git-subtree is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20194356018"
                   }
                 ]
@@ -198,11 +216,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "git-subtree is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "git-svn is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513019"
                   },
                   {
-                    "Comment": "git-subtree is signed with Red Hat redhatrelease2 key",
+                    "Comment": "git-svn is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20194356020"
                   }
                 ]
@@ -211,11 +229,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "git-svn is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "gitk is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513021"
                   },
                   {
-                    "Comment": "git-svn is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gitk is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20194356022"
                   }
                 ]
@@ -224,11 +242,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gitk is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "gitweb is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513023"
                   },
                   {
-                    "Comment": "gitk is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gitweb is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20194356024"
                   }
                 ]
@@ -237,11 +255,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gitweb is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "perl-Git is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513025"
                   },
                   {
-                    "Comment": "gitweb is signed with Red Hat redhatrelease2 key",
+                    "Comment": "perl-Git is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20194356026"
                   }
                 ]
@@ -250,25 +268,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "perl-Git is earlier than 0:2.18.2-2.el8_1",
+                    "Comment": "perl-Git-SVN is earlier than 0:2.18.2-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201513027"
                   },
                   {
-                    "Comment": "perl-Git is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20194356028"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "perl-Git-SVN is earlier than 0:2.18.2-2.el8_1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201513029"
-                  },
-                  {
                     "Comment": "perl-Git-SVN is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20194356030"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194356028"
                   }
                 ]
               }

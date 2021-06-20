@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20193575",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:3575: elfutils security, bug fix, and enhancement update (Low)",
     "AffectedList": [
@@ -60,6 +60,7 @@
           "CveID": "CVE-2019-7146",
           "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
           "Cwe": "CWE-125",
+          "Impact": "low",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-7146",
           "Public": "20190109"
         },
@@ -67,6 +68,7 @@
           "CveID": "CVE-2019-7149",
           "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
           "Cwe": "CWE-125",
+          "Impact": "low",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-7149",
           "Public": "20190118"
         },
@@ -74,6 +76,7 @@
           "CveID": "CVE-2019-7150",
           "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
           "Cwe": "CWE-125",
+          "Impact": "low",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-7150",
           "Public": "20181010"
         },
@@ -81,6 +84,7 @@
           "CveID": "CVE-2019-7664",
           "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
           "Cwe": "CWE-787",
+          "Impact": "low",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-7664",
           "Public": "20190111"
         },
@@ -88,6 +92,7 @@
           "CveID": "CVE-2019-7665",
           "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
           "Cwe": "CWE-122",
+          "Impact": "low",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-7665",
           "Public": "20190112"
         }
@@ -106,27 +111,27 @@
           "ID": "1671446"
         },
         {
-          "Href": "https://bugzilla.redhat.com/1674430",
-          "ID": "1674430"
-        },
-        {
           "Href": "https://bugzilla.redhat.com/1677536",
           "ID": "1677536"
         },
         {
           "Href": "https://bugzilla.redhat.com/1677538",
           "ID": "1677538"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1705138",
-          "ID": "1705138"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::crb",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -135,19 +140,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -168,11 +180,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "elfutils-debugsource is earlier than 0:0.176-5.el8",
+                    "Comment": "elfutils-default-yama-scope is earlier than 0:0.176-5.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575003"
                   },
                   {
-                    "Comment": "elfutils-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "elfutils-default-yama-scope is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575004"
                   }
                 ]
@@ -181,11 +193,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "elfutils-default-yama-scope is earlier than 0:0.176-5.el8",
+                    "Comment": "elfutils-devel is earlier than 0:0.176-5.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575005"
                   },
                   {
-                    "Comment": "elfutils-default-yama-scope is signed with Red Hat redhatrelease2 key",
+                    "Comment": "elfutils-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575006"
                   }
                 ]
@@ -194,11 +206,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "elfutils-devel is earlier than 0:0.176-5.el8",
+                    "Comment": "elfutils-devel-static is earlier than 0:0.176-5.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575007"
                   },
                   {
-                    "Comment": "elfutils-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "elfutils-devel-static is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575008"
                   }
                 ]
@@ -207,11 +219,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "elfutils-devel-static is earlier than 0:0.176-5.el8",
+                    "Comment": "elfutils-libelf is earlier than 0:0.176-5.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575009"
                   },
                   {
-                    "Comment": "elfutils-devel-static is signed with Red Hat redhatrelease2 key",
+                    "Comment": "elfutils-libelf is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575010"
                   }
                 ]
@@ -220,11 +232,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "elfutils-libelf is earlier than 0:0.176-5.el8",
+                    "Comment": "elfutils-libelf-devel is earlier than 0:0.176-5.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575011"
                   },
                   {
-                    "Comment": "elfutils-libelf is signed with Red Hat redhatrelease2 key",
+                    "Comment": "elfutils-libelf-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575012"
                   }
                 ]
@@ -233,11 +245,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "elfutils-libelf-devel is earlier than 0:0.176-5.el8",
+                    "Comment": "elfutils-libelf-devel-static is earlier than 0:0.176-5.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575013"
                   },
                   {
-                    "Comment": "elfutils-libelf-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "elfutils-libelf-devel-static is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575014"
                   }
                 ]
@@ -246,25 +258,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "elfutils-libelf-devel-static is earlier than 0:0.176-5.el8",
+                    "Comment": "elfutils-libs is earlier than 0:0.176-5.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193575015"
                   },
                   {
-                    "Comment": "elfutils-libelf-devel-static is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193575016"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "elfutils-libs is earlier than 0:0.176-5.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193575017"
-                  },
-                  {
                     "Comment": "elfutils-libs is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193575018"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193575016"
                   }
                 ]
               }

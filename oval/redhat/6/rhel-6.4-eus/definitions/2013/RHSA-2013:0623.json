@@ -1,0 +1,261 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130623",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2013:0623: tomcat6 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0623",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0623"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-3546",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-3546"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-4534",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-4534"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-5885",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-5885"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-5886",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-5886"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-5887",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-5887"
+      }
+    ],
+    "Description": "Apache Tomcat is a servlet container.\n\nIt was found that when an application used FORM authentication, along with\nanother component that calls request.setUserPrincipal() before the call to\nFormAuthenticator#authenticate() (such as the Single-Sign-On valve), it was\npossible to bypass the security constraint checks in the FORM authenticator\nby appending \"/j_security_check\" to the end of a URL. A remote attacker\nwith an authenticated session on an affected application could use this\nflaw to circumvent authorization controls, and thereby access resources not\npermitted by the roles associated with their authenticated session.\n(CVE-2012-3546)\n\nA flaw was found in the way Tomcat handled sendfile operations when using\nthe HTTP NIO (Non-Blocking I/O) connector and HTTPS. A remote attacker\ncould use this flaw to cause a denial of service (infinite loop). The HTTP\nblocking IO (BIO) connector, which is not vulnerable to this issue, is used\nby default in Red Hat Enterprise Linux 6. (CVE-2012-4534)\n\nMultiple weaknesses were found in the Tomcat DIGEST authentication\nimplementation, effectively reducing the security normally provided by\nDIGEST authentication. A remote attacker could use these flaws to perform\nreplay attacks in some circumstances. (CVE-2012-5885, CVE-2012-5886,\nCVE-2012-5887)\n\nUsers of Tomcat should upgrade to these updated packages, which correct\nthese issues. Tomcat must be restarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-03-11"
+      },
+      "Updated": {
+        "Date": "2013-03-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-3546",
+          "Cvss2": "5.5/AV:N/AC:L/Au:S/C:P/I:P/A:N",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-3546",
+          "Public": "20121204"
+        },
+        {
+          "CveID": "CVE-2012-4534",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-4534",
+          "Public": "20121204"
+        },
+        {
+          "CveID": "CVE-2012-5885",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-5885",
+          "Public": "20121105"
+        },
+        {
+          "CveID": "CVE-2012-5886",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-5886",
+          "Public": "20121105"
+        },
+        {
+          "CveID": "CVE-2012-5887",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-5887",
+          "Public": "20121105"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/873664",
+          "ID": "873664"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/883634",
+          "ID": "883634"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/883637",
+          "ID": "883637"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/o:redhat:rhel_eus:6.4",
+        "cpe:/o:redhat:rhel_eus:6.4::computenode",
+        "cpe:/o:redhat:rhel_eus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6 is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623001"
+                  },
+                  {
+                    "Comment": "tomcat6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-admin-webapps is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623003"
+                  },
+                  {
+                    "Comment": "tomcat6-admin-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-docs-webapp is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623005"
+                  },
+                  {
+                    "Comment": "tomcat6-docs-webapp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-el-2.1-api is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623007"
+                  },
+                  {
+                    "Comment": "tomcat6-el-2.1-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-javadoc is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623009"
+                  },
+                  {
+                    "Comment": "tomcat6-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-jsp-2.1-api is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623011"
+                  },
+                  {
+                    "Comment": "tomcat6-jsp-2.1-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-lib is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623013"
+                  },
+                  {
+                    "Comment": "tomcat6-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-servlet-2.5-api is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623015"
+                  },
+                  {
+                    "Comment": "tomcat6-servlet-2.5-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-webapps is earlier than 0:6.0.24-52.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130623017"
+                  },
+                  {
+                    "Comment": "tomcat6-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

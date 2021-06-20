@@ -1,0 +1,202 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170116",
+  "Version": "646",
+  "Metadata": {
+    "Title": "RHSA-2017:0116: docker security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0116",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0116"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9962",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9962"
+      }
+    ],
+    "Description": "Docker is an open-source engine that automates the deployment of any application as a lightweight, portable, self-sufficient container that will run virtually anywhere.\n\nThe following packages have been upgraded to a newer upstream version: docker (1.12.5). (BZ#1404298)\n\nSecurity Fix(es):\n\n* The runc component used by `docker exec` feature of docker allowed additional container processes via to be ptraced by the pid 1 of the container. This allows the main processes of the container, if running as root, to gain low-level access to these new processes during initialization. An attacker can, depending on the nature of the incoming process, leverage this to elevate access to the host. This ranges from accessing host content through the file descriptors of the incoming process to, potentially, a complete container escape by leveraging memory access or syscall interception. (CVE-2016-9962)\n\nRed Hat would like to thank the Docker project for reporting this issue. Upstream acknowledges Aleksa Sarai (SUSE) and Tonis Tiigi (Docker) as the original reporters.\n\nBug Fix(es):\n\n* The docker containers and images did not read proxy variables from the environment when contacting registries. As a consequence, a user could not pull image when the system was configured to use a proxy. The containers and images have been fixed to read proxy variables from the environment, and pulling images now from a system with a proxy works correctly. (BZ#1393816)\n\n* Occasionally the docker-storage-setup service could start before a thin pool is ready which caused it to failed. As a consequence, the docker daemon also failed. This bug has been fixed and now docker-storage-setup waits for a thin pool to be created for 60 seconds. This default time can be configured. As a result, docker and docker-storage-setup start correctly upon reboot. (BZ#1316786)\n\n* Previously, the docker daemon's unit file was not supplying the userspace proxy path. As a consequence, containers that exposed ports could not be started. To fix this bug, the unit file was updated to include the userspace proxy path option to the daemon start command, along with several other minor packaging fixes. As a result, containers that expose ports can now be started as expected. (BZ#1406460)\n\n* Previously, the system CA (Certificate Authority) pool was excluded when the registry CA is used from the /etc/docker/certs.d/ directory. As a consequence, pulling images failed with the following error:\n\n    Failed to push image: x509: certificate signed by unknown authority\n\nThis bug has been fixed and docker now reads the system CA pool correctly and pulling images now work correctly. (BZ#1400372)\n\n* Previously, the docker daemon option did not handle correctly the \"--block-registry docker.io\" option. As a consequence, docker allowed pulling images from docker.io even when the \"--block-registry docker.io\" option was enabled. This update fixed the handling of the option, and now using \"--block-registry docker.io\" correctly blocks image pulling. (BZ#1395401)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-01-17"
+      },
+      "Updated": {
+        "Date": "2017-01-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-9962",
+          "Cvss3": "7.5/CVSS:3.1/AV:L/AC:H/PR:H/UI:N/S:C/C:H/I:H/A:H",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9962",
+          "Public": "20170111"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1409531",
+          "ID": "1409531"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20140047030"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20140047029"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "container-selinux is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116001"
+                  },
+                  {
+                    "Comment": "container-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116003"
+                  },
+                  {
+                    "Comment": "docker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-client is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116005"
+                  },
+                  {
+                    "Comment": "docker-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-common is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116007"
+                  },
+                  {
+                    "Comment": "docker-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-logrotate is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116009"
+                  },
+                  {
+                    "Comment": "docker-logrotate is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-lvm-plugin is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116011"
+                  },
+                  {
+                    "Comment": "docker-lvm-plugin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-novolume-plugin is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116013"
+                  },
+                  {
+                    "Comment": "docker-novolume-plugin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-rhel-push-plugin is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116015"
+                  },
+                  {
+                    "Comment": "docker-rhel-push-plugin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-v1.10-migrator is earlier than 2:1.12.5-14.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170116017"
+                  },
+                  {
+                    "Comment": "docker-v1.10-migrator is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047018"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

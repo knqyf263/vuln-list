@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130551",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2013:0551: acroread security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Supplementary for Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0551",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0551"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0640",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0640"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0641",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0641"
+      }
+    ],
+    "Description": "Adobe Reader allows users to view and print documents in Portable Document\nFormat (PDF).\n\nThis update fixes two security flaws in Adobe Reader. These flaws are\ndetailed in the Adobe Security bulletin APSB13-07, listed in the References\nsection. A specially-crafted PDF file could cause Adobe Reader to crash or,\npotentially, execute arbitrary code as the user running Adobe Reader when\nopened. (CVE-2013-0640, CVE-2013-0641)\n\nAll Adobe Reader users should install these updated packages. They contain\nAdobe Reader version 9.5.4, which is not vulnerable to these issues. All\nrunning instances of Adobe Reader must be restarted for the update to take\neffect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-21"
+      },
+      "Updated": {
+        "Date": "2013-02-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-0640",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0640",
+          "Public": "20130213"
+        },
+        {
+          "CveID": "CVE-2013-0641",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0641",
+          "Public": "20130213"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/911099",
+          "ID": "911099"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/o:redhat:rhel_eus:6.4",
+        "cpe:/o:redhat:rhel_eus:6.4::computenode",
+        "cpe:/o:redhat:rhel_eus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "acroread is earlier than 0:9.5.4-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130551001"
+                  },
+                  {
+                    "Comment": "acroread is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100934002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "acroread-plugin is earlier than 0:9.5.4-1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130551003"
+                  },
+                  {
+                    "Comment": "acroread-plugin is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100934004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

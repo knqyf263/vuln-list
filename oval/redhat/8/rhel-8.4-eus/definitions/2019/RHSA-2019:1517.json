@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20191517",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2019:1517: gvfs security update (Moderate)",
     "AffectedList": [
@@ -38,8 +38,9 @@
       "Cves": [
         {
           "CveID": "CVE-2019-3827",
-          "Cvss3": "7/CVSS:3.0/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-863",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-3827",
           "Public": "20181227"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -147,11 +164,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gvfs-debugsource is earlier than 0:1.36.2-2.el8_0.1",
+                    "Comment": "gvfs-devel is earlier than 0:1.36.2-2.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517011"
                   },
                   {
-                    "Comment": "gvfs-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gvfs-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517012"
                   }
                 ]
@@ -160,11 +177,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gvfs-devel is earlier than 0:1.36.2-2.el8_0.1",
+                    "Comment": "gvfs-fuse is earlier than 0:1.36.2-2.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517013"
                   },
                   {
-                    "Comment": "gvfs-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gvfs-fuse is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517014"
                   }
                 ]
@@ -173,11 +190,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gvfs-fuse is earlier than 0:1.36.2-2.el8_0.1",
+                    "Comment": "gvfs-goa is earlier than 0:1.36.2-2.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517015"
                   },
                   {
-                    "Comment": "gvfs-fuse is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gvfs-goa is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517016"
                   }
                 ]
@@ -186,11 +203,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gvfs-goa is earlier than 0:1.36.2-2.el8_0.1",
+                    "Comment": "gvfs-gphoto2 is earlier than 0:1.36.2-2.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517017"
                   },
                   {
-                    "Comment": "gvfs-goa is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gvfs-gphoto2 is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517018"
                   }
                 ]
@@ -199,11 +216,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gvfs-gphoto2 is earlier than 0:1.36.2-2.el8_0.1",
+                    "Comment": "gvfs-mtp is earlier than 0:1.36.2-2.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517019"
                   },
                   {
-                    "Comment": "gvfs-gphoto2 is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gvfs-mtp is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517020"
                   }
                 ]
@@ -212,25 +229,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gvfs-mtp is earlier than 0:1.36.2-2.el8_0.1",
+                    "Comment": "gvfs-smb is earlier than 0:1.36.2-2.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191517021"
                   },
                   {
-                    "Comment": "gvfs-mtp is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191517022"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "gvfs-smb is earlier than 0:1.36.2-2.el8_0.1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191517023"
-                  },
-                  {
                     "Comment": "gvfs-smb is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191517024"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191517022"
                   }
                 ]
               }

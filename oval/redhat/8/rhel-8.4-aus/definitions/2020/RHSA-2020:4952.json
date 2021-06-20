@@ -1,0 +1,122 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20204952",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:4952: freetype security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:4952",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:4952"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-15999",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-15999"
+      }
+    ],
+    "Description": "FreeType is a free, high-quality, portable font engine that can open and manage font files. FreeType loads, hints, and renders individual glyphs efficiently.\n\nSecurity Fix(es):\n\n* freetype: Heap-based buffer overflow due to integer truncation in Load_SBit_Png (CVE-2020-15999)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-05"
+      },
+      "Updated": {
+        "Date": "2020-11-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-15999",
+          "Cvss3": "8.6/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-15999",
+          "Public": "20201019"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1890210",
+          "ID": "1890210"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.4",
+        "cpe:/a:redhat:rhel_aus:8.4::appstream",
+        "cpe:/o:redhat:rhel_aus:8.4",
+        "cpe:/o:redhat:rhel_aus:8.4::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "freetype is earlier than 0:2.9.1-4.el8_3.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204952001"
+                  },
+                  {
+                    "Comment": "freetype is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204952002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "freetype-devel is earlier than 0:2.9.1-4.el8_3.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204952003"
+                  },
+                  {
+                    "Comment": "freetype-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204952004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

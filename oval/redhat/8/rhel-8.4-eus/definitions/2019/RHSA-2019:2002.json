@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20192002",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:2002: redis:5 security update (Important)",
     "AffectedList": [
@@ -45,6 +45,7 @@
           "CveID": "CVE-2019-10192",
           "Cvss3": "7.2/CVSS:3.0/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-10192",
           "Public": "20190619"
         },
@@ -52,6 +53,7 @@
           "CveID": "CVE-2019-10193",
           "Cvss3": "7.2/CVSS:3.0/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-121",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-10193",
           "Public": "20190619"
         }
@@ -67,8 +69,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -77,7 +89,7 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
@@ -85,15 +97,24 @@
         "Operator": "AND",
         "Criterions": [
           {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          },
-          {
             "Comment": "Module redis:5 is enabled",
-            "TestRef": "oval:com.redhat.rhsa:tst:20192002009"
+            "TestRef": "oval:com.redhat.rhsa:tst:20192002007"
           }
         ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -114,11 +135,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "redis-debugsource is earlier than 0:5.0.3-2.module+el8.0.0.z+3657+acb471dc",
+                    "Comment": "redis-devel is earlier than 0:5.0.3-2.module+el8.0.0.z+3657+acb471dc",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192002003"
                   },
                   {
-                    "Comment": "redis-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "redis-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192002004"
                   }
                 ]
@@ -127,25 +148,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "redis-devel is earlier than 0:5.0.3-2.module+el8.0.0.z+3657+acb471dc",
+                    "Comment": "redis-doc is earlier than 0:5.0.3-2.module+el8.0.0.z+3657+acb471dc",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192002005"
                   },
                   {
-                    "Comment": "redis-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192002006"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "redis-doc is earlier than 0:5.0.3-2.module+el8.0.0.z+3657+acb471dc",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192002007"
-                  },
-                  {
                     "Comment": "redis-doc is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192002008"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192002006"
                   }
                 ]
               }

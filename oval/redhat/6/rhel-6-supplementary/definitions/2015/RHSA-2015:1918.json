@@ -1,0 +1,117 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151918",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2015:1918: swiftonfile security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Gluster Storage 3.1 for RHEL 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1918",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1918"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5242",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5242"
+      }
+    ],
+    "Description": "Red Hat Gluster Storage is a software only scale-out storage solution that\nprovides flexible and affordable unstructured data storage. It unifies data\nstorage and infrastructure, increases performance, and improves\navailability and manageability to meet enterprise-level storage challenges.\n\nRed Hat Gluster Storage's Unified File and Object Storage is built on\nOpenStack's Object Storage (swift).\n\nA flaw was found in the way swiftonfile (gluster-swift) serialized and\nstored metadata on disk by using Python's pickle module. A remote,\nauthenticated user could use this flaw to execute arbitrary code on the\nstorage node. (CVE-2015-5242)\n\nFor more information about CVE-2015-5242, please see\nhttps://access.redhat.com/solutions/1985893\n\nRed Hat would like to thank Bill Owen of IBM for reporting this issue.\n\nAll swiftonfile users are advised to upgrade to this updated package, which\ncontains a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-10-20"
+      },
+      "Updated": {
+        "Date": "2015-10-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5242",
+          "Cvss2": "6.0/AV:N/AC:M/Au:S/C:P/I:P/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5242",
+          "Public": "20151020"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1258743",
+          "ID": "1258743"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:storage:3",
+        "cpe:/a:redhat:storage:3.1",
+        "cpe:/a:redhat:storage:3.1:bigdata:el6",
+        "cpe:/a:redhat:storage:3.1:console:el6",
+        "cpe:/a:redhat:storage:3.1:nagios:el6",
+        "cpe:/a:redhat:storage:3.1:nfs:el6",
+        "cpe:/a:redhat:storage:3.1:samba:el6",
+        "cpe:/a:redhat:storage:3.1:server:el6",
+        "cpe:/a:redhat:storage:3.1:splunk:el6",
+        "cpe:/a:redhat:storage:3.2",
+        "cpe:/a:redhat:storage:3.2:console:el6",
+        "cpe:/a:redhat:storage:3.2:nagios:el6",
+        "cpe:/a:redhat:storage:3.2:nfs:el6",
+        "cpe:/a:redhat:storage:3.2:samba:el6",
+        "cpe:/a:redhat:storage:3.2:server:el6",
+        "cpe:/a:redhat:storage:3.3",
+        "cpe:/a:redhat:storage:3.3:nagios:el6",
+        "cpe:/a:redhat:storage:3.3:nfs:el6",
+        "cpe:/a:redhat:storage:3.3:samba:el6",
+        "cpe:/a:redhat:storage:3.3:server:el6",
+        "cpe:/a:redhat:storage:3.4",
+        "cpe:/a:redhat:storage:3.4:samba:el6",
+        "cpe:/a:redhat:storage:3.4:server:el6",
+        "cpe:/a:redhat:storage:3.5",
+        "cpe:/a:redhat:storage:3.5:samba:el6",
+        "cpe:/a:redhat:storage:3.5:server:el6",
+        "cpe:/a:redhat:storage:3:bigdata:el6",
+        "cpe:/a:redhat:storage:3:client:el6",
+        "cpe:/a:redhat:storage:3:console:el6",
+        "cpe:/a:redhat:storage:3:nfs:el6",
+        "cpe:/a:redhat:storage:3:samba:el6",
+        "cpe:/a:redhat:storage:3:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201610089008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201610089007"
+          },
+          {
+            "Comment": "swiftonfile is earlier than 0:1.13.1-6.el6rhs",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151918001"
+          },
+          {
+            "Comment": "swiftonfile is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhba:tst:20150038067"
+          }
+        ]
+      }
+    ]
+  }
+}

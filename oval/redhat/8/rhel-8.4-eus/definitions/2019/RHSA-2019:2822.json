@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20192822",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2019:2822: dovecot security update (Important)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2019-11500",
           "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-20",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-11500",
           "Public": "20190828:1200"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -95,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "dovecot-debugsource is earlier than 1:2.2.36-5.el8_0.1",
+                    "Comment": "dovecot-devel is earlier than 1:2.2.36-5.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192822003"
                   },
                   {
-                    "Comment": "dovecot-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "dovecot-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192822004"
                   }
                 ]
@@ -108,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "dovecot-devel is earlier than 1:2.2.36-5.el8_0.1",
+                    "Comment": "dovecot-mysql is earlier than 1:2.2.36-5.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192822005"
                   },
                   {
-                    "Comment": "dovecot-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "dovecot-mysql is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192822006"
                   }
                 ]
@@ -121,25 +138,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "dovecot-mysql is earlier than 1:2.2.36-5.el8_0.1",
+                    "Comment": "dovecot-pgsql is earlier than 1:2.2.36-5.el8_0.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192822007"
                   },
                   {
-                    "Comment": "dovecot-mysql is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192822008"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "dovecot-pgsql is earlier than 1:2.2.36-5.el8_0.1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192822009"
-                  },
-                  {
                     "Comment": "dovecot-pgsql is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192822010"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192822008"
                   }
                 ]
               }

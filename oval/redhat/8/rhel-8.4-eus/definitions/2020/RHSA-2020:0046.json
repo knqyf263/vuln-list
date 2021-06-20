@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20200046",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2020:0046: java-1.8.0-ibm security update (Moderate)",
     "AffectedList": [
@@ -105,6 +105,7 @@
           "CveID": "CVE-2019-17631",
           "Cvss3": "8.4/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-285",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-17631",
           "Public": "20191204"
         },
@@ -143,12 +144,14 @@
           "CveID": "CVE-2019-2975",
           "Cvss3": "4.8/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:L",
           "Cwe": "CWE-248",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-2975",
           "Public": "20191015"
         },
         {
           "CveID": "CVE-2019-2978",
           "Cvss3": "3.7/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-2978",
           "Public": "20191015"
         },
@@ -180,6 +183,7 @@
           "CveID": "CVE-2019-2989",
           "Cvss3": "6.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:C/C:N/I:H/A:N",
           "Cwe": "CWE-79",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-2989",
           "Public": "20191015"
         },
@@ -194,6 +198,7 @@
         {
           "CveID": "CVE-2019-2996",
           "Cvss3": "4.2/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-2996",
           "Public": "20191015"
         },
@@ -265,8 +270,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::supplementary"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -275,19 +290,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [

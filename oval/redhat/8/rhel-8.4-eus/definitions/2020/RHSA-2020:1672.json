@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20201672",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2020:1672: freeradius:3.0 security update (Moderate)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2019-13456",
           "Cvss3": "5.3/CVSS:3.0/AV:A/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
           "Cwe": "CWE-200",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-13456",
           "Public": "20190803"
         }
@@ -51,8 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -61,7 +72,7 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
@@ -69,15 +80,24 @@
         "Operator": "AND",
         "Criterions": [
           {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          },
-          {
             "Comment": "Module freeradius:3.0 is enabled",
-            "TestRef": "oval:com.redhat.rhsa:tst:20191142027"
+            "TestRef": "oval:com.redhat.rhsa:tst:20191142025"
           }
         ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -98,11 +118,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-debugsource is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-devel is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672003"
                   },
                   {
-                    "Comment": "freeradius-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142004"
                   }
                 ]
@@ -111,11 +131,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-devel is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-doc is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672005"
                   },
                   {
-                    "Comment": "freeradius-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-doc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142006"
                   }
                 ]
@@ -124,11 +144,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-doc is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-krb5 is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672007"
                   },
                   {
-                    "Comment": "freeradius-doc is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-krb5 is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142008"
                   }
                 ]
@@ -137,11 +157,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-krb5 is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-ldap is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672009"
                   },
                   {
-                    "Comment": "freeradius-krb5 is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-ldap is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142010"
                   }
                 ]
@@ -150,11 +170,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-ldap is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-mysql is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672011"
                   },
                   {
-                    "Comment": "freeradius-ldap is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-mysql is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142012"
                   }
                 ]
@@ -163,11 +183,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-mysql is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-perl is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672013"
                   },
                   {
-                    "Comment": "freeradius-mysql is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-perl is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142014"
                   }
                 ]
@@ -176,11 +196,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-perl is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-postgresql is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672015"
                   },
                   {
-                    "Comment": "freeradius-perl is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-postgresql is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142016"
                   }
                 ]
@@ -189,11 +209,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-postgresql is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-rest is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672017"
                   },
                   {
-                    "Comment": "freeradius-postgresql is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-rest is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142018"
                   }
                 ]
@@ -202,11 +222,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-rest is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-sqlite is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672019"
                   },
                   {
-                    "Comment": "freeradius-rest is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-sqlite is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142020"
                   }
                 ]
@@ -215,11 +235,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-sqlite is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-unixODBC is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672021"
                   },
                   {
-                    "Comment": "freeradius-sqlite is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freeradius-unixODBC is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191142022"
                   }
                 ]
@@ -228,25 +248,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freeradius-unixODBC is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
+                    "Comment": "freeradius-utils is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201672023"
                   },
                   {
-                    "Comment": "freeradius-unixODBC is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191142024"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "freeradius-utils is earlier than 0:3.0.17-7.module+el8.2.0+4847+336970e8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201672025"
-                  },
-                  {
                     "Comment": "freeradius-utils is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191142026"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191142024"
                   }
                 ]
               }

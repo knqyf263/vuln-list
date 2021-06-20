@@ -1,0 +1,168 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211627",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2021:1627: trousers security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1627",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1627"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-24330",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-24330"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-24331",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-24331"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-24332",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-24332"
+      }
+    ],
+    "Description": "TrouSerS is an implementation of the Trusted Computing Group's Software Stack (TSS) specification. TrouSerS enables the user to write applications that make use of the Trusted Platform Module (TPM) hardware.\n\nThe following packages have been upgraded to a later upstream version: trousers (0.3.15). (BZ#1725782)\n\nSecurity Fix(es):\n\n* trousers: tss user still has read and write access to the /etc/tcsd.conf file if tcsd is started as root (CVE-2020-24331)\n\n* trousers: tss user can be used to create or corrupt existing files, this could lead to DoS (CVE-2020-24332)\n\n* trousers: fails to drop the root gid privilege when no longer needed (CVE-2020-24330)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.4 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-05-18"
+      },
+      "Updated": {
+        "Date": "2021-05-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-24330",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-271",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-24330",
+          "Public": "20200902"
+        },
+        {
+          "CveID": "CVE-2020-24331",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-24331",
+          "Public": "20200813"
+        },
+        {
+          "CveID": "CVE-2020-24332",
+          "Cvss3": "5.5/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-59-\u003eCWE-22",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-24332",
+          "Public": "20200813"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1870052",
+          "ID": "1870052"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1870054",
+          "ID": "1870054"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1870056",
+          "ID": "1870056"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.4",
+        "cpe:/a:redhat:rhel_aus:8.4::appstream",
+        "cpe:/o:redhat:rhel_aus:8.4",
+        "cpe:/o:redhat:rhel_aus:8.4::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "trousers is earlier than 0:0.3.15-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211627001"
+                  },
+                  {
+                    "Comment": "trousers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211627002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "trousers-devel is earlier than 0:0.3.15-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211627003"
+                  },
+                  {
+                    "Comment": "trousers-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211627004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "trousers-lib is earlier than 0:0.3.15-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211627005"
+                  },
+                  {
+                    "Comment": "trousers-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211627006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

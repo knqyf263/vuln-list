@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20202550",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2020:2550: libexif security update (Moderate)",
     "AffectedList": [
@@ -39,7 +39,8 @@
         {
           "CveID": "CVE-2020-13112",
           "Cvss3": "9.1/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:H",
-          "Cwe": "CWE-122 CWE-190 CWE-125",
+          "Cwe": "(CWE-122|CWE-190)-\u003eCWE-125",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-13112",
           "Public": "20200516"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -95,25 +112,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libexif-debugsource is earlier than 0:0.6.21-17.el8_2",
+                    "Comment": "libexif-devel is earlier than 0:0.6.21-17.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202550003"
                   },
                   {
-                    "Comment": "libexif-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202550004"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "libexif-devel is earlier than 0:0.6.21-17.el8_2",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202550005"
-                  },
-                  {
                     "Comment": "libexif-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202550006"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202550004"
                   }
                 ]
               }

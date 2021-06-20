@@ -1,0 +1,114 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111441",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2011:1441: icedtea-web security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1441",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1441"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3377",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3377"
+      }
+    ],
+    "Description": "The IcedTea-Web project provides a Java web browser plug-in and an\nimplementation of Java Web Start, which is based on the Netx project. It\nalso contains a configuration tool for managing deployment settings for the\nplug-in and Web Start implementations.\n\nA flaw was found in the same-origin policy implementation in the\nIcedTea-Web browser plug-in. A malicious Java applet could use this flaw to\nopen network connections to hosts other than the originating host,\nviolating the same-origin policy. (CVE-2011-3377)\n\nAll IcedTea-Web users should upgrade to these updated packages, which\nupgrade IcedTea-Web to version 1.0.6 to correct this issue. Web browsers\nusing the IcedTea-Web browser plug-in must be restarted for this update to\ntake effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-11-08"
+      },
+      "Updated": {
+        "Date": "2011-11-08"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-3377",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3377",
+          "Public": "20111108"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/742515",
+          "ID": "742515"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/o:redhat:rhel_eus:6.4",
+        "cpe:/o:redhat:rhel_eus:6.4::computenode",
+        "cpe:/o:redhat:rhel_eus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "icedtea-web is earlier than 0:1.0.6-1.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111441001"
+                  },
+                  {
+                    "Comment": "icedtea-web is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141417002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "icedtea-web-javadoc is earlier than 0:1.0.6-1.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111441003"
+                  },
+                  {
+                    "Comment": "icedtea-web-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141417004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

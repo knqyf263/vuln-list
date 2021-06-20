@@ -1,0 +1,128 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20121283",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:1283: openjpeg security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:1283",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:1283"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-3535",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-3535"
+      }
+    ],
+    "Description": "OpenJPEG is an open source library for reading and writing image files in\nJPEG 2000 format.\n\nIt was found that OpenJPEG failed to sanity-check an image header field\nbefore using it. A remote attacker could provide a specially-crafted image\nfile that could cause an application linked against OpenJPEG to crash or,\npossibly, execute arbitrary code. (CVE-2012-3535)\n\nThis issue was discovered by Huzaifa Sidhpurwala of the Red Hat Security\nResponse Team.\n\nUsers of OpenJPEG should upgrade to these updated packages, which contain\na patch to correct this issue. All running applications using OpenJPEG\nmust be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-09-17"
+      },
+      "Updated": {
+        "Date": "2012-09-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-3535",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-3535",
+          "Public": "20120827"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/842918",
+          "ID": "842918"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/o:redhat:rhel_eus:6.4",
+        "cpe:/o:redhat:rhel_eus:6.4::computenode",
+        "cpe:/o:redhat:rhel_eus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg is earlier than 0:1.3-9.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121283001"
+                  },
+                  {
+                    "Comment": "openjpeg is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg-devel is earlier than 0:1.3-9.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121283003"
+                  },
+                  {
+                    "Comment": "openjpeg-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg-libs is earlier than 0:1.3-9.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121283005"
+                  },
+                  {
+                    "Comment": "openjpeg-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

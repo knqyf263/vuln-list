@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20193513",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:3513: glibc security, bug fix, and enhancement update (Moderate)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2016-10739",
           "Cvss2": "4.6/AV:L/AC:L/Au:N/C:P/I:P/A:P",
           "Cwe": "CWE-20",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2016-10739",
           "Public": "20160428"
         }
@@ -48,98 +49,21 @@
         {
           "Href": "https://bugzilla.redhat.com/1347549",
           "ID": "1347549"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1623537",
-          "ID": "1623537"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1659293",
-          "ID": "1659293"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1659512",
-          "ID": "1659512"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1662843",
-          "ID": "1662843"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1663035",
-          "ID": "1663035"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1664408",
-          "ID": "1664408"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1670043",
-          "ID": "1670043"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1672773",
-          "ID": "1672773"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1691528",
-          "ID": "1691528"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1699194",
-          "ID": "1699194"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1701605",
-          "ID": "1701605"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1702539",
-          "ID": "1702539"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1706777",
-          "ID": "1706777"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1710478",
-          "ID": "1710478"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1710894",
-          "ID": "1710894"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1717347",
-          "ID": "1717347"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1717438",
-          "ID": "1717438"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1722215",
-          "ID": "1722215"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1724975",
-          "ID": "1724975"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1725131",
-          "ID": "1725131"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1727152",
-          "ID": "1727152"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -148,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [

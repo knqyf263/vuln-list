@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20190990",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:0990: systemd security and bug fix update (Moderate)",
     "AffectedList": [
@@ -38,7 +38,7 @@
       "Cves": [
         {
           "CveID": "CVE-2019-6454",
-          "Cvss3": "7/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-20",
           "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-6454",
@@ -49,15 +49,21 @@
         {
           "Href": "https://bugzilla.redhat.com/1667032",
           "ID": "1667032"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1693578",
-          "ID": "1693578"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -66,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -112,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "systemd-debugsource is earlier than 0:239-13.el8_0.3",
+                    "Comment": "systemd-devel is earlier than 0:239-13.el8_0.3",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990005"
                   },
                   {
-                    "Comment": "systemd-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "systemd-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990006"
                   }
                 ]
@@ -125,11 +138,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "systemd-devel is earlier than 0:239-13.el8_0.3",
+                    "Comment": "systemd-journal-remote is earlier than 0:239-13.el8_0.3",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990007"
                   },
                   {
-                    "Comment": "systemd-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "systemd-journal-remote is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990008"
                   }
                 ]
@@ -138,11 +151,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "systemd-journal-remote is earlier than 0:239-13.el8_0.3",
+                    "Comment": "systemd-libs is earlier than 0:239-13.el8_0.3",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990009"
                   },
                   {
-                    "Comment": "systemd-journal-remote is signed with Red Hat redhatrelease2 key",
+                    "Comment": "systemd-libs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990010"
                   }
                 ]
@@ -151,11 +164,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "systemd-libs is earlier than 0:239-13.el8_0.3",
+                    "Comment": "systemd-pam is earlier than 0:239-13.el8_0.3",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990011"
                   },
                   {
-                    "Comment": "systemd-libs is signed with Red Hat redhatrelease2 key",
+                    "Comment": "systemd-pam is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990012"
                   }
                 ]
@@ -164,11 +177,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "systemd-pam is earlier than 0:239-13.el8_0.3",
+                    "Comment": "systemd-tests is earlier than 0:239-13.el8_0.3",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990013"
                   },
                   {
-                    "Comment": "systemd-pam is signed with Red Hat redhatrelease2 key",
+                    "Comment": "systemd-tests is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990014"
                   }
                 ]
@@ -177,25 +190,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "systemd-tests is earlier than 0:239-13.el8_0.3",
+                    "Comment": "systemd-udev is earlier than 0:239-13.el8_0.3",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190990015"
                   },
                   {
-                    "Comment": "systemd-tests is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20190990016"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "systemd-udev is earlier than 0:239-13.el8_0.3",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20190990017"
-                  },
-                  {
                     "Comment": "systemd-udev is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20190990018"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190990016"
                   }
                 ]
               }

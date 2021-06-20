@@ -1,0 +1,127 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130216",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2013:0216: freetype security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0216",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0216"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-5669",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-5669"
+      }
+    ],
+    "Description": "FreeType is a free, high-quality, portable font engine that can open and\nmanage font files. It also loads, hints, and renders individual glyphs\nefficiently.\n\nA flaw was found in the way the FreeType font rendering engine processed\ncertain Glyph Bitmap Distribution Format (BDF) fonts. If a user loaded a\nspecially-crafted font file with an application linked against FreeType, it\ncould cause the application to crash or, possibly, execute arbitrary code\nwith the privileges of the user running the application. (CVE-2012-5669)\n\nUsers are advised to upgrade to these updated packages, which contain a\nbackported patch to correct this issue. The X server must be restarted (log\nout, then log back in) for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-01-31"
+      },
+      "Updated": {
+        "Date": "2013-01-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-5669",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-5669",
+          "Public": "20121215"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/890088",
+          "ID": "890088"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/o:redhat:rhel_eus:6.4",
+        "cpe:/o:redhat:rhel_eus:6.4::computenode",
+        "cpe:/o:redhat:rhel_eus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "freetype is earlier than 0:2.3.11-14.el6_3.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130216001"
+                  },
+                  {
+                    "Comment": "freetype is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100864002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "freetype-demos is earlier than 0:2.3.11-14.el6_3.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130216003"
+                  },
+                  {
+                    "Comment": "freetype-demos is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100864004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "freetype-devel is earlier than 0:2.3.11-14.el6_3.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130216005"
+                  },
+                  {
+                    "Comment": "freetype-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100864006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

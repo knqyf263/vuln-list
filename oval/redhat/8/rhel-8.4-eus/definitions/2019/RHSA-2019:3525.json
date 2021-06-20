@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20193525",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:3525: dhcp security and bug fix update (Moderate)",
     "AffectedList": [
@@ -40,27 +40,30 @@
           "CveID": "CVE-2019-6470",
           "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-20",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-6470",
           "Public": "20180714"
         }
       ],
       "Bugzilla": [
         {
-          "Href": "https://bugzilla.redhat.com/1660865",
-          "ID": "1660865"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1685560",
-          "ID": "1685560"
-        },
-        {
           "Href": "https://bugzilla.redhat.com/1708641",
           "ID": "1708641"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -69,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -115,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "dhcp-debugsource is earlier than 12:4.3.6-34.el8",
+                    "Comment": "dhcp-libs is earlier than 12:4.3.6-34.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193525005"
                   },
                   {
-                    "Comment": "dhcp-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "dhcp-libs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193525006"
                   }
                 ]
@@ -128,11 +138,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "dhcp-libs is earlier than 12:4.3.6-34.el8",
+                    "Comment": "dhcp-relay is earlier than 12:4.3.6-34.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193525007"
                   },
                   {
-                    "Comment": "dhcp-libs is signed with Red Hat redhatrelease2 key",
+                    "Comment": "dhcp-relay is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193525008"
                   }
                 ]
@@ -141,25 +151,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "dhcp-relay is earlier than 12:4.3.6-34.el8",
+                    "Comment": "dhcp-server is earlier than 12:4.3.6-34.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193525009"
                   },
                   {
-                    "Comment": "dhcp-relay is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193525010"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "dhcp-server is earlier than 12:4.3.6-34.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193525011"
-                  },
-                  {
                     "Comment": "dhcp-server is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193525012"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193525010"
                   }
                 ]
               }

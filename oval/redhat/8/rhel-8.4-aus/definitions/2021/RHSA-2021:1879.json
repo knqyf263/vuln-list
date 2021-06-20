@@ -1,0 +1,682 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211879",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2021:1879: python38:3.8 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1879",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1879"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-26116",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-26116"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-27783",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-27783"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3177",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3177"
+      }
+    ],
+    "Description": "Python is an interpreted, interactive, object-oriented programming language, which includes modules, classes, exceptions, very high level dynamic data types and dynamic typing. Python supports interfaces to many system calls and libraries, as well as to various windowing systems. \n\nSecurity Fix(es):\n\n* python: CRLF injection via HTTP request method in httplib/http.client (CVE-2020-26116)\n\n* python-lxml: mXSS due to the use of improper parser (CVE-2020-27783)\n\n* python: Stack-based buffer overflow in PyCArg_repr in _ctypes/callproc.c (CVE-2021-3177)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.4 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-05-18"
+      },
+      "Updated": {
+        "Date": "2021-05-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-26116",
+          "Cvss3": "6.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-113",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-26116",
+          "Public": "20200210"
+        },
+        {
+          "CveID": "CVE-2020-27783",
+          "Cvss3": "6.1/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-27783",
+          "Public": "20201018"
+        },
+        {
+          "CveID": "CVE-2021-3177",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-120",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3177",
+          "Public": "20210119"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1883014",
+          "ID": "1883014"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1901633",
+          "ID": "1901633"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1918168",
+          "ID": "1918168"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.4",
+        "cpe:/a:redhat:rhel_aus:8.4::appstream",
+        "cpe:/o:redhat:rhel_aus:8.4",
+        "cpe:/o:redhat:rhel_aus:8.4::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Module python38:3.8 is enabled",
+            "TestRef": "oval:com.redhat.rhsa:tst:20204641085"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38 is earlier than 0:3.8.6-3.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879001"
+                  },
+                  {
+                    "Comment": "python38 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-Cython is earlier than 0:0.29.14-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879003"
+                  },
+                  {
+                    "Comment": "python38-Cython is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-PyMySQL is earlier than 0:0.10.1-1.module+el8.4.0+9692+8e86ab84",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879005"
+                  },
+                  {
+                    "Comment": "python38-PyMySQL is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-asn1crypto is earlier than 0:1.2.0-3.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879007"
+                  },
+                  {
+                    "Comment": "python38-asn1crypto is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-babel is earlier than 0:2.7.0-10.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879009"
+                  },
+                  {
+                    "Comment": "python38-babel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-cffi is earlier than 0:1.13.2-3.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879011"
+                  },
+                  {
+                    "Comment": "python38-cffi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-chardet is earlier than 0:3.0.4-19.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879013"
+                  },
+                  {
+                    "Comment": "python38-chardet is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-cryptography is earlier than 0:2.8-3.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879015"
+                  },
+                  {
+                    "Comment": "python38-cryptography is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-debug is earlier than 0:3.8.6-3.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879017"
+                  },
+                  {
+                    "Comment": "python38-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-devel is earlier than 0:3.8.6-3.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879019"
+                  },
+                  {
+                    "Comment": "python38-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-idle is earlier than 0:3.8.6-3.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879021"
+                  },
+                  {
+                    "Comment": "python38-idle is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-idna is earlier than 0:2.8-6.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879023"
+                  },
+                  {
+                    "Comment": "python38-idna is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-jinja2 is earlier than 0:2.10.3-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879025"
+                  },
+                  {
+                    "Comment": "python38-jinja2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-libs is earlier than 0:3.8.6-3.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879027"
+                  },
+                  {
+                    "Comment": "python38-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-lxml is earlier than 0:4.4.1-5.module+el8.4.0+9001+fc421f6c",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879029"
+                  },
+                  {
+                    "Comment": "python38-lxml is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-markupsafe is earlier than 0:1.1.1-6.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879031"
+                  },
+                  {
+                    "Comment": "python38-markupsafe is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-mod_wsgi is earlier than 0:4.6.8-3.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879033"
+                  },
+                  {
+                    "Comment": "python38-mod_wsgi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-numpy is earlier than 0:1.17.3-5.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879035"
+                  },
+                  {
+                    "Comment": "python38-numpy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-numpy-doc is earlier than 0:1.17.3-5.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879037"
+                  },
+                  {
+                    "Comment": "python38-numpy-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-numpy-f2py is earlier than 0:1.17.3-5.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879039"
+                  },
+                  {
+                    "Comment": "python38-numpy-f2py is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-pip is earlier than 0:19.3.1-1.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879041"
+                  },
+                  {
+                    "Comment": "python38-pip is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-pip-wheel is earlier than 0:19.3.1-1.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879043"
+                  },
+                  {
+                    "Comment": "python38-pip-wheel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-ply is earlier than 0:3.11-10.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879045"
+                  },
+                  {
+                    "Comment": "python38-ply is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-psutil is earlier than 0:5.6.4-3.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879047"
+                  },
+                  {
+                    "Comment": "python38-psutil is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-psycopg2 is earlier than 0:2.8.4-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879049"
+                  },
+                  {
+                    "Comment": "python38-psycopg2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-psycopg2-doc is earlier than 0:2.8.4-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879051"
+                  },
+                  {
+                    "Comment": "python38-psycopg2-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641052"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-psycopg2-tests is earlier than 0:2.8.4-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879053"
+                  },
+                  {
+                    "Comment": "python38-psycopg2-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641054"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-pycparser is earlier than 0:2.19-3.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879055"
+                  },
+                  {
+                    "Comment": "python38-pycparser is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641056"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-pysocks is earlier than 0:1.7.1-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879057"
+                  },
+                  {
+                    "Comment": "python38-pysocks is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641058"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-pytz is earlier than 0:2019.3-3.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879059"
+                  },
+                  {
+                    "Comment": "python38-pytz is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641060"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-pyyaml is earlier than 0:5.3.1-1.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879061"
+                  },
+                  {
+                    "Comment": "python38-pyyaml is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-requests is earlier than 0:2.22.0-9.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879063"
+                  },
+                  {
+                    "Comment": "python38-requests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641064"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-rpm-macros is earlier than 0:3.8.6-3.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879065"
+                  },
+                  {
+                    "Comment": "python38-rpm-macros is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641066"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-scipy is earlier than 0:1.3.1-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879067"
+                  },
+                  {
+                    "Comment": "python38-scipy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641068"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-setuptools is earlier than 0:41.6.0-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879069"
+                  },
+                  {
+                    "Comment": "python38-setuptools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641070"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-setuptools-wheel is earlier than 0:41.6.0-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879071"
+                  },
+                  {
+                    "Comment": "python38-setuptools-wheel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641072"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-six is earlier than 0:1.12.0-10.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879073"
+                  },
+                  {
+                    "Comment": "python38-six is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641074"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-test is earlier than 0:3.8.6-3.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879075"
+                  },
+                  {
+                    "Comment": "python38-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641076"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-tkinter is earlier than 0:3.8.6-3.module+el8.4.0+9579+e9717e18",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879077"
+                  },
+                  {
+                    "Comment": "python38-tkinter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641078"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-urllib3 is earlier than 0:1.25.7-4.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879079"
+                  },
+                  {
+                    "Comment": "python38-urllib3 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641080"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-wheel is earlier than 0:0.33.6-5.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879081"
+                  },
+                  {
+                    "Comment": "python38-wheel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641082"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python38-wheel-wheel is earlier than 0:0.33.6-5.module+el8.4.0+8888+89bc7e79",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211879083"
+                  },
+                  {
+                    "Comment": "python38-wheel-wheel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204641084"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

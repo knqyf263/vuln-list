@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20192703",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2019:2703: kernel security and bug fix update (Important)",
     "AffectedList": [
@@ -63,7 +63,7 @@
         "Date": "2019-09-12"
       },
       "Updated": {
-        "Date": "2019-09-10"
+        "Date": "2019-09-12"
       },
       "Cves": [
         {
@@ -78,13 +78,15 @@
           "CveID": "CVE-2019-11487",
           "Cvss3": "7.8/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:H",
           "Cwe": "CWE-416",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-11487",
           "Public": "20190422"
         },
         {
           "CveID": "CVE-2019-12817",
-          "Cvss3": "7/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
-          "Cwe": "CWE-119 CWE-125 CWE-787",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-119-\u003e(CWE-125|CWE-787)",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-12817",
           "Public": "20190624"
         },
@@ -92,6 +94,7 @@
           "CveID": "CVE-2019-3846",
           "Cvss3": "8.0/CVSS:3.0/AV:A/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-3846",
           "Public": "20190530:1253"
         },
@@ -99,6 +102,7 @@
           "CveID": "CVE-2019-3887",
           "Cvss3": "6.7/CVSS:3.0/AV:L/AC:H/PR:H/UI:N/S:C/C:L/I:L/A:H",
           "Cwe": "CWE-284",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-3887",
           "Public": "20190405:1600"
         },
@@ -106,6 +110,7 @@
           "CveID": "CVE-2019-9500",
           "Cvss3": "6.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:H",
           "Cwe": "CWE-122",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-9500",
           "Public": "20190219"
         },
@@ -149,10 +154,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::crb",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -161,19 +174,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterions": [

@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20201653",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2020:1653: zziplib security update (Moderate)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2018-17828",
           "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:N",
           "Cwe": "CWE-22",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2018-17828",
           "Public": "20180925"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -95,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "zziplib-debugsource is earlier than 0:0.13.68-8.el8",
+                    "Comment": "zziplib-devel is earlier than 0:0.13.68-8.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201653003"
                   },
                   {
-                    "Comment": "zziplib-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "zziplib-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201653004"
                   }
                 ]
@@ -108,25 +125,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "zziplib-devel is earlier than 0:0.13.68-8.el8",
+                    "Comment": "zziplib-utils is earlier than 0:0.13.68-8.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201653005"
                   },
                   {
-                    "Comment": "zziplib-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201653006"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "zziplib-utils is earlier than 0:0.13.68-8.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201653007"
-                  },
-                  {
                     "Comment": "zziplib-utils is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201653008"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201653006"
                   }
                 ]
               }

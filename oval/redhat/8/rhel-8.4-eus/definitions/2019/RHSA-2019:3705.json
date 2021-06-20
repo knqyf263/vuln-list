@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20193705",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:3705: libjpeg-turbo security update (Moderate)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2018-14498",
           "Cvss3": "4.4/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:L",
           "Cwe": "CWE-125",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2018-14498",
           "Public": "20180720"
         }
@@ -48,16 +49,21 @@
         {
           "Href": "https://bugzilla.redhat.com/1687424",
           "ID": "1687424"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1688397",
-          "ID": "1688397"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -66,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -99,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libjpeg-turbo-debugsource is earlier than 0:1.5.3-10.el8",
+                    "Comment": "libjpeg-turbo-devel is earlier than 0:1.5.3-10.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193705003"
                   },
                   {
-                    "Comment": "libjpeg-turbo-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "libjpeg-turbo-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193705004"
                   }
                 ]
@@ -112,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libjpeg-turbo-devel is earlier than 0:1.5.3-10.el8",
+                    "Comment": "libjpeg-turbo-utils is earlier than 0:1.5.3-10.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193705005"
                   },
                   {
-                    "Comment": "libjpeg-turbo-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "libjpeg-turbo-utils is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193705006"
                   }
                 ]
@@ -125,11 +138,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libjpeg-turbo-utils is earlier than 0:1.5.3-10.el8",
+                    "Comment": "turbojpeg is earlier than 0:1.5.3-10.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193705007"
                   },
                   {
-                    "Comment": "libjpeg-turbo-utils is signed with Red Hat redhatrelease2 key",
+                    "Comment": "turbojpeg is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193705008"
                   }
                 ]
@@ -138,25 +151,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "turbojpeg is earlier than 0:1.5.3-10.el8",
+                    "Comment": "turbojpeg-devel is earlier than 0:1.5.3-10.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193705009"
                   },
                   {
-                    "Comment": "turbojpeg is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193705010"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "turbojpeg-devel is earlier than 0:1.5.3-10.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193705011"
-                  },
-                  {
                     "Comment": "turbojpeg-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193705012"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193705010"
                   }
                 ]
               }

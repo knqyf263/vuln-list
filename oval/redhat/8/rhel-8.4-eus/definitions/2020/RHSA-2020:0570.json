@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20200570",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2020:0570: openjpeg2 security update (Important)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2020-8112",
           "Cvss3": "8.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-8112",
           "Public": "20200207:1135"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -87,20 +104,7 @@
                   },
                   {
                     "Comment": "openjpeg2 is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200274002"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "openjpeg2-debugsource is earlier than 0:2.3.1-3.el8_1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200570003"
-                  },
-                  {
-                    "Comment": "openjpeg2-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200274004"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193408002"
                   }
                 ]
               },
@@ -109,11 +113,11 @@
                 "Criterions": [
                   {
                     "Comment": "openjpeg2-devel is earlier than 0:2.3.1-3.el8_1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200570005"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200570003"
                   },
                   {
                     "Comment": "openjpeg2-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200274006"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193408004"
                   }
                 ]
               },
@@ -122,11 +126,11 @@
                 "Criterions": [
                   {
                     "Comment": "openjpeg2-devel-docs is earlier than 0:2.3.1-3.el8_1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200570007"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200570005"
                   },
                   {
                     "Comment": "openjpeg2-devel-docs is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200274008"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193408006"
                   }
                 ]
               },
@@ -135,11 +139,11 @@
                 "Criterions": [
                   {
                     "Comment": "openjpeg2-tools is earlier than 0:2.3.1-3.el8_1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200570009"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200570007"
                   },
                   {
                     "Comment": "openjpeg2-tools is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200274010"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193408008"
                   }
                 ]
               }

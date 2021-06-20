@@ -1,0 +1,142 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20204464",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:4464: libxslt security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:4464",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:4464"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11068",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11068"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-18197",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-18197"
+      }
+    ],
+    "Description": "libxslt is a library for transforming XML files into other textual formats (including HTML, plain text, and other XML representations of the underlying data) using the standard XSLT stylesheet transformation mechanism. \n\nSecurity Fix(es):\n\n* libxslt: xsltCheckRead and xsltCheckWrite routines security bypass by crafted URL (CVE-2019-11068)\n\n* libxslt: use after free in xsltCopyText in transform.c could lead to information disclosure (CVE-2019-18197)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 8.3 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-04"
+      },
+      "Updated": {
+        "Date": "2020-11-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-11068",
+          "Cvss3": "6.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-284",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11068",
+          "Public": "20190410"
+        },
+        {
+          "CveID": "CVE-2019-18197",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-18197",
+          "Public": "20191018"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1709697",
+          "ID": "1709697"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1770768",
+          "ID": "1770768"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/a:redhat:rhel_tus:8.4",
+        "cpe:/a:redhat:rhel_tus:8.4::appstream",
+        "cpe:/a:redhat:rhel_tus:8.4::highavailability",
+        "cpe:/o:redhat:rhel_tus:8.4",
+        "cpe:/o:redhat:rhel_tus:8.4::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libxslt is earlier than 0:1.1.32-5.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204464001"
+                  },
+                  {
+                    "Comment": "libxslt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201766086"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libxslt-devel is earlier than 0:1.1.32-5.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204464003"
+                  },
+                  {
+                    "Comment": "libxslt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201766088"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

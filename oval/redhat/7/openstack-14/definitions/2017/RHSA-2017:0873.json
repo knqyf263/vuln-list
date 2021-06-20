@@ -1,0 +1,332 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20170873",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2017:0873: Red Hat Single Sign-On 7.1 update on RHEL 7 (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Single Sign-On 7.1 for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:0873",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:0873"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8629",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8629"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-9589",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-9589"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-2585",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-2585"
+      }
+    ],
+    "Description": "Red Hat Single Sign-On is a standalone server, based on the Keycloak project, that provides authentication and standards-based single sign-on capabilities for web and mobile applications.\n\nThis release of Red Hat Single Sign-On 7.1 serves as a replacement for Red Hat Single Sign-On 7.0, and includes several bug fixes and enhancements. For further information regarding those, refer to the Release Notes linked to in the References section.\n\nSecurity Fix(es):\n\n* It was found that keycloak did not correctly check permissions when handling service account user deletion requests sent to the REST server. An attacker with service account authentication could use this flaw to bypass normal permissions and delete users in a separate realm. (CVE-2016-8629)\n\n* It was found that JBoss EAP 7 Header Cache was inefficient. An attacker could use this flaw to cause a denial of service attack. (CVE-2016-9589)\n\n* It was found that keycloak's implementation of HMAC verification for JWS tokens uses a method that runs in non-constant time, potentially leaving the application vulnerable to timing attacks. (CVE-2017-2585)\n\nRed Hat would like to thank Gabriel Lavoie (Halogen Software) for reporting CVE-2016-9589 and Richard Kettelerij (Mindloops) for reporting CVE-2017-2585.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-04-04"
+      },
+      "Updated": {
+        "Date": "2017-04-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-8629",
+          "Cvss2": "4.0/AV:N/AC:L/Au:S/C:N/I:P/A:N",
+          "Cvss3": "4.3/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-284",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8629",
+          "Public": "20170404"
+        },
+        {
+          "CveID": "CVE-2016-9589",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-9589",
+          "Public": "20170322"
+        },
+        {
+          "CveID": "CVE-2017-2585",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Cvss3": "3.7/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-385",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-2585",
+          "Public": "20170404"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1388988",
+          "ID": "1388988"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1404782",
+          "ID": "1404782"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1412376",
+          "ID": "1412376"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:red_hat_single_sign_on:7",
+        "cpe:/a:redhat:red_hat_single_sign_on:7::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170873034"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170873033"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7 is earlier than 0:1-2.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873001"
+                  },
+                  {
+                    "Comment": "rh-sso7 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-runtime is earlier than 0:1-2.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873003"
+                  },
+                  {
+                    "Comment": "rh-sso7-runtime is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-javapackages-tools is earlier than 0:3.4.1-5.15.3.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873005"
+                  },
+                  {
+                    "Comment": "rh-sso7-javapackages-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-python-javapackages is earlier than 0:3.4.1-5.15.3.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873007"
+                  },
+                  {
+                    "Comment": "rh-sso7-python-javapackages is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-freemarker is earlier than 0:2.3.23-1.redhat_2.2.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873009"
+                  },
+                  {
+                    "Comment": "rh-sso7-freemarker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-twitter4j is earlier than 0:4.0.4-1.redhat_3.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873011"
+                  },
+                  {
+                    "Comment": "rh-sso7-twitter4j is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-twitter4j-core is earlier than 0:4.0.4-1.redhat_3.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873013"
+                  },
+                  {
+                    "Comment": "rh-sso7-twitter4j-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-zxing is earlier than 0:3.2.1-1.redhat_4.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873015"
+                  },
+                  {
+                    "Comment": "rh-sso7-zxing is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-zxing-core is earlier than 0:3.2.1-1.redhat_4.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873017"
+                  },
+                  {
+                    "Comment": "rh-sso7-zxing-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-zxing-javase is earlier than 0:3.2.1-1.redhat_4.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873019"
+                  },
+                  {
+                    "Comment": "rh-sso7-zxing-javase is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-liquibase is earlier than 0:3.4.1-2.redhat_2.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873021"
+                  },
+                  {
+                    "Comment": "rh-sso7-liquibase is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-liquibase-core is earlier than 0:3.4.1-2.redhat_2.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873023"
+                  },
+                  {
+                    "Comment": "rh-sso7-liquibase-core is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-libunix-dbus-java is earlier than 0:0.8.0-2.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873025"
+                  },
+                  {
+                    "Comment": "rh-sso7-libunix-dbus-java is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-libunix-dbus-java-devel is earlier than 0:0.8.0-2.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873027"
+                  },
+                  {
+                    "Comment": "rh-sso7-libunix-dbus-java-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-keycloak is earlier than 0:2.5.5-2.Final_redhat_1.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873029"
+                  },
+                  {
+                    "Comment": "rh-sso7-keycloak is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-sso7-keycloak-server is earlier than 0:2.5.5-2.Final_redhat_1.1.jbcs.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873031"
+                  },
+                  {
+                    "Comment": "rh-sso7-keycloak-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170873032"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

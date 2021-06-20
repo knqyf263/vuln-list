@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20192722",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2019:2722: libwmf security update (Low)",
     "AffectedList": [
@@ -33,13 +33,14 @@
         "Date": "2019-09-12"
       },
       "Updated": {
-        "Date": "2019-09-10"
+        "Date": "2019-09-12"
       },
       "Cves": [
         {
           "CveID": "CVE-2019-6978",
           "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
           "Cwe": "CWE-416",
+          "Impact": "low",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-6978",
           "Public": "20190115"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -95,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libwmf-debugsource is earlier than 0:0.2.9-8.el8_0",
+                    "Comment": "libwmf-devel is earlier than 0:0.2.9-8.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192722003"
                   },
                   {
-                    "Comment": "libwmf-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "libwmf-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192722004"
                   }
                 ]
@@ -108,25 +125,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libwmf-devel is earlier than 0:0.2.9-8.el8_0",
+                    "Comment": "libwmf-lite is earlier than 0:0.2.9-8.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192722005"
                   },
                   {
-                    "Comment": "libwmf-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192722006"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "libwmf-lite is earlier than 0:0.2.9-8.el8_0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192722007"
-                  },
-                  {
                     "Comment": "libwmf-lite is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192722008"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192722006"
                   }
                 ]
               }

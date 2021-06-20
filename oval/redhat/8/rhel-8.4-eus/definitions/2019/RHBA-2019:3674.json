@@ -1,9 +1,9 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhba:def:20193674",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
-    "Title": "RHBA-2019:3674: openldap bug fix and enhancement update (None)",
+    "Title": "RHBA-2019:3674: openldap bug fix and enhancement update (Low)",
     "AffectedList": [
       {
         "Family": "unix",
@@ -27,7 +27,7 @@
     "Description": "For detailed information on changes in this release, see the Red Hat Enterprise Linux 8.1 Release Notes linked from the References section.",
     "Advisory": {
       "From": "secalert@redhat.com",
-      "Severity": "None",
+      "Severity": "Low",
       "Rights": "Copyright 2019 Red Hat, Inc.",
       "Issued": {
         "Date": "2019-11-05"
@@ -47,13 +47,23 @@
       ],
       "Bugzilla": [
         {
-          "Href": "https://bugzilla.redhat.com/1740070",
-          "ID": "1740070"
+          "Href": "https://bugzilla.redhat.com/1853350",
+          "ID": "1853350"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -108,25 +125,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "openldap-debugsource is earlier than 0:2.4.46-10.el8",
+                    "Comment": "openldap-devel is earlier than 0:2.4.46-10.el8",
                     "TestRef": "oval:com.redhat.rhba:tst:20193674005"
                   },
                   {
-                    "Comment": "openldap-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhba:tst:20193674006"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "openldap-devel is earlier than 0:2.4.46-10.el8",
-                    "TestRef": "oval:com.redhat.rhba:tst:20193674007"
-                  },
-                  {
                     "Comment": "openldap-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhba:tst:20193674008"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193674006"
                   }
                 ]
               }

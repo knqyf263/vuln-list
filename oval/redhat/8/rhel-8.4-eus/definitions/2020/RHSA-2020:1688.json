@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20201688",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2020:1688: libtiff security update (Moderate)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2019-14973",
           "Cvss3": "4.5/CVSS:3.0/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L",
           "Cwe": "CWE-190",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-14973",
           "Public": "20190814"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -95,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libtiff-debugsource is earlier than 0:4.0.9-17.el8",
+                    "Comment": "libtiff-devel is earlier than 0:4.0.9-17.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201688003"
                   },
                   {
-                    "Comment": "libtiff-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "libtiff-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193419004"
                   }
                 ]
@@ -108,25 +125,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libtiff-devel is earlier than 0:4.0.9-17.el8",
+                    "Comment": "libtiff-tools is earlier than 0:4.0.9-17.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201688005"
                   },
                   {
-                    "Comment": "libtiff-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193419006"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "libtiff-tools is earlier than 0:4.0.9-17.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201688007"
-                  },
-                  {
                     "Comment": "libtiff-tools is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193419008"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193419006"
                   }
                 ]
               }

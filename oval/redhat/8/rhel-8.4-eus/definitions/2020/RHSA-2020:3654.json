@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20203654",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2020:3654: libcroco security update (Moderate)",
     "AffectedList": [
@@ -39,7 +39,8 @@
         {
           "CveID": "CVE-2020-12825",
           "Cvss3": "7.1/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:H",
-          "Cwe": "CWE-674 CWE-121",
+          "Cwe": "CWE-674-\u003eCWE-121",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-12825",
           "Public": "20200512"
         }
@@ -51,10 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::crb",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -63,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -96,25 +112,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libcroco-debugsource is earlier than 0:0.6.12-4.el8_2.1",
+                    "Comment": "libcroco-devel is earlier than 0:0.6.12-4.el8_2.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203654003"
                   },
                   {
-                    "Comment": "libcroco-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20203654004"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "libcroco-devel is earlier than 0:0.6.12-4.el8_2.1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20203654005"
-                  },
-                  {
                     "Comment": "libcroco-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20203654006"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203654004"
                   }
                 ]
               }

@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20193890",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2019:3890: ghostscript security update (Important)",
     "AffectedList": [
@@ -33,13 +33,14 @@
         "Date": "2019-11-18"
       },
       "Updated": {
-        "Date": "2019-11-14"
+        "Date": "2019-11-18"
       },
       "Cves": [
         {
           "CveID": "CVE-2019-14869",
           "Cvss3": "7.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
           "Cwe": "CWE-648",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-14869",
           "Public": "20191114:1300"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -95,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "ghostscript-debugsource is earlier than 0:9.25-5.el8_1.1",
+                    "Comment": "ghostscript-doc is earlier than 0:9.25-5.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193890003"
                   },
                   {
-                    "Comment": "ghostscript-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "ghostscript-doc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190971004"
                   }
                 ]
@@ -108,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "ghostscript-doc is earlier than 0:9.25-5.el8_1.1",
+                    "Comment": "ghostscript-tools-dvipdf is earlier than 0:9.25-5.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193890005"
                   },
                   {
-                    "Comment": "ghostscript-doc is signed with Red Hat redhatrelease2 key",
+                    "Comment": "ghostscript-tools-dvipdf is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190971006"
                   }
                 ]
@@ -121,11 +138,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "ghostscript-tools-dvipdf is earlier than 0:9.25-5.el8_1.1",
+                    "Comment": "ghostscript-tools-fonts is earlier than 0:9.25-5.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193890007"
                   },
                   {
-                    "Comment": "ghostscript-tools-dvipdf is signed with Red Hat redhatrelease2 key",
+                    "Comment": "ghostscript-tools-fonts is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190971008"
                   }
                 ]
@@ -134,11 +151,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "ghostscript-tools-fonts is earlier than 0:9.25-5.el8_1.1",
+                    "Comment": "ghostscript-tools-printing is earlier than 0:9.25-5.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193890009"
                   },
                   {
-                    "Comment": "ghostscript-tools-fonts is signed with Red Hat redhatrelease2 key",
+                    "Comment": "ghostscript-tools-printing is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190971010"
                   }
                 ]
@@ -147,11 +164,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "ghostscript-tools-printing is earlier than 0:9.25-5.el8_1.1",
+                    "Comment": "ghostscript-x11 is earlier than 0:9.25-5.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193890011"
                   },
                   {
-                    "Comment": "ghostscript-tools-printing is signed with Red Hat redhatrelease2 key",
+                    "Comment": "ghostscript-x11 is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190971012"
                   }
                 ]
@@ -160,11 +177,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "ghostscript-x11 is earlier than 0:9.25-5.el8_1.1",
+                    "Comment": "libgs is earlier than 0:9.25-5.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193890013"
                   },
                   {
-                    "Comment": "ghostscript-x11 is signed with Red Hat redhatrelease2 key",
+                    "Comment": "libgs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20190971014"
                   }
                 ]
@@ -173,25 +190,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libgs is earlier than 0:9.25-5.el8_1.1",
+                    "Comment": "libgs-devel is earlier than 0:9.25-5.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193890015"
                   },
                   {
-                    "Comment": "libgs is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20190971016"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "libgs-devel is earlier than 0:9.25-5.el8_1.1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193890017"
-                  },
-                  {
                     "Comment": "libgs-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20190971018"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190971016"
                   }
                 ]
               }

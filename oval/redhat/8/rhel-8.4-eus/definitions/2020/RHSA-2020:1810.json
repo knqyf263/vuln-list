@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20201810",
-  "Version": "635",
+  "Version": "638",
   "Metadata": {
     "Title": "RHSA-2020:1810: sqlite security and bug fix update (Moderate)",
     "AffectedList": [
@@ -69,12 +69,14 @@
         {
           "CveID": "CVE-2019-13752",
           "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-13752",
           "Public": "20191210"
         },
         {
           "CveID": "CVE-2019-13753",
           "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-13753",
           "Public": "20191210"
         },
@@ -82,6 +84,7 @@
           "CveID": "CVE-2019-19923",
           "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-476",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-19923",
           "Public": "20200108"
         },
@@ -89,6 +92,7 @@
           "CveID": "CVE-2019-19924",
           "Cvss3": "5.3/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
           "Cwe": "CWE-391",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-19924",
           "Public": "20200108"
         },
@@ -96,6 +100,7 @@
           "CveID": "CVE-2019-19925",
           "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-20",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-19925",
           "Public": "20200108"
         },
@@ -103,6 +108,7 @@
           "CveID": "CVE-2019-19959",
           "Cvss3": "7.3/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
           "Cwe": "CWE-626",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-19959",
           "Public": "20191223"
         },
@@ -110,6 +116,7 @@
           "CveID": "CVE-2019-8457",
           "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-125",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-8457",
           "Public": "20190320"
         }
@@ -145,10 +152,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -157,19 +172,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -203,11 +225,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "sqlite-debugsource is earlier than 0:3.26.0-6.el8",
+                    "Comment": "sqlite-devel is earlier than 0:3.26.0-6.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201810005"
                   },
                   {
-                    "Comment": "sqlite-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "sqlite-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200273006"
                   }
                 ]
@@ -216,11 +238,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "sqlite-devel is earlier than 0:3.26.0-6.el8",
+                    "Comment": "sqlite-doc is earlier than 0:3.26.0-6.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201810007"
                   },
                   {
-                    "Comment": "sqlite-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "sqlite-doc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200273008"
                   }
                 ]
@@ -229,25 +251,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "sqlite-doc is earlier than 0:3.26.0-6.el8",
+                    "Comment": "sqlite-libs is earlier than 0:3.26.0-6.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201810009"
                   },
                   {
-                    "Comment": "sqlite-doc is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200273010"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "sqlite-libs is earlier than 0:3.26.0-6.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201810011"
-                  },
-                  {
                     "Comment": "sqlite-libs is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200273012"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200273010"
                   }
                 ]
               }

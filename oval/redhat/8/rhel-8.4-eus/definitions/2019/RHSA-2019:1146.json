@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20191146",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2019:1146: java-1.8.0-openjdk security update (Important)",
     "AffectedList": [
@@ -65,6 +65,7 @@
           "CveID": "CVE-2019-2698",
           "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-787",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-2698",
           "Public": "20190416"
         }
@@ -84,8 +85,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -94,19 +105,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -140,11 +158,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-1.8.0-openjdk-debugsource is earlier than 1:1.8.0.212.b04-1.el8_0",
+                    "Comment": "java-1.8.0-openjdk-demo is earlier than 1:1.8.0.212.b04-1.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146005"
                   },
                   {
-                    "Comment": "java-1.8.0-openjdk-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-1.8.0-openjdk-demo is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146006"
                   }
                 ]
@@ -153,11 +171,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-1.8.0-openjdk-demo is earlier than 1:1.8.0.212.b04-1.el8_0",
+                    "Comment": "java-1.8.0-openjdk-devel is earlier than 1:1.8.0.212.b04-1.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146007"
                   },
                   {
-                    "Comment": "java-1.8.0-openjdk-demo is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-1.8.0-openjdk-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146008"
                   }
                 ]
@@ -166,11 +184,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-1.8.0-openjdk-devel is earlier than 1:1.8.0.212.b04-1.el8_0",
+                    "Comment": "java-1.8.0-openjdk-headless is earlier than 1:1.8.0.212.b04-1.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146009"
                   },
                   {
-                    "Comment": "java-1.8.0-openjdk-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-1.8.0-openjdk-headless is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146010"
                   }
                 ]
@@ -179,11 +197,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-1.8.0-openjdk-headless is earlier than 1:1.8.0.212.b04-1.el8_0",
+                    "Comment": "java-1.8.0-openjdk-javadoc is earlier than 1:1.8.0.212.b04-1.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146011"
                   },
                   {
-                    "Comment": "java-1.8.0-openjdk-headless is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-1.8.0-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146012"
                   }
                 ]
@@ -192,11 +210,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-1.8.0-openjdk-javadoc is earlier than 1:1.8.0.212.b04-1.el8_0",
+                    "Comment": "java-1.8.0-openjdk-javadoc-zip is earlier than 1:1.8.0.212.b04-1.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146013"
                   },
                   {
-                    "Comment": "java-1.8.0-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-1.8.0-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146014"
                   }
                 ]
@@ -205,25 +223,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-1.8.0-openjdk-javadoc-zip is earlier than 1:1.8.0.212.b04-1.el8_0",
+                    "Comment": "java-1.8.0-openjdk-src is earlier than 1:1.8.0.212.b04-1.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191146015"
                   },
                   {
-                    "Comment": "java-1.8.0-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191146016"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "java-1.8.0-openjdk-src is earlier than 1:1.8.0.212.b04-1.el8_0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191146017"
-                  },
-                  {
                     "Comment": "java-1.8.0-openjdk-src is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191146018"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191146016"
                   }
                 ]
               }

@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20200339",
-  "Version": "636",
+  "Version": "639",
   "Metadata": {
     "Title": "RHSA-2020:0339: kernel security and bug fix update (Important)",
     "AffectedList": [
@@ -89,22 +89,24 @@
         },
         {
           "CveID": "CVE-2019-14816",
-          "Cvss3": "8/CVSS:3.0/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cvss3": "8.0/CVSS:3.0/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-14816",
           "Public": "20190828:1000"
         },
         {
           "CveID": "CVE-2019-14895",
-          "Cvss3": "8/CVSS:3.0/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cvss3": "8.0/CVSS:3.0/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-14895",
           "Public": "20191125:0829"
         },
         {
           "CveID": "CVE-2019-14898",
           "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
-          "Cwe": "CWE-362 CWE-667",
+          "Cwe": "CWE-362-\u003eCWE-667",
           "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-14898",
           "Public": "20191120"
@@ -112,7 +114,8 @@
         {
           "CveID": "CVE-2019-14901",
           "Cvss3": "8.8/CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-          "Cwe": "CWE-400 CWE-122",
+          "Cwe": "(CWE-400|CWE-122)",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-14901",
           "Public": "20191122"
         },
@@ -120,13 +123,14 @@
           "CveID": "CVE-2019-17666",
           "Cvss3": "6.3/CVSS:3.0/AV:A/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:H",
           "Cwe": "CWE-120",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-17666",
           "Public": "20191018"
         },
         {
           "CveID": "CVE-2019-19338",
           "Cvss3": "5.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
-          "Cwe": "CWE-385 CWE-203",
+          "Cwe": "CWE-385-\u003eCWE-203",
           "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-19338",
           "Public": "20191118"
@@ -167,10 +171,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::crb",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -179,25 +191,32 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
           {
             "Operator": "OR",
             "Criterions": [
               {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
                 "Comment": "kernel earlier than 0:4.18.0-147.5.1.el8_1 is currently running",
-                "TestRef": "oval:com.redhat.rhsa:tst:20200339051"
+                "TestRef": "oval:com.redhat.rhsa:tst:20200328025"
               },
               {
                 "Comment": "kernel earlier than 0:4.18.0-147.5.1.el8_1 is set to boot up on next boot",

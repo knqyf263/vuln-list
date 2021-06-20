@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20202970",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2020:2970: java-11-openjdk security and enhancement update (Important)",
     "AffectedList": [
@@ -99,6 +99,7 @@
           "CveID": "CVE-2020-14583",
           "Cvss3": "8.3/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:H/A:H",
           "Cwe": "CWE-119",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-14583",
           "Public": "20200714"
         },
@@ -106,6 +107,7 @@
           "CveID": "CVE-2020-14593",
           "Cvss3": "7.4/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:N/I:H/A:N",
           "Cwe": "CWE-119",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-14593",
           "Public": "20200714"
         },
@@ -149,8 +151,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -159,19 +171,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -192,11 +211,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-debugsource is earlier than 1:11.0.8.10-0.el8_2",
+                    "Comment": "java-11-openjdk-demo is earlier than 1:11.0.8.10-0.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202970003"
                   },
                   {
-                    "Comment": "java-11-openjdk-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-demo is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518004"
                   }
                 ]
@@ -205,11 +224,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-demo is earlier than 1:11.0.8.10-0.el8_2",
+                    "Comment": "java-11-openjdk-devel is earlier than 1:11.0.8.10-0.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202970005"
                   },
                   {
-                    "Comment": "java-11-openjdk-demo is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518006"
                   }
                 ]
@@ -218,11 +237,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-devel is earlier than 1:11.0.8.10-0.el8_2",
+                    "Comment": "java-11-openjdk-headless is earlier than 1:11.0.8.10-0.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202970007"
                   },
                   {
-                    "Comment": "java-11-openjdk-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-headless is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518008"
                   }
                 ]
@@ -231,11 +250,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-headless is earlier than 1:11.0.8.10-0.el8_2",
+                    "Comment": "java-11-openjdk-javadoc is earlier than 1:11.0.8.10-0.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202970009"
                   },
                   {
-                    "Comment": "java-11-openjdk-headless is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518010"
                   }
                 ]
@@ -244,11 +263,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-javadoc is earlier than 1:11.0.8.10-0.el8_2",
+                    "Comment": "java-11-openjdk-javadoc-zip is earlier than 1:11.0.8.10-0.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202970011"
                   },
                   {
-                    "Comment": "java-11-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518012"
                   }
                 ]
@@ -257,11 +276,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-javadoc-zip is earlier than 1:11.0.8.10-0.el8_2",
+                    "Comment": "java-11-openjdk-jmods is earlier than 1:11.0.8.10-0.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202970013"
                   },
                   {
-                    "Comment": "java-11-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-jmods is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518014"
                   }
                 ]
@@ -270,11 +289,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-jmods is earlier than 1:11.0.8.10-0.el8_2",
+                    "Comment": "java-11-openjdk-src is earlier than 1:11.0.8.10-0.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202970015"
                   },
                   {
-                    "Comment": "java-11-openjdk-jmods is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-src is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518016"
                   }
                 ]
@@ -283,25 +302,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-src is earlier than 1:11.0.8.10-0.el8_2",
+                    "Comment": "java-11-openjdk-static-libs is earlier than 1:11.0.8.10-0.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202970017"
                   },
                   {
-                    "Comment": "java-11-openjdk-src is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191518018"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "java-11-openjdk-static-libs is earlier than 1:11.0.8.10-0.el8_2",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202970019"
-                  },
-                  {
                     "Comment": "java-11-openjdk-static-libs is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202970020"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202970018"
                   }
                 ]
               }

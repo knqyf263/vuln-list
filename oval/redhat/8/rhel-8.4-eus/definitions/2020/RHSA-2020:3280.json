@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20203280",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2020:3280: nss and nspr security, bug fix, and enhancement update (Moderate)",
     "AffectedList": [
@@ -55,6 +55,7 @@
           "CveID": "CVE-2019-11756",
           "Cvss3": "7.1/CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-416",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-11756",
           "Public": "20191210"
         },
@@ -62,6 +63,7 @@
           "CveID": "CVE-2019-17006",
           "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-17006",
           "Public": "20191226"
         },
@@ -76,31 +78,12 @@
           "CveID": "CVE-2020-12402",
           "Cvss3": "4.4/CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:U/C:H/I:N/A:N",
           "Cwe": "CWE-327",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-12402",
           "Public": "20200602:1200"
         }
       ],
       "Bugzilla": [
-        {
-          "Href": "https://bugzilla.redhat.com/1663187",
-          "ID": "1663187"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1691454",
-          "ID": "1691454"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1711375",
-          "ID": "1711375"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1724250",
-          "ID": "1724250"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1750921",
-          "ID": "1750921"
-        },
         {
           "Href": "https://bugzilla.redhat.com/1774835",
           "ID": "1774835"
@@ -114,25 +97,23 @@
           "ID": "1791225"
         },
         {
-          "Href": "https://bugzilla.redhat.com/1809637",
-          "ID": "1809637"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1825270",
-          "ID": "1825270"
-        },
-        {
           "Href": "https://bugzilla.redhat.com/1826231",
           "ID": "1826231"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1854564",
-          "ID": "1854564"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -141,19 +122,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -174,11 +162,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nspr-debugsource is earlier than 0:4.25.0-2.el8_2",
+                    "Comment": "nspr-devel is earlier than 0:4.25.0-2.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280003"
                   },
                   {
-                    "Comment": "nspr-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nspr-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951004"
                   }
                 ]
@@ -187,11 +175,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nspr-devel is earlier than 0:4.25.0-2.el8_2",
+                    "Comment": "nss is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280005"
                   },
                   {
-                    "Comment": "nspr-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951006"
                   }
                 ]
@@ -200,11 +188,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-devel is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280007"
                   },
                   {
-                    "Comment": "nss is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951008"
                   }
                 ]
@@ -213,11 +201,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss-debugsource is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-softokn is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280009"
                   },
                   {
-                    "Comment": "nss-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss-softokn is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951010"
                   }
                 ]
@@ -226,11 +214,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss-devel is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-softokn-devel is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280011"
                   },
                   {
-                    "Comment": "nss-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss-softokn-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951012"
                   }
                 ]
@@ -239,11 +227,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss-softokn is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-softokn-freebl is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280013"
                   },
                   {
-                    "Comment": "nss-softokn is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss-softokn-freebl is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951014"
                   }
                 ]
@@ -252,11 +240,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss-softokn-devel is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-softokn-freebl-devel is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280015"
                   },
                   {
-                    "Comment": "nss-softokn-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss-softokn-freebl-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951016"
                   }
                 ]
@@ -265,11 +253,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss-softokn-freebl is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-sysinit is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280017"
                   },
                   {
-                    "Comment": "nss-softokn-freebl is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss-sysinit is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951018"
                   }
                 ]
@@ -278,11 +266,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss-softokn-freebl-devel is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-tools is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280019"
                   },
                   {
-                    "Comment": "nss-softokn-freebl-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss-tools is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951020"
                   }
                 ]
@@ -291,11 +279,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss-sysinit is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-util is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280021"
                   },
                   {
-                    "Comment": "nss-sysinit is signed with Red Hat redhatrelease2 key",
+                    "Comment": "nss-util is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191951022"
                   }
                 ]
@@ -304,38 +292,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "nss-tools is earlier than 0:3.53.1-11.el8_2",
+                    "Comment": "nss-util-devel is earlier than 0:3.53.1-11.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20203280023"
                   },
                   {
-                    "Comment": "nss-tools is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191951024"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "nss-util is earlier than 0:3.53.1-11.el8_2",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20203280025"
-                  },
-                  {
-                    "Comment": "nss-util is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191951026"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "nss-util-devel is earlier than 0:3.53.1-11.el8_2",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20203280027"
-                  },
-                  {
                     "Comment": "nss-util-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191951028"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191951024"
                   }
                 ]
               }

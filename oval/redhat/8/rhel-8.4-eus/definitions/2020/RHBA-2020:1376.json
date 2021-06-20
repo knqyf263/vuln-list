@@ -1,9 +1,9 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhba:def:20201376",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
-    "Title": "RHBA-2020:1376: net-snmp bug fix and enhancement update (None)",
+    "Title": "RHBA-2020:1376: net-snmp bug fix and enhancement update (Moderate)",
     "AffectedList": [
       {
         "Family": "unix",
@@ -27,7 +27,7 @@
     "Description": "The net-snmp packages provide various libraries and tools for the Simple\nNetwork Management Protocol (SNMP), including an SNMP library, an\nextensible agent, tools for requesting or setting information from SNMP\nagents, tools for generating and handling SNMP traps, a version of the\nnetstat command which uses SNMP, and a Tk/Perl Management Information Base\n(MIB) browser.\n\nBug Fix(es) and Enhancement(s):\n\n* net-snmpd double free or corruption error (BZ#1802055)",
     "Advisory": {
       "From": "secalert@redhat.com",
-      "Severity": "None",
+      "Severity": "Moderate",
       "Rights": "Copyright 2020 Red Hat, Inc.",
       "Issued": {
         "Date": "2020-04-07"
@@ -47,15 +47,23 @@
       ],
       "Bugzilla": [
         {
-          "Href": "https://bugzilla.redhat.com/1802055",
-          "ID": "1802055"
+          "Href": "https://bugzilla.redhat.com/1851145",
+          "ID": "1851145"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -64,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -110,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "net-snmp-debugsource is earlier than 1:5.8-12.el8_1.1",
+                    "Comment": "net-snmp-devel is earlier than 1:5.8-12.el8_1.1",
                     "TestRef": "oval:com.redhat.rhba:tst:20201376005"
                   },
                   {
-                    "Comment": "net-snmp-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "net-snmp-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhba:tst:20201376006"
                   }
                 ]
@@ -123,11 +138,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "net-snmp-devel is earlier than 1:5.8-12.el8_1.1",
+                    "Comment": "net-snmp-libs is earlier than 1:5.8-12.el8_1.1",
                     "TestRef": "oval:com.redhat.rhba:tst:20201376007"
                   },
                   {
-                    "Comment": "net-snmp-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "net-snmp-libs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhba:tst:20201376008"
                   }
                 ]
@@ -136,25 +151,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "net-snmp-libs is earlier than 1:5.8-12.el8_1.1",
+                    "Comment": "net-snmp-utils is earlier than 1:5.8-12.el8_1.1",
                     "TestRef": "oval:com.redhat.rhba:tst:20201376009"
                   },
                   {
-                    "Comment": "net-snmp-libs is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhba:tst:20201376010"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "net-snmp-utils is earlier than 1:5.8-12.el8_1.1",
-                    "TestRef": "oval:com.redhat.rhba:tst:20201376011"
-                  },
-                  {
                     "Comment": "net-snmp-utils is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhba:tst:20201376012"
+                    "TestRef": "oval:com.redhat.rhba:tst:20201376010"
                   }
                 ]
               }

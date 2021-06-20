@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20193390",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2019:3390: qt5-qtbase security and bug fix update (Moderate)",
     "AffectedList": [
@@ -50,6 +50,7 @@
           "CveID": "CVE-2018-15518",
           "Cvss3": "5.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
           "Cwe": "CWE-416",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2018-15518",
           "Public": "20180813"
         },
@@ -80,20 +81,21 @@
         {
           "Href": "https://bugzilla.redhat.com/1659000",
           "ID": "1659000"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1692970",
-          "ID": "1692970"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1709949",
-          "ID": "1709949"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -102,19 +104,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -148,11 +157,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qtbase-debugsource is earlier than 0:5.11.1-7.el8",
+                    "Comment": "qt5-qtbase-devel is earlier than 0:5.11.1-7.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390005"
                   },
                   {
-                    "Comment": "qt5-qtbase-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qtbase-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390006"
                   }
                 ]
@@ -161,11 +170,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qtbase-devel is earlier than 0:5.11.1-7.el8",
+                    "Comment": "qt5-qtbase-examples is earlier than 0:5.11.1-7.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390007"
                   },
                   {
-                    "Comment": "qt5-qtbase-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qtbase-examples is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390008"
                   }
                 ]
@@ -174,11 +183,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qtbase-examples is earlier than 0:5.11.1-7.el8",
+                    "Comment": "qt5-qtbase-gui is earlier than 0:5.11.1-7.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390009"
                   },
                   {
-                    "Comment": "qt5-qtbase-examples is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qtbase-gui is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390010"
                   }
                 ]
@@ -187,11 +196,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qtbase-gui is earlier than 0:5.11.1-7.el8",
+                    "Comment": "qt5-qtbase-mysql is earlier than 0:5.11.1-7.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390011"
                   },
                   {
-                    "Comment": "qt5-qtbase-gui is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qtbase-mysql is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390012"
                   }
                 ]
@@ -200,11 +209,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qtbase-mysql is earlier than 0:5.11.1-7.el8",
+                    "Comment": "qt5-qtbase-odbc is earlier than 0:5.11.1-7.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390013"
                   },
                   {
-                    "Comment": "qt5-qtbase-mysql is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qtbase-odbc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390014"
                   }
                 ]
@@ -213,11 +222,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qtbase-odbc is earlier than 0:5.11.1-7.el8",
+                    "Comment": "qt5-qtbase-postgresql is earlier than 0:5.11.1-7.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390015"
                   },
                   {
-                    "Comment": "qt5-qtbase-odbc is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qtbase-postgresql is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390016"
                   }
                 ]
@@ -226,11 +235,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qtbase-postgresql is earlier than 0:5.11.1-7.el8",
+                    "Comment": "qt5-qtbase-static is earlier than 0:5.11.1-7.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390017"
                   },
                   {
-                    "Comment": "qt5-qtbase-postgresql is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qtbase-static is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390018"
                   }
                 ]
@@ -239,11 +248,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qtbase-static is earlier than 0:5.11.1-7.el8",
+                    "Comment": "qt5-assistant is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390019"
                   },
                   {
-                    "Comment": "qt5-qtbase-static is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-assistant is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390020"
                   }
                 ]
@@ -252,11 +261,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-assistant is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-designer is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390021"
                   },
                   {
-                    "Comment": "qt5-assistant is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-designer is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390022"
                   }
                 ]
@@ -265,11 +274,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-designer is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-doctools is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390023"
                   },
                   {
-                    "Comment": "qt5-designer is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-doctools is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390024"
                   }
                 ]
@@ -278,11 +287,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-doctools is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-linguist is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390025"
                   },
                   {
-                    "Comment": "qt5-doctools is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-linguist is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390026"
                   }
                 ]
@@ -291,11 +300,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-linguist is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qdbusviewer is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390027"
                   },
                   {
-                    "Comment": "qt5-linguist is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qdbusviewer is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390028"
                   }
                 ]
@@ -304,11 +313,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qdbusviewer is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qttools is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390029"
                   },
                   {
-                    "Comment": "qt5-qdbusviewer is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qttools is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390030"
                   }
                 ]
@@ -317,11 +326,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qttools is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qttools-common is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390031"
                   },
                   {
-                    "Comment": "qt5-qttools is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qttools-common is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390032"
                   }
                 ]
@@ -330,11 +339,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qttools-common is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qttools-devel is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390033"
                   },
                   {
-                    "Comment": "qt5-qttools-common is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qttools-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390034"
                   }
                 ]
@@ -343,11 +352,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qttools-debugsource is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qttools-examples is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390035"
                   },
                   {
-                    "Comment": "qt5-qttools-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qttools-examples is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390036"
                   }
                 ]
@@ -356,11 +365,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qttools-devel is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qttools-libs-designer is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390037"
                   },
                   {
-                    "Comment": "qt5-qttools-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qttools-libs-designer is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390038"
                   }
                 ]
@@ -369,11 +378,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qttools-examples is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qttools-libs-designercomponents is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390039"
                   },
                   {
-                    "Comment": "qt5-qttools-examples is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qttools-libs-designercomponents is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390040"
                   }
                 ]
@@ -382,11 +391,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qttools-libs-designer is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qttools-libs-help is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390041"
                   },
                   {
-                    "Comment": "qt5-qttools-libs-designer is signed with Red Hat redhatrelease2 key",
+                    "Comment": "qt5-qttools-libs-help is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390042"
                   }
                 ]
@@ -395,38 +404,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "qt5-qttools-libs-designercomponents is earlier than 0:5.11.1-9.el8",
+                    "Comment": "qt5-qttools-static is earlier than 0:5.11.1-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193390043"
                   },
                   {
-                    "Comment": "qt5-qttools-libs-designercomponents is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193390044"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "qt5-qttools-libs-help is earlier than 0:5.11.1-9.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193390045"
-                  },
-                  {
-                    "Comment": "qt5-qttools-libs-help is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193390046"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "qt5-qttools-static is earlier than 0:5.11.1-9.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193390047"
-                  },
-                  {
                     "Comment": "qt5-qttools-static is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193390048"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193390044"
                   }
                 ]
               }

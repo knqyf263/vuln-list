@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20191623",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2019:1623: thunderbird security update (Important)",
     "AffectedList": [
@@ -63,7 +63,7 @@
       "Cves": [
         {
           "CveID": "CVE-2019-11703",
-          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
           "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-11703",
@@ -71,7 +71,7 @@
         },
         {
           "CveID": "CVE-2019-11704",
-          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
           "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-11704",
@@ -79,8 +79,9 @@
         },
         {
           "CveID": "CVE-2019-11705",
-          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-121",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-11705",
           "Public": "20190613"
         },
@@ -102,8 +103,9 @@
         },
         {
           "CveID": "CVE-2019-11708",
-          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cvss3": "10.0/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H",
           "Cwe": "CWE-270",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-11708",
           "Public": "20190620"
         }
@@ -135,8 +137,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -145,7 +157,7 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
@@ -153,39 +165,25 @@
         "Operator": "AND",
         "Criterions": [
           {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
+            "Comment": "thunderbird is earlier than 0:60.7.2-2.el8_0",
+            "TestRef": "oval:com.redhat.rhsa:tst:20191623001"
+          },
+          {
+            "Comment": "thunderbird is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20191144002"
           }
         ],
         "Criterias": [
           {
             "Operator": "OR",
-            "Criterias": [
+            "Criterions": [
               {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "thunderbird is earlier than 0:60.7.2-2.el8_0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191623001"
-                  },
-                  {
-                    "Comment": "thunderbird is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191144002"
-                  }
-                ]
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
               },
               {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "thunderbird-debugsource is earlier than 0:60.7.2-2.el8_0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191623003"
-                  },
-                  {
-                    "Comment": "thunderbird-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191144004"
-                  }
-                ]
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
               }
             ]
           }

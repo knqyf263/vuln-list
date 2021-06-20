@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20191174",
-  "Version": "637",
+  "Version": "640",
   "Metadata": {
     "Title": "RHSA-2019:1174: kernel-rt security update (Important)",
     "AffectedList": [
@@ -54,7 +54,7 @@
         {
           "CveID": "CVE-2018-12126",
           "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
-          "Cwe": "CWE-226 CWE-203 CWE-385",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
           "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2018-12126",
           "Public": "20190514:1700"
@@ -62,7 +62,7 @@
         {
           "CveID": "CVE-2018-12127",
           "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
-          "Cwe": "CWE-226 CWE-203 CWE-385",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
           "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2018-12127",
           "Public": "20190514:1700"
@@ -70,14 +70,15 @@
         {
           "CveID": "CVE-2018-12130",
           "Cvss3": "6.2/CVSS:3.0/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-          "Cwe": "CWE-203 CWE-385 CWE-226",
+          "Cwe": "CWE-203-\u003eCWE-385-\u003eCWE-226",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2018-12130",
           "Public": "20190514:1700"
         },
         {
           "CveID": "CVE-2019-11091",
           "Cvss3": "3.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N",
-          "Cwe": "CWE-226 CWE-203 CWE-385",
+          "Cwe": "CWE-226-\u003eCWE-203-\u003eCWE-385",
           "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-11091",
           "Public": "20190514:1700"
@@ -102,9 +103,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::nfv",
-        "cpe:/a:redhat:enterprise_linux:8::realtime"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -113,19 +123,39 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel-rt earlier than 0:4.18.0-80.1.2.rt9.145.el8_0 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20191167051"
+              },
+              {
+                "Comment": "kernel-rt earlier than 0:4.18.0-80.1.2.rt9.145.el8_0 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20191174026"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [

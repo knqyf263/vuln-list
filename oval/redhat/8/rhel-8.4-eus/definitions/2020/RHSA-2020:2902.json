@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20202902",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2020:2902: sane-backends security update (Important)",
     "AffectedList": [
@@ -43,15 +43,17 @@
       "Cves": [
         {
           "CveID": "CVE-2020-12861",
-          "Cvss3": "8/CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cvss3": "8.0/CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-122",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-12861",
           "Public": "20200517"
         },
         {
           "CveID": "CVE-2020-12865",
-          "Cvss3": "8/CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cvss3": "8.0/CVSS:3.1/AV:A/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-190",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-12865",
           "Public": "20200517"
         }
@@ -67,8 +69,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -77,19 +89,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -123,11 +142,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "sane-backends-debugsource is earlier than 0:1.0.27-19.el8_2.1",
+                    "Comment": "sane-backends-devel is earlier than 0:1.0.27-19.el8_2.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902005"
                   },
                   {
-                    "Comment": "sane-backends-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "sane-backends-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902006"
                   }
                 ]
@@ -136,11 +155,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "sane-backends-devel is earlier than 0:1.0.27-19.el8_2.1",
+                    "Comment": "sane-backends-doc is earlier than 0:1.0.27-19.el8_2.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902007"
                   },
                   {
-                    "Comment": "sane-backends-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "sane-backends-doc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902008"
                   }
                 ]
@@ -149,11 +168,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "sane-backends-doc is earlier than 0:1.0.27-19.el8_2.1",
+                    "Comment": "sane-backends-drivers-cameras is earlier than 0:1.0.27-19.el8_2.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902009"
                   },
                   {
-                    "Comment": "sane-backends-doc is signed with Red Hat redhatrelease2 key",
+                    "Comment": "sane-backends-drivers-cameras is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902010"
                   }
                 ]
@@ -162,11 +181,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "sane-backends-drivers-cameras is earlier than 0:1.0.27-19.el8_2.1",
+                    "Comment": "sane-backends-drivers-scanners is earlier than 0:1.0.27-19.el8_2.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902011"
                   },
                   {
-                    "Comment": "sane-backends-drivers-cameras is signed with Red Hat redhatrelease2 key",
+                    "Comment": "sane-backends-drivers-scanners is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902012"
                   }
                 ]
@@ -175,25 +194,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "sane-backends-drivers-scanners is earlier than 0:1.0.27-19.el8_2.1",
+                    "Comment": "sane-backends-libs is earlier than 0:1.0.27-19.el8_2.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202902013"
                   },
                   {
-                    "Comment": "sane-backends-drivers-scanners is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202902014"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "sane-backends-libs is earlier than 0:1.0.27-19.el8_2.1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202902015"
-                  },
-                  {
                     "Comment": "sane-backends-libs is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202902016"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202902014"
                   }
                 ]
               }

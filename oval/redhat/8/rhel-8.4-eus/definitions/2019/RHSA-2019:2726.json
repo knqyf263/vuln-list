@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20192726",
-  "Version": "634",
+  "Version": "637",
   "Metadata": {
     "Title": "RHSA-2019:2726: go-toolset:rhel8 security and bug fix update (Important)",
     "AffectedList": [
@@ -38,13 +38,14 @@
         "Date": "2019-09-12"
       },
       "Updated": {
-        "Date": "2019-09-10"
+        "Date": "2019-09-12"
       },
       "Cves": [
         {
           "CveID": "CVE-2019-9512",
           "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-400",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-9512",
           "Public": "20190813:1700"
         },
@@ -52,6 +53,7 @@
           "CveID": "CVE-2019-9514",
           "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-400",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-9514",
           "Public": "20190813:1700"
         }
@@ -64,15 +66,21 @@
         {
           "Href": "https://bugzilla.redhat.com/1735744",
           "ID": "1735744"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1743169",
-          "ID": "1743169"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -81,7 +89,7 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
@@ -89,15 +97,24 @@
         "Operator": "AND",
         "Criterions": [
           {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          },
-          {
             "Comment": "Module go-toolset:rhel8 is enabled",
             "TestRef": "oval:com.redhat.rhsa:tst:20191519017"
           }
         ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [

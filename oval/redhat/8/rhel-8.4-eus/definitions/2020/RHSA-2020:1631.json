@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20201631",
-  "Version": "636",
+  "Version": "639",
   "Metadata": {
     "Title": "RHSA-2020:1631: GStreamer, libmad, and SDL security, bug fix, and enhancement update (Low)",
     "AffectedList": [
@@ -40,40 +40,30 @@
           "CveID": "CVE-2018-7263",
           "Cvss3": "3.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L",
           "Cwe": "CWE-416",
+          "Impact": "low",
           "Href": "https://access.redhat.com/security/cve/CVE-2018-7263",
           "Public": "20180220"
         }
       ],
       "Bugzilla": [
         {
-          "Href": "https://bugzilla.redhat.com/1488585",
-          "ID": "1488585"
-        },
-        {
           "Href": "https://bugzilla.redhat.com/1547504",
           "ID": "1547504"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1693292",
-          "ID": "1693292"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1724677",
-          "ID": "1724677"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1751780",
-          "ID": "1751780"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1756299",
-          "ID": "1756299"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -82,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -128,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "orc-debugsource is earlier than 0:0.4.28-3.el8",
+                    "Comment": "orc-devel is earlier than 0:0.4.28-3.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631005"
                   },
                   {
-                    "Comment": "orc-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "orc-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631006"
                   }
                 ]
@@ -141,11 +138,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "orc-devel is earlier than 0:0.4.28-3.el8",
+                    "Comment": "gstreamer1-plugins-bad-free is earlier than 0:1.16.1-1.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631007"
                   },
                   {
-                    "Comment": "orc-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1-plugins-bad-free is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631008"
                   }
                 ]
@@ -154,11 +151,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-bad-free is earlier than 0:1.16.1-1.el8",
+                    "Comment": "gstreamer1-plugins-bad-free-devel is earlier than 0:1.16.1-1.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631009"
                   },
                   {
-                    "Comment": "gstreamer1-plugins-bad-free is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1-plugins-bad-free-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631010"
                   }
                 ]
@@ -167,11 +164,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-bad-free-debugsource is earlier than 0:1.16.1-1.el8",
+                    "Comment": "gstreamer1-plugins-base is earlier than 0:1.16.1-1.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631011"
                   },
                   {
-                    "Comment": "gstreamer1-plugins-bad-free-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1-plugins-base is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631012"
                   }
                 ]
@@ -180,11 +177,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-bad-free-devel is earlier than 0:1.16.1-1.el8",
+                    "Comment": "gstreamer1-plugins-base-devel is earlier than 0:1.16.1-1.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631013"
                   },
                   {
-                    "Comment": "gstreamer1-plugins-bad-free-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1-plugins-base-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631014"
                   }
                 ]
@@ -193,11 +190,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-base is earlier than 0:1.16.1-1.el8",
+                    "Comment": "gstreamer1-plugins-good is earlier than 0:1.16.1-1.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631015"
                   },
                   {
-                    "Comment": "gstreamer1-plugins-base is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1-plugins-good is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631016"
                   }
                 ]
@@ -206,11 +203,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-base-debugsource is earlier than 0:1.16.1-1.el8",
+                    "Comment": "gstreamer1-plugins-good-gtk is earlier than 0:1.16.1-1.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631017"
                   },
                   {
-                    "Comment": "gstreamer1-plugins-base-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1-plugins-good-gtk is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631018"
                   }
                 ]
@@ -219,11 +216,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-base-devel is earlier than 0:1.16.1-1.el8",
+                    "Comment": "gstreamer1-plugins-ugly-free is earlier than 0:1.16.1-1.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631019"
                   },
                   {
-                    "Comment": "gstreamer1-plugins-base-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1-plugins-ugly-free is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631020"
                   }
                 ]
@@ -232,11 +229,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-good is earlier than 0:1.16.1-1.el8",
+                    "Comment": "gstreamer1 is earlier than 0:1.16.1-2.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631021"
                   },
                   {
-                    "Comment": "gstreamer1-plugins-good is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1 is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631022"
                   }
                 ]
@@ -245,11 +242,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-good-debugsource is earlier than 0:1.16.1-1.el8",
+                    "Comment": "gstreamer1-devel is earlier than 0:1.16.1-2.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631023"
                   },
                   {
-                    "Comment": "gstreamer1-plugins-good-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "gstreamer1-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20201631024"
                   }
                 ]
@@ -258,86 +255,8 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "gstreamer1-plugins-good-gtk is earlier than 0:1.16.1-1.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631025"
-                  },
-                  {
-                    "Comment": "gstreamer1-plugins-good-gtk is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631026"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "gstreamer1-plugins-ugly-free is earlier than 0:1.16.1-1.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631027"
-                  },
-                  {
-                    "Comment": "gstreamer1-plugins-ugly-free is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631028"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "gstreamer1-plugins-ugly-free-debugsource is earlier than 0:1.16.1-1.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631029"
-                  },
-                  {
-                    "Comment": "gstreamer1-plugins-ugly-free-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631030"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "gstreamer1 is earlier than 0:1.16.1-2.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631031"
-                  },
-                  {
-                    "Comment": "gstreamer1 is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631032"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "gstreamer1-debugsource is earlier than 0:1.16.1-2.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631033"
-                  },
-                  {
-                    "Comment": "gstreamer1-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631034"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "gstreamer1-devel is earlier than 0:1.16.1-2.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631035"
-                  },
-                  {
-                    "Comment": "gstreamer1-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631036"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
                     "Comment": "SDL is earlier than 0:1.2.15-37.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631037"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631025"
                   },
                   {
                     "Comment": "SDL is signed with Red Hat redhatrelease2 key",
@@ -349,11 +268,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "SDL-debugsource is earlier than 0:1.2.15-37.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631039"
+                    "Comment": "SDL-devel is earlier than 0:1.2.15-37.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631027"
                   },
                   {
-                    "Comment": "SDL-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "SDL-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193553006"
                   }
                 ]
@@ -362,38 +281,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "SDL-devel is earlier than 0:1.2.15-37.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631041"
-                  },
-                  {
-                    "Comment": "SDL-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193553008"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
                     "Comment": "SDL2 is earlier than 0:2.0.10-2.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631043"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631029"
                   },
                   {
                     "Comment": "SDL2 is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631044"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "SDL2-debugsource is earlier than 0:2.0.10-2.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631045"
-                  },
-                  {
-                    "Comment": "SDL2-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631046"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631030"
                   }
                 ]
               },
@@ -402,11 +295,11 @@
                 "Criterions": [
                   {
                     "Comment": "SDL2-devel is earlier than 0:2.0.10-2.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631047"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631031"
                   },
                   {
                     "Comment": "SDL2-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631048"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631032"
                   }
                 ]
               },
@@ -415,11 +308,11 @@
                 "Criterions": [
                   {
                     "Comment": "SDL2-static is earlier than 0:2.0.10-2.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631049"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631033"
                   },
                   {
                     "Comment": "SDL2-static is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631050"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631034"
                   }
                 ]
               },
@@ -428,24 +321,11 @@
                 "Criterions": [
                   {
                     "Comment": "libmad is earlier than 0:0.15.1b-25.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631051"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631035"
                   },
                   {
                     "Comment": "libmad is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631052"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "libmad-debugsource is earlier than 0:0.15.1b-25.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631053"
-                  },
-                  {
-                    "Comment": "libmad-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631054"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631036"
                   }
                 ]
               },
@@ -454,11 +334,11 @@
                 "Criterions": [
                   {
                     "Comment": "libmad-devel is earlier than 0:0.15.1b-25.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631055"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631037"
                   },
                   {
                     "Comment": "libmad-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20201631056"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201631038"
                   }
                 ]
               }

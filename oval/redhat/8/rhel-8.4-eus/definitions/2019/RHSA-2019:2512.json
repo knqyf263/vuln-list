@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20192512",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:2512: subversion:1.10 security update (Important)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2019-0203",
           "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-476",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-0203",
           "Public": "20190731:1200"
         }
@@ -51,8 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -61,7 +72,7 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
@@ -69,15 +80,24 @@
         "Operator": "AND",
         "Criterions": [
           {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          },
-          {
             "Comment": "Module subversion:1.10 is enabled",
-            "TestRef": "oval:com.redhat.rhsa:tst:20192512027"
+            "TestRef": "oval:com.redhat.rhsa:tst:20192512021"
           }
         ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -98,11 +118,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libserf-debugsource is earlier than 0:1.3.9-9.module+el8.0.0+3900+919b6753",
+                    "Comment": "mod_dav_svn is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512003"
                   },
                   {
-                    "Comment": "libserf-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "mod_dav_svn is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512004"
                   }
                 ]
@@ -111,11 +131,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "mod_dav_svn is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
+                    "Comment": "subversion is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512005"
                   },
                   {
-                    "Comment": "mod_dav_svn is signed with Red Hat redhatrelease2 key",
+                    "Comment": "subversion is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512006"
                   }
                 ]
@@ -124,11 +144,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "subversion is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
+                    "Comment": "subversion-devel is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512007"
                   },
                   {
-                    "Comment": "subversion is signed with Red Hat redhatrelease2 key",
+                    "Comment": "subversion-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512008"
                   }
                 ]
@@ -137,11 +157,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "subversion-debugsource is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
+                    "Comment": "subversion-gnome is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512009"
                   },
                   {
-                    "Comment": "subversion-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "subversion-gnome is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512010"
                   }
                 ]
@@ -150,11 +170,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "subversion-devel is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
+                    "Comment": "subversion-javahl is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512011"
                   },
                   {
-                    "Comment": "subversion-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "subversion-javahl is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512012"
                   }
                 ]
@@ -163,11 +183,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "subversion-gnome is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
+                    "Comment": "subversion-libs is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512013"
                   },
                   {
-                    "Comment": "subversion-gnome is signed with Red Hat redhatrelease2 key",
+                    "Comment": "subversion-libs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512014"
                   }
                 ]
@@ -176,11 +196,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "subversion-javahl is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
+                    "Comment": "subversion-perl is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512015"
                   },
                   {
-                    "Comment": "subversion-javahl is signed with Red Hat redhatrelease2 key",
+                    "Comment": "subversion-perl is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512016"
                   }
                 ]
@@ -189,11 +209,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "subversion-libs is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
+                    "Comment": "subversion-tools is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512017"
                   },
                   {
-                    "Comment": "subversion-libs is signed with Red Hat redhatrelease2 key",
+                    "Comment": "subversion-tools is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512018"
                   }
                 ]
@@ -202,51 +222,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "subversion-perl is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
+                    "Comment": "utf8proc is earlier than 0:2.1.1-5.module+el8.0.0+3900+919b6753",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192512019"
                   },
                   {
-                    "Comment": "subversion-perl is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192512020"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "subversion-tools is earlier than 0:1.10.2-2.module+el8.0.0+3900+919b6753",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192512021"
-                  },
-                  {
-                    "Comment": "subversion-tools is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192512022"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "utf8proc is earlier than 0:2.1.1-5.module+el8.0.0+3900+919b6753",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192512023"
-                  },
-                  {
                     "Comment": "utf8proc is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192512024"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "utf8proc-debugsource is earlier than 0:2.1.1-5.module+el8.0.0+3900+919b6753",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192512025"
-                  },
-                  {
-                    "Comment": "utf8proc-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192512026"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192512020"
                   }
                 ]
               }

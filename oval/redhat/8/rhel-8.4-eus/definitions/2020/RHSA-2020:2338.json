@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20202338",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2020:2338: bind security update (Important)",
     "AffectedList": [
@@ -45,6 +45,7 @@
           "CveID": "CVE-2020-8616",
           "Cvss3": "8.6/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
           "Cwe": "CWE-400",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-8616",
           "Public": "20200519"
         },
@@ -52,6 +53,7 @@
           "CveID": "CVE-2020-8617",
           "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-617",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-8617",
           "Public": "20200519"
         }
@@ -67,10 +69,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -79,19 +89,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -125,11 +142,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-debugsource is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-devel is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338005"
                   },
                   {
-                    "Comment": "bind-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145006"
                   }
                 ]
@@ -138,11 +155,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-devel is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-export-devel is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338007"
                   },
                   {
-                    "Comment": "bind-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-export-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145008"
                   }
                 ]
@@ -151,11 +168,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-export-devel is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-export-libs is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338009"
                   },
                   {
-                    "Comment": "bind-export-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-export-libs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145010"
                   }
                 ]
@@ -164,11 +181,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-export-libs is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-libs is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338011"
                   },
                   {
-                    "Comment": "bind-export-libs is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-libs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145012"
                   }
                 ]
@@ -177,11 +194,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-libs is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-libs-lite is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338013"
                   },
                   {
-                    "Comment": "bind-libs is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-libs-lite is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145014"
                   }
                 ]
@@ -190,11 +207,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-libs-lite is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-license is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338015"
                   },
                   {
-                    "Comment": "bind-libs-lite is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-license is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145016"
                   }
                 ]
@@ -203,11 +220,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-license is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-lite-devel is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338017"
                   },
                   {
-                    "Comment": "bind-license is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-lite-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145018"
                   }
                 ]
@@ -216,11 +233,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-lite-devel is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-pkcs11 is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338019"
                   },
                   {
-                    "Comment": "bind-lite-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-pkcs11 is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145020"
                   }
                 ]
@@ -229,11 +246,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-pkcs11 is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-pkcs11-devel is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338021"
                   },
                   {
-                    "Comment": "bind-pkcs11 is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-pkcs11-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145022"
                   }
                 ]
@@ -242,11 +259,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-pkcs11-devel is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-pkcs11-libs is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338023"
                   },
                   {
-                    "Comment": "bind-pkcs11-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-pkcs11-libs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145024"
                   }
                 ]
@@ -255,11 +272,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-pkcs11-libs is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-pkcs11-utils is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338025"
                   },
                   {
-                    "Comment": "bind-pkcs11-libs is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-pkcs11-utils is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145026"
                   }
                 ]
@@ -268,11 +285,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-pkcs11-utils is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-sdb is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338027"
                   },
                   {
-                    "Comment": "bind-pkcs11-utils is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-sdb is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145028"
                   }
                 ]
@@ -281,11 +298,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-sdb is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-sdb-chroot is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338029"
                   },
                   {
-                    "Comment": "bind-sdb is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-sdb-chroot is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145030"
                   }
                 ]
@@ -294,11 +311,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-sdb-chroot is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "bind-utils is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338031"
                   },
                   {
-                    "Comment": "bind-sdb-chroot is signed with Red Hat redhatrelease2 key",
+                    "Comment": "bind-utils is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191145032"
                   }
                 ]
@@ -307,25 +324,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "bind-utils is earlier than 32:9.11.13-5.el8_2",
+                    "Comment": "python3-bind is earlier than 32:9.11.13-5.el8_2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202338033"
                   },
                   {
-                    "Comment": "bind-utils is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191145034"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "python3-bind is earlier than 32:9.11.13-5.el8_2",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202338035"
-                  },
-                  {
                     "Comment": "python3-bind is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191145036"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191145034"
                   }
                 ]
               }

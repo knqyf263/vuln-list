@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20200335",
-  "Version": "632",
+  "Version": "635",
   "Metadata": {
     "Title": "RHSA-2020:0335: grub2 security update (Moderate)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2019-14865",
           "Cvss3": "5.9/CVSS:3.0/AV:L/AC:L/PR:L/UI:R/S:C/C:N/I:N/A:H",
           "Cwe": "CWE-267",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-14865",
           "Public": "20191125"
         }
@@ -51,8 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -61,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -94,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-debugsource is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-aa64 is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335003"
                   },
                   {
-                    "Comment": "grub2-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-aa64 is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335004"
                   }
                 ]
@@ -107,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-aa64 is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-aa64-cdboot is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335005"
                   },
                   {
-                    "Comment": "grub2-efi-aa64 is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-aa64-cdboot is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335006"
                   }
                 ]
@@ -120,11 +138,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-aa64-cdboot is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-aa64-modules is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335007"
                   },
                   {
-                    "Comment": "grub2-efi-aa64-cdboot is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-aa64-modules is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335008"
                   }
                 ]
@@ -133,11 +151,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-aa64-modules is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-ia32 is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335009"
                   },
                   {
-                    "Comment": "grub2-efi-aa64-modules is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-ia32 is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335010"
                   }
                 ]
@@ -146,11 +164,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-ia32 is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-ia32-cdboot is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335011"
                   },
                   {
-                    "Comment": "grub2-efi-ia32 is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-ia32-cdboot is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335012"
                   }
                 ]
@@ -159,11 +177,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-ia32-cdboot is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-ia32-modules is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335013"
                   },
                   {
-                    "Comment": "grub2-efi-ia32-cdboot is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-ia32-modules is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335014"
                   }
                 ]
@@ -172,11 +190,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-ia32-modules is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-x64 is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335015"
                   },
                   {
-                    "Comment": "grub2-efi-ia32-modules is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-x64 is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335016"
                   }
                 ]
@@ -185,11 +203,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-x64 is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-x64-cdboot is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335017"
                   },
                   {
-                    "Comment": "grub2-efi-x64 is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-x64-cdboot is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335018"
                   }
                 ]
@@ -198,11 +216,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-x64-cdboot is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-efi-x64-modules is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335019"
                   },
                   {
-                    "Comment": "grub2-efi-x64-cdboot is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-efi-x64-modules is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335020"
                   }
                 ]
@@ -211,11 +229,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-efi-x64-modules is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-pc is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335021"
                   },
                   {
-                    "Comment": "grub2-efi-x64-modules is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-pc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335022"
                   }
                 ]
@@ -224,11 +242,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-pc is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-pc-modules is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335023"
                   },
                   {
-                    "Comment": "grub2-pc is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-pc-modules is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335024"
                   }
                 ]
@@ -237,11 +255,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-pc-modules is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-ppc64le is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335025"
                   },
                   {
-                    "Comment": "grub2-pc-modules is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-ppc64le is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335026"
                   }
                 ]
@@ -250,11 +268,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-ppc64le is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-ppc64le-modules is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335027"
                   },
                   {
-                    "Comment": "grub2-ppc64le is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-ppc64le-modules is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335028"
                   }
                 ]
@@ -263,11 +281,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-ppc64le-modules is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-tools is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335029"
                   },
                   {
-                    "Comment": "grub2-ppc64le-modules is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-tools is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335030"
                   }
                 ]
@@ -276,11 +294,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-tools is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-tools-efi is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335031"
                   },
                   {
-                    "Comment": "grub2-tools is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-tools-efi is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335032"
                   }
                 ]
@@ -289,11 +307,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-tools-efi is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-tools-extra is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335033"
                   },
                   {
-                    "Comment": "grub2-tools-efi is signed with Red Hat redhatrelease2 key",
+                    "Comment": "grub2-tools-extra is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335034"
                   }
                 ]
@@ -302,25 +320,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "grub2-tools-extra is earlier than 1:2.02-78.el8_1.1",
+                    "Comment": "grub2-tools-minimal is earlier than 1:2.02-78.el8_1.1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200335035"
                   },
                   {
-                    "Comment": "grub2-tools-extra is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200335036"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "grub2-tools-minimal is earlier than 1:2.02-78.el8_1.1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200335037"
-                  },
-                  {
                     "Comment": "grub2-tools-minimal is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200335038"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200335036"
                   }
                 ]
               }

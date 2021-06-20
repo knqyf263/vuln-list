@@ -1,0 +1,253 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211511",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2021:1511: AMQ Clients 2.9.1 release and security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "AMQ Clients 2.y for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1511",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1511"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-21290",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-21290"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-21295",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-21295"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-21409",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-21409"
+      }
+    ],
+    "Description": "Red Hat AMQ Clients enable connecting, sending, and receiving messages over the AMQP 1.0 wire transport protocol to or from AMQ Broker 6 and 7.\n\nThis update provides various bug fixes and enhancements in addition to the client package versions previously released on Red Hat Enterprise Linux 7 and 8.\n\nSecurity Fix(es):\n\n* netty: Information disclosure via the local system temporary directory (CVE-2021-21290)\n\n* netty: possible request smuggling in HTTP/2 due missing validation (CVE-2021-21295)\n\n* netty: Request smuggling via content-length header (CVE-2021-21409)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-05-06"
+      },
+      "Updated": {
+        "Date": "2021-05-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-21290",
+          "Cvss3": "6.2/CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-21290",
+          "Public": "20210209"
+        },
+        {
+          "CveID": "CVE-2021-21295",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-444",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-21295",
+          "Public": "20210309"
+        },
+        {
+          "CveID": "CVE-2021-21409",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-444",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-21409",
+          "Public": "20210330"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1927028",
+          "ID": "1927028"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1937364",
+          "ID": "1937364"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1944888",
+          "ID": "1944888"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:a_mq_clients:2",
+        "cpe:/a:redhat:a_mq_clients:2.9",
+        "cpe:/a:redhat:a_mq_clients:2.9::el7",
+        "cpe:/a:redhat:a_mq_clients:2::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:202120328004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:202120328003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-qpid-proton is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511001"
+                  },
+                  {
+                    "Comment": "python-qpid-proton is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-qpid-proton-docs is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511003"
+                  },
+                  {
+                    "Comment": "python-qpid-proton-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-proton-c is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511005"
+                  },
+                  {
+                    "Comment": "qpid-proton-c is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-proton-c-devel is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511007"
+                  },
+                  {
+                    "Comment": "qpid-proton-c-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-proton-c-docs is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511009"
+                  },
+                  {
+                    "Comment": "qpid-proton-c-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-proton-cpp is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511011"
+                  },
+                  {
+                    "Comment": "qpid-proton-cpp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-proton-cpp-devel is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511013"
+                  },
+                  {
+                    "Comment": "qpid-proton-cpp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-proton-cpp-docs is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511015"
+                  },
+                  {
+                    "Comment": "qpid-proton-cpp-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-proton-tests is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511017"
+                  },
+                  {
+                    "Comment": "qpid-proton-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190886018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-qpid_proton is earlier than 0:0.33.0-6.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211511019"
+                  },
+                  {
+                    "Comment": "rubygem-qpid_proton is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200601002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

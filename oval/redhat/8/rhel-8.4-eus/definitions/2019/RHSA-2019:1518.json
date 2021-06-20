@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20191518",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:1518: java-11-openjdk security update (Moderate)",
     "AffectedList": [
@@ -45,12 +45,14 @@
           "CveID": "CVE-2019-2602",
           "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
           "Cwe": "CWE-770",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-2602",
           "Public": "20190416"
         },
         {
           "CveID": "CVE-2019-2684",
           "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-2684",
           "Public": "20190416"
         }
@@ -66,8 +68,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -76,19 +88,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -109,11 +128,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-debugsource is earlier than 1:11.0.3.7-2.el8_0",
+                    "Comment": "java-11-openjdk-demo is earlier than 1:11.0.3.7-2.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518003"
                   },
                   {
-                    "Comment": "java-11-openjdk-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-demo is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518004"
                   }
                 ]
@@ -122,11 +141,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-demo is earlier than 1:11.0.3.7-2.el8_0",
+                    "Comment": "java-11-openjdk-devel is earlier than 1:11.0.3.7-2.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518005"
                   },
                   {
-                    "Comment": "java-11-openjdk-demo is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518006"
                   }
                 ]
@@ -135,11 +154,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-devel is earlier than 1:11.0.3.7-2.el8_0",
+                    "Comment": "java-11-openjdk-headless is earlier than 1:11.0.3.7-2.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518007"
                   },
                   {
-                    "Comment": "java-11-openjdk-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-headless is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518008"
                   }
                 ]
@@ -148,11 +167,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-headless is earlier than 1:11.0.3.7-2.el8_0",
+                    "Comment": "java-11-openjdk-javadoc is earlier than 1:11.0.3.7-2.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518009"
                   },
                   {
-                    "Comment": "java-11-openjdk-headless is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518010"
                   }
                 ]
@@ -161,11 +180,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-javadoc is earlier than 1:11.0.3.7-2.el8_0",
+                    "Comment": "java-11-openjdk-javadoc-zip is earlier than 1:11.0.3.7-2.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518011"
                   },
                   {
-                    "Comment": "java-11-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518012"
                   }
                 ]
@@ -174,11 +193,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-javadoc-zip is earlier than 1:11.0.3.7-2.el8_0",
+                    "Comment": "java-11-openjdk-jmods is earlier than 1:11.0.3.7-2.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518013"
                   },
                   {
-                    "Comment": "java-11-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
+                    "Comment": "java-11-openjdk-jmods is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518014"
                   }
                 ]
@@ -187,25 +206,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "java-11-openjdk-jmods is earlier than 1:11.0.3.7-2.el8_0",
+                    "Comment": "java-11-openjdk-src is earlier than 1:11.0.3.7-2.el8_0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20191518015"
                   },
                   {
-                    "Comment": "java-11-openjdk-jmods is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191518016"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "java-11-openjdk-src is earlier than 1:11.0.3.7-2.el8_0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191518017"
-                  },
-                  {
                     "Comment": "java-11-openjdk-src is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191518018"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518016"
                   }
                 ]
               }

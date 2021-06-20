@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20192720",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:2720: pki-deps:10.6 security update (Important)",
     "AffectedList": [
@@ -33,13 +33,14 @@
         "Date": "2019-09-12"
       },
       "Updated": {
-        "Date": "2019-09-10"
+        "Date": "2019-09-12"
       },
       "Cves": [
         {
           "CveID": "CVE-2019-12384",
           "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-502",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-12384",
           "Public": "20190621"
         }
@@ -51,8 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -61,7 +72,7 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
@@ -69,15 +80,24 @@
         "Operator": "AND",
         "Criterions": [
           {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          },
-          {
             "Comment": "Module pki-deps:10.6 is enabled",
-            "TestRef": "oval:com.redhat.rhsa:tst:20191529069"
+            "TestRef": "oval:com.redhat.rhba:tst:20193416067"
           }
         ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -90,7 +110,7 @@
                   },
                   {
                     "Comment": "apache-commons-collections is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529002"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416002"
                   }
                 ]
               },
@@ -103,7 +123,7 @@
                   },
                   {
                     "Comment": "apache-commons-lang is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529004"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416004"
                   }
                 ]
               },
@@ -116,7 +136,7 @@
                   },
                   {
                     "Comment": "bea-stax-api is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529006"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416006"
                   }
                 ]
               },
@@ -129,7 +149,7 @@
                   },
                   {
                     "Comment": "glassfish-fastinfoset is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529008"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416008"
                   }
                 ]
               },
@@ -142,7 +162,7 @@
                   },
                   {
                     "Comment": "glassfish-jaxb-api is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529010"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416010"
                   }
                 ]
               },
@@ -155,7 +175,7 @@
                   },
                   {
                     "Comment": "glassfish-jaxb-core is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529012"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416012"
                   }
                 ]
               },
@@ -168,7 +188,7 @@
                   },
                   {
                     "Comment": "glassfish-jaxb-runtime is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529014"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416014"
                   }
                 ]
               },
@@ -181,7 +201,7 @@
                   },
                   {
                     "Comment": "glassfish-jaxb-txw2 is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529016"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416016"
                   }
                 ]
               },
@@ -194,7 +214,7 @@
                   },
                   {
                     "Comment": "jackson-annotations is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529018"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416018"
                   }
                 ]
               },
@@ -207,7 +227,7 @@
                   },
                   {
                     "Comment": "jackson-core is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529020"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416020"
                   }
                 ]
               },
@@ -220,7 +240,7 @@
                   },
                   {
                     "Comment": "jackson-databind is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529022"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416022"
                   }
                 ]
               },
@@ -233,7 +253,7 @@
                   },
                   {
                     "Comment": "jackson-jaxrs-json-provider is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529024"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416024"
                   }
                 ]
               },
@@ -246,7 +266,7 @@
                   },
                   {
                     "Comment": "jackson-jaxrs-providers is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529026"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416026"
                   }
                 ]
               },
@@ -259,7 +279,7 @@
                   },
                   {
                     "Comment": "jackson-module-jaxb-annotations is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529028"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416028"
                   }
                 ]
               },
@@ -272,7 +292,7 @@
                   },
                   {
                     "Comment": "jakarta-commons-httpclient is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529030"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416030"
                   }
                 ]
               },
@@ -285,7 +305,7 @@
                   },
                   {
                     "Comment": "javassist is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529032"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416032"
                   }
                 ]
               },
@@ -298,7 +318,7 @@
                   },
                   {
                     "Comment": "javassist-javadoc is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529034"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416034"
                   }
                 ]
               },
@@ -311,7 +331,7 @@
                   },
                   {
                     "Comment": "pki-servlet-4.0-api is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529036"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416036"
                   }
                 ]
               },
@@ -332,25 +352,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "python-nss-debugsource is earlier than 0:1.0.1-10.module+el8.0.0+3892+c903d3f0",
+                    "Comment": "python-nss-doc is earlier than 0:1.0.1-10.module+el8.0.0+3892+c903d3f0",
                     "TestRef": "oval:com.redhat.rhsa:tst:20192720039"
                   },
                   {
-                    "Comment": "python-nss-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529040"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "python-nss-doc is earlier than 0:1.0.1-10.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720041"
-                  },
-                  {
                     "Comment": "python-nss-doc is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529042"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416040"
                   }
                 ]
               },
@@ -359,11 +366,11 @@
                 "Criterions": [
                   {
                     "Comment": "python3-nss is earlier than 0:1.0.1-10.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720043"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720041"
                   },
                   {
                     "Comment": "python3-nss is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529044"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416042"
                   }
                 ]
               },
@@ -372,11 +379,11 @@
                 "Criterions": [
                   {
                     "Comment": "relaxngDatatype is earlier than 0:2011.1-7.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720045"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720043"
                   },
                   {
                     "Comment": "relaxngDatatype is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529046"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416044"
                   }
                 ]
               },
@@ -385,11 +392,11 @@
                 "Criterions": [
                   {
                     "Comment": "resteasy is earlier than 0:3.0.26-3.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720047"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720045"
                   },
                   {
                     "Comment": "resteasy is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529048"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416046"
                   }
                 ]
               },
@@ -398,11 +405,11 @@
                 "Criterions": [
                   {
                     "Comment": "slf4j is earlier than 0:1.7.25-4.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720049"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720047"
                   },
                   {
                     "Comment": "slf4j is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529050"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416048"
                   }
                 ]
               },
@@ -411,11 +418,11 @@
                 "Criterions": [
                   {
                     "Comment": "slf4j-jdk14 is earlier than 0:1.7.25-4.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720051"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720049"
                   },
                   {
                     "Comment": "slf4j-jdk14 is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529052"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416050"
                   }
                 ]
               },
@@ -424,11 +431,11 @@
                 "Criterions": [
                   {
                     "Comment": "stax-ex is earlier than 0:1.7.7-8.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720053"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720051"
                   },
                   {
                     "Comment": "stax-ex is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529054"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416052"
                   }
                 ]
               },
@@ -437,11 +444,11 @@
                 "Criterions": [
                   {
                     "Comment": "velocity is earlier than 0:1.7-24.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720055"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720053"
                   },
                   {
                     "Comment": "velocity is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529056"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416054"
                   }
                 ]
               },
@@ -450,11 +457,11 @@
                 "Criterions": [
                   {
                     "Comment": "xalan-j2 is earlier than 0:2.7.1-38.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720057"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720055"
                   },
                   {
                     "Comment": "xalan-j2 is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529058"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416056"
                   }
                 ]
               },
@@ -463,11 +470,11 @@
                 "Criterions": [
                   {
                     "Comment": "xerces-j2 is earlier than 0:2.11.0-34.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720059"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720057"
                   },
                   {
                     "Comment": "xerces-j2 is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529060"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416058"
                   }
                 ]
               },
@@ -476,11 +483,11 @@
                 "Criterions": [
                   {
                     "Comment": "xml-commons-apis is earlier than 0:1.4.01-25.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720061"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720059"
                   },
                   {
                     "Comment": "xml-commons-apis is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529062"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416060"
                   }
                 ]
               },
@@ -489,11 +496,11 @@
                 "Criterions": [
                   {
                     "Comment": "xml-commons-resolver is earlier than 0:1.2-26.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720063"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720061"
                   },
                   {
                     "Comment": "xml-commons-resolver is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529064"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416062"
                   }
                 ]
               },
@@ -502,11 +509,11 @@
                 "Criterions": [
                   {
                     "Comment": "xmlstreambuffer is earlier than 0:1.5.4-8.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720065"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720063"
                   },
                   {
                     "Comment": "xmlstreambuffer is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529066"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416064"
                   }
                 ]
               },
@@ -515,11 +522,11 @@
                 "Criterions": [
                   {
                     "Comment": "xsom is earlier than 0:0-19.20110809svn.module+el8.0.0+3892+c903d3f0",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20192720067"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192720065"
                   },
                   {
                     "Comment": "xsom is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20191529068"
+                    "TestRef": "oval:com.redhat.rhba:tst:20193416066"
                   }
                 ]
               }

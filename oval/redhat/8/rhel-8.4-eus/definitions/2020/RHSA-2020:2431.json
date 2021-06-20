@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20202431",
-  "Version": "639",
+  "Version": "642",
   "Metadata": {
     "Title": "RHSA-2020:2431: microcode_ctl security, bug fix and enhancement update (Moderate)",
     "AffectedList": [
@@ -49,13 +49,14 @@
         {
           "CveID": "CVE-2020-0543",
           "Cvss3": "6.5/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-0543",
           "Public": "20200609:1700"
         },
         {
           "CveID": "CVE-2020-0548",
           "Cvss3": "2.8/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:L/I:N/A:N",
-          "Cwe": "CWE-203 CWE-200",
+          "Cwe": "CWE-203-\u003eCWE-200",
           "Impact": "low",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-0548",
           "Public": "20200127:1300"
@@ -63,7 +64,8 @@
         {
           "CveID": "CVE-2020-0549",
           "Cvss3": "6.5/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
-          "Cwe": "CWE-203 CWE-200",
+          "Cwe": "CWE-203-\u003eCWE-200",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-0549",
           "Public": "20200127:1300"
         }
@@ -83,8 +85,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -93,7 +105,7 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
@@ -101,16 +113,27 @@
         "Operator": "AND",
         "Criterions": [
           {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          },
-          {
             "Comment": "microcode_ctl is earlier than 4:20191115-4.20200602.2.el8_2",
             "TestRef": "oval:com.redhat.rhsa:tst:20202431001"
           },
           {
             "Comment": "microcode_ctl is signed with Red Hat redhatrelease2 key",
-            "TestRef": "oval:com.redhat.rhsa:tst:20202431002"
+            "TestRef": "oval:com.redhat.rhba:tst:20210621002"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
           }
         ]
       }

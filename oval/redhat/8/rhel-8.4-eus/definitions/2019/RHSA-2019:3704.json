@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20193704",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2019:3704: numpy security update (Moderate)",
     "AffectedList": [
@@ -39,7 +39,8 @@
         {
           "CveID": "CVE-2019-6446",
           "Cvss3": "8.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-          "Cwe": "CWE-358 CWE-20",
+          "Cwe": "CWE-358-\u003eCWE-20",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-6446",
           "Public": "20190116"
         }
@@ -48,15 +49,21 @@
         {
           "Href": "https://bugzilla.redhat.com/1667950",
           "ID": "1667950"
-        },
-        {
-          "Href": "https://bugzilla.redhat.com/1687873",
-          "ID": "1687873"
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -65,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -85,25 +99,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "numpy-debugsource is earlier than 1:1.14.3-9.el8",
+                    "Comment": "python3-numpy is earlier than 1:1.14.3-9.el8",
                     "TestRef": "oval:com.redhat.rhsa:tst:20193704001"
                   },
                   {
-                    "Comment": "numpy-debugsource is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193335008"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "python3-numpy is earlier than 1:1.14.3-9.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193704003"
-                  },
-                  {
                     "Comment": "python3-numpy is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193704004"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193704002"
                   }
                 ]
               },
@@ -112,11 +113,11 @@
                 "Criterions": [
                   {
                     "Comment": "python3-numpy-f2py is earlier than 1:1.14.3-9.el8",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193704005"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193704003"
                   },
                   {
                     "Comment": "python3-numpy-f2py is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20193704006"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193704004"
                   }
                 ]
               }

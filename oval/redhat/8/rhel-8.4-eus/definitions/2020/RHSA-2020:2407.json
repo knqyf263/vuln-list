@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20202407",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2020:2407: freerdp security update (Important)",
     "AffectedList": [
@@ -39,7 +39,8 @@
         {
           "CveID": "CVE-2020-13398",
           "Cvss3": "8.3/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L",
-          "Cwe": "CWE-805 CWE-122 CWE-787",
+          "Cwe": "CWE-805-\u003eCWE-122-\u003eCWE-787",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-13398",
           "Public": "20200522"
         }
@@ -51,9 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::appstream",
-        "cpe:/a:redhat:enterprise_linux:8::crb"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -62,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -95,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freerdp-debugsource is earlier than 2:2.0.0-46.rc4.el8_2.2",
+                    "Comment": "freerdp-devel is earlier than 2:2.0.0-46.rc4.el8_2.2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202407003"
                   },
                   {
-                    "Comment": "freerdp-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freerdp-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202336004"
                   }
                 ]
@@ -108,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freerdp-devel is earlier than 2:2.0.0-46.rc4.el8_2.2",
+                    "Comment": "freerdp-libs is earlier than 2:2.0.0-46.rc4.el8_2.2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202407005"
                   },
                   {
-                    "Comment": "freerdp-devel is signed with Red Hat redhatrelease2 key",
+                    "Comment": "freerdp-libs is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202336006"
                   }
                 ]
@@ -121,11 +138,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "freerdp-libs is earlier than 2:2.0.0-46.rc4.el8_2.2",
+                    "Comment": "libwinpr is earlier than 2:2.0.0-46.rc4.el8_2.2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202407007"
                   },
                   {
-                    "Comment": "freerdp-libs is signed with Red Hat redhatrelease2 key",
+                    "Comment": "libwinpr is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202336008"
                   }
                 ]
@@ -134,25 +151,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libwinpr is earlier than 2:2.0.0-46.rc4.el8_2.2",
+                    "Comment": "libwinpr-devel is earlier than 2:2.0.0-46.rc4.el8_2.2",
                     "TestRef": "oval:com.redhat.rhsa:tst:20202407009"
                   },
                   {
-                    "Comment": "libwinpr is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202336010"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "libwinpr-devel is earlier than 2:2.0.0-46.rc4.el8_2.2",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202407011"
-                  },
-                  {
                     "Comment": "libwinpr-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20202336012"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202336010"
                   }
                 ]
               }

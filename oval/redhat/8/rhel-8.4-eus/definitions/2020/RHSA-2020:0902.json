@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20200902",
-  "Version": "633",
+  "Version": "636",
   "Metadata": {
     "Title": "RHSA-2020:0902: icu security update (Important)",
     "AffectedList": [
@@ -40,6 +40,7 @@
           "CveID": "CVE-2020-10531",
           "Cvss3": "8.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-190",
+          "Impact": "important",
           "Href": "https://access.redhat.com/security/cve/CVE-2020-10531",
           "Public": "20200225"
         }
@@ -51,8 +52,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -61,19 +72,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -94,11 +112,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "icu-debugsource is earlier than 0:60.3-2.el8_1",
+                    "Comment": "libicu is earlier than 0:60.3-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200902003"
                   },
                   {
-                    "Comment": "icu-debugsource is signed with Red Hat redhatrelease2 key",
+                    "Comment": "libicu is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200902004"
                   }
                 ]
@@ -107,11 +125,11 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libicu is earlier than 0:60.3-2.el8_1",
+                    "Comment": "libicu-devel is earlier than 0:60.3-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200902005"
                   },
                   {
-                    "Comment": "libicu is signed with Red Hat redhatrelease2 key",
+                    "Comment": "libicu-devel is signed with Red Hat redhatrelease2 key",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200902006"
                   }
                 ]
@@ -120,25 +138,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "libicu-devel is earlier than 0:60.3-2.el8_1",
+                    "Comment": "libicu-doc is earlier than 0:60.3-2.el8_1",
                     "TestRef": "oval:com.redhat.rhsa:tst:20200902007"
                   },
                   {
-                    "Comment": "libicu-devel is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200902008"
-                  }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterions": [
-                  {
-                    "Comment": "libicu-doc is earlier than 0:60.3-2.el8_1",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200902009"
-                  },
-                  {
                     "Comment": "libicu-doc is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200902010"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200902008"
                   }
                 ]
               }

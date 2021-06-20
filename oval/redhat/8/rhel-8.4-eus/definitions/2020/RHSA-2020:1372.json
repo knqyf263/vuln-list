@@ -1,7 +1,7 @@
 {
   "Class": "patch",
   "ID": "oval:com.redhat.rhsa:def:20201372",
-  "Version": "639",
+  "Version": "642",
   "Metadata": {
     "Title": "RHSA-2020:1372: kernel security and bug fix update (Moderate)",
     "AffectedList": [
@@ -54,7 +54,8 @@
         {
           "CveID": "CVE-2019-15030",
           "Cvss3": "4.4/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:L",
-          "Cwe": "CWE-20 CWE-200",
+          "Cwe": "CWE-20-\u003eCWE-200",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-15030",
           "Public": "20190906"
         },
@@ -62,6 +63,7 @@
           "CveID": "CVE-2019-15031",
           "Cvss3": "4.4/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:L",
           "Cwe": "CWE-200",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-15031",
           "Public": "20190913"
         },
@@ -69,6 +71,7 @@
           "CveID": "CVE-2019-18660",
           "Cvss3": "4.7/CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
           "Cwe": "CWE-200",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-18660",
           "Public": "20191128"
         },
@@ -76,6 +79,7 @@
           "CveID": "CVE-2019-19527",
           "Cvss3": "6.8/CVSS:3.1/AV:P/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
           "Cwe": "CWE-416",
+          "Impact": "moderate",
           "Href": "https://access.redhat.com/security/cve/CVE-2019-19527",
           "Public": "20190806"
         }
@@ -99,10 +103,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:enterprise_linux:8",
-        "cpe:/o:redhat:enterprise_linux:8",
-        "cpe:/a:redhat:enterprise_linux:8::crb",
-        "cpe:/o:redhat:enterprise_linux:8::baseos"
+        "cpe:/a:redhat:rhel_eus:8.4",
+        "cpe:/a:redhat:rhel_eus:8.4::appstream",
+        "cpe:/a:redhat:rhel_eus:8.4::crb",
+        "cpe:/a:redhat:rhel_eus:8.4::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.4::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.4::sap",
+        "cpe:/a:redhat:rhel_eus:8.4::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.4::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.4",
+        "cpe:/o:redhat:rhel_eus:8.4::baseos"
       ]
     }
   },
@@ -111,19 +123,26 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.rhba:tst:20193384075"
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
       }
     ],
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 8 is installed",
-            "TestRef": "oval:com.redhat.rhba:tst:20193384074"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterions": [

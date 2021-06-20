@@ -1,0 +1,205 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20121269",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:1269: qpid security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:1269",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:1269"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2145",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2145"
+      }
+    ],
+    "Description": "Apache Qpid is a reliable, cross-platform, asynchronous messaging system\nthat supports the Advanced Message Queuing Protocol (AMQP) in several\ncommon programming languages.\n\nIt was discovered that the Qpid daemon (qpidd) did not allow the number of\nconnections from clients to be restricted. A malicious client could use\nthis flaw to open an excessive amount of connections, preventing other\nlegitimate clients from establishing a connection to qpidd. (CVE-2012-2145)\n\nTo address CVE-2012-2145, new qpidd configuration options were introduced:\nmax-negotiate-time defines the time during which initial protocol\nnegotiation must succeed, connection-limit-per-user and\nconnection-limit-per-ip can be used to limit the number of connections per\nuser and client host IP. Refer to the qpidd manual page for additional\ndetails.\n\nIn addition, the qpid-cpp, qpid-qmf, qpid-tools, and python-qpid packages\nhave been upgraded to upstream version 0.14, which provides support for Red\nHat Enterprise MRG 2.2, as well as a number of bug fixes and enhancements\nover the previous version. (BZ#840053, BZ#840055, BZ#840056, BZ#840058)\n\nAll users of qpid are advised to upgrade to these updated packages, which\nfix these issues and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-09-19"
+      },
+      "Updated": {
+        "Date": "2012-09-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-2145",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2145",
+          "Public": "20120424"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/817175",
+          "ID": "817175"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/o:redhat:rhel_eus:6.4",
+        "cpe:/o:redhat:rhel_eus:6.4::computenode",
+        "cpe:/o:redhat:rhel_eus:6.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-qpid is earlier than 0:0.14-11.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269001"
+                  },
+                  {
+                    "Comment": "python-qpid is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-qpid-qmf is earlier than 0:0.14-14.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269003"
+                  },
+                  {
+                    "Comment": "python-qpid-qmf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-qmf is earlier than 0:0.14-14.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269005"
+                  },
+                  {
+                    "Comment": "qpid-qmf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ruby-qpid-qmf is earlier than 0:0.14-14.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269007"
+                  },
+                  {
+                    "Comment": "ruby-qpid-qmf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-tools is earlier than 0:0.14-6.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269009"
+                  },
+                  {
+                    "Comment": "qpid-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-cpp-client is earlier than 0:0.14-22.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269011"
+                  },
+                  {
+                    "Comment": "qpid-cpp-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-cpp-client-ssl is earlier than 0:0.14-22.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269013"
+                  },
+                  {
+                    "Comment": "qpid-cpp-client-ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-cpp-server is earlier than 0:0.14-22.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269015"
+                  },
+                  {
+                    "Comment": "qpid-cpp-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qpid-cpp-server-ssl is earlier than 0:0.14-22.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269017"
+                  },
+                  {
+                    "Comment": "qpid-cpp-server-ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121269018"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
