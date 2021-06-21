@@ -1,0 +1,121 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20130386",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHBA-2013:0386: tuned bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2013:0386",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2013:0386"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-6136",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-6136"
+      }
+    ],
+    "Description": "The tuned packages contain a daemon that tunes system settings dynamically. It does so by monitoring the usage of several system components periodically. \n\nThis update fixes the following bugs:\n\n* Red Hat Enterprise Linux 6.1 and later enters processor power-saving states more aggressively. This could result in a small performance penalty on certain workloads. With this update, the pmqos-static.py daemon has been added to the tuned packages, which allows to set the requested latency using the kernel Power Management QoS interface. It is run when the \"latency-performance\" profile is activated and it sets cpu_dma_latency=0, which keeps the CPU in C0 state, thus making the system as responsive as possible. (BZ#714180)\n\n* When the ELEVATOR_TUNE_DEVS option was set to a disk device in the /etc/sysconfig/ktune file instead of providing a disk scheduler control file, the scheduler setting was not written to a disk scheduler control file but directly into the disk device file. Consequently, contents of the disk could become corrupted. With this update, the value of ELEVATOR_TUNE_DEVS is checked and only the disk scheduler control file is allowed for writing. As a result, an invalid value of ELEVATOR_TUNE_DEVS is detected in the described scenario so that the disk contents damage can be prevented. (BZ#784308)\n\n* When the tuned daemon run with the \"enterprise-storage\" profile enabled and a non-root, non-boot disk partition from a device with write-back cache was mounted, tuned remounted the partition with the \"nobarriers\" option. If a power failure occurred at that time, the file system could become corrupted. With this update, tuned can detect usage of write-back cache on devices communicating with kernel via SCSI. In these cases, \"nobarriers\" is now disabled, thus preventing this bug in the described scenario. (BZ#801561)\n\n* Previously, when the tuned service was started, the tuned PID file was created with world-writable permissions. This bug has been fixed and the /var/run/tuned/tuned.pid file is now created with correct permissions as expected. (BZ#845336)\n\n* On a machine with hot-plug disk devices with the \"enterprise-storage\" profile activated, a new disk device could be added into the system, or the disk could be removed and inserted back. In such a scenario, the scheduler and read-ahead settings from the profile were not applied on the newly-added disks. With this update, a new udev rule has been added, which restarts the ktune daemon whenever a new disk device is added, thus fixing this bug. (BZ#847445)\n\n* The transparent hugepage kernel thread could interfere with latency-sensitive applications. To lower the latency, the transparent hugepages are now disabled in the latency-performance tuned profile. (BZ#887355)\n\n* Previously, non-root, non-boot partitions were re-mounted using the \"nobarrier\" option to improve performance. On virtual guests, this could lead to data corruption if power supply was suddenly interrupted, because there was usually a host cache in transfer. This bug has been fixed and the virtual-guest profile no longer re-mounts partitions using \"nobarrier\". (BZ#886956)\n\nUsers of tuned are advised to upgrade to these updated packages, which fix these bugs.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-02-20"
+      },
+      "Updated": {
+        "Date": "2013-02-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-6136",
+          "Cvss2": "4.0/AV:L/AC:H/Au:N/C:N/I:N/A:C",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-6136",
+          "Public": "20120802"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/918813",
+          "ID": "918813"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tuned is earlier than 0:0.2.19-11.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20130386001"
+                  },
+                  {
+                    "Comment": "tuned is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20130386002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tuned-utils is earlier than 0:0.2.19-11.el6",
+                    "TestRef": "oval:com.redhat.rhba:tst:20130386003"
+                  },
+                  {
+                    "Comment": "tuned-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20130386004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

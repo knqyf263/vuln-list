@@ -1,0 +1,175 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20201300",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2020:1300: qemu-kvm-rhev security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 10.0 (Newton)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:1300",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:1300"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1711",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1711"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-7039",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-7039"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8608",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8608"
+      }
+    ],
+    "Description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for Linux on a variety of architectures. The qemu-kvm-rhev packages provide the user-space component for running virtual machines that use KVM in environments managed by Red Hat products.\n\nSecurity Fix(es):\n\n* QEMU: block: iscsi: OOB heap access via an unexpected response of iSCSI Server (CVE-2020-1711)\n* QEMU: slirp: OOB buffer access while emulating tcp protocols in tcp_emu() (CVE-2020-7039)\n* QEMU: slirp: potential OOB access due to unsafe snprintf() usages (CVE-2020-8608)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-04-02"
+      },
+      "Updated": {
+        "Date": "2020-04-02"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-1711",
+          "Cvss3": "6.0/CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:L",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1711",
+          "Public": "20200123"
+        },
+        {
+          "CveID": "CVE-2020-7039",
+          "Cvss3": "5.6/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-7039",
+          "Public": "20200107"
+        },
+        {
+          "CveID": "CVE-2020-8608",
+          "Cvss3": "5.6/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8608",
+          "Public": "20200127"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1791551",
+          "ID": "1791551"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1794290",
+          "ID": "1794290"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1798453",
+          "ID": "1798453"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:10",
+        "cpe:/a:redhat:openstack-optools:10::el7",
+        "cpe:/a:redhat:openstack:10",
+        "cpe:/a:redhat:openstack:10::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20170025004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20170025003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img-rhev is earlier than 10:2.12.0-33.el7_7.10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201300001"
+                  },
+                  {
+                    "Comment": "qemu-img-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170328002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-common-rhev is earlier than 10:2.12.0-33.el7_7.10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201300003"
+                  },
+                  {
+                    "Comment": "qemu-kvm-common-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170328004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-rhev is earlier than 10:2.12.0-33.el7_7.10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201300005"
+                  },
+                  {
+                    "Comment": "qemu-kvm-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170328006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools-rhev is earlier than 10:2.12.0-33.el7_7.10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201300007"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20170328008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

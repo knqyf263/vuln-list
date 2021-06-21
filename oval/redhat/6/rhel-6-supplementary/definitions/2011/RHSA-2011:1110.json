@@ -1,0 +1,96 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111110",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2011:1110: foomatic security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1110",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1110"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2964",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2964"
+      }
+    ],
+    "Description": "Foomatic is a comprehensive, spooler-independent database of printers,\nprinter drivers, and driver descriptions. The package also includes\nspooler-independent command line interfaces to manipulate queues and to\nprint files and manipulate print jobs. foomatic-rip is a print filter\nwritten in C.\n\nAn input sanitization flaw was found in the foomatic-rip print filter. An\nattacker could submit a print job with the username, title, or job options\nset to appear as a command line option that caused the filter to use a\nspecified PostScript printer description (PPD) file, rather than the\nadministrator-set one. This could lead to arbitrary code execution with the\nprivileges of the \"lp\" user. (CVE-2011-2964)\n\nAll foomatic users should upgrade to this updated package, which contains\na backported patch to resolve this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-08-01"
+      },
+      "Updated": {
+        "Date": "2011-08-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-2964",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2964",
+          "Public": "20110607"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/727016",
+          "ID": "727016"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "foomatic is earlier than 0:4.0.4-1.el6_1.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20111110001"
+          },
+          {
+            "Comment": "foomatic is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20111110002"
+          }
+        ]
+      }
+    ]
+  }
+}

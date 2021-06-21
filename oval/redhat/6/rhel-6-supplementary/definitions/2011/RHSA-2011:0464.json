@@ -1,0 +1,164 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110464",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2011:0464: kdelibs security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0464",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0464"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1094",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1094"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1168",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1168"
+      }
+    ],
+    "Description": "The kdelibs packages provide libraries for the K Desktop Environment (KDE).\n\nA cross-site scripting (XSS) flaw was found in the way KHTML, the HTML\nlayout engine used by KDE applications such as the Konqueror web browser,\ndisplayed certain error pages. A remote attacker could use this flaw to\nperform a cross-site scripting attack against victims by tricking them into\nvisiting a specially-crafted URL. (CVE-2011-1168)\n\nA flaw was found in the way kdelibs checked the user specified hostname\nagainst the name in the server's SSL certificate. A man-in-the-middle\nattacker could use this flaw to trick an application using kdelibs into\nmistakenly accepting a certificate as if it was valid for the host, if that\ncertificate was issued for an IP address to which the user specified\nhostname was resolved to. (CVE-2011-1094)\n\nNote: As part of the fix for CVE-2011-1094, this update also introduces\nstricter handling for wildcards used in servers' SSL certificates.\n\nUsers should upgrade to these updated packages, which contain backported\npatches to correct these issues. The desktop must be restarted (log out,\nthen log back in) for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-04-21"
+      },
+      "Updated": {
+        "Date": "2011-04-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1094",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1094",
+          "Public": "20110131"
+        },
+        {
+          "CveID": "CVE-2011-1168",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1168",
+          "Public": "20110411"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/632114",
+          "ID": "632114"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/695398",
+          "ID": "695398"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kdelibs is earlier than 6:4.3.4-11.el6_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110464001"
+                  },
+                  {
+                    "Comment": "kdelibs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110464002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kdelibs-apidocs is earlier than 6:4.3.4-11.el6_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110464003"
+                  },
+                  {
+                    "Comment": "kdelibs-apidocs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110464004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kdelibs-common is earlier than 6:4.3.4-11.el6_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110464005"
+                  },
+                  {
+                    "Comment": "kdelibs-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110464006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kdelibs-devel is earlier than 6:4.3.4-11.el6_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110464007"
+                  },
+                  {
+                    "Comment": "kdelibs-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110464008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

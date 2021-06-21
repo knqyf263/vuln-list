@@ -1,0 +1,298 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20172770",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2017:2770: kernel security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7.3 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:2770",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:2770"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-7533",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-7533"
+      }
+    ],
+    "Description": "The kernel packages contain the Linux kernel, the core of any Linux operating system.\n\nSecurity Fix(es):\n\n* A race condition was found in the Linux kernel, present since v3.14-rc1 through v4.12. The race happens between threads of inotify_handle_event() and vfs_rename() while running the rename operation against the same file. As a result of the race the next slab data or the slab's free list pointer can be corrupted with attacker-controlled data, which may lead to the privilege escalation. (CVE-2017-7533, Important)\n\nRed Hat would like to thank Leilei Lin (Alibaba Group), Fan Wu (The University of Hong Kong), and Shixiong Zhao (The University of Hong Kong) for reporting this issue.\n\nBug Fix(es):\n\n* Previously, the sha1-avx2 optimized hashing, which is used on processors supporting avx2, under certain conditions miscalculated an offset. Consequently, a kernel crash occasionally occurred on the NFS clients or servers using the krb5 security. With this update, the optimized hashing path for sha1-avx2 has been disabled, and the NFS clients and servers with krb5 security no longer experience the miscalculation and subsequent crash. (BZ#1446230)\n\n* When virt boundary limit was set, lots of small bios could not be merged even though they were contiguous physically. In some workload, such as mkfs.ntfs, system performance could be ten times degraded. The proposed patch fixes the bug by allowing to merge these small bios, which improves performance of mkfs.ntfs on devices significantly. (BZ#1472674)\n\n* When executing the mkfs.btrfs command to create a btrfs file system over Non-Volatile Memory Express (NVMe), kernel panic was previously triggered. The underlying code has been patched to fix this regression, and btrfs is now created successfully in the described scenario. (BZ#1472675)\n\n* As a side effect of BZ#147263, the system previously crashed when creating a container device. The provided patch transforms the resched_task() function into resched_curr(), and the chance of kernel crash is thus reduced in the aforementioned situation. (BZ#1473742)\n\n* Due to incorrectly used memory in VXLAN driver (a use-after-free bug and list corruption), the kernel could previously panic under some circumstances while bringing the VXLAN interfaces down. The provided patch fixes the memory corruptions, and the panic no longer occurs in this situation. (BZ#1474263)\n\n* A race condition could cause the in-flight asynchronous buffers count (bt_io_count) to become negative. This caused the umount operation to hang in the xfs_wait_buftarg() function. The provided patch fixes the buffer I/O accounting release race, and XFS umount no longer hangs. (BZ#1478253)\n\n* Kernel version 3.10.0-498.el7 separated CPU and TSC frequency and introduced the x86_platform.calibrate_cpu function pointer which points by default to the native_calibrate_cpu() function. As a consequence, time synchronization bugs appeared on Red Hat Enterprise Linux 7.3 ESXi guest causing a time offset shortly after boot. An upstream patch has been applied, which sets x86_platform.calibrate_cpu pointer on ESXi guests to the proper function, thus fixing this bug. (BZ#1479245)\n\n* A system having more than 128 CPUs could previously experience a crash during shutdown after the Intelligent Platform Management Interface (IPMI) service was stopped. The provided patch fixes a race condition in the IPMI smi_timeout() function, allowing the system to shut down as expected. (BZ#1479760)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-09-19"
+      },
+      "Updated": {
+        "Date": "2017-09-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-7533",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-362-\u003eCWE-642",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-7533",
+          "Public": "20170803"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1468283",
+          "ID": "1468283"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.3",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3::computenode",
+        "cpe:/o:redhat:rhel_eus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:3.10.0-514.32.2.el7 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20172770031"
+              },
+              {
+                "Comment": "kernel earlier than 0:3.10.0-514.32.2.el7 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20172770032"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-abi-whitelists is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770003"
+                  },
+                  {
+                    "Comment": "kernel-abi-whitelists is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-bootwrapper is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770005"
+                  },
+                  {
+                    "Comment": "kernel-bootwrapper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770007"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770009"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770011"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-doc is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770013"
+                  },
+                  {
+                    "Comment": "kernel-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-headers is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770015"
+                  },
+                  {
+                    "Comment": "kernel-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770017"
+                  },
+                  {
+                    "Comment": "kernel-kdump is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump-devel is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770019"
+                  },
+                  {
+                    "Comment": "kernel-kdump-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-tools is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770021"
+                  },
+                  {
+                    "Comment": "kernel-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-tools-libs is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770023"
+                  },
+                  {
+                    "Comment": "kernel-tools-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-tools-libs-devel is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770025"
+                  },
+                  {
+                    "Comment": "kernel-tools-libs-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perf is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770027"
+                  },
+                  {
+                    "Comment": "perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-perf is earlier than 0:3.10.0-514.32.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172770029"
+                  },
+                  {
+                    "Comment": "python-perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678030"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

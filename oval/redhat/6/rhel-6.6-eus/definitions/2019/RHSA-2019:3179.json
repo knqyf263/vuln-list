@@ -1,0 +1,160 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193179",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2019:3179: qemu-kvm-rhev security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.3"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3179",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3179"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-12155",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-12155"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14378",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14378"
+      }
+    ],
+    "Description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for Linux on a variety of architectures. The qemu-kvm-rhev packages provide the user-space component for running virtual machines that use KVM in environments managed by Red Hat products.\n\nSecurity Fix(es):\n\n* QEMU: slirp: heap buffer overflow during packet reassembly (CVE-2019-14378)\n\n* QEMU: qxl: null pointer dereference while releasing spice resources (CVE-2019-12155)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* ccid: Fix incorrect dwProtocol advertisement of T=0 (BZ#1729880)\n\n* QEMU gets stuck on resume/cont call from libvirt (BZ#1741937)\n\n* [v2v] Migration performance regression (BZ#1743322)\n\n* qemu, qemu-img fail to detect alignment with XFS and Gluster/XFS on 4k block device (BZ#1745443)\n\n* qemu-kvm: backport cpuidle-haltpoll support (BZ#1746282)\n\n* qemu aborts in blockCommit: qemu-kvm: block.c:3486 (BZ#1750322)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-10-23"
+      },
+      "Updated": {
+        "Date": "2019-10-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-12155",
+          "Cvss3": "3.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:N/I:N/A:L",
+          "Cwe": "CWE-476",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-12155",
+          "Public": "20190425"
+        },
+        {
+          "CveID": "CVE-2019-14378",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14378",
+          "Public": "20190728"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1712670",
+          "ID": "1712670"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1734745",
+          "ID": "1734745"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4",
+        "cpe:/a:redhat:rhev_manager:4.2",
+        "cpe:/a:redhat:rhev_manager:4.3",
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20143577006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20143577005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img-rhev is earlier than 10:2.12.0-33.el7_7.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193179001"
+                  },
+                  {
+                    "Comment": "qemu-img-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191968002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-common-rhev is earlier than 10:2.12.0-33.el7_7.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193179003"
+                  },
+                  {
+                    "Comment": "qemu-kvm-common-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191968004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-rhev is earlier than 10:2.12.0-33.el7_7.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193179005"
+                  },
+                  {
+                    "Comment": "qemu-kvm-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191968006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools-rhev is earlier than 10:2.12.0-33.el7_7.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193179007"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191968008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

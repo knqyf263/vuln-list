@@ -1,0 +1,148 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130883",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2013:0883: gnutls security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0883",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0883"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-2116",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-2116"
+      }
+    ],
+    "Description": "The GnuTLS library provides support for cryptographic algorithms and for\nprotocols such as Transport Layer Security (TLS).\n\nIt was discovered that the fix for the CVE-2013-1619 issue released via\nRHSA-2013:0588 introduced a regression in the way GnuTLS decrypted TLS/SSL\nencrypted records when CBC-mode cipher suites were used. A remote attacker\ncould possibly use this flaw to crash a server or client application that\nuses GnuTLS. (CVE-2013-2116)\n\nUsers of GnuTLS are advised to upgrade to these updated packages, which\ncorrect this issue. For the update to take effect, all applications linked\nto the GnuTLS library must be restarted.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-05-30"
+      },
+      "Updated": {
+        "Date": "2013-05-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-2116",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-125",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-2116",
+          "Public": "20130529"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/966754",
+          "ID": "966754"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls is earlier than 0:2.8.5-10.el6_4.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130883001"
+                  },
+                  {
+                    "Comment": "gnutls is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120429002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-devel is earlier than 0:2.8.5-10.el6_4.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130883003"
+                  },
+                  {
+                    "Comment": "gnutls-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120429004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-guile is earlier than 0:2.8.5-10.el6_4.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130883005"
+                  },
+                  {
+                    "Comment": "gnutls-guile is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120429006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gnutls-utils is earlier than 0:2.8.5-10.el6_4.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130883007"
+                  },
+                  {
+                    "Comment": "gnutls-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20120429008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

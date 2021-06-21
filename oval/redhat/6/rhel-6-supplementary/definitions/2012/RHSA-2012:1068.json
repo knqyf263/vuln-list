@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20121068",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2012:1068: openjpeg security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:1068",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:1068"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2009-5030",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2009-5030"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-3358",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-3358"
+      }
+    ],
+    "Description": "OpenJPEG is an open source library for reading and writing image files in\nJPEG 2000 format.\n\nAn input validation flaw, leading to a heap-based buffer overflow, was\nfound in the way OpenJPEG handled the tile number and size in an image tile\nheader. A remote attacker could provide a specially-crafted image file\nthat, when decoded using an application linked against OpenJPEG, would\ncause the application to crash or, potentially, execute arbitrary code with\nthe privileges of the user running the application. (CVE-2012-3358)\n\nOpenJPEG allocated insufficient memory when encoding JPEG 2000 files from\ninput images that have certain color depths. A remote attacker could\nprovide a specially-crafted image file that, when opened in an application\nlinked against OpenJPEG (such as image_to_j2k), would cause the application\nto crash or, potentially, execute arbitrary code with the privileges of the\nuser running the application. (CVE-2009-5030)\n\nUsers of OpenJPEG should upgrade to these updated packages, which contain\npatches to correct these issues. All running applications using OpenJPEG\nmust be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-07-11"
+      },
+      "Updated": {
+        "Date": "2012-07-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2009-5030",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2009-5030",
+          "Public": "20090731"
+        },
+        {
+          "CveID": "CVE-2012-3358",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-3358",
+          "Public": "20120710"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/812317",
+          "ID": "812317"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/835767",
+          "ID": "835767"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg is earlier than 0:1.3-8.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068001"
+                  },
+                  {
+                    "Comment": "openjpeg is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg-devel is earlier than 0:1.3-8.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068003"
+                  },
+                  {
+                    "Comment": "openjpeg-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg-libs is earlier than 0:1.3-8.el6_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068005"
+                  },
+                  {
+                    "Comment": "openjpeg-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

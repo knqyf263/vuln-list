@@ -1,0 +1,87 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20201231",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2020:1231: buildah security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:1231",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:1231"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8945",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8945"
+      }
+    ],
+    "Description": "The buildah package provides a tool for facilitating building OCI container images. Among other things, buildah enables you to:\n* Create a working container, either from scratch or using an image as a starting point.\n* Create an image, either from a working container or using the instructions in a Dockerfile.\n* Build both Docker and OCI images.\n\nSecurity Fix(es):\n\n* proglottis/gpgme: Use-after-free in GPGME bindings during container image pull (CVE-2020-8945)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* rootless buildah does not work with UID in /etc/subuid (BZ#1765469)\n\n* Extras RHEL-7.8 update - buildah (BZ#1791286)\n\n* buildah should be linked against gpgme-pthread (BZ#1793074)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-04-01"
+      },
+      "Updated": {
+        "Date": "2020-04-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-8945",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8945",
+          "Public": "20200116"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1795838",
+          "ID": "1795838"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20141977004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20141977003"
+          },
+          {
+            "Comment": "buildah is earlier than 0:1.11.6-8.el7_8",
+            "TestRef": "oval:com.redhat.rhsa:tst:20201231001"
+          },
+          {
+            "Comment": "buildah is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20201231002"
+          }
+        ]
+      }
+    ]
+  }
+}

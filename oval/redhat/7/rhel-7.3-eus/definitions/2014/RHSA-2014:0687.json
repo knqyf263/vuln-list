@@ -1,0 +1,163 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140687",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:0687: libtasn1 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0687",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0687"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3467",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3467"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3468",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3468"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3469",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3469"
+      }
+    ],
+    "Description": "The libtasn1 library provides Abstract Syntax Notation One (ASN.1) parsing\nand structures management, and Distinguished Encoding Rules (DER) encoding\nand decoding functions.\n\nIt was discovered that the asn1_get_bit_der() function of the libtasn1\nlibrary incorrectly reported the length of ASN.1-encoded data. Specially\ncrafted ASN.1 input could cause an application using libtasn1 to perform\nan out-of-bounds access operation, causing the application to crash or,\npossibly, execute arbitrary code. (CVE-2014-3468)\n\nMultiple incorrect buffer boundary check issues were discovered in\nlibtasn1. Specially crafted ASN.1 input could cause an application using\nlibtasn1 to crash. (CVE-2014-3467)\n\nMultiple NULL pointer dereference flaws were found in libtasn1's\nasn1_read_value() function. Specially crafted ASN.1 input could cause an\napplication using libtasn1 to crash, if the application used the\naforementioned function in a certain way. (CVE-2014-3469)\n\nRed Hat would like to thank GnuTLS upstream for reporting these issues.\n\nAll libtasn1 users are advised to upgrade to these updated packages, which\ncorrect these issues. For the update to take effect, all applications\nlinked to the libtasn1 library must be restarted.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-06-10"
+      },
+      "Updated": {
+        "Date": "2014-06-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-3467",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3467",
+          "Public": "20140525"
+        },
+        {
+          "CveID": "CVE-2014-3468",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-392-\u003eCWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3468",
+          "Public": "20140525"
+        },
+        {
+          "CveID": "CVE-2014-3469",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-476",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3469",
+          "Public": "20140525"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1102022",
+          "ID": "1102022"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1102323",
+          "ID": "1102323"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1102329",
+          "ID": "1102329"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.3",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3::computenode",
+        "cpe:/o:redhat:rhel_eus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtasn1 is earlier than 0:3.3-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687001"
+                  },
+                  {
+                    "Comment": "libtasn1 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtasn1-devel is earlier than 0:3.3-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687003"
+                  },
+                  {
+                    "Comment": "libtasn1-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtasn1-tools is earlier than 0:3.3-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687005"
+                  },
+                  {
+                    "Comment": "libtasn1-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140687006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20192499",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2019:2499: ovirt-engine-metrics security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.3"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:2499",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:2499"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10194",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10194"
+      }
+    ],
+    "Description": "The ovirt-engine-metrics package is used to collect and enrich metrics and logs from the Red Hat Virtualization Manager, hosts, and virtual machines. It includes Ansible scripts that configure Collectd and Fluentd on the Red Hat Virtualization Manager and hosts. It also stores remote metrics parameters.\n\nThe following packages have been upgraded to a later upstream version: ovirt-engine-metrics (1.3.3.3). (BZ#1723786)\n\nSecurity Fix(es):\n\n* ovirt-engine-metrics: disclosure of sensitive passwords in log files and ansible playbooks (CVE-2019-10194)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Installation of metrics store fails on template image upload (BZ#1715513)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-08-15"
+      },
+      "Updated": {
+        "Date": "2019-08-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-10194",
+          "Cvss3": "5.9/CVSS:3.0/AV:L/AC:L/PR:L/UI:R/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10194",
+          "Public": "20190226"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1726007",
+          "ID": "1726007"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4",
+        "cpe:/a:redhat:rhev_manager:4.2",
+        "cpe:/a:redhat:rhev_manager:4.3",
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20143577006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20143577005"
+          },
+          {
+            "Comment": "ovirt-engine-metrics is earlier than 0:1.3.3.3-1.el7ev",
+            "TestRef": "oval:com.redhat.rhsa:tst:20192499001"
+          },
+          {
+            "Comment": "ovirt-engine-metrics is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20192499002"
+          }
+        ]
+      }
+    ]
+  }
+}

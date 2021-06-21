@@ -1,0 +1,90 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20191669",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2019:1669: openstack-ironic-inspector security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 14.0 (Rocky)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:1669",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:1669"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10141",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10141"
+      }
+    ],
+    "Description": "Nodes managed by Ironic may use the ironic-inspector auxiliary service to discover hardware properties. Hardware introspection or hardware properties discovery is a process of getting hardware parameters required for scheduling from a bare metal node, given its power management credentials (e.g. IPMI address, user name and password).\n\nSecurity Fix(es):\n\n* openstack-ironic-inspector: SQL Injection vulnerability when receiving introspection data (CVE-2019-10141)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-07-02"
+      },
+      "Updated": {
+        "Date": "2019-07-02"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-10141",
+          "Cvss3": "8.3/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:H",
+          "Cwe": "CWE-89",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10141",
+          "Public": "20190515:0350"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1711722",
+          "ID": "1711722"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:14",
+        "cpe:/a:redhat:openstack-optools:14::el7",
+        "cpe:/a:redhat:openstack:14",
+        "cpe:/a:redhat:openstack:14::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20190944144"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20190944143"
+          },
+          {
+            "Comment": "openstack-ironic-inspector is earlier than 0:8.0.3-0.20190420013817.el7ost",
+            "TestRef": "oval:com.redhat.rhsa:tst:20191669001"
+          },
+          {
+            "Comment": "openstack-ironic-inspector is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20191669002"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151565",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2015:1565: kernel-rt security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1565",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1565"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-9715",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-9715"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-2666",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-2666"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-2922",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-2922"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3636",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3636"
+      }
+    ],
+    "Description": "The kernel-rt packages contain the Linux kernel, the core of any Linux\noperating system.\n\n* An integer overflow flaw was found in the way the Linux kernel's\nnetfilter connection tracking implementation loaded extensions. An attacker\non a local network could potentially send a sequence of specially crafted\npackets that would initiate the loading of a large number of extensions,\ncausing the targeted system in that network to crash. (CVE-2014-9715,\nModerate)\n\n* A stack-based buffer overflow flaw was found in the Linux kernel's early\nload microcode functionality. On a system with UEFI Secure Boot enabled, a\nlocal, privileged user could use this flaw to increase their privileges to\nthe kernel (ring0) level, bypassing intended restrictions in place.\n(CVE-2015-2666, Moderate)\n\n* It was found that the Linux kernel's ping socket implementation did not\nproperly handle socket unhashing during spurious disconnects, which could\nlead to a use-after-free flaw. On x86-64 architecture systems, a local user\nable to create ping sockets could use this flaw to crash the system.\nOn non-x86-64 architecture systems, a local user able to create ping\nsockets could use this flaw to escalate their privileges on the system.\n(CVE-2015-3636, Moderate)\n\n* It was found that the Linux kernel's TCP/IP protocol suite implementation\nfor IPv6 allowed the Hop Limit value to be set to a smaller value than the\ndefault one. An attacker on a local network could use this flaw to prevent\nsystems on that network from sending or receiving network packets.\n(CVE-2015-2922, Low)\n\nRed Hat would like to thank Nathan Hoad for reporting the CVE-2014-9715\nissue.\n\nThe kernel-rt packages have been upgraded to version 3.10.0-229.11.1, which\nprovides a number of bug fixes and enhancements over the previous version,\nincluding:\n\n* drbg: Add stdrng alias and increase priority\n* seqiv / eseqiv / chainiv: Move IV seeding into init function\n* ipv4: kABI fix for 0bbf87d backport\n* ipv4: Convert ipv4.ip_local_port_range to be per netns\n* libceph: tcp_nodelay support\n* ipr: Increase default adapter init stage change timeout\n* fix use-after-free bug in usb_hcd_unlink_urb()\n* libceph: fix double __remove_osd() problem\n* ext4: fix data corruption caused by unwritten and delayed extents\n* sunrpc: Add missing support for RPC_CLNT_CREATE_NO_RETRANS_TIMEOUT\n* nfs: Fixing lease renewal (Benjamin Coddington)\n* control hard lockup detection default\n* Fix print-once on enable\n* watchdog: update watchdog_thresh properly and watchdog attributes\n  atomically\n* module: Call module notifier on failure after complete_formation()\n\n(BZ#1234470)\n\nThis update also fixes the following bugs:\n\n* The megasas driver used the smp_processor_id() function within a\npreemptible context, which caused warning messages to be returned to the\nconsole. The function has been changed to raw_smp_processor_id() so that a\nlock is held while getting the processor ID. As a result, correct\noperations are now allowed without any console warnings being produced.\n(BZ#1235304)\n\n* In the NFSv4 file system, non-standard usage of the\nwrite_seqcount_{begin,end}() functions were used, which caused the realtime\ncode to try to sleep while locks were held. As a consequence, the\n\"scheduling while atomic\" error messages were returned. The underlying\nsource code has been modified to use the __write_seqcount_{begin,end}()\nfunctions that do not hold any locks, allowing correct execution of\nrealtime. (BZ#1235301)\n\nAll kernel-rt users are advised to upgrade to these updated packages, which\ncorrect these issues and add these enhancements. The system must be\nrebooted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-08-05"
+      },
+      "Updated": {
+        "Date": "2015-08-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-9715",
+          "Cvss2": "5.7/AV:A/AC:M/Au:N/C:N/I:N/A:C",
+          "Cwe": "CWE-841",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-9715",
+          "Public": "20150408"
+        },
+        {
+          "CveID": "CVE-2015-2666",
+          "Cvss2": "6.0/AV:L/AC:H/Au:S/C:C/I:C/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-2666",
+          "Public": "20150219"
+        },
+        {
+          "CveID": "CVE-2015-2922",
+          "Cvss2": "3.3/AV:A/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-454",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-2922",
+          "Public": "20150324"
+        },
+        {
+          "CveID": "CVE-2015-3636",
+          "Cvss2": "6.0/AV:L/AC:H/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3636",
+          "Public": "20150502"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1203712",
+          "ID": "1203712"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1204722",
+          "ID": "1204722"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1208684",
+          "ID": "1208684"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1218074",
+          "ID": "1218074"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.3",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3::computenode",
+        "cpe:/o:redhat:rhel_eus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel-rt earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20151534031"
+              },
+              {
+                "Comment": "kernel-rt earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20151565016"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt is earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151565001"
+                  },
+                  {
+                    "Comment": "kernel-rt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150727002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug is earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151565003"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150727004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-devel is earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151565005"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150727006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-devel is earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151565007"
+                  },
+                  {
+                    "Comment": "kernel-rt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150727008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-doc is earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151565009"
+                  },
+                  {
+                    "Comment": "kernel-rt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150727010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace is earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151565011"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150727012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-devel is earlier than 0:3.10.0-229.11.1.rt56.141.11.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151565013"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150727014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

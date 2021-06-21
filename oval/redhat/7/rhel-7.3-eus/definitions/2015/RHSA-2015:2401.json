@@ -1,0 +1,141 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20152401",
+  "Version": "644",
+  "Metadata": {
+    "Title": "RHSA-2015:2401: grub2 security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:2401",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:2401"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5281",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5281"
+      }
+    ],
+    "Description": "The grub2 packages provide version 2 of the Grand Unified Bootloader\n(GRUB), a highly configurable and customizable bootloader with modular\narchitecture. The packages support a variety of kernel formats, file\nsystems, computer architectures, and hardware devices.\n\nIt was discovered that grub2 builds for EFI systems contained modules that\nwere not suitable to be loaded in a Secure Boot environment. An attacker\ncould use this flaw to circumvent the Secure Boot mechanisms and load\nnon-verified code. Attacks could use the boot menu if no password was set,\nor the grub2 configuration file if the attacker has root privileges on the\nsystem. (CVE-2015-5281)\n\nThis update also fixes the following bugs:\n\n* In one of the earlier updates, GRUB2 was modified to escape forward slash\n(/) characters in several different places. In one of these places, the\nescaping was unnecessary and prevented certain types of kernel command-line\narguments from being passed to the kernel correctly. With this update,\nGRUB2 no longer escapes the forward slash characters in the mentioned\nplace, and the kernel command-line arguments work as expected. (BZ#1125404)\n\n* Previously, GRUB2 relied on a timing mechanism provided by legacy\nhardware, but not by the Hyper-V Gen2 hypervisor, to calibrate its timer\nloop. This prevented GRUB2 from operating correctly on Hyper-V Gen2.\nThis update modifies GRUB2 to use a different mechanism on Hyper-V Gen2 to\ncalibrate the timing. As a result, Hyper-V Gen2 hypervisors now work as\nexpected. (BZ#1150698)\n\n* Prior to this update, users who manually configured GRUB2 to use the\nbuilt-in GNU Privacy Guard (GPG) verification observed the following error\non boot:\n\n    alloc magic is broken at [addr]: [value] Aborted.\n\nConsequently, the boot failed. The GRUB2 built-in GPG verification has been\nmodified to no longer free the same memory twice. As a result, the\nmentioned error no longer occurs. (BZ#1167977)\n\n* Previously, the system sometimes did not recover after terminating\nunexpectedly and failed to reboot. To fix this problem, the GRUB2 packages\nnow enforce file synchronization when creating the GRUB2 configuration\nfile, which ensures that the required configuration files are written to\ndisk. As a result, the system now reboots successfully after crashing.\n(BZ#1212114)\n\n* Previously, if an unconfigured network driver instance was selected and\nconfigured when the GRUB2 bootloader was loaded on a different instance,\nGRUB2 did not receive notifications of the Address Resolution Protocol\n(ARP) replies. Consequently, GRUB2 failed with the following error message:\n\n    error: timeout: could not resolve hardware address.\n\nWith this update, GRUB2 selects the network driver instance from which it\nwas loaded. As a result, ARP packets are processed correctly. (BZ#1257475)\n\nIn addition, this update adds the following enhancement:\n\n* Sorting of GRUB2 boot menu has been improved. GRUB2 now uses the\nrpmdevtools package to sort available kernels and the configuration file is\nbeing generated correctly with the most recent kernel version listed at the\ntop. (BZ#1124074)\n\nAll grub2 users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues and add this\nenhancement.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-11-19"
+      },
+      "Updated": {
+        "Date": "2015-11-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5281",
+          "Cvss2": "2.6/AV:L/AC:H/Au:N/C:P/I:P/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5281",
+          "Public": "20151117"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1264103",
+          "ID": "1264103"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.3",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3::computenode",
+        "cpe:/o:redhat:rhel_eus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "grub2 is earlier than 1:2.02-0.29.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401001"
+                  },
+                  {
+                    "Comment": "grub2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "grub2-efi is earlier than 1:2.02-0.29.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401003"
+                  },
+                  {
+                    "Comment": "grub2-efi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "grub2-efi-modules is earlier than 1:2.02-0.29.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401005"
+                  },
+                  {
+                    "Comment": "grub2-efi-modules is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "grub2-tools is earlier than 1:2.02-0.29.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401007"
+                  },
+                  {
+                    "Comment": "grub2-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152401008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151695",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2015:1695: jakarta-taglibs-standard security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1695",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1695"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-0254",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-0254"
+      }
+    ],
+    "Description": "jakarta-taglibs-standard is the Java Standard Tag Library (JSTL).\nThis library is used in conjunction with Tomcat and Java Server Pages\n(JSP).\n\nIt was found that the Java Standard Tag Library (JSTL) allowed the\nprocessing of untrusted XML documents to utilize external entity\nreferences, which could access resources on the host system and,\npotentially, allowing arbitrary code execution. (CVE-2015-0254)\n\nNote: jakarta-taglibs-standard users may need to take additional steps\nafter applying this update. Detailed instructions on the additional steps\ncan be found here:\n\nhttps://access.redhat.com/solutions/1584363\n\nAll jakarta-taglibs-standard users are advised to upgrade to these updated\npackages, which contain a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-08-31"
+      },
+      "Updated": {
+        "Date": "2015-08-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-0254",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cvss3": "7.6/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:H/A:L",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-0254",
+          "Public": "20150227"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1198606",
+          "ID": "1198606"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.3",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3::computenode",
+        "cpe:/o:redhat:rhel_eus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jakarta-taglibs-standard is earlier than 0:1.1.2-14.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151695001"
+                  },
+                  {
+                    "Comment": "jakarta-taglibs-standard is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151695002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jakarta-taglibs-standard-javadoc is earlier than 0:1.1.2-14.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151695003"
+                  },
+                  {
+                    "Comment": "jakarta-taglibs-standard-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151695004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

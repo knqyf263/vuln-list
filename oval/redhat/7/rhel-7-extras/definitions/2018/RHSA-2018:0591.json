@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20180591",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2018:0591: python-paramiko security and bug fix update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:0591",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:0591"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-7750",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-7750"
+      }
+    ],
+    "Description": "The python-paramiko package provides a Python module that implements the SSH2 protocol for encrypted and authenticated connections to remote machines. Unlike SSL, the SSH2 protocol does not require hierarchical certificates signed by a powerful central authority. The protocol also includes the ability to open arbitrary channels to remote services across an encrypted tunnel.\n\nSecurity Fix(es):\n\n* python-paramiko: Authentication bypass in transport.py (CVE-2018-7750)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* python-paramiko has been using the python2-pyasn1 package, but did not depend on it. With new versions of python2-cryptography, python2-pyasn1 was not getting installed and this caused python-paramiko to malfunction. This bug was fixed by making python-paramiko depend on python2-pyasn1 explicitly. (BZ#1559133)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-03-26"
+      },
+      "Updated": {
+        "Date": "2018-03-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-7750",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-287",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-7750",
+          "Public": "20180313"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1557130",
+          "ID": "1557130"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20141977004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20141977003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-paramiko is earlier than 0:2.1.1-4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180591001"
+                  },
+                  {
+                    "Comment": "python-paramiko is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180591002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-paramiko-doc is earlier than 0:2.1.1-4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180591003"
+                  },
+                  {
+                    "Comment": "python-paramiko-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180591004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

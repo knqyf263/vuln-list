@@ -1,0 +1,129 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20201227",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2020:1227: podman security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:1227",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:1227"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-18466",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-18466"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-1702",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1702"
+      }
+    ],
+    "Description": "The podman tool manages pods, container images, and containers. It is part of the libpod library, which is for applications that use container pods. Container pods is a concept in Kubernetes.\n\nSecurity Fix(es):\n\n* podman: resolving symlink in host filesystem leads to unexpected results of copy operation (CVE-2019-18466)\n\n* containers/image: Container images read entire image manifest into memory (CVE-2020-1702)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* [extras-rhel-7] conmon binary stripped but debuginfo not generated (BZ#1650395)\n\n* Cannot run systemd-container with SCL service due to RHSA-2019:2091 fix (BZ#1758509)\n\n* Podman does not enforce registries.block in the registries.conf file (BZ#1787666)\n\n* podman and podman-manpages needs merging (BZ#1788549)\n\n* podman should be linked against gpgme-pthread (BZ#1793083)\n\n* podman cannot support load tarball which the name with colon but docker can support this (BZ#1797599)\n\n* podman (1.6.4) rhel 8.1 no route to host from inside container [extras-rhel-7.8/podman] (BZ#1806895)\n\n* Podman can't reuse a container name, even if the container that was using it is no longer around [extras-rhel-7.8/podman] (BZ#1807437)\n\n* podman exec does not reads from stdin [extras-rhel-7.8/podman] (BZ#1807586)\n\n* [FJ8.2 Bug]: [REG]The \"--group-add\" option of \"podman create\" doesn't function. [extras-rhel-7.8/podman] (BZ#1808702)\n\nEnhancement(s):\n\n* [RFE] sctp support for podman (BZ#1664218)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-04-01"
+      },
+      "Updated": {
+        "Date": "2020-04-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-18466",
+          "Cvss3": "2.5/CVSS:3.0/AV:L/AC:H/PR:N/UI:R/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-59",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-18466",
+          "Public": "20190822"
+        },
+        {
+          "CveID": "CVE-2020-1702",
+          "Cvss3": "3.5/CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-400",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-1702",
+          "Public": "20200120"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1744588",
+          "ID": "1744588"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1792796",
+          "ID": "1792796"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20141977004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20141977003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman is earlier than 0:1.6.4-16.el7_8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201227001"
+                  },
+                  {
+                    "Comment": "podman is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20182796002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "podman-docker is earlier than 0:1.6.4-16.el7_8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20201227003"
+                  },
+                  {
+                    "Comment": "podman-docker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191907004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

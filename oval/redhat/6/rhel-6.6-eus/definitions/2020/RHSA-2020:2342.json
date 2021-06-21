@@ -1,0 +1,177 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202342",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:2342: qemu-kvm-rhev bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2342",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2342"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14378",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14378"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-7039",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-7039"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8608",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8608"
+      }
+    ],
+    "Description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for Linux on a variety of architectures. The qemu-kvm-rhev packages provide the user-space component for running virtual machines that use KVM in environments managed by Red Hat products.\n\nSecurity Fix(es):\n\n* CVE-2020-8608 QEMU: Slirp: potential OOB access due to unsafe snprintf() usages\n\n* CVE-2020-7039 QEMU: slirp: OOB buffer access while emulating tcp protocols in tcp_emu()\n\n* CVE-2019-14378 QEMU: slirp: heap buffer overflow during packet reassembly\n\nThis update fixes the following bug:\n\n* BZ 1804577 Backport: Passthrough host CPU microcode version to KVM guest if using CPU passthrough to RHEL 7.7/7.8 [rhel-7.6.z] \n\nUsers of qemu-kvm are advised to upgrade to these updated packages. After installing this update, shut down all running virtual machines. Once all virtual machines have shut down, start them again for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-06-01"
+      },
+      "Updated": {
+        "Date": "2020-06-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-14378",
+          "Cvss3": "7.0/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:L/I:L/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14378",
+          "Public": "20190728"
+        },
+        {
+          "CveID": "CVE-2020-7039",
+          "Cvss3": "5.6/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-7039",
+          "Public": "20200107"
+        },
+        {
+          "CveID": "CVE-2020-8608",
+          "Cvss3": "5.6/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8608",
+          "Public": "20200127"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1734745",
+          "ID": "1734745"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1791551",
+          "ID": "1791551"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1798453",
+          "ID": "1798453"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4",
+        "cpe:/a:redhat:rhev_manager:4.2",
+        "cpe:/a:redhat:rhev_manager:4.3",
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20143577006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20143577005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img-rhev is earlier than 10:2.12.0-18.el7_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202342001"
+                  },
+                  {
+                    "Comment": "qemu-img-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191968002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-common-rhev is earlier than 10:2.12.0-18.el7_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202342003"
+                  },
+                  {
+                    "Comment": "qemu-kvm-common-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191968004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-rhev is earlier than 10:2.12.0-18.el7_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202342005"
+                  },
+                  {
+                    "Comment": "qemu-kvm-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191968006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools-rhev is earlier than 10:2.12.0-18.el7_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202342007"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191968008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

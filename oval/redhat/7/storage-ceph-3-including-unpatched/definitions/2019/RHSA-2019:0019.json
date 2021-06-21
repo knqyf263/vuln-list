@@ -1,0 +1,105 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20190019",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2019:0019: grafana security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Ceph Storage 3.2"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:0019",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:0019"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-15727",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-15727"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-18623",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-18623"
+      }
+    ],
+    "Description": "The grafana package provides the Grafana metrics dashboard and graph editor.\n\nSecurity Fix(es):\n\n* grafana: authentication bypass knowing only a username of an LDAP or OAuth user (CVE-2018-15727)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* The grafana package has been upgraded to upstream version 5.2.4., which includes a number of bug fixes (BZ#1647494)\n\n* Shrinking the cluster size no longer causes the Red Hat Ceph Storage Dashboard to display the error message Templating init failed (BZ#1653273)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-01-03"
+      },
+      "Updated": {
+        "Date": "2019-01-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-15727",
+          "Cvss3": "5.5/CVSS:3.0/AV:A/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-287",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-15727",
+          "Public": "20180829"
+        },
+        {
+          "CveID": "CVE-2018-18623",
+          "Cvss3": "6.1/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-18623",
+          "Public": "20200602"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1624088",
+          "ID": "1624088"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1850568",
+          "ID": "1850568"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:ceph_storage:3",
+        "cpe:/a:redhat:ceph_storage:3::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201610745004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201610745003"
+          },
+          {
+            "Comment": "grafana is earlier than 0:5.2.4-1.el7cp",
+            "TestRef": "oval:com.redhat.rhsa:tst:20190019001"
+          },
+          {
+            "Comment": "grafana is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:20181000816002"
+          }
+        ]
+      }
+    ]
+  }
+}

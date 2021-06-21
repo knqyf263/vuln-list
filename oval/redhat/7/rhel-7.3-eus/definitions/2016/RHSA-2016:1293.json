@@ -1,0 +1,163 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161293",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2016:1293: setroubleshoot and setroubleshoot-plugins security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1293",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1293"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4444",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4444"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4446",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4446"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-4989",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-4989"
+      }
+    ],
+    "Description": "The setroubleshoot packages provide tools to help diagnose SELinux problems. When Access Vector Cache (AVC) messages are returned, an alert can be generated that provides information about the problem and helps to track its resolution.\n\nThe setroubleshoot-plugins package provides a set of analysis plugins for use with setroubleshoot. Each plugin has the capacity to analyze SELinux AVC data and system data to provide user friendly reports describing how to interpret SELinux AVC denials.\n\nSecurity Fix(es):\n\n* Shell command injection flaws were found in the way the setroubleshoot executed external commands. A local attacker able to trigger certain SELinux denials could use these flaws to execute arbitrary code with privileges of the setroubleshoot user. (CVE-2016-4989)\n\n* Shell command injection flaws were found in the way the setroubleshoot allow_execmod and allow_execstack plugins executed external commands. A local attacker able to trigger an execmod or execstack SELinux denial could use these flaws to execute arbitrary code with privileges of the setroubleshoot user. (CVE-2016-4444, CVE-2016-4446)\n\nThe CVE-2016-4444 and CVE-2016-4446 issues were discovered by Milos Malik (Red Hat) and the CVE-2016-4989 issue was discovered by Red Hat Product Security.\n\nNote: On Red Hat Enterprise Linux 7.0 and 7.1, the setroubleshoot is run with root privileges. Therefore, these issues could allow an attacker to execute arbitrary code with root privileges.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-06-23"
+      },
+      "Updated": {
+        "Date": "2016-06-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-4444",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-77",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4444",
+          "Public": "20160621"
+        },
+        {
+          "CveID": "CVE-2016-4446",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-77",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4446",
+          "Public": "20160621"
+        },
+        {
+          "CveID": "CVE-2016-4989",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-77",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-4989",
+          "Public": "20160621"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1332644",
+          "ID": "1332644"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1339250",
+          "ID": "1339250"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1346461",
+          "ID": "1346461"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_sap_eus:7.3",
+        "cpe:/a:redhat:rhel_extras_sap_hana_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3",
+        "cpe:/o:redhat:rhel_eus:7.3::computenode",
+        "cpe:/o:redhat:rhel_eus:7.3::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "setroubleshoot-plugins is earlier than 0:3.0.59-2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161293001"
+                  },
+                  {
+                    "Comment": "setroubleshoot-plugins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161293002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "setroubleshoot is earlier than 0:3.2.24-4.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161293003"
+                  },
+                  {
+                    "Comment": "setroubleshoot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152287002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "setroubleshoot-server is earlier than 0:3.2.24-4.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161293005"
+                  },
+                  {
+                    "Comment": "setroubleshoot-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20152287004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
