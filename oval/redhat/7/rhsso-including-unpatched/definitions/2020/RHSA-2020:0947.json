@@ -1,22 +1,22 @@
 {
   "Class": "patch",
-  "ID": "oval:com.redhat.rhsa:def:20200945",
+  "ID": "oval:com.redhat.rhsa:def:20200947",
   "Version": "636",
   "Metadata": {
-    "Title": "RHSA-2020:0945: Red Hat Single Sign-On 7.3.7 security update on RHEL 6 (Important)",
+    "Title": "RHSA-2020:0947: Red Hat Single Sign-On 7.3.7 security update on RHEL 8 (Important)",
     "AffectedList": [
       {
         "Family": "unix",
         "Platforms": [
-          "Red Hat Single Sign-On 7.3 for RHEL 6"
+          "Red Hat Single Sign-On 7.3 for RHEL 8"
         ]
       }
     ],
     "References": [
       {
         "Source": "RHSA",
-        "RefID": "RHSA-2020:0945",
-        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0945"
+        "RefID": "RHSA-2020:0947",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0947"
       },
       {
         "Source": "CVE",
@@ -24,7 +24,7 @@
         "RefURL": "https://access.redhat.com/security/cve/CVE-2020-1744"
       }
     ],
-    "Description": "Red Hat Single Sign-On 7.3 is a standalone server, based on the Keycloak project, that provides authentication and standards-based single sign-on capabilities for web and mobile applications.\n\nThis release of Red Hat Single Sign-On 7.3.7 on RHEL 6 serves as a replacement for Red Hat Single Sign-On 7.3.6, and includes bug fixes and enhancements, which are documented in the Release Notes document linked to in the References.\n\nSecurity Fix(es):\n\n* keycloak: failedLogin Event not sent to BruteForceProtector when using Post Login Flow with Conditional-OTP (CVE-2020-1744)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Description": "Red Hat Single Sign-On 7.3 is a standalone server, based on the Keycloak project, that provides authentication and standards-based single sign-on capabilities for web and mobile applications.\n\nThis release of Red Hat Single Sign-On 7.3.7 on RHEL 8 serves as a replacement for Red Hat Single Sign-On 7.3.6, and includes bug fixes and enhancements, which are documented in the Release Notes document linked to in the References.\n\nSecurity Fix(es):\n\n* keycloak: failedLogin Event not sent to BruteForceProtector when using Post Login Flow with Conditional-OTP (CVE-2020-1744)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.",
     "Advisory": {
       "From": "secalert@redhat.com",
       "Severity": "Important",
@@ -53,7 +53,7 @@
       ],
       "AffectedCpeList": [
         "cpe:/a:redhat:red_hat_single_sign_on:7",
-        "cpe:/a:redhat:red_hat_single_sign_on:7::el6"
+        "cpe:/a:redhat:red_hat_single_sign_on:7::el8"
       ]
     }
   },
@@ -68,13 +68,20 @@
     "Criterias": [
       {
         "Operator": "AND",
-        "Criterions": [
-          {
-            "Comment": "Red Hat Enterprise Linux 6 is installed",
-            "TestRef": "oval:com.redhat.cve:tst:201712161003"
-          }
-        ],
         "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:201712161003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20193046006"
+              }
+            ]
+          },
           {
             "Operator": "OR",
             "Criterias": [
@@ -82,12 +89,12 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "rh-sso7-keycloak is earlier than 0:4.8.18-1.Final_redhat_00001.1.el6sso",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200945001"
+                    "Comment": "rh-sso7-keycloak is earlier than 0:4.8.18-1.Final_redhat_00001.1.el8sso",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200947001"
                   },
                   {
                     "Comment": "rh-sso7-keycloak is signed with Red Hat redhatrelease2 key",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20170872030"
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193046002"
                   }
                 ]
               },
@@ -95,8 +102,8 @@
                 "Operator": "AND",
                 "Criterions": [
                   {
-                    "Comment": "rh-sso7-keycloak-server is earlier than 0:4.8.18-1.Final_redhat_00001.1.el6sso",
-                    "TestRef": "oval:com.redhat.rhsa:tst:20200945003"
+                    "Comment": "rh-sso7-keycloak-server is earlier than 0:4.8.18-1.Final_redhat_00001.1.el8sso",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200947003"
                   },
                   {
                     "Comment": "rh-sso7-keycloak-server is signed with Red Hat redhatrelease2 key",
