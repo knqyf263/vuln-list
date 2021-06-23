@@ -1,0 +1,152 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20171852",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2017:1852: openldap security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:1852",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:1852"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-9287",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-9287"
+      }
+    ],
+    "Description": "OpenLDAP is an open-source suite of Lightweight Directory Access Protocol (LDAP) applications and development tools. LDAP is a set of protocols used to access and maintain distributed directory information services over an IP network. The openldap packages contain configuration files, libraries, and documentation for OpenLDAP.\n\nThe following packages have been upgraded to a later upstream version: openldap (2.4.44). (BZ#1386365)\n\nSecurity Fix(es):\n\n* A double-free flaw was found in the way OpenLDAP's slapd server using the MDB backend handled LDAP searches. A remote attacker with access to search the directory could potentially use this flaw to crash slapd by issuing a specially crafted LDAP search query. (CVE-2017-9287)\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 7.4 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-08-01"
+      },
+      "Updated": {
+        "Date": "2017-08-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-9287",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-9287",
+          "Public": "20170517"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1456712",
+          "ID": "1456712"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.2",
+        "cpe:/o:redhat:rhel_tus:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap is earlier than 0:2.4.44-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171852001"
+                  },
+                  {
+                    "Comment": "openldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151840002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap-clients is earlier than 0:2.4.44-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171852003"
+                  },
+                  {
+                    "Comment": "openldap-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151840004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap-devel is earlier than 0:2.4.44-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171852005"
+                  },
+                  {
+                    "Comment": "openldap-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151840006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap-servers is earlier than 0:2.4.44-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171852007"
+                  },
+                  {
+                    "Comment": "openldap-servers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151840008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap-servers-sql is earlier than 0:2.4.44-5.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171852009"
+                  },
+                  {
+                    "Comment": "openldap-servers-sql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151840010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

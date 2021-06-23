@@ -1,0 +1,164 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110356",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2011:0356: krb5 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0356",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0356"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0284",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0284"
+      }
+    ],
+    "Description": "Kerberos is a network authentication system which allows clients and\nservers to authenticate to each other using symmetric encryption and a\ntrusted third-party, the Key Distribution Center (KDC). The Public Key\nCryptography for Initial Authentication in Kerberos (PKINIT) capability\nprovides support for using public-key authentication with Kerberos.\n\nA double-free flaw was found in the way the MIT Kerberos KDC handled\ninitial authentication requests (AS-REQ), when the KDC was configured to\nprovide the PKINIT capability. A remote attacker could use this flaw to\ncause the KDC daemon to abort by using a specially-crafted AS-REQ request.\n(CVE-2011-0284)\n\nAll krb5 users should upgrade to these updated packages, which contain\na backported patch to correct this issue. After installing the updated\npackages, the krb5kdc daemon will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-03-16"
+      },
+      "Updated": {
+        "Date": "2011-03-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-0284",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0284",
+          "Public": "20110315"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/674325",
+          "ID": "674325"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-devel is earlier than 0:1.8.2-3.el6_0.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110356001"
+                  },
+                  {
+                    "Comment": "krb5-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-libs is earlier than 0:1.8.2-3.el6_0.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110356003"
+                  },
+                  {
+                    "Comment": "krb5-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-pkinit-openssl is earlier than 0:1.8.2-3.el6_0.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110356005"
+                  },
+                  {
+                    "Comment": "krb5-pkinit-openssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-server is earlier than 0:1.8.2-3.el6_0.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110356007"
+                  },
+                  {
+                    "Comment": "krb5-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-server-ldap is earlier than 0:1.8.2-3.el6_0.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110356009"
+                  },
+                  {
+                    "Comment": "krb5-server-ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-workstation is earlier than 0:1.8.2-3.el6_0.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110356011"
+                  },
+                  {
+                    "Comment": "krb5-workstation is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

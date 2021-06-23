@@ -1,0 +1,196 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20150016",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2015:0016: glibc security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:0016",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:0016"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-6040",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-6040"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-7817",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-7817"
+      }
+    ],
+    "Description": "The glibc packages provide the standard C libraries (libc), POSIX thread\nlibraries (libpthread), standard math libraries (libm), and the Name Server\nCaching Daemon (nscd) used by multiple programs on the system. Without\nthese libraries, the Linux system cannot function correctly.\n\nAn out-of-bounds read flaw was found in the way glibc's iconv() function\nconverted certain encoded data to UTF-8. An attacker able to make an\napplication call the iconv() function with a specially crafted argument\ncould use this flaw to crash that application. (CVE-2014-6040)\n\nIt was found that the wordexp() function would perform command substitution\neven when the WRDE_NOCMD flag was specified. An attacker able to provide\nspecially crafted input to an application using the wordexp() function, and\nnot sanitizing the input correctly, could potentially use this flaw to\nexecute arbitrary commands with the credentials of the user running that\napplication. (CVE-2014-7817)\n\nThe CVE-2014-7817 issue was discovered by Tim Waugh of the Red Hat\nDeveloper Experience Team.\n\nThis update also fixes the following bugs:\n\n* Previously, when an address lookup using the getaddrinfo() function for\nthe AF_UNSPEC value was performed on a defective DNS server, the server in\nsome cases responded with a valid response for the A record, but a referral\nresponse for the AAAA record, which resulted in a lookup failure. A prior\nupdate was implemented for getaddrinfo() to return the valid response, but\nit contained a typographical error, due to which the lookup could under\nsome circumstances still fail. This error has been corrected and\ngetaddrinfo() now returns a valid response in the described circumstances.\n(BZ#1172023)\n\n* An error in the dlopen() library function previously caused recursive\ncalls to dlopen() to terminate unexpectedly or to abort with a library\nassertion. This error has been fixed and recursive calls to dlopen() no\nlonger crash or abort. (BZ#1173469)\n\nAll glibc users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-01-07"
+      },
+      "Updated": {
+        "Date": "2015-01-07"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-6040",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-6040",
+          "Public": "20140828"
+        },
+        {
+          "CveID": "CVE-2014-7817",
+          "Cvss2": "3.6/AV:L/AC:L/Au:N/C:P/I:P/A:N",
+          "Cwe": "CWE-440",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-7817",
+          "Public": "20141120"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1135841",
+          "ID": "1135841"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1157689",
+          "ID": "1157689"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.6",
+        "cpe:/o:redhat:rhel_eus:6.6::computenode",
+        "cpe:/o:redhat:rhel_eus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc is earlier than 0:2.12-1.149.el6_6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150016001"
+                  },
+                  {
+                    "Comment": "glibc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-common is earlier than 0:2.12-1.149.el6_6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150016003"
+                  },
+                  {
+                    "Comment": "glibc-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-devel is earlier than 0:2.12-1.149.el6_6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150016005"
+                  },
+                  {
+                    "Comment": "glibc-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-headers is earlier than 0:2.12-1.149.el6_6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150016007"
+                  },
+                  {
+                    "Comment": "glibc-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-static is earlier than 0:2.12-1.149.el6_6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150016009"
+                  },
+                  {
+                    "Comment": "glibc-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-utils is earlier than 0:2.12-1.149.el6_6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150016011"
+                  },
+                  {
+                    "Comment": "glibc-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nscd is earlier than 0:2.12-1.149.el6_6.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150016013"
+                  },
+                  {
+                    "Comment": "nscd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141038",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2014:1038: tomcat6 security update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1038",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1038"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4590",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4590"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-0119",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-0119"
+      }
+    ],
+    "Description": "Apache Tomcat is a servlet container for the Java Servlet and JavaServer\nPages (JSP) technologies.\n\nIt was found that several application-provided XML files, such as web.xml,\ncontent.xml, *.tld, *.tagx, and *.jspx, resolved external entities,\npermitting XML External Entity (XXE) attacks. An attacker able to deploy\nmalicious applications to Tomcat could use this flaw to circumvent security\nrestrictions set by the JSM, and gain access to sensitive information on\nthe system. Note that this flaw only affected deployments in which Tomcat\nis running applications from untrusted sources, such as in a shared hosting\nenvironment. (CVE-2013-4590)\n\nIt was found that, in certain circumstances, it was possible for a\nmalicious web application to replace the XML parsers used by Apache Tomcat\nto process XSLTs for the default servlet, JSP documents, tag library\ndescriptors (TLDs), and tag plug-in configuration files. The injected XML\nparser(s) could then bypass the limits imposed on XML external entities\nand/or gain access to the XML files processed for other web applications\ndeployed on the same Apache Tomcat instance. (CVE-2014-0119)\n\nAll Tomcat users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. Tomcat must be\nrestarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-08-11"
+      },
+      "Updated": {
+        "Date": "2014-08-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-4590",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-611",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4590",
+          "Public": "20140225"
+        },
+        {
+          "CveID": "CVE-2014-0119",
+          "Cvss2": "2.1/AV:N/AC:H/Au:S/C:P/I:N/A:N",
+          "Cwe": "CWE-470",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-0119",
+          "Public": "20140527"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1069911",
+          "ID": "1069911"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1102038",
+          "ID": "1102038"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6 is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038001"
+                  },
+                  {
+                    "Comment": "tomcat6 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-admin-webapps is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038003"
+                  },
+                  {
+                    "Comment": "tomcat6-admin-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-docs-webapp is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038005"
+                  },
+                  {
+                    "Comment": "tomcat6-docs-webapp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-el-2.1-api is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038007"
+                  },
+                  {
+                    "Comment": "tomcat6-el-2.1-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-javadoc is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038009"
+                  },
+                  {
+                    "Comment": "tomcat6-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-jsp-2.1-api is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038011"
+                  },
+                  {
+                    "Comment": "tomcat6-jsp-2.1-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-lib is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038013"
+                  },
+                  {
+                    "Comment": "tomcat6-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-servlet-2.5-api is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038015"
+                  },
+                  {
+                    "Comment": "tomcat6-servlet-2.5-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat6-webapps is earlier than 0:6.0.24-78.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141038017"
+                  },
+                  {
+                    "Comment": "tomcat6-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110335020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

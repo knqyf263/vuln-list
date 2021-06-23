@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20160188",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2016:0188: sos security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:0188",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:0188"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-7529",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-7529"
+      }
+    ],
+    "Description": "The sos package contains a set of utilities that gather information from\nsystem hardware, logs, and configuration files. The information can then be\nused for diagnostic purposes and debugging.\n\nAn insecure temporary file use flaw was found in the way sos created\ncertain sosreport files. A local attacker could possibly use this flaw to\nperform a symbolic link attack to reveal the contents of sosreport files,\nor in some cases modify arbitrary files and escalate their privileges on\nthe system. (CVE-2015-7529)\n\nThis issue was discovered by Mateusz Guzik of Red Hat.\n\nThis update also fixes the following bug:\n\n* Previously, the sosreport tool was not collecting the /var/lib/ceph and\n/var/run/ceph directories when run with the ceph plug-in enabled, causing\nthe generated sosreport archive to miss vital troubleshooting information\nabout ceph. With this update, the ceph plug-in for sosreport collects these\ndirectories, and the generated report contains more useful information.\n(BZ#1291347)\n\nAll users of sos are advised to upgrade to this updated package, which\ncontains backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-02-16"
+      },
+      "Updated": {
+        "Date": "2016-02-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-7529",
+          "Cvss2": "6.0/AV:L/AC:H/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-377",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-7529",
+          "Public": "20151201"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1282542",
+          "ID": "1282542"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.2",
+        "cpe:/o:redhat:rhel_tus:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          },
+          {
+            "Comment": "sos is earlier than 0:3.2-35.el7_2.3",
+            "TestRef": "oval:com.redhat.rhsa:tst:20160188001"
+          },
+          {
+            "Comment": "sos is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20160188002"
+          }
+        ]
+      }
+    ]
+  }
+}

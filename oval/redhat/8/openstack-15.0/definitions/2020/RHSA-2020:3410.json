@@ -1,0 +1,133 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20203410",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2020:3410: python-paunch and openstack-tripleo-heat-templates security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 15.0 (Stein)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:3410",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:3410"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-10731",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-10731"
+      }
+    ],
+    "Description": "Library and utility to launch and manage containers using YAML based\nconfiguration data.\n\nopenstack-tripleo-heat-templates is a collection of OpenStack Orchestration\ntemplates and tools (codename heat), which can be used to help deploy\nOpenStack.\n\nSecurity Fix(es):\n\n* EMBARGOED CVE-2020-10731 openstack-tripleo-heat-templates: No sVirt\nprotection for OSP16 VMs due to disabled SELinux (CVE-2020-10731)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE\npage listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-08-11"
+      },
+      "Updated": {
+        "Date": "2020-08-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-10731",
+          "Cvss3": "9.9/CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H",
+          "Cwe": "CWE-284-\u003eCWE-1220",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-10731",
+          "Public": "20200728"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1831544",
+          "ID": "1831544"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack:15",
+        "cpe:/a:redhat:openstack:15::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20194358007"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20194358005"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20194358006"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "paunch-services is earlier than 0:4.5.3-0.20200108190460.3c38fe6.el8ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203410001"
+                  },
+                  {
+                    "Comment": "paunch-services is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203410002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-paunch is earlier than 0:4.5.3-0.20200108190460.3c38fe6.el8ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203410003"
+                  },
+                  {
+                    "Comment": "python3-paunch is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203410004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-tripleo-heat-templates is earlier than 0:10.6.3-0.20200113185561.cf467ea.el8ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203410005"
+                  },
+                  {
+                    "Comment": "openstack-tripleo-heat-templates is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203410006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

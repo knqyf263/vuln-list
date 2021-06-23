@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110180",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2011:0180: pango security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0180",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0180"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0020",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0020"
+      }
+    ],
+    "Description": "Pango is a library used for the layout and rendering of internationalized\ntext.\n\nAn input sanitization flaw, leading to a heap-based buffer overflow, was\nfound in the way Pango displayed font files when using the FreeType font\nengine back end. If a user loaded a malformed font file with an application\nthat uses Pango, it could cause the application to crash or, possibly,\nexecute arbitrary code with the privileges of the user running the\napplication. (CVE-2011-0020)\n\nUsers of pango and evolution28-pango are advised to upgrade to these\nupdated packages, which contain a backported patch to resolve this issue.\nAfter installing the updated packages, you must restart your system or\nrestart your X session for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-01-27"
+      },
+      "Updated": {
+        "Date": "2011-01-27"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-0020",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0020",
+          "Public": "20110118"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/671122",
+          "ID": "671122"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pango is earlier than 0:1.28.1-3.el6_0.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110180001"
+                  },
+                  {
+                    "Comment": "pango is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110180002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pango-devel is earlier than 0:1.28.1-3.el6_0.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110180003"
+                  },
+                  {
+                    "Comment": "pango-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110180004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

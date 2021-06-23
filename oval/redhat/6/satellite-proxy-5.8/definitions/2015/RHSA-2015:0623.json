@@ -1,0 +1,153 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20150623",
+  "Version": "649",
+  "Metadata": {
+    "Title": "RHSA-2015:0623: docker security, bug fix, and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7 Extras"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:0623",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:0623"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-9356",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-9356"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-9357",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-9357"
+      }
+    ],
+    "Description": "Docker is a service providing container management on Linux.\n\nIt was found that a malicious container image could overwrite arbitrary portions of the host file system by including absolute symlinks, potentially leading to privilege escalation. (CVE-2014-9356)\n\nA flaw was found in the way the Docker service unpacked images or builds after a \"docker pull\". An attacker could use this flaw to provide a malicious image or build that, when unpacked, would escalate their privileges on the system. (CVE-2014-9357)\n\nRed Hat would like to thank Docker Inc. for reporting these issues.\n\nThe docker-python subpackage provides the new Atomic tool. The goal of Atomic is to provide a high level, coherent entry point for Red Hat Enterprise Linux Atomic Host. Atomic makes it easier to interact with special kinds of containers, such as super-privileged debugging tools. Comprehensive information and documentation is available in the atomic manual pages.\n\nThe docker packages have been upgraded to upstream version 1.4.1, which provides a number of bug fixes and enhancements over the previous version, most notably an experimental overlayfs storage driver. (BZ#1174351)\n\nBug fixes:\n\n* The JSON configuration files for containers and images were inconsistent. As a consequence, when these files were parsed by the \"docker inspect\" command, the output was unnecessarily complex. This update improves the key naming schema in the configuration files and the output from \"docker inspect\" is now uniform. (BZ#1092773)\n\n* The /run directory had an incorrect SELinux label. As a consequence, containers could not access /run. This update corrects the SELinux label and containers now have access to /run. (BZ#1100009)\n\n* The Docker service contained an incorrect path for the secrets directory. As a consequence, executing \"docker run\" failed to create containers. This update fixes the default path to the secrets directory and \"docker run\" now executes successfully. (BZ#1102568)\n\n* It was not possible to specify a default repository in the configuration file in cases where all docker.io files are inaccessible. As a consequence, running docker commands failed because they could not contact the default repositories. Now, it is possible to specify a local Docker repository, and commands no longer fail because they are able to connect to a local private repository. (BZ#1106430)\n\n* When executing the \"docker attach\" command on a container which was in the process of shutting down, the process did not fail, but became unresponsive. This bug has been fixed, and running \"docker attach\" on a container which is shutting down causes the attach process to fail with an informative error message that it is not possible to attach to a stopped container. (BZ#1113608)\n\n* The \"docker run\" sub-command incorrectly returned non-zero exit codes, when they all should have been zero. As a consequence, it was not possible to differentiate between the exit codes of the docker command line and exit codes of contained processes, which in turn made automated control of \"docker run\" impossible. This update fixes the inconsistencies within the exit codes of \"docker run\". Additionally, this update also fixes inconsistencies of other docker sub-commands and improves the language in the error and warning messages. (BZ#1162807)\n\n* Adding a new registry with the \"--registry-prepend\" option did not follow the correct order to query and download an image. As a consequence, it did not query the prepended new registry first, but rather started with querying docker.io. The \"--registry-prepend\" option has been renamed to \"--registry-add\" and its behavior has been changed to query the registries added in the given order, with docker.io queried last. (BZ#1186153)\n\nAll docker users are advised to upgrade to these updated packages, which correct these issues and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-03-05"
+      },
+      "Updated": {
+        "Date": "2015-03-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-9356",
+          "Cvss2": "5.4/AV:N/AC:H/Au:N/C:N/I:C/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-9356",
+          "Public": "20141211"
+        },
+        {
+          "CveID": "CVE-2014-9357",
+          "Cvss2": "4.6/AV:A/AC:H/Au:N/C:N/I:C/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-9357",
+          "Public": "20141211"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1172761",
+          "ID": "1172761"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1172782",
+          "ID": "1172782"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras_other:7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20140047030"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20140047029"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker is earlier than 0:1.4.1-37.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150623001"
+                  },
+                  {
+                    "Comment": "docker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-logrotate is earlier than 0:1.4.1-37.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150623003"
+                  },
+                  {
+                    "Comment": "docker-logrotate is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "docker-python is earlier than 0:0.7.1-37.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150623005"
+                  },
+                  {
+                    "Comment": "docker-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-websocket-client is earlier than 0:0.14.1-37.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150623007"
+                  },
+                  {
+                    "Comment": "python-websocket-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20140047016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

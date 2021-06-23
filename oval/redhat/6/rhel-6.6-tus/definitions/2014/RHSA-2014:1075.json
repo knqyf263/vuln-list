@@ -1,0 +1,156 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141075",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHSA-2014:1075: qemu-kvm security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1075",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1075"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-0222",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-0222"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-0223",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-0223"
+      }
+    ],
+    "Description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for\nLinux on AMD64 and Intel 64 systems. The qemu-kvm package provides the\nuser-space component for running virtual machines using KVM.\n\nTwo integer overflow flaws were found in the QEMU block driver for QCOW\nversion 1 disk images. A user able to alter the QEMU disk image files\nloaded by a guest could use either of these flaws to corrupt QEMU process\nmemory on the host, which could potentially result in arbitrary code\nexecution on the host with the privileges of the QEMU process.\n(CVE-2014-0222, CVE-2014-0223)\n\nRed Hat would like to thank NSA for reporting these issues.\n\nThis update also fixes the following bugs:\n\n* In certain scenarios, when performing live incremental migration, the\ndisk size could be expanded considerably due to the transfer of unallocated\nsectors past the end of the base image. With this update, the\nbdrv_is_allocated() function has been fixed to no longer return \"True\" for\nunallocated sectors, and the disk size no longer changes after performing\nlive incremental migration. (BZ#1109715)\n\n* This update enables ioeventfd in virtio-scsi-pci. This allows QEMU to\nprocess I/O requests outside of the vCPU thread, reducing the latency of\nsubmitting requests and improving single task throughput. (BZ#1123271)\n\n* Prior to this update, vendor-specific SCSI commands issued from a KVM\nguest did not reach the target device due to QEMU considering such commands\nas invalid. This update fixes this bug by properly propagating\nvendor-specific SCSI commands to the target device. (BZ#1125131)\n\nAll qemu-kvm users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. After installing this\nupdate, shut down all running virtual machines. Once all virtual machines\nhave shut down, start them again for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-08-19"
+      },
+      "Updated": {
+        "Date": "2014-08-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-0222",
+          "Cvss2": "4.3/AV:A/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-190-\u003eCWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-0222",
+          "Public": "20140512"
+        },
+        {
+          "CveID": "CVE-2014-0223",
+          "Cvss2": "4.3/AV:A/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-190-\u003eCWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-0223",
+          "Public": "20140512"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1097216",
+          "ID": "1097216"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1097222",
+          "ID": "1097222"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-guest-agent is earlier than 2:0.12.1.2-2.415.el6_5.14",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141075001"
+                  },
+                  {
+                    "Comment": "qemu-guest-agent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121234002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img is earlier than 2:0.12.1.2-2.415.el6_5.14",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141075003"
+                  },
+                  {
+                    "Comment": "qemu-img is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm is earlier than 2:0.12.1.2-2.415.el6_5.14",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141075005"
+                  },
+                  {
+                    "Comment": "qemu-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools is earlier than 2:0.12.1.2-2.415.el6_5.14",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141075007"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110345006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

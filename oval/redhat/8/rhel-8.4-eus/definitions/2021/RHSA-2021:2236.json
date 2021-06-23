@@ -1,0 +1,154 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212236",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:2236: polkit security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8.1 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2236",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2236"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3560",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3560"
+      }
+    ],
+    "Description": "The polkit packages provide a component for controlling system-wide privileges. This component provides a uniform and organized way for non-privileged processes to communicate with privileged ones.\n\nSecurity Fix(es):\n\n* polkit: local privilege escalation using polkit_system_bus_name_get_creds_sync() (CVE-2021-3560)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-06-03"
+      },
+      "Updated": {
+        "Date": "2021-06-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-3560",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-863",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3560",
+          "Public": "20210603:0655"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1961710",
+          "ID": "1961710"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_eus:8.1",
+        "cpe:/a:redhat:rhel_eus:8.1::appstream",
+        "cpe:/a:redhat:rhel_eus:8.1::crb",
+        "cpe:/a:redhat:rhel_eus:8.1::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.1::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.1::sap",
+        "cpe:/a:redhat:rhel_eus:8.1::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.1::supplementary",
+        "cpe:/o:redhat:rhel_eus:8.1",
+        "cpe:/o:redhat:rhel_eus:8.1::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit is earlier than 0:0.115-9.el8_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212236001"
+                  },
+                  {
+                    "Comment": "polkit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212236002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-devel is earlier than 0:0.115-9.el8_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212236003"
+                  },
+                  {
+                    "Comment": "polkit-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212236004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-docs is earlier than 0:0.115-9.el8_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212236005"
+                  },
+                  {
+                    "Comment": "polkit-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212236006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-libs is earlier than 0:0.115-9.el8_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212236007"
+                  },
+                  {
+                    "Comment": "polkit-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212236008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

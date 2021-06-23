@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130590",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2013:0590: nss-pam-ldapd security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0590",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0590"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0288",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0288"
+      }
+    ],
+    "Description": "The nss-pam-ldapd packages provide the nss-pam-ldapd daemon (nslcd), which\nuses a directory server to lookup name service information on behalf of a\nlightweight nsswitch module.\n\nAn array index error, leading to a stack-based buffer overflow flaw, was\nfound in the way nss-pam-ldapd managed open file descriptors. An attacker\nable to make a process have a large number of open file descriptors and\nperform name lookups could use this flaw to cause the process to crash or,\npotentially, execute arbitrary code with the privileges of the user running\nthe process. (CVE-2013-0288)\n\nRed Hat would like to thank Garth Mollett for reporting this issue.\n\nAll users of nss-pam-ldapd are advised to upgrade to these updated\npackages, which contain a backported patch to fix this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-03-04"
+      },
+      "Updated": {
+        "Date": "2013-03-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-0288",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-121",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0288",
+          "Public": "20130218"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/909119",
+          "ID": "909119"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "nss-pam-ldapd is earlier than 0:0.7.5-18.1.el6_4",
+            "TestRef": "oval:com.redhat.rhsa:tst:20130590001"
+          },
+          {
+            "Comment": "nss-pam-ldapd is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20130590002"
+          }
+        ]
+      }
+    ]
+  }
+}

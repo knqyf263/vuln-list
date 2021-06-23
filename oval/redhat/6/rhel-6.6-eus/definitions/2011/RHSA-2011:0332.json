@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110332",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2011:0332: scsi-target-utils security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0332",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0332"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0001",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0001"
+      }
+    ],
+    "Description": "The scsi-target-utils package contains the daemon and tools to set up and\nmonitor SCSI targets. Currently, iSCSI software and iSER targets are\nsupported.\n\nA double-free flaw was found in scsi-target-utils' tgtd daemon. A remote\nattacker could trigger this flaw by sending carefully-crafted network\ntraffic, causing the tgtd daemon to crash. (CVE-2011-0001)\n\nRed Hat would like to thank Emmanuel Bouillon of NATO C3 Agency for\nreporting this issue.\n\nAll scsi-target-utils users should upgrade to this updated package, which\ncontains a backported patch to correct this issue. All running\nscsi-target-utils services must be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-03-09"
+      },
+      "Updated": {
+        "Date": "2011-03-09"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-0001",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0001",
+          "Public": "20110309"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/667261",
+          "ID": "667261"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.6",
+        "cpe:/o:redhat:rhel_eus:6.6::computenode",
+        "cpe:/o:redhat:rhel_eus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "scsi-target-utils is earlier than 0:1.0.4-3.el6_0.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110332001"
+          },
+          {
+            "Comment": "scsi-target-utils is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110332002"
+          }
+        ]
+      }
+    ]
+  }
+}

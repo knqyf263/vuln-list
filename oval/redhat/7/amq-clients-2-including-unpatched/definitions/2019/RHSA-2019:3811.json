@@ -1,0 +1,320 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193811",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2019:3811: OpenShift Container Platform 3.9 atomic-openshift security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 3.9"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3811",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3811"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-10150",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-10150"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11249",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11249"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11251",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11251"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-11253",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-11253"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the atomic-openshift RPM package for Red Hat OpenShift Container Platform 3.9.102.\n\nSecurity Fix(es):\n\n* kubernetes: YAML parsing vulnerable to \"Billion Laughs\" attack, allowing for remote denial of service (CVE-2019-11253)\n\n* atomic-openshift: OpenShift builds don't verify SSH Host Keys for the Git repository (CVE-2019-10150)\n\n* kubernetes: Incomplete fixes for CVE-2019-1002101 and CVE-2019-11246, kubectl cp potential directory traversal (CVE-2019-11249)\n\n* kubernetes: `kubectl cp` allows for arbitrary file write via double symlinks (CVE-2019-11251)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-07"
+      },
+      "Updated": {
+        "Date": "2019-11-07"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-10150",
+          "Cvss3": "5.9/CVSS:3.0/AV:A/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:L",
+          "Cwe": "CWE-287",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-10150",
+          "Public": "20190529"
+        },
+        {
+          "CveID": "CVE-2019-11249",
+          "Cvss3": "4.8/CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-22",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11249",
+          "Public": "20190805"
+        },
+        {
+          "CveID": "CVE-2019-11251",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:H/PR:N/UI:R/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-59",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11251",
+          "Public": "20190918"
+        },
+        {
+          "CveID": "CVE-2019-11253",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-11253",
+          "Public": "20190928"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1713433",
+          "ID": "1713433"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1737651",
+          "ID": "1737651"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1753495",
+          "ID": "1753495"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1757701",
+          "ID": "1757701"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:3.9",
+        "cpe:/a:redhat:openshift:3.9::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201715095006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201715095005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811001"
+                  },
+                  {
+                    "Comment": "atomic-openshift is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-clients is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811003"
+                  },
+                  {
+                    "Comment": "atomic-openshift-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-clients-redistributable is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811005"
+                  },
+                  {
+                    "Comment": "atomic-openshift-clients-redistributable is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-cluster-capacity is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811007"
+                  },
+                  {
+                    "Comment": "atomic-openshift-cluster-capacity is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-docker-excluder is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811009"
+                  },
+                  {
+                    "Comment": "atomic-openshift-docker-excluder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-excluder is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811011"
+                  },
+                  {
+                    "Comment": "atomic-openshift-excluder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-federation-services is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811013"
+                  },
+                  {
+                    "Comment": "atomic-openshift-federation-services is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-master is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811015"
+                  },
+                  {
+                    "Comment": "atomic-openshift-master is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-node is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811017"
+                  },
+                  {
+                    "Comment": "atomic-openshift-node is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-pod is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811019"
+                  },
+                  {
+                    "Comment": "atomic-openshift-pod is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-sdn-ovs is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811021"
+                  },
+                  {
+                    "Comment": "atomic-openshift-sdn-ovs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-service-catalog is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811023"
+                  },
+                  {
+                    "Comment": "atomic-openshift-service-catalog is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-template-service-broker is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811025"
+                  },
+                  {
+                    "Comment": "atomic-openshift-template-service-broker is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "atomic-openshift-tests is earlier than 0:3.9.102-1.git.0.6411f52.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193811027"
+                  },
+                  {
+                    "Comment": "atomic-openshift-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

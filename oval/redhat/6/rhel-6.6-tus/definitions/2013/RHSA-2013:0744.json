@@ -1,0 +1,482 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130744",
+  "Version": "646",
+  "Metadata": {
+    "Title": "RHSA-2013:0744: kernel security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0744",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0744"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-6537",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-6537"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-6538",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-6538"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-6546",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-6546"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-6547",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-6547"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0349",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0349"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-0913",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-0913"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1767",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1767"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1773",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1773"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1774",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1774"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1792",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1792"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1796",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1796"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1797",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1797"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1798",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1798"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1826",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1826"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1827",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1827"
+      }
+    ],
+    "Description": "Security:\n\n* An integer overflow flaw, leading to a heap-based buffer overflow, was\nfound in the way the Intel i915 driver in the Linux kernel handled the\nallocation of the buffer used for relocation copies. A local user with\nconsole access could use this flaw to cause a denial of service or escalate\ntheir privileges. (CVE-2013-0913, Important)\n\n* A buffer overflow flaw was found in the way UTF-8 characters were\nconverted to UTF-16 in the utf8s_to_utf16s() function of the Linux kernel's\nFAT file system implementation. A local user able to mount a FAT file\nsystem with the \"utf8=1\" option could use this flaw to crash the system or,\npotentially, to escalate their privileges. (CVE-2013-1773, Important)\n\n* A flaw was found in the way KVM handled guest time updates when the\nbuffer the guest registered by writing to the MSR_KVM_SYSTEM_TIME machine\nstate register (MSR) crossed a page boundary. A privileged guest user could\nuse this flaw to crash the host or, potentially, escalate their privileges,\nallowing them to execute arbitrary code at the host kernel level.\n(CVE-2013-1796, Important)\n\n* A potential use-after-free flaw was found in the way KVM handled guest\ntime updates when the GPA (guest physical address) the guest registered by\nwriting to the MSR_KVM_SYSTEM_TIME machine state register (MSR) fell into a\nmovable or removable memory region of the hosting user-space process (by\ndefault, QEMU-KVM) on the host. If that memory region is deregistered from\nKVM using KVM_SET_USER_MEMORY_REGION and the allocated virtual memory\nreused, a privileged guest user could potentially use this flaw to\nescalate their privileges on the host. (CVE-2013-1797, Important)\n\n* A flaw was found in the way KVM emulated IOAPIC (I/O Advanced\nProgrammable Interrupt Controller). A missing validation check in the\nioapic_read_indirect() function could allow a privileged guest user to\ncrash the host, or read a substantial portion of host kernel memory.\n(CVE-2013-1798, Important)\n\n* A race condition in install_user_keyrings(), leading to a NULL pointer\ndereference, was found in the key management facility. A local,\nunprivileged user could use this flaw to cause a denial of service.\n(CVE-2013-1792, Moderate)\n\n* A NULL pointer dereference in the XFRM implementation could allow a local\nuser who has the CAP_NET_ADMIN capability to cause a denial of service.\n(CVE-2013-1826, Moderate)\n\n* A NULL pointer dereference in the Datagram Congestion Control Protocol\n(DCCP) implementation could allow a local user to cause a denial of\nservice. (CVE-2013-1827, Moderate)\n\n* Information leak flaws in the XFRM implementation could allow a local\nuser who has the CAP_NET_ADMIN capability to leak kernel stack memory to\nuser-space. (CVE-2012-6537, Low)\n\n* Two information leak flaws in the Asynchronous Transfer Mode (ATM)\nsubsystem could allow a local, unprivileged user to leak kernel stack\nmemory to user-space. (CVE-2012-6546, Low)\n\n* An information leak was found in the TUN/TAP device driver in the\nnetworking implementation. A local user with access to a TUN/TAP virtual\ninterface could use this flaw to leak kernel stack memory to user-space.\n(CVE-2012-6547, Low)\n\n* An information leak in the Bluetooth implementation could allow a local\nuser who has the CAP_NET_ADMIN capability to leak kernel stack memory to\nuser-space. (CVE-2013-0349, Low)\n\n* A use-after-free flaw was found in the tmpfs implementation. A local user\nable to mount and unmount a tmpfs file system could use this flaw to cause\na denial of service or, potentially, escalate their privileges.\n(CVE-2013-1767, Low)\n\n* A NULL pointer dereference was found in the Linux kernel's USB Inside Out\nEdgeport Serial Driver implementation. An attacker with physical access to\na system could use this flaw to cause a denial of service. (CVE-2013-1774,\nLow)\n\nRed Hat would like to thank Andrew Honig of Google for reporting\nCVE-2013-1796, CVE-2013-1797, and CVE-2013-1798. CVE-2013-1792 was\ndiscovered by Mateusz Guzik of Red Hat EMEA GSS SEG Team.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-04-23"
+      },
+      "Updated": {
+        "Date": "2013-04-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-6537",
+          "Cvss2": "1.5/AV:L/AC:M/Au:S/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-6537",
+          "Public": "20120919"
+        },
+        {
+          "CveID": "CVE-2012-6538",
+          "Cvss2": "1.5/AV:L/AC:M/Au:S/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-6538",
+          "Public": "20120919"
+        },
+        {
+          "CveID": "CVE-2012-6546",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-6546",
+          "Public": "20120815"
+        },
+        {
+          "CveID": "CVE-2012-6547",
+          "Cvss2": "1.7/AV:L/AC:L/Au:S/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-6547",
+          "Public": "20120815"
+        },
+        {
+          "CveID": "CVE-2013-0349",
+          "Cvss2": "1.5/AV:L/AC:M/Au:S/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0349",
+          "Public": "20130109"
+        },
+        {
+          "CveID": "CVE-2013-0913",
+          "Cvss2": "6.0/AV:L/AC:H/Au:S/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-0913",
+          "Public": "20130311"
+        },
+        {
+          "CveID": "CVE-2013-1767",
+          "Cvss2": "6.0/AV:L/AC:H/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-416",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1767",
+          "Public": "20130224"
+        },
+        {
+          "CveID": "CVE-2013-1773",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1773",
+          "Public": "20121209"
+        },
+        {
+          "CveID": "CVE-2013-1774",
+          "Cvss2": "3.8/AV:L/AC:H/Au:S/C:N/I:N/A:C",
+          "Cwe": "CWE-476",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1774",
+          "Public": "20130118"
+        },
+        {
+          "CveID": "CVE-2013-1792",
+          "Cvss2": "4.0/AV:L/AC:H/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1792",
+          "Public": "20130306"
+        },
+        {
+          "CveID": "CVE-2013-1796",
+          "Cvss2": "6.5/AV:A/AC:H/Au:S/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1796",
+          "Public": "20130320"
+        },
+        {
+          "CveID": "CVE-2013-1797",
+          "Cvss2": "6.5/AV:A/AC:H/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-416",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1797",
+          "Public": "20130320"
+        },
+        {
+          "CveID": "CVE-2013-1798",
+          "Cvss2": "5.9/AV:A/AC:H/Au:S/C:C/I:N/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1798",
+          "Public": "20130320"
+        },
+        {
+          "CveID": "CVE-2013-1826",
+          "Cvss2": "3.8/AV:L/AC:H/Au:S/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1826",
+          "Public": "20120913"
+        },
+        {
+          "CveID": "CVE-2013-1827",
+          "Cvss2": "4.9/AV:L/AC:L/Au:N/C:N/I:N/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1827",
+          "Public": "20120815"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/914298",
+          "ID": "914298"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/915592",
+          "ID": "915592"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/916115",
+          "ID": "916115"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/916191",
+          "ID": "916191"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/916646",
+          "ID": "916646"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/917012",
+          "ID": "917012"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/917013",
+          "ID": "917013"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/917017",
+          "ID": "917017"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/919164",
+          "ID": "919164"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/919384",
+          "ID": "919384"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/920471",
+          "ID": "920471"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/922253",
+          "ID": "922253"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/922344",
+          "ID": "922344"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/922383",
+          "ID": "922383"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/922424",
+          "ID": "922424"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:2.6.32-358.6.1.el6 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20130744025"
+              },
+              {
+                "Comment": "kernel earlier than 0:2.6.32-358.6.1.el6 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20130744026"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-bootwrapper is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744003"
+                  },
+                  {
+                    "Comment": "kernel-bootwrapper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744005"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744007"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744009"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-doc is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744011"
+                  },
+                  {
+                    "Comment": "kernel-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-firmware is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744013"
+                  },
+                  {
+                    "Comment": "kernel-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-headers is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744015"
+                  },
+                  {
+                    "Comment": "kernel-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744017"
+                  },
+                  {
+                    "Comment": "kernel-kdump is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump-devel is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744019"
+                  },
+                  {
+                    "Comment": "kernel-kdump-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perf is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744021"
+                  },
+                  {
+                    "Comment": "perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-perf is earlier than 0:2.6.32-358.6.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130744023"
+                  },
+                  {
+                    "Comment": "python-perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111530024"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

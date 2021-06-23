@@ -1,0 +1,246 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20150386",
+  "Version": "642",
+  "Metadata": {
+    "Title": "RHBA-2015:0386: cups bug fix and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2015:0386",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2015:0386"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-2856",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-2856"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3537",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3537"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-5029",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-5029"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-5030",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-5030"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-5031",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-5031"
+      }
+    ],
+    "Description": "CUPS provides a portable printing layer for Linux, UNIX, and similar operating systems. \n\nThis update fixes the following bugs:\n\n* When using the cupsEnumDests() API call, the libcups utility failed to take note of the client callback function. As a consequence, applications using this API could terminate unexpectedly. The cupsEnumDests() implementation has been fixed and callbacks now function as expected. (BZ#1072954) \n\n* Previously, the CUPS scheduler used an incorrect D-Bus interface when trying to add a colord profile, which led to colord profiles not working correctly. With this update, the correct D-Bus interface is used, and colord profiles now function as expected. (BZ#1087323)\n\n* When handling an incoming Internet Printing Protocol (IPP) request with an associated document to follow, the CUPS scheduler did not check whether the client connection had data available to read before starting to handle the document data. Consequently, in some instances, a 10-second timeout could occur. The scheduler now checks for data availability before reading the document data, thus fixing this bug. (BZ#1110259) \n\n* When the CUPS scheduler read data from a client, it did not check for data availability in between reading the HTTP headers and the Internet Printing Protocol (IPP) request. This led to a race condition causing client requests to fail depending on the timing of the data packets. With this update, the scheduler checks for data availability, preventing the race condition from occurring. (BZ#1113045) \n\n* Previously, the manual page for the cupsd.conf(5) configuration file did not mention the ErrorPolicy directive. Text describing this directive has now been added to the manual page. (BZ#1120591) \n\n* Prior to this update, the cups utility was started before networking, and therefore it was not available in some configurations. A patch has been applied to fix this bug, and CUPS is now available throughout the network. (BZ#1144780) \n\n* A prior security update changed the /etc/cups/ppd/ directory not to be world-readable. However, the cupsGetPPD() function still assumed the files in the directory were world-readable. As a consequence, cupsGetPPD() returned a symbolic link to a file in /etc/cups/ppd/ to the caller even though the caller was not able to read it, which caused a variety of failures when printing. This update fixes cupsGetPPD3() to check for readability, and these failures thus no longer occur. (BZ#1153708)\n\n* A prior fix for setting the value of the FINAL_CONTENT_TYPE variable caused unintended problems: the back end could not reliably determine the format of the input data and forced FINAL_CONTENT_TYPE to always be \"printer/[queue name]\". The incorrect fix has been reverted. Nevertheless, users who have files configured on both the local and remote ends of their queues will still encounter this problem, and thus need to make the local ends of their queues \"raw\". (BZ#1149245)\n\nIn addition, this update adds the following enhancement:\n\n* Prior to this update, the commands required by the redhat-lsb-core package were provided by the cups packages, which itself has other requirements on other packages. To prevent redhat-lsb-core causing a larger dependency chain than needed, the CUPS client commands required by redhat-lsb-core have been moved into a new sub-package, cups-clients. (BZ#1115057) \n\nUsers of cups are advised to upgrade to these updated packages, which fix these bugs and add this enhancement. After installing this update, the cupsd daemon will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-03-05"
+      },
+      "Updated": {
+        "Date": "2015-03-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-2856",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-2856",
+          "Public": "20140130"
+        },
+        {
+          "CveID": "CVE-2014-3537",
+          "Cvss2": "5.0/AV:L/AC:M/Au:S/C:C/I:P/A:N",
+          "Cwe": "CWE-59",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3537",
+          "Public": "20140714"
+        },
+        {
+          "CveID": "CVE-2014-5029",
+          "Cvss2": "5.0/AV:L/AC:M/Au:S/C:C/I:P/A:N",
+          "Cwe": "CWE-59",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-5029",
+          "Public": "20140722"
+        },
+        {
+          "CveID": "CVE-2014-5030",
+          "Cvss2": "5.0/AV:L/AC:M/Au:S/C:C/I:P/A:N",
+          "Cwe": "CWE-59",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-5030",
+          "Public": "20140722"
+        },
+        {
+          "CveID": "CVE-2014-5031",
+          "Cvss2": "5.0/AV:L/AC:M/Au:S/C:C/I:P/A:N",
+          "Cwe": "CWE-59",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-5031",
+          "Public": "20140722"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1087122",
+          "ID": "1087122"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1115576",
+          "ID": "1115576"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1122600",
+          "ID": "1122600"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1128764",
+          "ID": "1128764"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1128767",
+          "ID": "1128767"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.2",
+        "cpe:/o:redhat:rhel_tus:7.2::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cups is earlier than 1:1.6.3-17.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386001"
+                  },
+                  {
+                    "Comment": "cups is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cups-client is earlier than 1:1.6.3-17.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386003"
+                  },
+                  {
+                    "Comment": "cups-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cups-devel is earlier than 1:1.6.3-17.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386005"
+                  },
+                  {
+                    "Comment": "cups-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cups-filesystem is earlier than 1:1.6.3-17.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386007"
+                  },
+                  {
+                    "Comment": "cups-filesystem is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cups-ipptool is earlier than 1:1.6.3-17.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386009"
+                  },
+                  {
+                    "Comment": "cups-ipptool is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cups-libs is earlier than 1:1.6.3-17.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386011"
+                  },
+                  {
+                    "Comment": "cups-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cups-lpd is earlier than 1:1.6.3-17.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386013"
+                  },
+                  {
+                    "Comment": "cups-lpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150386014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
