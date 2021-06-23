@@ -1,5 +1,5 @@
 {
-  "Severity": "HIGH",
+  "Severity": "MODERATE",
   "UpdatedAt": "2021-05-05T19:47:51Z",
   "Package": {
     "Ecosystem": "RUBYGEMS",
@@ -30,9 +30,9 @@
     "Description": "Impact\n------\nThis is similar to CVE-2021-22881. Specially crafted Host headers in\ncombination with certain \"allowed host\" formats can cause the Host\nAuthorization middleware in Action Pack to redirect users to a malicious\nwebsite.\n\nSince rails/rails@9bc7ea5, strings in config.hosts that do not have a leading\ndot are converted to regular expressions without proper escaping. This causes,\nfor example, config.hosts \u003c\u003c \"sub.example.com\" to permit a request with a Host\nheader value of sub-example.com.\n\n\nReleases\n--------\nThe fixed releases are available at the normal locations.\n\nWorkarounds\n-----------\nThe following monkey patch put in an initializer can be used as a workaround.\n\n```ruby\nclass ActionDispatch::HostAuthorization::Permissions\n  def sanitize_string(host)\n    if host.start_with?(\".\")\n      /\\A(.+\\.)?#{Regexp.escape(host[1..-1])}\\z/i\n    else\n      /\\A#{Regexp.escape host}\\z/i\n    end\n  end\nend\n```\n\nPatches\n-------\nTo aid users who aren't able to upgrade immediately we have provided patches for\nthe two supported release series. They are in git-am format and consist of a\nsingle changeset.\n\n* 6-1-open-redirect.patch - Patch for 6.1 series\n\nPlease note that only the 6.1.Z, 6.0.Z, and 5.2.Z series are supported at\npresent. Users of earlier unsupported releases are advised to upgrade as soon\nas possible as we cannot guarantee the continued availability of security\nfixes for unsupported releases.\n\nCredits\n-------\n\nThanks Jonathan Hefner (https://hackerone.com/jonathanhefner) for reporting this bug!",
     "Origin": "UNSPECIFIED",
     "PublishedAt": "2021-05-05T19:48:29Z",
-    "Severity": "HIGH",
+    "Severity": "MODERATE",
     "Summary": "Open Redirect in Action Pack",
-    "UpdatedAt": "2021-06-14T17:26:24Z",
+    "UpdatedAt": "2021-06-23T18:26:23Z",
     "WithdrawnAt": ""
   },
   "Versions": [
