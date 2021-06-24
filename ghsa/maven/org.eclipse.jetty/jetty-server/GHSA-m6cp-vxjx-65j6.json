@@ -1,0 +1,61 @@
+{
+  "Severity": "LOW",
+  "UpdatedAt": "2021-06-22T16:41:01Z",
+  "Package": {
+    "Ecosystem": "MAVEN",
+    "Name": "org.eclipse.jetty:jetty-server"
+  },
+  "Advisory": {
+    "DatabaseId": 4816,
+    "Id": "MDE2OlNlY3VyaXR5QWR2aXNvcnlHSFNBLW02Y3AtdnhqeC02NWo2",
+    "GhsaId": "GHSA-m6cp-vxjx-65j6",
+    "References": [
+      {
+        "Url": "https://github.com/eclipse/jetty.project/security/advisories/GHSA-m6cp-vxjx-65j6"
+      },
+      {
+        "Url": "https://nvd.nist.gov/vuln/detail/CVE-2021-34428"
+      },
+      {
+        "Url": "https://github.com/advisories/GHSA-m6cp-vxjx-65j6"
+      }
+    ],
+    "Identifiers": [
+      {
+        "Type": "GHSA",
+        "Value": "GHSA-m6cp-vxjx-65j6"
+      },
+      {
+        "Type": "CVE",
+        "Value": "CVE-2021-34428"
+      }
+    ],
+    "Description": "### Impact\nIf an exception is thrown from the `SessionListener#sessionDestroyed()` method, then the session ID is not invalidated in the session ID manager.   On deployments with clustered sessions and multiple contexts this can result in a session not being invalidated.  This can result in an application used on a shared computer being left logged in.\n\nThere is no known path for an attacker to induce such an exception to be thrown, thus they must rely on an application to throw such an exception.    The OP has also identified that during the call to `sessionDestroyed`, the `getLastAccessedTime()` throws an `IllegalStateException`, which potentially contrary to the servlet spec, so applications calling this method may always throw and fail to log out.  If such an application was only tested on a non clustered test environment, then it may be deployed on a clustered environment with multiple contexts and fail to log out.\n\n### Workarounds\nThe application should catch all Throwables within their `SessionListener#sessionDestroyed()` implementations.\n",
+    "Origin": "UNSPECIFIED",
+    "PublishedAt": "2021-06-23T20:23:04Z",
+    "Severity": "LOW",
+    "Summary": "SessionListener can prevent a session from being invalidated breaking logout",
+    "UpdatedAt": "2021-06-23T20:23:04Z",
+    "WithdrawnAt": ""
+  },
+  "Versions": [
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "11.0.3"
+      },
+      "VulnerableVersionRange": "\u003e= 11.0.0, \u003c= 11.0.2"
+    },
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "10.0.3"
+      },
+      "VulnerableVersionRange": "\u003e= 10.0.0, \u003c= 10.0.2"
+    },
+    {
+      "FirstPatchedVersion": {
+        "Identifier": "9.4.41"
+      },
+      "VulnerableVersionRange": "\u003c= 9.4.40"
+    }
+  ]
+}
