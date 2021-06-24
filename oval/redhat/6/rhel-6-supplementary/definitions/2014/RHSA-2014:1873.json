@@ -1,0 +1,194 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141873",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:1873: libvirt security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1873",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1873"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3633",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3633"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3657",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3657"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-7823",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-7823"
+      }
+    ],
+    "Description": "The libvirt library is a C API for managing and interacting with the\nvirtualization capabilities of Linux and other operating systems.\nIn addition, libvirt provides tools for remote management of\nvirtualized systems.\n\nAn out-of-bounds read flaw was found in the way libvirt's\nqemuDomainGetBlockIoTune() function looked up the disk index in a\nnon-persistent (live) disk configuration while a persistent disk\nconfiguration was being indexed. A remote attacker able to establish a\nread-only connection to libvirtd could use this flaw to crash libvirtd or,\npotentially, leak memory from the libvirtd process. (CVE-2014-3633)\n\nA denial of service flaw was found in the way libvirt's\nvirConnectListAllDomains() function computed the number of used domains.\nA remote attacker able to establish a read-only connection to libvirtd\ncould use this flaw to make any domain operations within libvirt\nunresponsive. (CVE-2014-3657)\n\nIt was found that when the VIR_DOMAIN_XML_MIGRATABLE flag was used, the\nQEMU driver implementation of the virDomainGetXMLDesc() function could\nbypass the restrictions of the VIR_DOMAIN_XML_SECURE flag. A remote\nattacker able to establish a read-only connection to libvirtd could use\nthis flaw to leak certain limited information from the domain XML data.\n(CVE-2014-7823)\n\nThe CVE-2014-3633 issue was discovered by Luyao Huang of Red Hat.\n\nThis update also fixes the following bug:\n\nWhen dumping migratable XML configuration of a domain, libvirt removes some\nautomatically added devices for compatibility with older libvirt releases.\nIf such XML is passed to libvirt as a domain XML that should be used during\nmigration, libvirt checks this XML for compatibility with the internally\nstored configuration of the domain. However, prior to this update, these\nchecks failed because of devices that were missing (the same devices\nlibvirt removed). As a consequence, migration with user-supplied migratable\nXML failed. Since this feature is used by OpenStack, migrating QEMU/KVM\ndomains with OpenStack always failed. With this update, before checking\ndomain configurations for compatibility, libvirt transforms both\nuser-supplied and internal configuration into a migratable form\n(automatically added devices are removed) and checks those instead. Thus,\nno matter whether the user-supplied configuration was generated as\nmigratable or not, libvirt does not err about missing devices, and\nmigration succeeds as expected. (BZ#1155564)\n\nAll libvirt users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. After installing the\nupdated packages, libvirtd will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-11-18"
+      },
+      "Updated": {
+        "Date": "2014-11-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-3633",
+          "Cvss2": "3.2/AV:A/AC:H/Au:N/C:P/I:N/A:P",
+          "Cwe": "CWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3633",
+          "Public": "20140917"
+        },
+        {
+          "CveID": "CVE-2014-3657",
+          "Cvss2": "3.3/AV:A/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3657",
+          "Public": "20141001"
+        },
+        {
+          "CveID": "CVE-2014-7823",
+          "Cvss2": "3.3/AV:A/AC:L/Au:N/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-7823",
+          "Public": "20141105"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1141131",
+          "ID": "1141131"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1145667",
+          "ID": "1145667"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1160817",
+          "ID": "1160817"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt is earlier than 0:0.10.2-46.el6_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141873001"
+                  },
+                  {
+                    "Comment": "libvirt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-client is earlier than 0:0.10.2-46.el6_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141873003"
+                  },
+                  {
+                    "Comment": "libvirt-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-devel is earlier than 0:0.10.2-46.el6_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141873005"
+                  },
+                  {
+                    "Comment": "libvirt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-lock-sanlock is earlier than 0:0.10.2-46.el6_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141873007"
+                  },
+                  {
+                    "Comment": "libvirt-lock-sanlock is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-python is earlier than 0:0.10.2-46.el6_6.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141873009"
+                  },
+                  {
+                    "Comment": "libvirt-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

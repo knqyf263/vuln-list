@@ -1,0 +1,133 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111507",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2011:1507: libarchive security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1507",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1507"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1777",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1777"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1778",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1778"
+      }
+    ],
+    "Description": "The libarchive programming library can create and read several different\nstreaming archive formats, including GNU tar and cpio. It can also read ISO\n9660 CD-ROM images.\n\nTwo heap-based buffer overflow flaws were discovered in libarchive. If a\nuser were tricked into expanding a specially-crafted ISO 9660 CD-ROM image\nor tar archive with an application using libarchive, it could cause the\napplication to crash or, potentially, execute arbitrary code with the\nprivileges of the user running the application. (CVE-2011-1777,\nCVE-2011-1778)\n\nAll libarchive users should upgrade to these updated packages, which\ncontain backported patches to correct these issues. All running\napplications using libarchive must be restarted for this update to take\neffect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-12-01"
+      },
+      "Updated": {
+        "Date": "2011-12-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1777",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1777",
+          "Public": "20101230"
+        },
+        {
+          "CveID": "CVE-2011-1778",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1778",
+          "Public": "20101230"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/705849",
+          "ID": "705849"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libarchive is earlier than 0:2.8.3-3.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111507001"
+                  },
+                  {
+                    "Comment": "libarchive is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111507002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libarchive-devel is earlier than 0:2.8.3-3.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111507003"
+                  },
+                  {
+                    "Comment": "libarchive-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111507004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

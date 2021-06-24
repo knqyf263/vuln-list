@@ -1,0 +1,169 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212420",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:2420: dhcp security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8.2 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2420",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2420"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-25217",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-25217"
+      }
+    ],
+    "Description": "The Dynamic Host Configuration Protocol (DHCP) is a protocol that allows individual devices on an IP network to get their own network configuration information, including an IP address, a subnet mask, and a broadcast address. The dhcp packages provide a relay agent and ISC DHCP service required to enable and administer DHCP on a network.\n\nSecurity Fix(es):\n\n* dhcp: stack-based buffer overflow when parsing statements with colon-separated hex digits in config or lease files in dhcpd and dhclient (CVE-2021-25217)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-06-14"
+      },
+      "Updated": {
+        "Date": "2021-06-14"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-25217",
+          "Cvss3": "8.8/CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-119",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-25217",
+          "Public": "20210526"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1963258",
+          "ID": "1963258"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_eus:8.2",
+        "cpe:/a:redhat:rhel_eus:8.2::appstream",
+        "cpe:/a:redhat:rhel_eus:8.2::crb",
+        "cpe:/a:redhat:rhel_eus:8.2::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.2::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.2::sap",
+        "cpe:/a:redhat:rhel_eus:8.2::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.2::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.2",
+        "cpe:/o:redhat:rhel_eus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-client is earlier than 12:4.3.6-40.el8_2.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212420001"
+                  },
+                  {
+                    "Comment": "dhcp-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193525002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-common is earlier than 12:4.3.6-40.el8_2.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212420003"
+                  },
+                  {
+                    "Comment": "dhcp-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193525004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-libs is earlier than 12:4.3.6-40.el8_2.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212420005"
+                  },
+                  {
+                    "Comment": "dhcp-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193525006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-relay is earlier than 12:4.3.6-40.el8_2.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212420007"
+                  },
+                  {
+                    "Comment": "dhcp-relay is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193525008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-server is earlier than 12:4.3.6-40.el8_2.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212420009"
+                  },
+                  {
+                    "Comment": "dhcp-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193525010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

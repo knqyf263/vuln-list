@@ -1,0 +1,114 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110308",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2011:0308: mailman security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0308",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0308"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-3089",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-3089"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0707",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0707"
+      }
+    ],
+    "Description": "Mailman is a program used to help manage email discussion lists.\n\nMultiple input sanitization flaws were found in the way Mailman displayed\nusernames of subscribed users on certain pages. If a user who is subscribed\nto a mailing list were able to trick a victim into visiting one of those\npages, they could perform a cross-site scripting (XSS) attack against the\nvictim. (CVE-2011-0707)\n\nMultiple input sanitization flaws were found in the way Mailman displayed\nmailing list information. A mailing list administrator could use this flaw\nto conduct a cross-site scripting (XSS) attack against victims viewing a\nlist's \"listinfo\" page. (CVE-2010-3089)\n\nRed Hat would like to thank Mark Sapiro for reporting these issues.\n\nUsers of mailman should upgrade to this updated package, which contains\nbackported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-03-01"
+      },
+      "Updated": {
+        "Date": "2011-03-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2010-3089",
+          "Cvss2": "4.0/AV:N/AC:L/Au:S/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-3089",
+          "Public": "20100909"
+        },
+        {
+          "CveID": "CVE-2011-0707",
+          "Cvss2": "3.5/AV:N/AC:M/Au:S/C:N/I:P/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0707",
+          "Public": "20110218"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/631881",
+          "ID": "631881"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/677375",
+          "ID": "677375"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "mailman is earlier than 3:2.1.12-14.el6_0.2",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110308001"
+          },
+          {
+            "Comment": "mailman is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110308002"
+          }
+        ]
+      }
+    ]
+  }
+}

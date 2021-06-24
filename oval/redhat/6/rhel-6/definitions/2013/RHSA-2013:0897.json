@@ -1,0 +1,243 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130897",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2013:0897: mesa security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0897",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0897"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1872",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1872"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1993",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1993"
+      }
+    ],
+    "Description": "Mesa provides a 3D graphics API that is compatible with Open Graphics\nLibrary (OpenGL). It also provides hardware-accelerated drivers for many\npopular graphics chips.\n\nAn out-of-bounds access flaw was found in Mesa. If an application using\nMesa exposed the Mesa API to untrusted inputs (Mozilla Firefox does\nthis), an attacker could cause the application to crash or, potentially,\nexecute arbitrary code with the privileges of the user running the\napplication. (CVE-2013-1872)\n\nIt was found that Mesa did not correctly validate messages from the X\nserver. A malicious X server could cause an application using Mesa to crash\nor, potentially, execute arbitrary code with the privileges of the user\nrunning the application. (CVE-2013-1993)\n\nAll users of Mesa are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. All running\napplications linked against Mesa must be restarted for this update to take\neffect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-06-03"
+      },
+      "Updated": {
+        "Date": "2013-06-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1872",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-119",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1872",
+          "Public": "20130529"
+        },
+        {
+          "CveID": "CVE-2013-1993",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1993",
+          "Public": "20130523"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/923584",
+          "ID": "923584"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/961613",
+          "ID": "961613"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glx-utils is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897001"
+                  },
+                  {
+                    "Comment": "glx-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376124"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-demos is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897003"
+                  },
+                  {
+                    "Comment": "mesa-demos is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376126"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-dri-drivers is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897005"
+                  },
+                  {
+                    "Comment": "mesa-dri-drivers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376128"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-dri-filesystem is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897007"
+                  },
+                  {
+                    "Comment": "mesa-dri-filesystem is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376130"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-libGL is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897009"
+                  },
+                  {
+                    "Comment": "mesa-libGL is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376136"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-libGL-devel is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897011"
+                  },
+                  {
+                    "Comment": "mesa-libGL-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376138"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-libGLU is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897013"
+                  },
+                  {
+                    "Comment": "mesa-libGLU is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376140"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-libGLU-devel is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897015"
+                  },
+                  {
+                    "Comment": "mesa-libGLU-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376142"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-libOSMesa is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897017"
+                  },
+                  {
+                    "Comment": "mesa-libOSMesa is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376144"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mesa-libOSMesa-devel is earlier than 0:9.0-0.8.el6_4.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130897019"
+                  },
+                  {
+                    "Comment": "mesa-libOSMesa-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20141376146"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

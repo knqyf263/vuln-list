@@ -1,0 +1,191 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20171679",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2017:1679: bind security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:1679",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:1679"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3142",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3142"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3143",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3143"
+      }
+    ],
+    "Description": "The Berkeley Internet Name Domain (BIND) is an implementation of the Domain Name System (DNS) protocols. BIND includes a DNS server (named); a resolver library (routines for applications to use when interfacing with DNS); and tools for verifying that the DNS server is operating correctly.\n\nSecurity Fix(es):\n\n* A flaw was found in the way BIND handled TSIG authentication for dynamic updates. A remote attacker able to communicate with an authoritative BIND server could use this flaw to manipulate the contents of a zone, by forging a valid TSIG or SIG(0) signature for a dynamic update request. (CVE-2017-3143)\n\n* A flaw was found in the way BIND handled TSIG authentication of AXFR requests. A remote attacker, able to communicate with an authoritative BIND server, could use this flaw to view the entire contents of a zone by sending a specially constructed request packet. (CVE-2017-3142)\n\nRed Hat would like to thank Internet Systems Consortium for reporting these issues. Upstream acknowledges Clement Berthaux (Synacktiv) as the original reporter of these issues.\n\nBug Fix(es):\n\n* ICANN is planning to perform a Root Zone DNSSEC Key Signing Key (KSK) rollover during October 2017. Maintaining an up-to-date KSK, by adding the new root zone KSK, is essential for ensuring that validating DNS resolvers continue to function following the rollover. (BZ#1458234)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-07-05"
+      },
+      "Updated": {
+        "Date": "2017-07-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-3142",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-287",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3142",
+          "Public": "20170629"
+        },
+        {
+          "CveID": "CVE-2017-3143",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-287",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3143",
+          "Public": "20170629"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1466189",
+          "ID": "1466189"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1466193",
+          "ID": "1466193"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind is earlier than 32:9.8.2-0.62.rc1.el6_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171679001"
+                  },
+                  {
+                    "Comment": "bind is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-chroot is earlier than 32:9.8.2-0.62.rc1.el6_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171679003"
+                  },
+                  {
+                    "Comment": "bind-chroot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-devel is earlier than 32:9.8.2-0.62.rc1.el6_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171679005"
+                  },
+                  {
+                    "Comment": "bind-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-libs is earlier than 32:9.8.2-0.62.rc1.el6_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171679007"
+                  },
+                  {
+                    "Comment": "bind-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-sdb is earlier than 32:9.8.2-0.62.rc1.el6_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171679009"
+                  },
+                  {
+                    "Comment": "bind-sdb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-utils is earlier than 32:9.8.2-0.62.rc1.el6_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20171679011"
+                  },
+                  {
+                    "Comment": "bind-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

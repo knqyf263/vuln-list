@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110320",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2011:0320: libcgroup security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0320",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0320"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1006",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1006"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1022",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1022"
+      }
+    ],
+    "Description": "The libcgroup packages provide tools and libraries to control and monitor\ncontrol groups.\n\nA heap-based buffer overflow flaw was found in the way libcgroup converted\na list of user-provided controllers for a particular task into an array of\nstrings. A local attacker could use this flaw to escalate their privileges\nvia a specially-crafted list of controllers. (CVE-2011-1006)\n\nIt was discovered that libcgroup did not properly check the origin of\nNetlink messages. A local attacker could use this flaw to send crafted\nNetlink messages to the cgrulesengd daemon, causing it to put processes\ninto one or more existing control groups, based on the attacker's choosing,\npossibly allowing the particular tasks to run with more resources (memory,\nCPU, etc.) than originally intended. (CVE-2011-1022)\n\nRed Hat would like to thank Nelson Elhage for reporting the CVE-2011-1006\nissue.\n\nAll libcgroup users should upgrade to these updated packages, which contain\nbackported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-03-03"
+      },
+      "Updated": {
+        "Date": "2011-03-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1006",
+          "Cvss2": "7.2/AV:L/AC:L/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1006",
+          "Public": "20110303"
+        },
+        {
+          "CveID": "CVE-2011-1022",
+          "Cvss2": "3.3/AV:L/AC:M/Au:N/C:N/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1022",
+          "Public": "20110218"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/678107",
+          "ID": "678107"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/680409",
+          "ID": "680409"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcgroup is earlier than 0:0.36.1-6.el6_0.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110320001"
+                  },
+                  {
+                    "Comment": "libcgroup is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110320002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcgroup-devel is earlier than 0:0.36.1-6.el6_0.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110320003"
+                  },
+                  {
+                    "Comment": "libcgroup-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110320004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcgroup-pam is earlier than 0:0.36.1-6.el6_0.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110320005"
+                  },
+                  {
+                    "Comment": "libcgroup-pam is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110320006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

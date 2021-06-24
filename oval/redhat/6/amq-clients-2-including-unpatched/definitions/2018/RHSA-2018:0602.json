@@ -1,0 +1,90 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20180602",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2018:0602: openstack-tripleo-common and openstack-tripleo-heat-templates update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenStack Platform 12.0 (Pike)"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:0602",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:0602"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12155",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12155"
+      }
+    ],
+    "Description": "openstack-tripleo-common contains the python library for code common to the Red Hat OpenStack Platform director CLI and GUI (codename tripleo).\n\nopenstack-tripleo-heat-templates is a collection of OpenStack Orchestration templates and tools (codename heat), which can be used to help deploy OpenStack.\n\nSecurity Fix(es):\n\n* openstack-tripleo-heat-templates: Ceph client keyring is world-readable when deployed by director (CVE-2017-12155)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nRed Hat would like to thank Katuya Kawakami (NEC) for reporting this issue.\n\nBug Fix(es):\n\n* All Compute and Controller nodes have bridge-mappings configured and therefore are eligible to schedule routers. However, if you scheduled a router on a Compute node that doesn't have a connection to an external network, connectivity with the external network fails. This fix adds the ability to configure bridge-mappings in TripleO and in the director according to roles so that you can now exclude Compute nodes from router scheduling and maintain external network connectivity. (BZ#1510879)\n\n* Previously, the CephPools parameter value was incorrectly consumed as a string list instead of as a JSON object. This prevented creating additional Ceph pools during the overcloud deployment, because attempting to pass a JSON object failed. This fix updates the CephPools parameter so that it now accepts any JSON object that describes additional pools to create in the Ceph cluster. Note: The JSON object structure must conform to ceph-ansible conventions. (BZ#1516389)\n\n* There is currently a known issue with LDAP integration for Red Hat OpenStack Platform. The `keystone_domain_confg` tag is missing currently from `keystone.yaml`, preventing Puppet from properly applying the required configuration files. Consequently, LDAP integration with Red Hat OpenStack Platform will not be properly configured. As a workaround, you must manually edit `keystone.yaml` and add the missing tag. There are two ways to do this:\n\n1. Edit the file directly:\n  a. Log into the undercloud as the stack user.\n  b. Open the keystone.yaml in the editor of your choice. For example:\n       `sudo vi /usr/share/openstack-tripleo-heat-templates/docker/services/keystone.yaml`\n  c. Append the missing puppet tag, `keystone_domain_confg`, to line 94. For example:\n      `puppet_tags: keystone_config`\n        Changes to:\n      `puppet_tags: keystone_config,keystone_domain_confg`\n  d. Save and close `keystone.yaml`.\n  e. Verify you see the missing tag in the `keystone.yaml` file. The following command should return '1':\n    `cat /usr/share/openstack-tripleo-heat-templates/docker/sercies/keystone.yaml | grep 'puppet_tags: keystone_config,keystone_domain_config' | wc -l`\n\n2. Or, use sed to edit the file inline:\n  a. Login to the undercloud as the stack user.\n  b. Run the following command to add the missing puppet tag:\n     `sed -i 's/puppet_tags\\: keystone_config/puppet_tags\\: keystone_config,keystone_domain_config/' /usr/share/openstack-tripleo-heat-templates/docker/services/keystone.yaml`\n  c. Verify you see the missing tag in the keystone.yaml file The following command should return '1':\n    `cat /usr/share/openstack-tripleo-heat-templates/docker/sercies/keystone.yaml | grep 'puppet_tags: keystone_config,keystone_domain_config' | wc -l` (BZ#1519057)\n\n* It is only possible to deploy Ceph storage servers if their disk devices are homogeneous. (BZ#1520004)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-03-28"
+      },
+      "Updated": {
+        "Date": "2018-03-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-12155",
+          "Cvss3": "8.4/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:N",
+          "Cwe": "CWE-732",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12155",
+          "Public": "20170919"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1489360",
+          "ID": "1489360"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-optools:12",
+        "cpe:/a:redhat:openstack-optools:12::el7",
+        "cpe:/a:redhat:openstack:12",
+        "cpe:/a:redhat:openstack:12::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20152582006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20152582005"
+          },
+          {
+            "Comment": "openstack-tripleo-heat-templates is earlier than 0:7.0.9-8.el7ost",
+            "TestRef": "oval:com.redhat.rhsa:tst:20180602001"
+          },
+          {
+            "Comment": "openstack-tripleo-heat-templates is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20180602002"
+          }
+        ]
+      }
+    ]
+  }
+}

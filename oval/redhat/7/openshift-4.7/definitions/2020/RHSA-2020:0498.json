@@ -1,0 +1,494 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200498",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2020:0498: Red Hat Virtualization Engine security, bug fix and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.3"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0498",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0498"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-19336",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-19336"
+      }
+    ],
+    "Description": "The org.ovirt.engine-root is a core component of oVirt.\n\nThe following packages have been upgraded to a later upstream version: org.ovirt.engine-root (4.3.8.2), ovirt-engine-dwh (4.3.8), ovirt-engine-metrics (1.3.6.1), ovirt-fast-forward-upgrade (1.0.0), ovirt-imageio-common (1.5.3), ovirt-imageio-proxy (1.5.3), ovirt-web-ui (1.6.0), rhv-log-collector-analyzer (0.2.15), v2v-conversion-host (1.16.0). (BZ#1767333, BZ#1776722, BZ#1779587, BZ#1779631)\n\nSecurity Fix(es):\n\n* ovirt-engine: response_type parameter allows reflected XSS (CVE-2019-19336)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Previously, when a vNIC had two references to a VM, if the VM is a template, one reference was used. Otherwise, the other reference was used. This construct confused the constraint checker of the database and enabled inconsistencies. Bug 1528316 and bug 1684586 disabled the check of this constraint during upgrades. The current release fixes this issue by merging both references into a single one, which has to be set. As a result, the improved data structure in the database matches the database constraints and prevents inconsistencies. (BZ#1688781)\n\n* Previously, after using the REST API to create an affinity group, the resulting group did not have the required labels, even though they were defined in the request body. The current release fixes this issue so the affinity group has the labels that were defined in the request body. (BZ#1781380)\n\n* Previously, when you deleted a snapshot of a VM with a LUN disk, its image ID parsed incorrectly and used \"mapper\" as its value, which caused a null pointer exception. The current release fixes this issue by avoiding disks whose image ID parses as 'mapper' so deleting the VM snapshot is successful. (BZ#1779664)\n\n* Prevously, upgrading RHV Manager from 4.2 to 4.3 ovirt-fast-forward-upgrade fails with a yum dependency error. The current version fixes this issue. (BZ#1754979)\n\n* Previously, when you used the VM Portal to create a Windows virtual machine, it failed with the following error \"CREATE_VM failed [Cannot add VM. Invalid time zone for given OS type., Attribute: vmStatic].\" The Administration Portal did not have this issue. The current release fixes this issue. (BZ#1773580)\n\n* Normally, when the \"UserSessionTimeOutInterval\" is set to a negative value such as \"-1\", the user remains logged into the VM Portal indefinitely. However, in RHV version 4.5.3.6, a negative value automatically logged the user out immediately. The current release fixes this issue. (BZ#1757423)\n\nEnhancements:\n\n* This release adds a new 'status' column to the affinity group table that shows whether all of an affinity group's rules are satisfied (status = ok) or not (status = broken). The \"Enforcing\" option does not affect this status. (BZ#1767333)\n\n* In this release, Metrics Store adds support for a flat DNS environment without subdomains. This capability helps you satisfy security policies that mandate having a \"flat\" DNS environment with no submains. To enable this capability, you add a suffix to the master0 virtual machine when you configure networking for Metrics Store virtual machines. For example, if you set 'openshift_ovirt_machine_suffix' to 'prod' and 'public_hosted_zone' is 'example.com', then the metrics store virtual machine will be called 'master-prod0.example.com'. (BZ#1782412)\n\n* This release adds a new feature, rhv-image-discrepancies, which reports discrepancies between images in the engine database and storage. The report lists images that are present in one location but missing from the other. Also, for images that are present in both locations, the report lists discrepancies in the values of attributes such as status, parent_id, and type. (BZ#1739106)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-02-13"
+      },
+      "Updated": {
+        "Date": "2020-02-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-19336",
+          "Cvss3": "5.4/CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-79",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-19336",
+          "Public": "20200111"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1781001",
+          "ID": "1781001"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4",
+        "cpe:/a:redhat:rhev_manager:4.2",
+        "cpe:/a:redhat:rhev_manager:4.3",
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20180135042"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20180135041"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-web-ui is earlier than 0:1.6.0-2.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498001"
+                  },
+                  {
+                    "Comment": "ovirt-web-ui is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193024002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "v2v-conversion-host-ansible is earlier than 0:1.16.0-3.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498003"
+                  },
+                  {
+                    "Comment": "v2v-conversion-host-ansible is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-dwh is earlier than 0:4.3.8-1.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498005"
+                  },
+                  {
+                    "Comment": "ovirt-engine-dwh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-dwh-setup is earlier than 0:4.3.8-1.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498007"
+                  },
+                  {
+                    "Comment": "ovirt-engine-dwh-setup is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-fast-forward-upgrade is earlier than 0:1.0.0-16.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498009"
+                  },
+                  {
+                    "Comment": "ovirt-fast-forward-upgrade is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-imageio-common is earlier than 0:1.5.3-0.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498011"
+                  },
+                  {
+                    "Comment": "ovirt-imageio-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-imageio-proxy is earlier than 0:1.5.3-0.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498013"
+                  },
+                  {
+                    "Comment": "ovirt-imageio-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-imageio-proxy-setup is earlier than 0:1.5.3-0.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498015"
+                  },
+                  {
+                    "Comment": "ovirt-imageio-proxy-setup is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rhv-log-collector-analyzer is earlier than 0:0.2.15-0.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498017"
+                  },
+                  {
+                    "Comment": "rhv-log-collector-analyzer is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498019"
+                  },
+                  {
+                    "Comment": "ovirt-engine is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-backend is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498021"
+                  },
+                  {
+                    "Comment": "ovirt-engine-backend is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-dbscripts is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498023"
+                  },
+                  {
+                    "Comment": "ovirt-engine-dbscripts is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-extensions-api-impl is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498025"
+                  },
+                  {
+                    "Comment": "ovirt-engine-extensions-api-impl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-extensions-api-impl-javadoc is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498027"
+                  },
+                  {
+                    "Comment": "ovirt-engine-extensions-api-impl-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-health-check-bundler is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498029"
+                  },
+                  {
+                    "Comment": "ovirt-engine-health-check-bundler is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20190802012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-restapi is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498031"
+                  },
+                  {
+                    "Comment": "ovirt-engine-restapi is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498033"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-base is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498035"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-base is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-cinderlib is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498037"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-cinderlib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-ovirt-engine is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498039"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-ovirt-engine is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-ovirt-engine-common is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498041"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-ovirt-engine-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-vmconsole-proxy-helper is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498043"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-vmconsole-proxy-helper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-websocket-proxy is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498045"
+                  },
+                  {
+                    "Comment": "ovirt-engine-setup-plugin-websocket-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-tools is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498047"
+                  },
+                  {
+                    "Comment": "ovirt-engine-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-tools-backup is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498049"
+                  },
+                  {
+                    "Comment": "ovirt-engine-tools-backup is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-vmconsole-proxy-helper is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498051"
+                  },
+                  {
+                    "Comment": "ovirt-engine-vmconsole-proxy-helper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-webadmin-portal is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498053"
+                  },
+                  {
+                    "Comment": "ovirt-engine-webadmin-portal is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-websocket-proxy is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498055"
+                  },
+                  {
+                    "Comment": "ovirt-engine-websocket-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20180135038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python2-ovirt-engine-lib is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498057"
+                  },
+                  {
+                    "Comment": "python2-ovirt-engine-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20202396068"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rhvm is earlier than 0:4.3.8.2-0.4.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498059"
+                  },
+                  {
+                    "Comment": "rhvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20190802040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovirt-engine-metrics is earlier than 0:1.3.6.2-1.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200498061"
+                  },
+                  {
+                    "Comment": "ovirt-engine-metrics is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192499002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

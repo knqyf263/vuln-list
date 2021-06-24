@@ -1,0 +1,680 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20172778",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2017:2778: samba security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Gluster Storage 3.3 for RHEL 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:2778",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:2778"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-2619",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-2619"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-9461",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-9461"
+      }
+    ],
+    "Description": "Samba is an open-source implementation of the Server Message Block (SMB) protocol and the related Common Internet File System (CIFS) protocol, which allow PC-compatible machines to share files, printers, and various information.\n\nSecurity Fix(es):\n\n* A race condition was found in samba server. A malicious samba client could use this flaw to access files and directories in areas of the server file system not exported under the share definitions. (CVE-2017-2619)\n\n* A flaw was found in the way Samba handled dangling symlinks. An authenticated malicious Samba client could use this flaw to cause the smbd daemon to enter an infinite loop and use an excessive amount of CPU and memory. (CVE-2017-9461)\n\nRed Hat would like to thank the Samba project for reporting CVE-2017-2619. Upstream acknowledges Jann Horn (Google) as the original reporter of CVE-2017-2619.\n\nBug Fix(es):\n\n* In the samba configuration, by default the 'posix locking' is enabled and 'stat cache' is disabled. Enabling 'posix locking' sends the file lock request to the bricks too, and disabling 'stat cache' blocks samba to cache certain information at the samba layer. This led to decrease in performance of SMB access of Red Hat Gluster Storage volumes  \n\nAs a fix, the following two options are included in the samba configuration file:\nposix locking = No\nstat cache = Yes\n\nDue to this, a slight improvement in the performance is observed. (BZ#1436265)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-09-21"
+      },
+      "Updated": {
+        "Date": "2017-09-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-2619",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:L/A:L",
+          "Cwe": "CWE-362",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-2619",
+          "Public": "20170323"
+        },
+        {
+          "CveID": "CVE-2017-9461",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-835",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-9461",
+          "Public": "20170216"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1429472",
+          "ID": "1429472"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1459464",
+          "ID": "1459464"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:storage:3",
+        "cpe:/a:redhat:storage:3.1",
+        "cpe:/a:redhat:storage:3.1:bigdata:el6",
+        "cpe:/a:redhat:storage:3.1:console:el6",
+        "cpe:/a:redhat:storage:3.1:nagios:el6",
+        "cpe:/a:redhat:storage:3.1:nfs:el6",
+        "cpe:/a:redhat:storage:3.1:samba:el6",
+        "cpe:/a:redhat:storage:3.1:server:el6",
+        "cpe:/a:redhat:storage:3.1:splunk:el6",
+        "cpe:/a:redhat:storage:3.2",
+        "cpe:/a:redhat:storage:3.2:console:el6",
+        "cpe:/a:redhat:storage:3.2:nagios:el6",
+        "cpe:/a:redhat:storage:3.2:nfs:el6",
+        "cpe:/a:redhat:storage:3.2:samba:el6",
+        "cpe:/a:redhat:storage:3.2:server:el6",
+        "cpe:/a:redhat:storage:3.3",
+        "cpe:/a:redhat:storage:3.3:nagios:el6",
+        "cpe:/a:redhat:storage:3.3:nfs:el6",
+        "cpe:/a:redhat:storage:3.3:samba:el6",
+        "cpe:/a:redhat:storage:3.3:server:el6",
+        "cpe:/a:redhat:storage:3.4",
+        "cpe:/a:redhat:storage:3.4:samba:el6",
+        "cpe:/a:redhat:storage:3.4:server:el6",
+        "cpe:/a:redhat:storage:3.5",
+        "cpe:/a:redhat:storage:3.5:samba:el6",
+        "cpe:/a:redhat:storage:3.5:server:el6",
+        "cpe:/a:redhat:storage:3:bigdata:el6",
+        "cpe:/a:redhat:storage:3:client:el6",
+        "cpe:/a:redhat:storage:3:console:el6",
+        "cpe:/a:redhat:storage:3:nfs:el6",
+        "cpe:/a:redhat:storage:3:samba:el6",
+        "cpe:/a:redhat:storage:3:server:el6"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201610089008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201610089007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtalloc is earlier than 0:2.1.9-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778001"
+                  },
+                  {
+                    "Comment": "libtalloc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151495029"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtalloc-devel is earlier than 0:2.1.9-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778003"
+                  },
+                  {
+                    "Comment": "libtalloc-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151495031"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pytalloc is earlier than 0:2.1.9-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778005"
+                  },
+                  {
+                    "Comment": "pytalloc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151495033"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pytalloc-devel is earlier than 0:2.1.9-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778007"
+                  },
+                  {
+                    "Comment": "pytalloc-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151495035"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtdb is earlier than 0:1.3.12-1.1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778009"
+                  },
+                  {
+                    "Comment": "libtdb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160614026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtdb-devel is earlier than 0:1.3.12-1.1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778011"
+                  },
+                  {
+                    "Comment": "libtdb-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160614028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-tdb is earlier than 0:1.3.12-1.1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778013"
+                  },
+                  {
+                    "Comment": "python-tdb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160614030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tdb-tools is earlier than 0:1.3.12-1.1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778015"
+                  },
+                  {
+                    "Comment": "tdb-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160614032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtevent is earlier than 0:0.9.31-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778017"
+                  },
+                  {
+                    "Comment": "libtevent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160614010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtevent-devel is earlier than 0:0.9.31-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778019"
+                  },
+                  {
+                    "Comment": "libtevent-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160614012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-tevent is earlier than 0:0.9.31-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778021"
+                  },
+                  {
+                    "Comment": "python-tevent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160614014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ldb-tools is earlier than 0:1.1.29-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778023"
+                  },
+                  {
+                    "Comment": "ldb-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160014002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libldb is earlier than 0:1.1.29-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778025"
+                  },
+                  {
+                    "Comment": "libldb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160014004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libldb-devel is earlier than 0:1.1.29-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778027"
+                  },
+                  {
+                    "Comment": "libldb-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160014006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pyldb is earlier than 0:1.1.29-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778029"
+                  },
+                  {
+                    "Comment": "pyldb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160014008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pyldb-devel is earlier than 0:1.1.29-1.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778031"
+                  },
+                  {
+                    "Comment": "pyldb-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160014010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ctdb is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778033"
+                  },
+                  {
+                    "Comment": "ctdb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ctdb-tests is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778035"
+                  },
+                  {
+                    "Comment": "ctdb-tests is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsmbclient is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778037"
+                  },
+                  {
+                    "Comment": "libsmbclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsmbclient-devel is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778039"
+                  },
+                  {
+                    "Comment": "libsmbclient-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libwbclient is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778041"
+                  },
+                  {
+                    "Comment": "libwbclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libwbclient-devel is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778043"
+                  },
+                  {
+                    "Comment": "libwbclient-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318060"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778045"
+                  },
+                  {
+                    "Comment": "samba is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318052"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-client is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778047"
+                  },
+                  {
+                    "Comment": "samba-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318066"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-client-libs is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778049"
+                  },
+                  {
+                    "Comment": "samba-client-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-common is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778051"
+                  },
+                  {
+                    "Comment": "samba-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318054"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-common-libs is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778053"
+                  },
+                  {
+                    "Comment": "samba-common-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-common-tools is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778055"
+                  },
+                  {
+                    "Comment": "samba-common-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-dc is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778057"
+                  },
+                  {
+                    "Comment": "samba-dc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-dc-libs is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778059"
+                  },
+                  {
+                    "Comment": "samba-dc-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-devel is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778061"
+                  },
+                  {
+                    "Comment": "samba-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-krb5-printing is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778063"
+                  },
+                  {
+                    "Comment": "samba-krb5-printing is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-libs is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778065"
+                  },
+                  {
+                    "Comment": "samba-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-pidl is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778067"
+                  },
+                  {
+                    "Comment": "samba-pidl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318064"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-python is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778069"
+                  },
+                  {
+                    "Comment": "samba-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-test is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778071"
+                  },
+                  {
+                    "Comment": "samba-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-test-libs is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778073"
+                  },
+                  {
+                    "Comment": "samba-test-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-vfs-glusterfs is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778075"
+                  },
+                  {
+                    "Comment": "samba-vfs-glusterfs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-winbind is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778077"
+                  },
+                  {
+                    "Comment": "samba-winbind is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-winbind-clients is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778079"
+                  },
+                  {
+                    "Comment": "samba-winbind-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-winbind-krb5-locator is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778081"
+                  },
+                  {
+                    "Comment": "samba-winbind-krb5-locator is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba-winbind-modules is earlier than 0:4.6.3-5.el6rhs",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172778083"
+                  },
+                  {
+                    "Comment": "samba-winbind-modules is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202014318056"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20173278",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2017:3278: samba4 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:3278",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:3278"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-14746",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-14746"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-15275",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-15275"
+      }
+    ],
+    "Description": "Samba is an open-source implementation of the Server Message Block (SMB) or Common Internet File System (CIFS) protocol, which allows PC-compatible machines to share files, printers, and other information.\n\nSecurity Fix(es):\n\n* A use-after-free flaw was found in the way samba servers handled certain SMB1 requests. An unauthenticated attacker could send specially-crafted SMB1 requests to cause the server to crash or execute arbitrary code. (CVE-2017-14746)\n\n* A memory disclosure flaw was found in samba. An attacker could retrieve parts of server memory, which could contain potentially sensitive data, by sending specially-crafted requests to the samba server. (CVE-2017-15275)\n\nRed Hat would like to thank the Samba project for reporting these issues. Upstream acknowledges Yihan Lian and Zhibin Hu (Qihoo 360 GearTeam) as the original reporter of CVE-2017-14746; and Volker Lendecke (SerNet and the Samba Team) as the original reporter of CVE-2017-15275.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-11-29"
+      },
+      "Updated": {
+        "Date": "2017-11-29"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-14746",
+          "Cvss3": "6.3/CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-14746",
+          "Public": "20171121"
+        },
+        {
+          "CveID": "CVE-2017-15275",
+          "Cvss3": "4.3/CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-15275",
+          "Public": "20171121"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1511899",
+          "ID": "1511899"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1512465",
+          "ID": "1512465"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4 is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278001"
+                  },
+                  {
+                    "Comment": "samba4 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-client is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278003"
+                  },
+                  {
+                    "Comment": "samba4-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-common is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278005"
+                  },
+                  {
+                    "Comment": "samba4-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-dc is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278007"
+                  },
+                  {
+                    "Comment": "samba4-dc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-dc-libs is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278009"
+                  },
+                  {
+                    "Comment": "samba4-dc-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-devel is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278011"
+                  },
+                  {
+                    "Comment": "samba4-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-libs is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278013"
+                  },
+                  {
+                    "Comment": "samba4-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-pidl is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278015"
+                  },
+                  {
+                    "Comment": "samba4-pidl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-python is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278017"
+                  },
+                  {
+                    "Comment": "samba4-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-test is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278019"
+                  },
+                  {
+                    "Comment": "samba4-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-winbind is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278021"
+                  },
+                  {
+                    "Comment": "samba4-winbind is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-winbind-clients is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278023"
+                  },
+                  {
+                    "Comment": "samba4-winbind-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "samba4-winbind-krb5-locator is earlier than 0:4.2.10-12.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173278025"
+                  },
+                  {
+                    "Comment": "samba4-winbind-krb5-locator is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130506028"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

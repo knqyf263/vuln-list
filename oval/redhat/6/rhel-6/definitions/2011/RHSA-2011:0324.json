@@ -1,0 +1,97 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110324",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2011:0324: logwatch security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0324",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0324"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1018",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1018"
+      }
+    ],
+    "Description": "Logwatch is a customizable log analysis system. Logwatch parses through\nyour system's logs for a given period of time and creates a report\nanalyzing areas that you specify, in as much detail as you require.\n\nA flaw was found in the way Logwatch processed log files. If an attacker\nwere able to create a log file with a malicious file name, it could result\nin arbitrary code execution with the privileges of the root user when that\nlog file is analyzed by Logwatch. (CVE-2011-1018)\n\nUsers of logwatch should upgrade to this updated package, which contains a\nbackported patch to resolve this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-03-07"
+      },
+      "Updated": {
+        "Date": "2011-03-07"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1018",
+          "Cvss2": "7.9/AV:A/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-73-\u003eCWE-78",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1018",
+          "Public": "20110216"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/680237",
+          "ID": "680237"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "logwatch is earlier than 0:7.3.6-49.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110324001"
+          },
+          {
+            "Comment": "logwatch is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110324002"
+          }
+        ]
+      }
+    ]
+  }
+}

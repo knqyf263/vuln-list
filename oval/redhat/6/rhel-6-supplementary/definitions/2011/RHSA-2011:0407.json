@@ -1,0 +1,129 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110407",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2011:0407: logrotate security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0407",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0407"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1098",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1098"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1154",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1154"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1155",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1155"
+      }
+    ],
+    "Description": "The logrotate utility simplifies the administration of multiple log files,\nallowing the automatic rotation, compression, removal, and mailing of log\nfiles.\n\nA shell command injection flaw was found in the way logrotate handled the\nshred directive. A specially-crafted log file could cause logrotate to\nexecute arbitrary commands with the privileges of the user running\nlogrotate (root, by default). Note: The shred directive is not enabled by\ndefault. (CVE-2011-1154)\n\nA race condition flaw was found in the way logrotate applied permissions\nwhen creating new log files. In some specific configurations, a local\nattacker could use this flaw to open new log files before logrotate applies\nthe final permissions, possibly leading to the disclosure of sensitive\ninformation. (CVE-2011-1098)\n\nAn input sanitization flaw was found in logrotate. A log file with a\nspecially-crafted file name could cause logrotate to abort when attempting\nto process that file a subsequent time. (CVE-2011-1155)\n\nAll logrotate users should upgrade to this updated package, which contains\nbackported patches to resolve these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-03-31"
+      },
+      "Updated": {
+        "Date": "2011-03-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1098",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-367",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1098",
+          "Public": "20110213"
+        },
+        {
+          "CveID": "CVE-2011-1154",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1154",
+          "Public": "20110213"
+        },
+        {
+          "CveID": "CVE-2011-1155",
+          "Cvss2": "1.9/AV:L/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1155",
+          "Public": "20110213"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/680796",
+          "ID": "680796"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/680797",
+          "ID": "680797"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/680798",
+          "ID": "680798"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "logrotate is earlier than 0:3.7.8-12.el6_0.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110407001"
+          },
+          {
+            "Comment": "logrotate is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110407002"
+          }
+        ]
+      }
+    ]
+  }
+}
