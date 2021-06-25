@@ -1,0 +1,164 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20121123",
+  "Version": "634",
+  "Metadata": {
+    "Title": "RHSA-2012:1123: bind security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:1123",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:1123"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-3817",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-3817"
+      }
+    ],
+    "Description": "The Berkeley Internet Name Domain (BIND) is an implementation of the Domain\nName System (DNS) protocols. BIND includes a DNS server (named); a resolver\nlibrary (routines for applications to use when interfacing with DNS); and\ntools for verifying that the DNS server is operating correctly.\n\nAn uninitialized data structure use flaw was found in BIND when DNSSEC\nvalidation was enabled. A remote attacker able to send a large number of\nqueries to a DNSSEC validating BIND resolver could use this flaw to cause\nit to exit unexpectedly with an assertion failure. (CVE-2012-3817)\n\nUsers of bind are advised to upgrade to these updated packages, which\ncorrect this issue. After installing the update, the BIND daemon (named)\nwill be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-07-31"
+      },
+      "Updated": {
+        "Date": "2012-07-31"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-3817",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-3817",
+          "Public": "20120724"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/842897",
+          "ID": "842897"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind is earlier than 32:9.8.2-0.10.rc1.el6_3.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121123001"
+                  },
+                  {
+                    "Comment": "bind is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-chroot is earlier than 32:9.8.2-0.10.rc1.el6_3.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121123003"
+                  },
+                  {
+                    "Comment": "bind-chroot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-devel is earlier than 32:9.8.2-0.10.rc1.el6_3.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121123005"
+                  },
+                  {
+                    "Comment": "bind-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-libs is earlier than 32:9.8.2-0.10.rc1.el6_3.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121123007"
+                  },
+                  {
+                    "Comment": "bind-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-sdb is earlier than 32:9.8.2-0.10.rc1.el6_3.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121123009"
+                  },
+                  {
+                    "Comment": "bind-sdb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-utils is earlier than 32:9.8.2-0.10.rc1.el6_3.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121123011"
+                  },
+                  {
+                    "Comment": "bind-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

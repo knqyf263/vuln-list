@@ -1,0 +1,312 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20150726",
+  "Version": "654",
+  "Metadata": {
+    "Title": "RHSA-2015:0726: kernel security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:0726",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:0726"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-8159",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-8159"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-1421",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-1421"
+      }
+    ],
+    "Description": "The kernel packages contain the Linux kernel, the core of any Linux\noperating system.\n\n* It was found that the Linux kernel's Infiniband subsystem did not\nproperly sanitize input parameters while registering memory regions from\nuser space via the (u)verbs API. A local user with access to a\n/dev/infiniband/uverbsX device could use this flaw to crash the system or,\npotentially, escalate their privileges on the system. (CVE-2014-8159,\nImportant)\n\n* A use-after-free flaw was found in the way the Linux kernel's SCTP\nimplementation handled authentication key reference counting during INIT\ncollisions. A remote attacker could use this flaw to crash the system or,\npotentially, escalate their privileges on the system. (CVE-2015-1421,\nImportant)\n\nRed Hat would like to thank Mellanox for reporting the CVE-2014-8159 issue.\nThe CVE-2015-1421 issue was discovered by Sun Baoliang of Red Hat.\n\nThis update also fixes the following bugs:\n\n* In certain systems with multiple CPUs, when a crash was triggered on one\nCPU with an interrupt handler and this CPU sent Non-Maskable Interrupt\n(NMI) to another CPU, and, at the same time, ioapic_lock had already been\nacquired, a deadlock occurred in ioapic_lock. As a consequence, the kdump\nservice could become unresponsive. This bug has been fixed and kdump now\nworks as expected. (BZ#1197742)\n\n* On Lenovo X1 Carbon 3rd Gen, X250, and T550 laptops, the thinkpad_acpi\nmodule was not properly loaded, and thus the function keys and radio\nswitches did not work. This update applies a new string pattern of BIOS\nversion, which fixes this bug, and function keys and radio switches now\nwork as intended. (BZ#1197743)\n\n* During a heavy file system load involving many worker threads, all worker\nthreads in the pool became blocked on a resource, and no manager thread\nexisted to create more workers. As a consequence, the running processes\nbecame unresponsive. With this update, the logic around manager creation\nhas been changed to assure that the last worker thread becomes a manager\nthread and does not start executing work items. Now, a manager thread\nexists, spawns new workers as needed, and processes no longer hang.\n(BZ#1197744)\n\n* If a thin-pool's metadata enters read-only or fail mode, for example, due\nto thin-pool running out of metadata or data space, any attempt to make\nmetadata changes such as creating a thin device or snapshot thin device\nshould error out cleanly. However, previously, the kernel code returned\nverbose and alarming error messages to the user. With this update, due to\nearly trapping of attempt to make metadata changes, informative errors are\ndisplayed, no longer unnecessarily alarming the user. (BZ#1197745)\n\n* When running Red Hat Enterprise Linux as a guest on Microsoft Hyper-V\nhypervisor, the storvsc module did not return the correct error code for\nthe upper level Small Computer System Interface (SCSI) subsystem. As a\nconsequence, a SCSI command failed and storvsc did not handle such a\nfailure properly under some conditions, for example, when RAID devices were\ncreated on top of storvsc devices. An upstream patch has been applied to\nfix this bug, and storvsc now returns the correct error code in the\ndescribed situation. (BZ#1197749)\n\nAll kernel users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. The system must be\nrebooted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-03-26"
+      },
+      "Updated": {
+        "Date": "2018-07-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-8159",
+          "Cvss2": "6.2/AV:L/AC:H/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-190",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-8159",
+          "Public": "20150311"
+        },
+        {
+          "CveID": "CVE-2015-1421",
+          "Cvss2": "7.1/AV:N/AC:M/Au:N/C:N/I:N/A:C",
+          "Cwe": "CWE-416",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-1421",
+          "Public": "20150122"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1181166",
+          "ID": "1181166"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1196581",
+          "ID": "1196581"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.4",
+        "cpe:/o:redhat:rhel_aus:7.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:3.10.0-229.1.2.el7 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20150726031"
+              },
+              {
+                "Comment": "kernel earlier than 0:3.10.0-229.1.2.el7 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20150726032"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-abi-whitelists is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726003"
+                  },
+                  {
+                    "Comment": "kernel-abi-whitelists is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-bootwrapper is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726005"
+                  },
+                  {
+                    "Comment": "kernel-bootwrapper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726007"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726009"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726011"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-doc is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726013"
+                  },
+                  {
+                    "Comment": "kernel-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-headers is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726015"
+                  },
+                  {
+                    "Comment": "kernel-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726017"
+                  },
+                  {
+                    "Comment": "kernel-kdump is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump-devel is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726019"
+                  },
+                  {
+                    "Comment": "kernel-kdump-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-tools is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726021"
+                  },
+                  {
+                    "Comment": "kernel-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-tools-libs is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726023"
+                  },
+                  {
+                    "Comment": "kernel-tools-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-tools-libs-devel is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726025"
+                  },
+                  {
+                    "Comment": "kernel-tools-libs-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perf is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726027"
+                  },
+                  {
+                    "Comment": "perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-perf is earlier than 0:3.10.0-229.1.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150726029"
+                  },
+                  {
+                    "Comment": "python-perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140678030"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

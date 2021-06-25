@@ -1,0 +1,407 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20182261",
+  "Version": "659",
+  "Metadata": {
+    "Title": "RHSA-2018:2261: Red Hat Ceph Storage 2.5 security, enhancement, and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Ceph Storage 2.5"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:2261",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:2261"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-10861",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-10861"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1128",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1128"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1129",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1129"
+      }
+    ],
+    "Description": "Red Hat Ceph Storage is a scalable, open, software-defined storage platform\nthat combines the most stable version of the Ceph storage system with a\nCeph management platform, deployment utilities, and support services.\n\nSecurity Fix(es):\n\n* ceph: cephx protocol is vulnerable to replay attack (CVE-2018-1128)\n\n* ceph: cephx uses weak signatures (CVE-2018-1129)\n\n* ceph: ceph-mon does not perform authorization on OSD pool ops (CVE-2018-10861)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore and other related information refer to the CVE page(s) listed in the Reference section.\n\nEnhancement(s):\n\n* Ceph OSDs now logs when they shutdown due to disk operations timing out by default. (BZ#1568897)\n\n* The `radosgw-admin orphans find` command can inadvertently remove data objects still in use, if followed by another operation, such as, a `rados rm` command. Users are now warned before attempting to produce lists of potentially orphaned objects. (BZ#1573656)\n\n* The 'ceph-osdomap-tool' now has a 'compact' command to perform offline compaction on an OSD's 'omap' directory. (BZ#1574231)\n\n* For S3 and Swift protocols, an option to list buckets/containers in natural (partial) order has been added. Listing containers in sorted order is canonical in both protocols, but is costly, and not required by some client applications. The performance and workload cost of S3 and Swift bucket/container listings is reduced for sharded buckets/containers when the `allow_unordered` extension is used. (BZ#1595374)\n\n* An asynchronous mechanism for executing the Ceph Object Gateway garbage collection using the `librados` APIs has been introduced. The original garbage collection mechanism serialized all processing, and lagged behind applications in specific workloads. Garbage collection performance has been significantly improved, and can be tuned to specific site requirements. (BZ#1595383)\n\nBug Fix(es):\n\nThese updated ceph packages include numerous bug fixes. Space precludes\ndocumenting all of these changes in this advisory. Users are directed to the Red Hat Ceph Storage 2.5 Release Notes for information on the most significant bug fixes for this release:\n\nhttps://access.redhat.com/documentation/en-us/red_hat_ceph_storage/2.5/html/release_notes/bug_fixes",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-07-26"
+      },
+      "Updated": {
+        "Date": "2018-07-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-10861",
+          "Cvss3": "4.6/CVSS:3.0/AV:A/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:L",
+          "Cwe": "CWE-285",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-10861",
+          "Public": "20180709:1200"
+        },
+        {
+          "CveID": "CVE-2018-1128",
+          "Cvss3": "5.9/CVSS:3.0/AV:A/AC:H/PR:N/UI:R/S:U/C:H/I:L/A:L",
+          "Cwe": "CWE-294",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1128",
+          "Public": "20180709:1200"
+        },
+        {
+          "CveID": "CVE-2018-1129",
+          "Cvss3": "5.9/CVSS:3.0/AV:A/AC:H/PR:N/UI:R/S:U/C:H/I:L/A:L",
+          "Cwe": "CWE-284",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1129",
+          "Public": "20180709:1200"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1575866",
+          "ID": "1575866"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1576057",
+          "ID": "1576057"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1593308",
+          "ID": "1593308"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:ceph_storage:2",
+        "cpe:/a:redhat:ceph_storage:2::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20137459004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20137459003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-ansible is earlier than 0:3.0.39-1.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261001"
+                  },
+                  {
+                    "Comment": "ceph-ansible is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202025677002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-base is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261003"
+                  },
+                  {
+                    "Comment": "ceph-base is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-common is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261005"
+                  },
+                  {
+                    "Comment": "ceph-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-fuse is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261007"
+                  },
+                  {
+                    "Comment": "ceph-fuse is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-mds is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261009"
+                  },
+                  {
+                    "Comment": "ceph-mds is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-mon is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261011"
+                  },
+                  {
+                    "Comment": "ceph-mon is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-osd is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261013"
+                  },
+                  {
+                    "Comment": "ceph-osd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-radosgw is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261015"
+                  },
+                  {
+                    "Comment": "ceph-radosgw is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-selinux is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261017"
+                  },
+                  {
+                    "Comment": "ceph-selinux is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ceph-test is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261019"
+                  },
+                  {
+                    "Comment": "ceph-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcephfs1 is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261021"
+                  },
+                  {
+                    "Comment": "libcephfs1 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcephfs1-devel is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261023"
+                  },
+                  {
+                    "Comment": "libcephfs1-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librados2 is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261025"
+                  },
+                  {
+                    "Comment": "librados2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librados2-devel is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261027"
+                  },
+                  {
+                    "Comment": "librados2-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librbd1 is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261029"
+                  },
+                  {
+                    "Comment": "librbd1 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librbd1-devel is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261031"
+                  },
+                  {
+                    "Comment": "librbd1-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librgw2 is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261033"
+                  },
+                  {
+                    "Comment": "librgw2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librgw2-devel is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261035"
+                  },
+                  {
+                    "Comment": "librgw2-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-cephfs is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261037"
+                  },
+                  {
+                    "Comment": "python-cephfs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-rados is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261039"
+                  },
+                  {
+                    "Comment": "python-rados is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-rbd is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261041"
+                  },
+                  {
+                    "Comment": "python-rbd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rbd-mirror is earlier than 2:10.2.10-28.el7cp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182261043"
+                  },
+                  {
+                    "Comment": "rbd-mirror is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201812684034"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

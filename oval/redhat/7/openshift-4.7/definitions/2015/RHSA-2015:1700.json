@@ -1,0 +1,130 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151700",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2015:1700: pcs security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1700",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1700"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5189",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5189"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5190",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5190"
+      }
+    ],
+    "Description": "The pcs packages provide a command-line configuration system for the\nPacemaker and Corosync utilities.\n\nA command injection flaw was found in the pcsd web UI. An attacker able to\ntrick a victim that was logged in to the pcsd web UI into visiting a\nspecially crafted URL could use this flaw to execute arbitrary code with\nroot privileges on the server hosting the web UI. (CVE-2015-5190)\n\nA race condition was found in the way the pcsd web UI backend performed\nauthorization of user requests. An attacker could use this flaw to send a\nrequest that would be evaluated as originating from a different user,\npotentially allowing the attacker to perform actions with permissions of a\nmore privileged user. (CVE-2015-5189)\n\nThese issues were discovered by Tomáš Jelínek of Red Hat.\n\nAll pcs users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-09-01"
+      },
+      "Updated": {
+        "Date": "2015-09-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5189",
+          "Cvss2": "4.9/AV:N/AC:M/Au:S/C:P/I:P/A:N",
+          "Cwe": "CWE-863",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5189",
+          "Public": "20150901"
+        },
+        {
+          "CveID": "CVE-2015-5190",
+          "Cvss2": "9.3/AV:N/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-77",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5190",
+          "Public": "20150901"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1252805",
+          "ID": "1252805"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1252813",
+          "ID": "1252813"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.4",
+        "cpe:/o:redhat:rhel_aus:7.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pcs is earlier than 0:0.9.137-13.el7_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151700001"
+                  },
+                  {
+                    "Comment": "pcs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150980002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-clufter is earlier than 0:0.9.137-13.el7_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151700003"
+                  },
+                  {
+                    "Comment": "python-clufter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150980004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

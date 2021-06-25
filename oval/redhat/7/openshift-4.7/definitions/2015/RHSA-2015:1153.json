@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151153",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2015:1153: mailman security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1153",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1153"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-2775",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-2775"
+      }
+    ],
+    "Description": "Mailman is a program used to help manage email discussion lists.\n\nIt was found that mailman did not sanitize the list name before passing it\nto certain MTAs. A local attacker could use this flaw to execute arbitrary\ncode as the user running mailman. (CVE-2015-2775)\n\nThis update also fixes the following bugs:\n\n* Previously, it was impossible to configure Mailman in a way that\nDomain-based Message Authentication, Reporting \u0026 Conformance (DMARC) would\nrecognize Sender alignment for Domain Key Identified Mail (DKIM)\nsignatures. Consequently, Mailman list subscribers that belonged to a mail\nserver with a \"reject\" policy for DMARC, such as yahoo.com or AOL.com, were\nunable to receive Mailman forwarded messages from senders residing in any\ndomain that provided DKIM signatures. With this update, domains with a\n\"reject\" DMARC policy are recognized correctly, and Mailman list\nadministrators are able to configure the way these messages are handled. As\na result, after a proper configuration, subscribers now correctly receive\nMailman forwarded messages in this scenario. (BZ#1229288)\n\n* Previously, the /etc/mailman file had incorrectly set permissions, which\nin some cases caused removing Mailman lists to fail with a \"'NoneType'\nobject has no attribute 'close'\" message. With this update, the permissions\nvalue for /etc/mailman is correctly set to 2775 instead of 0755, and\nremoving Mailman lists now works as expected. (BZ#1229307)\n\n* Prior to this update, the mailman utility incorrectly installed the\ntmpfiles configuration in the /etc/tmpfiles.d/ directory. As a consequence,\nchanges made to mailman tmpfiles configuration were overwritten if the\nmailman packages were reinstalled or updated. The mailman utility now\ninstalls the tmpfiles configuration in the /usr/lib/tmpfiles.d/ directory,\nand changes made to them by the user are preserved on reinstall or update.\n(BZ#1229306)\n\nAll mailman users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-06-23"
+      },
+      "Updated": {
+        "Date": "2015-06-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-2775",
+          "Cvss2": "4.6/AV:L/AC:L/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-22",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-2775",
+          "Public": "20150331"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1208059",
+          "ID": "1208059"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.4",
+        "cpe:/o:redhat:rhel_aus:7.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          },
+          {
+            "Comment": "mailman is earlier than 3:2.1.15-21.el7_1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151153001"
+          },
+          {
+            "Comment": "mailman is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151153002"
+          }
+        ]
+      }
+    ]
+  }
+}

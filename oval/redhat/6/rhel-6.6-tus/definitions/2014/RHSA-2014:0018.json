@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140018",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2014:0018: libXfont security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0018",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0018"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-6462",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-6462"
+      }
+    ],
+    "Description": "The libXfont packages provide the X.Org libXfont runtime library. X.Org is\nan open source implementation of the X Window System.\n\nA stack-based buffer overflow flaw was found in the way the libXfont\nlibrary parsed Glyph Bitmap Distribution Format (BDF) fonts. A malicious,\nlocal user could exploit this issue to potentially execute arbitrary code\nwith the privileges of the X.Org server. (CVE-2013-6462)\n\nUsers of libXfont should upgrade to these updated packages, which contain\na backported patch to resolve this issue. All running X.Org server\ninstances must be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-01-10"
+      },
+      "Updated": {
+        "Date": "2014-01-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-6462",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Cwe": "CWE-121",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-6462",
+          "Public": "20140107"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1048044",
+          "ID": "1048044"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libXfont is earlier than 0:1.4.5-3.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140018001"
+                  },
+                  {
+                    "Comment": "libXfont is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111154002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libXfont-devel is earlier than 0:1.4.5-3.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140018003"
+                  },
+                  {
+                    "Comment": "libXfont-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111154004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

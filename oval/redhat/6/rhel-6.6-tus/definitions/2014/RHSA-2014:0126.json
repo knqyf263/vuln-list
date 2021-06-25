@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140126",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2014:0126: openldap security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0126",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0126"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4449",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4449"
+      }
+    ],
+    "Description": "OpenLDAP is an open source suite of Lightweight Directory Access Protocol\n(LDAP) applications and development tools. LDAP is a set of protocols used\nto access and maintain distributed directory information services over an\nIP network. The openldap package contains configuration files, libraries,\nand documentation for OpenLDAP.\n\nA denial of service flaw was found in the way the OpenLDAP server daemon\n(slapd) performed reference counting when using the rwm (rewrite/remap)\noverlay. A remote attacker able to query the OpenLDAP server could use this\nflaw to crash the server by immediately unbinding from the server after\nsending a search request. (CVE-2013-4449)\n\nRed Hat would like to thank Michael Vishchers from Seven Principles AG for\nreporting this issue.\n\nThis update also fixes the following bug:\n\n* Previously, OpenLDAP did not properly handle a number of simultaneous\nupdates. As a consequence, sending a number of parallel update requests to\nthe server could cause a deadlock. With this update, a superfluous locking\nmechanism causing the deadlock has been removed, thus fixing the bug.\n(BZ#1056124)\n\nAll openldap users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-02-03"
+      },
+      "Updated": {
+        "Date": "2014-02-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-4449",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4449",
+          "Public": "20131011"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1019490",
+          "ID": "1019490"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:6.6",
+        "cpe:/o:redhat:rhel_tus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap is earlier than 0:2.4.23-34.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140126001"
+                  },
+                  {
+                    "Comment": "openldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151292002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap-clients is earlier than 0:2.4.23-34.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140126003"
+                  },
+                  {
+                    "Comment": "openldap-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151292004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap-devel is earlier than 0:2.4.23-34.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140126005"
+                  },
+                  {
+                    "Comment": "openldap-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151292006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap-servers is earlier than 0:2.4.23-34.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140126007"
+                  },
+                  {
+                    "Comment": "openldap-servers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151292008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openldap-servers-sql is earlier than 0:2.4.23-34.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140126009"
+                  },
+                  {
+                    "Comment": "openldap-servers-sql is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151292010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

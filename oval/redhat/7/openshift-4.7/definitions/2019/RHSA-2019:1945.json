@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20191945",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2019:1945: keepalived security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7.4 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:1945",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:1945"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-19115",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-19115"
+      }
+    ],
+    "Description": "The keepalived utility provides simple and robust facilities for load balancing and high availability. The load balancing framework relies on the well-known and widely used IP Virtual Server (IPVS) kernel module providing layer-4 (transport layer) load balancing. Keepalived implements a set of checkers to dynamically and adaptively maintain and manage a load balanced server pool according to the health of the servers. Keepalived also implements the Virtual Router Redundancy Protocol (VRRPv2) to achieve high availability with director failover.\n\nSecurity Fix(es):\n\n* keepalived: Heap-based buffer overflow when parsing HTTP status codes allows for denial of service or possibly arbitrary code execution (CVE-2018-19115)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-07-30"
+      },
+      "Updated": {
+        "Date": "2019-07-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-19115",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-19115",
+          "Public": "20181108"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1651871",
+          "ID": "1651871"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.4",
+        "cpe:/o:redhat:rhel_aus:7.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          },
+          {
+            "Comment": "keepalived is earlier than 0:1.3.5-1.el7_4.1",
+            "TestRef": "oval:com.redhat.rhsa:tst:20191945001"
+          },
+          {
+            "Comment": "keepalived is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20191945002"
+          }
+        ]
+      }
+    ]
+  }
+}

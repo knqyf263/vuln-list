@@ -1,0 +1,271 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20160685",
+  "Version": "647",
+  "Metadata": {
+    "Title": "RHSA-2016:0685: nss, nspr, nss-softokn, and nss-util security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:0685",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:0685"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-1978",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-1978"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-1979",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-1979"
+      }
+    ],
+    "Description": "Network Security Services (NSS) is a set of libraries designed to support the cross-platform development of security-enabled client and server applications. The nss-util packages provide utilities for use with the Network Security Services (NSS) libraries. Netscape Portable Runtime (NSPR) provides platform independence for non-GUI operating system facilities.\n\nThe following packages have been upgraded to a newer upstream version: nss (3.21.0), nss-util (3.21.0), nspr (4.11.0). (BZ#1310581, BZ#1303021, BZ#1299872)\n\nSecurity Fix(es):\n\n* A use-after-free flaw was found in the way NSS handled DHE (Diffie–Hellman key exchange) and ECDHE (Elliptic Curve Diffie-Hellman key exchange) handshake messages. A remote attacker could send a specially crafted handshake message that, when parsed by an application linked against NSS, would cause that application to crash or, under certain special conditions, execute arbitrary code using the permissions of the user running the application. (CVE-2016-1978)\n\n* A use-after-free flaw was found in the way NSS processed certain DER (Distinguished Encoding Rules) encoded cryptographic keys. An attacker could use this flaw to create a specially crafted DER encoded certificate which, when parsed by an application compiled against the NSS library, could cause that application to crash, or execute arbitrary code using the permissions of the user running the application. (CVE-2016-1979)\n\nRed Hat would like to thank the Mozilla project for reporting these issues. Upstream acknowledges Eric Rescorla as the original reporter of CVE-2016-1978; and Tim Taubert as the original reporter of CVE-2016-1979.\n\nBug Fix(es):\n\n* The nss-softokn package has been updated to be compatible with NSS 3.21. (BZ#1326221)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-04-25"
+      },
+      "Updated": {
+        "Date": "2016-04-25"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-1978",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-1978",
+          "Public": "20160308"
+        },
+        {
+          "CveID": "CVE-2016-1979",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-1979",
+          "Public": "20160308"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1315202",
+          "ID": "1315202"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1315565",
+          "ID": "1315565"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.4",
+        "cpe:/o:redhat:rhel_aus:7.4::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nspr is earlier than 0:4.11.0-1.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685001"
+                  },
+                  {
+                    "Comment": "nspr is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nspr-devel is earlier than 0:4.11.0-1.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685003"
+                  },
+                  {
+                    "Comment": "nspr-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util is earlier than 0:3.21.0-2.2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685005"
+                  },
+                  {
+                    "Comment": "nss-util is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util-devel is earlier than 0:3.21.0-2.2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685007"
+                  },
+                  {
+                    "Comment": "nss-util-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-softokn is earlier than 0:3.16.2.3-14.2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685009"
+                  },
+                  {
+                    "Comment": "nss-softokn is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-softokn-devel is earlier than 0:3.16.2.3-14.2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685011"
+                  },
+                  {
+                    "Comment": "nss-softokn-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-softokn-freebl is earlier than 0:3.16.2.3-14.2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685013"
+                  },
+                  {
+                    "Comment": "nss-softokn-freebl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-softokn-freebl-devel is earlier than 0:3.16.2.3-14.2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685015"
+                  },
+                  {
+                    "Comment": "nss-softokn-freebl-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss is earlier than 0:3.21.0-9.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685017"
+                  },
+                  {
+                    "Comment": "nss is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-devel is earlier than 0:3.21.0-9.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685019"
+                  },
+                  {
+                    "Comment": "nss-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-pkcs11-devel is earlier than 0:3.21.0-9.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685021"
+                  },
+                  {
+                    "Comment": "nss-pkcs11-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-sysinit is earlier than 0:3.21.0-9.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685023"
+                  },
+                  {
+                    "Comment": "nss-sysinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-tools is earlier than 0:3.21.0-9.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160685025"
+                  },
+                  {
+                    "Comment": "nss-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

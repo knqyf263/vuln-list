@@ -1,0 +1,191 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20161653",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2016:1653: qemu-kvm-rhev security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux OpenStack Platform 7.0 (Kilo) for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:1653",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:1653"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5126",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5126"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5403",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5403"
+      }
+    ],
+    "Description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for Linux on AMD64 and Intel 64 systems. The qemu-kvm-rhev package provides the user-space component for running virtual machines using KVM in environments managed by Red Hat Enterprise Virtualization Manager.\n\nSecurity Fix(es):\n\n* Quick Emulator(Qemu) built with the Block driver for iSCSI images support (virtio-blk) is vulnerable to a heap buffer overflow issue. It could occur while processing iSCSI asynchronous I/O ioctl(2) calls. A user inside guest could use this flaw to crash the Qemu process resulting in DoS or potentially leverage it to execute arbitrary code with privileges of the Qemu process on the host. (CVE-2016-5126)\n\n* Quick emulator(Qemu) built with the virtio framework is vulnerable to an unbounded memory allocation issue. It was found that a malicious guest user could submit more requests than the virtqueue size permits. Processing a request allocates a VirtQueueElement and therefore causes unbounded memory allocation on the host controlled by the guest. (CVE-2016-5403)\n\nRed Hat would like to thank hongzhenhao (Marvel Team) for reporting CVE-2016-5403.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-08-23"
+      },
+      "Updated": {
+        "Date": "2016-08-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-5126",
+          "Cvss2": "4.3/AV:A/AC:M/Au:N/C:N/I:P/A:P",
+          "Cvss3": "5.4/CVSS:3.0/AV:A/AC:L/PR:L/UI:N/S:C/C:N/I:L/A:L",
+          "Cwe": "CWE-120",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5126",
+          "Public": "20160524"
+        },
+        {
+          "CveID": "CVE-2016-5403",
+          "Cvss2": "2.3/AV:A/AC:M/Au:S/C:N/I:N/A:P",
+          "Cvss3": "3.4/CVSS:3.0/AV:A/AC:L/PR:H/UI:N/S:C/C:N/I:N/A:L",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5403",
+          "Public": "20160727"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1340924",
+          "ID": "1340924"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1358359",
+          "ID": "1358359"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:7",
+        "cpe:/a:redhat:openstack-director:7::el7",
+        "cpe:/a:redhat:openstack-director_els:7",
+        "cpe:/a:redhat:openstack-director_els:7::el7.4",
+        "cpe:/a:redhat:openstack-optools:7",
+        "cpe:/a:redhat:openstack-optools:7::el7",
+        "cpe:/a:redhat:openstack:7",
+        "cpe:/a:redhat:openstack:7::el7",
+        "cpe:/a:redhat:openstack_els:7",
+        "cpe:/a:redhat:openstack_els:7::el7.4"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20151639008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151639007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcacard-rhev is earlier than 10:2.3.0-31.el7_2.21",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161653001"
+                  },
+                  {
+                    "Comment": "libcacard-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151718002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcacard-tools-rhev is earlier than 10:2.3.0-31.el7_2.21",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161653003"
+                  },
+                  {
+                    "Comment": "libcacard-tools-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151718004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img-rhev is earlier than 10:2.3.0-31.el7_2.21",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161653005"
+                  },
+                  {
+                    "Comment": "qemu-img-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151718006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-common-rhev is earlier than 10:2.3.0-31.el7_2.21",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161653007"
+                  },
+                  {
+                    "Comment": "qemu-kvm-common-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151718008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-rhev is earlier than 10:2.3.0-31.el7_2.21",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161653009"
+                  },
+                  {
+                    "Comment": "qemu-kvm-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151718010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools-rhev is earlier than 10:2.3.0-31.el7_2.21",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161653011"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools-rhev is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151718012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
