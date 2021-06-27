@@ -1,0 +1,185 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151635",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2015:1635: sqlite security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1635",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1635"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3414",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3414"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3415",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3415"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-3416",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-3416"
+      }
+    ],
+    "Description": "SQLite is a C library that implements an SQL database engine. A large\nsubset of SQL92 is supported. A complete database is stored in a single\ndisk file. The API is designed for convenience and ease of use.\nApplications that link against SQLite can enjoy the power and flexibility\nof an SQL database without the administrative hassles of supporting a\nseparate database server.\n\nA flaw was found in the way SQLite handled dequoting of collation-sequence\nnames. A local attacker could submit a specially crafted COLLATE statement\nthat would crash the SQLite process, or have other unspecified impacts.\n(CVE-2015-3414)\n\nIt was found that SQLite's sqlite3VdbeExec() function did not properly\nimplement comparison operators. A local attacker could submit a specially\ncrafted CHECK statement that would crash the SQLite process, or have other\nunspecified impacts. (CVE-2015-3415)\n\nIt was found that SQLite's sqlite3VXPrintf() function did not properly\nhandle precision and width values during floating-point conversions.\nA local attacker could submit a specially crafted SELECT statement that\nwould crash the SQLite process, or have other unspecified impacts.\n(CVE-2015-3416)\n\nAll sqlite users are advised to upgrade to this updated package, which\ncontains backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-08-17"
+      },
+      "Updated": {
+        "Date": "2015-08-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-3414",
+          "Cvss2": "3.7/AV:L/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-456",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3414",
+          "Public": "20150331"
+        },
+        {
+          "CveID": "CVE-2015-3415",
+          "Cvss2": "3.7/AV:L/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3415",
+          "Public": "20150331"
+        },
+        {
+          "CveID": "CVE-2015-3416",
+          "Cvss2": "3.7/AV:L/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-121",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-3416",
+          "Public": "20150331"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1212353",
+          "ID": "1212353"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1212356",
+          "ID": "1212356"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1212357",
+          "ID": "1212357"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.7",
+        "cpe:/o:redhat:rhel_tus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "lemon is earlier than 0:3.7.17-6.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635001"
+                  },
+                  {
+                    "Comment": "lemon is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sqlite is earlier than 0:3.7.17-6.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635003"
+                  },
+                  {
+                    "Comment": "sqlite is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sqlite-devel is earlier than 0:3.7.17-6.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635005"
+                  },
+                  {
+                    "Comment": "sqlite-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sqlite-doc is earlier than 0:3.7.17-6.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635007"
+                  },
+                  {
+                    "Comment": "sqlite-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sqlite-tcl is earlier than 0:3.7.17-6.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635009"
+                  },
+                  {
+                    "Comment": "sqlite-tcl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151635010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

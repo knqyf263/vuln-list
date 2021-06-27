@@ -1,0 +1,152 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20183396",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2018:3396: libvirt security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.5 Advanced Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:3396",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:3396"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-3639",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-3639"
+      }
+    ],
+    "Description": "The libvirt library contains a C API for managing and interacting with the virtualization capabilities of Linux and other operating systems. In addition, libvirt provides tools for remote management of virtualized systems.\n\nSecurity Fix(es):\n\n* An industry-wide issue was found in the way many modern microprocessor designs have implemented speculative execution of Load \u0026 Store instructions (a commonly used performance optimization). It relies on the presence of a precisely-defined instruction sequence in the privileged code as well as the fact that memory read from address to which a recent memory write has occurred may see an older value and subsequently cause an update into the microprocessor's data cache even for speculatively executed instructions that never actually commit (retire). As a result, an unprivileged attacker could use this flaw to read privileged memory by conducting targeted cache side-channel attacks. (CVE-2018-3639 virt-ssbd AMD)\n\nNote: This is the libvirt side of the CVE-2018-3639 mitigation.\n\nRed Hat would like to thank Ken Johnson (Microsoft Security Response Center) and Jann Horn (Google Project Zero) for reporting this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-10-30"
+      },
+      "Updated": {
+        "Date": "2018-10-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-3639",
+          "Cvss3": "5.6/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-200",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-3639",
+          "Public": "20180521:2100"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1566890",
+          "ID": "1566890"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.5",
+        "cpe:/o:redhat:rhel_aus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt is earlier than 0:0.10.2-29.el6_5.17",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183396001"
+                  },
+                  {
+                    "Comment": "libvirt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-client is earlier than 0:0.10.2-29.el6_5.17",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183396003"
+                  },
+                  {
+                    "Comment": "libvirt-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-devel is earlier than 0:0.10.2-29.el6_5.17",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183396005"
+                  },
+                  {
+                    "Comment": "libvirt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-lock-sanlock is earlier than 0:0.10.2-29.el6_5.17",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183396007"
+                  },
+                  {
+                    "Comment": "libvirt-lock-sanlock is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-python is earlier than 0:0.10.2-29.el6_5.17",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183396009"
+                  },
+                  {
+                    "Comment": "libvirt-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

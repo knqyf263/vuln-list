@@ -1,0 +1,88 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20190597",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2019:0597: cloud-init security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:0597",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:0597"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-0816",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-0816"
+      }
+    ],
+    "Description": "The cloud-init packages provide a set of init scripts for cloud instances. Cloud instances need special scripts to run during initialization to retrieve and install SSH keys, and to let the user run various scripts.\n\nSecurity Fix(es):\n\n* cloud-init: extra ssh keys added to authorized_keys on the Azure platform (CVE-2019-0816)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-03-18"
+      },
+      "Updated": {
+        "Date": "2019-03-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-0816",
+          "Cvss3": "5.4/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-285",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-0816",
+          "Public": "20190305"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1680165",
+          "ID": "1680165"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.7",
+        "cpe:/o:redhat:rhel_tus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          },
+          {
+            "Comment": "cloud-init is earlier than 0:18.2-1.el7_6.2",
+            "TestRef": "oval:com.redhat.rhsa:tst:20190597001"
+          },
+          {
+            "Comment": "cloud-init is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20190597002"
+          }
+        ]
+      }
+    ]
+  }
+}

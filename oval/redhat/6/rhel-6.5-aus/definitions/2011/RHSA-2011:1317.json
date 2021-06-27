@@ -1,0 +1,125 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111317",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2011:1317: cyrus-imapd security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1317",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1317"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3208",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3208"
+      }
+    ],
+    "Description": "The cyrus-imapd packages contain a high-performance mail server with IMAP,\nPOP3, NNTP, and Sieve support.\n\nA buffer overflow flaw was found in the cyrus-imapd NNTP server, nntpd. A\nremote user able to use the nntpd service could use this flaw to crash the\nnntpd child process or, possibly, execute arbitrary code with the\nprivileges of the cyrus user. (CVE-2011-3208)\n\nRed Hat would like to thank Greg Banks for reporting this issue.\n\nUsers of cyrus-imapd are advised to upgrade to these updated packages,\nwhich contain a backported patch to correct this issue. After installing\nthe update, cyrus-imapd will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-09-19"
+      },
+      "Updated": {
+        "Date": "2011-09-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-3208",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3208",
+          "Public": "20110908"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/734926",
+          "ID": "734926"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.5",
+        "cpe:/o:redhat:rhel_aus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cyrus-imapd is earlier than 0:2.3.16-6.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111317001"
+                  },
+                  {
+                    "Comment": "cyrus-imapd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110859002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cyrus-imapd-devel is earlier than 0:2.3.16-6.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111317003"
+                  },
+                  {
+                    "Comment": "cyrus-imapd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110859004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cyrus-imapd-utils is earlier than 0:2.3.16-6.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111317005"
+                  },
+                  {
+                    "Comment": "cyrus-imapd-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110859006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

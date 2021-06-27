@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20183324",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2018:3324: fuse security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:3324",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:3324"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-10906",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-10906"
+      }
+    ],
+    "Description": "The fuse packages contain the File System in Userspace (FUSE) tools to mount a FUSE file system. With FUSE, it is possible to implement a fully functional file system in a user-space program.\n\nSecurity Fix(es):\n\n* fuse: bypass of the \"user_allow_other\" restriction when SELinux is active (CVE-2018-10906)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 7.6 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-10-30"
+      },
+      "Updated": {
+        "Date": "2018-10-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-10906",
+          "Cvss3": "5.3/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-285",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-10906",
+          "Public": "20180724"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1602996",
+          "ID": "1602996"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.7",
+        "cpe:/o:redhat:rhel_tus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fuse is earlier than 0:2.9.2-11.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183324001"
+                  },
+                  {
+                    "Comment": "fuse is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183324002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fuse-devel is earlier than 0:2.9.2-11.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183324003"
+                  },
+                  {
+                    "Comment": "fuse-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183324004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "fuse-libs is earlier than 0:2.9.2-11.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183324005"
+                  },
+                  {
+                    "Comment": "fuse-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183324006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

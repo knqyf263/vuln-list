@@ -1,0 +1,165 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151945",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2015:1945: kubernetes security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Enterprise 3.0"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1945",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1945"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5305",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5305"
+      }
+    ],
+    "Description": "Kubernetes allows orchestration and control of Docker containers as used in OpenShift Enterprise 3.\n\nKubernetes fails to validate object name types before passing the data to etcd. As the etcd service generates keys based on the object name type this can lead to a directory path traversal.  (CVE-2015-5305)\n\nRed Hat would like to thank Jordan Liggitt for discovering and \nreporting this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-10-27"
+      },
+      "Updated": {
+        "Date": "2015-10-27"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5305",
+          "Cvss2": "4.0/AV:N/AC:L/Au:S/C:N/I:P/A:N",
+          "Cwe": "CWE-22",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5305",
+          "Public": "20151027"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1273969",
+          "ID": "1273969"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:3.0",
+        "cpe:/a:redhat:openshift:3.0::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20181000805004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20181000805003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift is earlier than 0:3.0.2.0-0.git.20.656dc3e.el7ose",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151945001"
+                  },
+                  {
+                    "Comment": "openshift is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002105002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients is earlier than 0:3.0.2.0-0.git.20.656dc3e.el7ose",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151945003"
+                  },
+                  {
+                    "Comment": "openshift-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002105008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-master is earlier than 0:3.0.2.0-0.git.20.656dc3e.el7ose",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151945005"
+                  },
+                  {
+                    "Comment": "openshift-master is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002105004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-node is earlier than 0:3.0.2.0-0.git.20.656dc3e.el7ose",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151945007"
+                  },
+                  {
+                    "Comment": "openshift-node is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002105006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-sdn-ovs is earlier than 0:3.0.2.0-0.git.20.656dc3e.el7ose",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151945009"
+                  },
+                  {
+                    "Comment": "openshift-sdn-ovs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002105010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tuned-profiles-openshift-node is earlier than 0:3.0.2.0-0.git.20.656dc3e.el7ose",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151945011"
+                  },
+                  {
+                    "Comment": "tuned-profiles-openshift-node is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002105012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

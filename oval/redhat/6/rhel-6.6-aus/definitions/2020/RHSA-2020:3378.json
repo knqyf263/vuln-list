@@ -1,0 +1,182 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20203378",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:3378: bind security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.6 Advanced Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:3378",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:3378"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8616",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8616"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-8617",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-8617"
+      }
+    ],
+    "Description": "The Berkeley Internet Name Domain (BIND) is an implementation of the Domain Name System (DNS) protocols. BIND includes a DNS server (named); a resolver library (routines for applications to use when interfacing with DNS); and tools for verifying that the DNS server is operating correctly.\n\nSecurity Fix(es):\n\n* bind: BIND does not sufficiently limit the number of fetches performed when processing referrals (CVE-2020-8616)\n\n* bind: A logic error in code which checks TSIG validity can be used to trigger an assertion failure in tsig.c (CVE-2020-8617)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-08-10"
+      },
+      "Updated": {
+        "Date": "2020-08-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-8616",
+          "Cvss3": "8.6/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8616",
+          "Public": "20200519"
+        },
+        {
+          "CveID": "CVE-2020-8617",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-617",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-8617",
+          "Public": "20200519"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1836118",
+          "ID": "1836118"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1836124",
+          "ID": "1836124"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.6",
+        "cpe:/o:redhat:rhel_aus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind is earlier than 32:9.8.2-0.30.rc1.el6_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203378001"
+                  },
+                  {
+                    "Comment": "bind is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-chroot is earlier than 32:9.8.2-0.30.rc1.el6_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203378003"
+                  },
+                  {
+                    "Comment": "bind-chroot is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-devel is earlier than 32:9.8.2-0.30.rc1.el6_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203378005"
+                  },
+                  {
+                    "Comment": "bind-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-libs is earlier than 32:9.8.2-0.30.rc1.el6_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203378007"
+                  },
+                  {
+                    "Comment": "bind-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-sdb is earlier than 32:9.8.2-0.30.rc1.el6_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203378009"
+                  },
+                  {
+                    "Comment": "bind-sdb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "bind-utils is earlier than 32:9.8.2-0.30.rc1.el6_6.11",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203378011"
+                  },
+                  {
+                    "Comment": "bind-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20170651012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20131850",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2013:1850: openjpeg security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:1850",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:1850"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1447",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1447"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-6045",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-6045"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-6052",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-6052"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-6054",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-6054"
+      }
+    ],
+    "Description": "OpenJPEG is an open source library for reading and writing image files in\nJPEG 2000 format.\n\nMultiple heap-based buffer overflow flaws were found in OpenJPEG.\nAn attacker could create a specially crafted OpenJPEG image that, when\nopened, could cause an application using openjpeg to crash or, possibly,\nexecute arbitrary code with the privileges of the user running the\napplication. (CVE-2013-6045, CVE-2013-6054)\n\nMultiple denial of service flaws were found in OpenJPEG. An attacker could\ncreate a specially crafted OpenJPEG image that, when opened, could cause an\napplication using openjpeg to crash (CVE-2013-1447, CVE-2013-6052)\n\nRed Hat would like to thank Raphael Geissert for reporting these issues.\n\nUsers of OpenJPEG are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. All running\napplications using OpenJPEG must be restarted for the update to take\neffect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-12-17"
+      },
+      "Updated": {
+        "Date": "2013-12-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1447",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1447",
+          "Public": "20131204"
+        },
+        {
+          "CveID": "CVE-2013-6045",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-6045",
+          "Public": "20131204"
+        },
+        {
+          "CveID": "CVE-2013-6052",
+          "Cvss2": "5.8/AV:N/AC:M/Au:N/C:P/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-6052",
+          "Public": "20131204"
+        },
+        {
+          "CveID": "CVE-2013-6054",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-6054",
+          "Public": "20131204"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1036491",
+          "ID": "1036491"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1036495",
+          "ID": "1036495"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1036499",
+          "ID": "1036499"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1037945",
+          "ID": "1037945"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.5",
+        "cpe:/o:redhat:rhel_aus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg is earlier than 0:1.3-10.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131850001"
+                  },
+                  {
+                    "Comment": "openjpeg is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg-devel is earlier than 0:1.3-10.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131850003"
+                  },
+                  {
+                    "Comment": "openjpeg-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openjpeg-libs is earlier than 0:1.3-10.el6_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131850005"
+                  },
+                  {
+                    "Comment": "openjpeg-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121068006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

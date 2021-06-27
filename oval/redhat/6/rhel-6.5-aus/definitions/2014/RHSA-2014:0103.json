@@ -1,0 +1,167 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140103",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2014:0103: libvirt security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0103",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0103"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-6458",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-6458"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-1447",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-1447"
+      }
+    ],
+    "Description": "The libvirt library is a C API for managing and interacting with the\nvirtualization capabilities of Linux and other operating systems.\nIn addition, libvirt provides tools for remote management of\nvirtualized systems.\n\nA use-after-free flaw was found in the way several libvirt block APIs\nhandled domain jobs. A remote attacker able to establish a read-only\nconnection to libvirtd could use this flaw to crash libvirtd or,\npotentially, execute arbitrary code with the privileges of the libvirtd\nprocess (usually root). (CVE-2013-6458)\n\nA race condition was found in the way libvirtd handled keepalive\ninitialization requests when the connection was closed prior to\nestablishing connection credentials. An attacker able to establish a\nread-only connection to libvirtd could use this flaw to crash libvirtd,\nresulting in a denial of service. (CVE-2014-1447)\n\nThis update also fixes the following bug:\n\n* A race condition was possible between a thread starting a virtual machine\nwith a guest agent configured (regular start-up or while migrating) and a\nthread that was killing the VM process (or the process crashing). The race\ncould cause the monitor object to be freed by the thread that killed the VM\nprocess, which was later accessed by the thread that was attempting to\nstart the VM, resulting in a crash. This issue was fixed by checking the\nstate of the VM after the attempted connection to the guest agent; if the\nVM in the meantime exited, no other operations are attempted. (BZ#1055578)\n\nAll libvirt users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. After installing the\nupdated packages, libvirtd will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-01-28"
+      },
+      "Updated": {
+        "Date": "2014-01-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-6458",
+          "Cvss2": "6.8/AV:A/AC:H/Au:N/C:C/I:C/A:C",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-6458",
+          "Public": "20131213"
+        },
+        {
+          "CveID": "CVE-2014-1447",
+          "Cvss2": "3.3/AV:A/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-1447",
+          "Public": "20131231"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1048631",
+          "ID": "1048631"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1052957",
+          "ID": "1052957"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.5",
+        "cpe:/o:redhat:rhel_aus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt is earlier than 0:0.10.2-29.el6_5.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140103001"
+                  },
+                  {
+                    "Comment": "libvirt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-client is earlier than 0:0.10.2-29.el6_5.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140103003"
+                  },
+                  {
+                    "Comment": "libvirt-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-devel is earlier than 0:0.10.2-29.el6_5.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140103005"
+                  },
+                  {
+                    "Comment": "libvirt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-lock-sanlock is earlier than 0:0.10.2-29.el6_5.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140103007"
+                  },
+                  {
+                    "Comment": "libvirt-lock-sanlock is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libvirt-python is earlier than 0:0.10.2-29.el6_5.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140103009"
+                  },
+                  {
+                    "Comment": "libvirt-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131581010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

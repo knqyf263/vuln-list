@@ -1,0 +1,195 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20150863",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2015:0863: glibc security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:0863",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:0863"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-7423",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-7423"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-1781",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-1781"
+      }
+    ],
+    "Description": "The glibc packages provide the standard C libraries (libc), POSIX thread\nlibraries (libpthread), standard math libraries (libm), and the Name\nServer Caching Daemon (nscd) used by multiple programs on the system.\nWithout these libraries, the Linux system cannot function correctly.\n\nA buffer overflow flaw was found in the way glibc's gethostbyname_r() and\nother related functions computed the size of a buffer when passed a\nmisaligned buffer as input. An attacker able to make an application call\nany of these functions with a misaligned buffer could use this flaw to\ncrash the application or, potentially, execute arbitrary code with the\npermissions of the user running the application. (CVE-2015-1781)\n\nIt was discovered that, under certain circumstances, glibc's getaddrinfo()\nfunction would send DNS queries to random file descriptors. An attacker\ncould potentially use this flaw to send DNS queries to unintended\nrecipients, resulting in information disclosure or data loss due to the\napplication encountering corrupted data. (CVE-2013-7423)\n\nThe CVE-2015-1781 issue was discovered by Arjun Shankar of Red Hat.\n\nThis update also fixes the following bug:\n\n* Previously, the nscd daemon did not properly reload modified data when\nthe user edited monitored nscd configuration files. As a consequence, nscd\nreturned stale data to system processes. This update adds a system of\ninotify-based monitoring and stat-based backup monitoring for nscd\nconfiguration files. As a result, nscd now detects changes to its\nconfiguration files and reloads the data properly, which prevents it from\nreturning stale data. (BZ#1194149)\n\nAll glibc users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-04-21"
+      },
+      "Updated": {
+        "Date": "2015-04-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-7423",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-362-\u003eCWE-201",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-7423",
+          "Public": "20130912"
+        },
+        {
+          "CveID": "CVE-2015-1781",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-131-\u003eCWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-1781",
+          "Public": "20150421"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1187109",
+          "ID": "1187109"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1199525",
+          "ID": "1199525"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.6",
+        "cpe:/o:redhat:rhel_aus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc is earlier than 0:2.12-1.149.el6_6.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150863001"
+                  },
+                  {
+                    "Comment": "glibc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-common is earlier than 0:2.12-1.149.el6_6.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150863003"
+                  },
+                  {
+                    "Comment": "glibc-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-devel is earlier than 0:2.12-1.149.el6_6.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150863005"
+                  },
+                  {
+                    "Comment": "glibc-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-headers is earlier than 0:2.12-1.149.el6_6.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150863007"
+                  },
+                  {
+                    "Comment": "glibc-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-static is earlier than 0:2.12-1.149.el6_6.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150863009"
+                  },
+                  {
+                    "Comment": "glibc-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "glibc-utils is earlier than 0:2.12-1.149.el6_6.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150863011"
+                  },
+                  {
+                    "Comment": "glibc-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nscd is earlier than 0:2.12-1.149.el6_6.7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20150863013"
+                  },
+                  {
+                    "Comment": "nscd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20120763014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

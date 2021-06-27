@@ -1,0 +1,152 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20180158",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2018:0158: dhcp security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:0158",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:0158"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-3144",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-3144"
+      }
+    ],
+    "Description": "The Dynamic Host Configuration Protocol (DHCP) is a protocol that allows individual devices on an IP network to get their own network configuration information, including an IP address, a subnet mask, and a broadcast address. The dhcp packages provide a relay agent and ISC DHCP service required to enable and administer DHCP on a network.\n\nSecurity Fix(es):\n\n* It was found that the DHCP daemon did not properly clean up closed OMAPI connections in certain cases. A remote attacker able to connect to the OMAPI port could use this flaw to exhaust file descriptors in the DHCP daemon, leading to a denial of service in the OMAPI functionality. (CVE-2017-3144)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-01-25"
+      },
+      "Updated": {
+        "Date": "2018-01-25"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-3144",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-772",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-3144",
+          "Public": "20171207"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1522918",
+          "ID": "1522918"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.7",
+        "cpe:/o:redhat:rhel_tus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhclient is earlier than 12:4.2.5-58.el7_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180158001"
+                  },
+                  {
+                    "Comment": "dhclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162590002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp is earlier than 12:4.2.5-58.el7_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180158003"
+                  },
+                  {
+                    "Comment": "dhcp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162590004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-common is earlier than 12:4.2.5-58.el7_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180158005"
+                  },
+                  {
+                    "Comment": "dhcp-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162590006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-devel is earlier than 12:4.2.5-58.el7_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180158007"
+                  },
+                  {
+                    "Comment": "dhcp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162590008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "dhcp-libs is earlier than 12:4.2.5-58.el7_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180158009"
+                  },
+                  {
+                    "Comment": "dhcp-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162590010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

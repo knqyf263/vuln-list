@@ -1,0 +1,211 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20162779",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2016:2779: nss and nss-util security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:2779",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:2779"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2834",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2834"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-5285",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-5285"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8635",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8635"
+      }
+    ],
+    "Description": "Network Security Services (NSS) is a set of libraries designed to support the cross-platform development of security-enabled client and server applications.\n\nThe nss-util packages provide utilities for use with the Network Security Services (NSS) libraries.\n\nThe following packages have been upgraded to a newer upstream version: nss (3.21.3), nss-util (3.21.3).\n\nSecurity Fix(es):\n\n* Multiple buffer handling flaws were found in the way NSS handled cryptographic data from the network. A remote attacker could use these flaws to crash an application using NSS or, possibly, execute arbitrary code with the permission of the user running the application. (CVE-2016-2834)\n\n* A NULL pointer dereference flaw was found in the way NSS handled invalid Diffie-Hellman keys. A remote client could use this flaw to crash a TLS/SSL server using NSS. (CVE-2016-5285)\n\n* It was found that Diffie Hellman Client key exchange handling in NSS was vulnerable to small subgroup confinement attack. An attacker could use this flaw to recover private keys by confining the client DH key to small subgroup of the desired group. (CVE-2016-8635)\n\nRed Hat would like to thank the Mozilla project for reporting CVE-2016-2834. The CVE-2016-8635 issue was discovered by Hubert Kario (Red Hat). Upstream acknowledges Tyson Smith and Jed Davis as the original reporter of CVE-2016-2834.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-11-16"
+      },
+      "Updated": {
+        "Date": "2016-11-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-2834",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2834",
+          "Public": "20160607"
+        },
+        {
+          "CveID": "CVE-2016-5285",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-5285",
+          "Public": "20161116"
+        },
+        {
+          "CveID": "CVE-2016-8635",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:P/I:N/A:N",
+          "Cvss3": "5.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8635",
+          "Public": "20161116"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1347908",
+          "ID": "1347908"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1383883",
+          "ID": "1383883"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1391818",
+          "ID": "1391818"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.7",
+        "cpe:/o:redhat:rhel_tus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util is earlier than 0:3.21.3-1.1.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162779001"
+                  },
+                  {
+                    "Comment": "nss-util is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util-devel is earlier than 0:3.21.3-1.1.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162779003"
+                  },
+                  {
+                    "Comment": "nss-util-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss is earlier than 0:3.21.3-2.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162779005"
+                  },
+                  {
+                    "Comment": "nss is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-devel is earlier than 0:3.21.3-2.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162779007"
+                  },
+                  {
+                    "Comment": "nss-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-pkcs11-devel is earlier than 0:3.21.3-2.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162779009"
+                  },
+                  {
+                    "Comment": "nss-pkcs11-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-sysinit is earlier than 0:3.21.3-2.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162779011"
+                  },
+                  {
+                    "Comment": "nss-sysinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-tools is earlier than 0:3.21.3-2.el7_3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162779013"
+                  },
+                  {
+                    "Comment": "nss-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364014"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

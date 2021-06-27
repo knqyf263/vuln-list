@@ -1,0 +1,139 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20160615",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2016:0615: openvswitch security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Enterprise 3.1"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:0615",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:0615"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2074",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2074"
+      }
+    ],
+    "Description": "OpenShift Enterprise by Red Hat is the company's cloud computing\nPlatform-as-a-Service (PaaS) solution designed for on-premise or private\ncloud deployments.\n\nA buffer overflow flaw was discovered in the OVS processing of MPLS labels. \nA remote attacker able to deliver a frame containing a malicious MPLS label \nthat would be processed by OVS could trigger the flaw and use the resulting \nmemory corruption to cause a denial of service (DoS) or, possibly, execute \narbitrary code. (CVE-2016-2074)\n\nRed Hat would like to thank the Open vSwitch Project for reporting these \nissues. Upstream acknowledges Kashyap Thimmaraju and Bhargava Shastry as \nthe original reporters of CVE-2016-2074.\n\nThis update includes the following images:\n\nopenshift3/openvswitch:v3.1.1.6-9\naep3_beta/openvswitch:v3.1.1.6-9\nopenshift3/node:v3.1.1.6-16\naep3_beta/node:v3.1.1.6-16\n\nAll openvswitch users are advised to upgrade to this updated package, which \ncontains a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-04-11"
+      },
+      "Updated": {
+        "Date": "2016-04-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-2074",
+          "Cvss2": "7.4/AV:A/AC:M/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-121",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2074",
+          "Public": "20160328"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1318553",
+          "ID": "1318553"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:3.1",
+        "cpe:/a:redhat:openshift:3.1::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201410077006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201410077005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch is earlier than 0:2.4.0-2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160615001"
+                  },
+                  {
+                    "Comment": "openvswitch is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160070004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch-devel is earlier than 0:2.4.0-2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160615003"
+                  },
+                  {
+                    "Comment": "openvswitch-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160070006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch-test is earlier than 0:2.4.0-2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160615005"
+                  },
+                  {
+                    "Comment": "openvswitch-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160070008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-openvswitch is earlier than 0:2.4.0-2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160615007"
+                  },
+                  {
+                    "Comment": "python-openvswitch is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160070010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

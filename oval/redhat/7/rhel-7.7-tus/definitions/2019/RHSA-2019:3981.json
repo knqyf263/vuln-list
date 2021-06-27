@@ -1,0 +1,139 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20193981",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2019:3981: 389-ds-base security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:3981",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:3981"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14824",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14824"
+      }
+    ],
+    "Description": "389 Directory Server is an LDAP version 3 (LDAPv3) compliant server. The base packages include the Lightweight Directory Access Protocol (LDAP) server and command-line utilities for server administration.\n\nSecurity Fix(es):\n\n* 389-ds-base: Read permission check bypass via the deref plugin (CVE-2019-14824)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* DB Deadlock on modrdn appears to corrupt database and entry cache (BZ#1749289)\n\n* After audit log file is rotated, DS version string is logged after each update (BZ#1754831)\n\n* Extremely slow LDIF import with ldif2db (BZ#1763622)\n\n* ns-slapd crash on concurrent SASL BINDs, connection_call_io_layer_callbacks must hold hold c_mutex (BZ#1763627)\n\n* CleanAllRUV task limit not enforced (BZ#1767622)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-11-26"
+      },
+      "Updated": {
+        "Date": "2019-11-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-14824",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-732",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14824",
+          "Public": "20191104:0914"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1747448",
+          "ID": "1747448"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.7",
+        "cpe:/o:redhat:rhel_tus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base is earlier than 0:1.3.9.1-12.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193981001"
+                  },
+                  {
+                    "Comment": "389-ds-base is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151554002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-devel is earlier than 0:1.3.9.1-12.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193981003"
+                  },
+                  {
+                    "Comment": "389-ds-base-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151554004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-libs is earlier than 0:1.3.9.1-12.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193981005"
+                  },
+                  {
+                    "Comment": "389-ds-base-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20151554006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "389-ds-base-snmp is earlier than 0:1.3.9.1-12.el7_7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20193981007"
+                  },
+                  {
+                    "Comment": "389-ds-base-snmp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162594008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

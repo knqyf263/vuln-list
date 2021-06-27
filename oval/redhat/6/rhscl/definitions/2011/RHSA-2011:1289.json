@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111289",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2011:1289: librsvg2 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1289",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1289"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3146",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3146"
+      }
+    ],
+    "Description": "The librsvg2 packages provide an SVG (Scalable Vector Graphics) library\nbased on libart.\n\nA flaw was found in the way librsvg2 parsed certain SVG files. An attacker\ncould create a specially-crafted SVG file that, when opened, would cause\napplications that use librsvg2 (such as Eye of GNOME) to crash or,\npotentially, execute arbitrary code. (CVE-2011-3146)\n\nRed Hat would like to thank the Ubuntu Security Team for reporting this\nissue. The Ubuntu Security Team acknowledges Sauli Pahlman as the original\nreporter.\n\nAll librsvg2 users should upgrade to these updated packages, which contain\na backported patch to correct this issue. All running applications that use\nlibrsvg2 must be restarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-09-13"
+      },
+      "Updated": {
+        "Date": "2011-09-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-3146",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3146",
+          "Public": "20110906"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/734936",
+          "ID": "734936"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.5",
+        "cpe:/o:redhat:rhel_eus:6.5::computenode",
+        "cpe:/o:redhat:rhel_eus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librsvg2 is earlier than 0:2.26.0-5.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111289001"
+                  },
+                  {
+                    "Comment": "librsvg2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111289002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librsvg2-devel is earlier than 0:2.26.0-5.el6_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111289003"
+                  },
+                  {
+                    "Comment": "librsvg2-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111289004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

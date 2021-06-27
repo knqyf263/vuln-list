@@ -1,0 +1,125 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130771",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2013:0771: curl security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0771",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0771"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1944",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1944"
+      }
+    ],
+    "Description": "cURL provides the libcurl library and a command line tool for downloading\nfiles from servers using various protocols, including HTTP, FTP, and LDAP.\n\nA flaw was found in the way libcurl matched domains associated with\ncookies. This could lead to cURL or an application linked against libcurl\nsending the wrong cookie if only part of the domain name matched the domain\nassociated with the cookie, disclosing the cookie to unrelated hosts.\n(CVE-2013-1944)\n\nRed Hat would like to thank the cURL project for reporting this issue.\nUpstream acknowledges YAMADA Yasuharu as the original reporter.\n\nUsers of curl should upgrade to these updated packages, which contain a\nbackported patch to correct this issue. All running applications using\nlibcurl must be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-04-24"
+      },
+      "Updated": {
+        "Date": "2013-04-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1944",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1944",
+          "Public": "20130412"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/950577",
+          "ID": "950577"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.6",
+        "cpe:/o:redhat:rhel_aus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "curl is earlier than 0:7.19.7-36.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130771001"
+                  },
+                  {
+                    "Comment": "curl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110918002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcurl is earlier than 0:7.19.7-36.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130771003"
+                  },
+                  {
+                    "Comment": "libcurl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110918004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcurl-devel is earlier than 0:7.19.7-36.el6_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130771005"
+                  },
+                  {
+                    "Comment": "libcurl-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110918006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

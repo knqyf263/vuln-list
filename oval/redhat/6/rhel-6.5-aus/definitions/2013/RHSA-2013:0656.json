@@ -1,0 +1,182 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130656",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2013:0656: krb5 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0656",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0656"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-1016",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-1016"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1415",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1415"
+      }
+    ],
+    "Description": "Kerberos is a network authentication system which allows clients and\nservers to authenticate to each other using symmetric encryption and a\ntrusted third-party, the Key Distribution Center (KDC).\n\nWhen a client attempts to use PKINIT to obtain credentials from the KDC,\nthe client can specify, using an issuer and serial number, which of the\nKDC's possibly-many certificates the client has in its possession, as a\nhint to the KDC that it should use the corresponding key to sign its\nresponse. If that specification was malformed, the KDC could attempt to\ndereference a NULL pointer and crash. (CVE-2013-1415)\n\nWhen a client attempts to use PKINIT to obtain credentials from the KDC,\nthe client will typically format its request to conform to the\nspecification published in RFC 4556. For interoperability reasons, clients\nand servers also provide support for an older, draft version of that\nspecification. If a client formatted its request to conform to this older\nversion of the specification, with a non-default key agreement option, it\ncould cause the KDC to attempt to dereference a NULL pointer and crash.\n(CVE-2012-1016)\n\nAll krb5 users should upgrade to these updated packages, which contain\nbackported patches to correct these issues. After installing the updated\npackages, the krb5kdc daemon will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-03-18"
+      },
+      "Updated": {
+        "Date": "2013-03-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-1016",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-476",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-1016",
+          "Public": "20130215"
+        },
+        {
+          "CveID": "CVE-2013-1415",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-476",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1415",
+          "Public": "20130215"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/914749",
+          "ID": "914749"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/917840",
+          "ID": "917840"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.5",
+        "cpe:/o:redhat:rhel_aus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-devel is earlier than 0:1.10.3-10.el6_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130656001"
+                  },
+                  {
+                    "Comment": "krb5-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-libs is earlier than 0:1.10.3-10.el6_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130656003"
+                  },
+                  {
+                    "Comment": "krb5-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-pkinit-openssl is earlier than 0:1.10.3-10.el6_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130656005"
+                  },
+                  {
+                    "Comment": "krb5-pkinit-openssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-server is earlier than 0:1.10.3-10.el6_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130656007"
+                  },
+                  {
+                    "Comment": "krb5-server is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-server-ldap is earlier than 0:1.10.3-10.el6_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130656009"
+                  },
+                  {
+                    "Comment": "krb5-server-ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "krb5-workstation is earlier than 0:1.10.3-10.el6_4.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20130656011"
+                  },
+                  {
+                    "Comment": "krb5-workstation is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100863012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20160537",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2016:0537: openvswitch security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux OpenStack Platform 7.0 (Kilo) for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:0537",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:0537"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-2074",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-2074"
+      }
+    ],
+    "Description": "Open vSwitch provides standard network bridging functions and support for the OpenFlow protocol for remote per-flow control of traffic.\n\nSecurity Fix(es):\n\n* A buffer overflow flaw was discovered in the OVS processing of MPLS labels. A remote attacker able to deliver a frame containing a malicious MPLS label that would be processed by OVS could trigger the flaw and use the resulting memory corruption to cause a denial of service (DoS) or, possibly, execute arbitrary code. (CVE-2016-2074)\n\nRed Hat would like to thank the Open vSwitch project for reporting this issue. Upstream acknowledges Kashyap Thimmaraju and Bhargava Shastry as the original reporters.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-03-30"
+      },
+      "Updated": {
+        "Date": "2016-03-30"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-2074",
+          "Cvss2": "7.4/AV:A/AC:M/Au:S/C:C/I:C/A:C",
+          "Cwe": "CWE-121",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-2074",
+          "Public": "20160328"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1318553",
+          "ID": "1318553"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:7",
+        "cpe:/a:redhat:openstack-director:7::el7",
+        "cpe:/a:redhat:openstack-director_els:7",
+        "cpe:/a:redhat:openstack-director_els:7::el7.4",
+        "cpe:/a:redhat:openstack-optools:7",
+        "cpe:/a:redhat:openstack-optools:7::el7",
+        "cpe:/a:redhat:openstack:7",
+        "cpe:/a:redhat:openstack:7::el7",
+        "cpe:/a:redhat:openstack_els:7",
+        "cpe:/a:redhat:openstack_els:7::el7.4"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20151639008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20151639007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch-dpdk is earlier than 0:2.4.0-0.10346.git97bab959.3.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160537001"
+                  },
+                  {
+                    "Comment": "openvswitch-dpdk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160537002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch is earlier than 0:2.4.0-2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160537003"
+                  },
+                  {
+                    "Comment": "openvswitch is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160537004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-openvswitch is earlier than 0:2.4.0-2.el7_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160537005"
+                  },
+                  {
+                    "Comment": "python-openvswitch is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160537006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

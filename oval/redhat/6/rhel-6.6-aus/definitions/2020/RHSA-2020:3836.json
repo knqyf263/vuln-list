@@ -1,0 +1,152 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20203836",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:3836: kernel security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6.6 Advanced Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:3836",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:3836"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-2647",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-2647"
+      }
+    ],
+    "Description": "The kernel packages contain the Linux kernel, the core of any Linux operating system.\n\nSecurity Fix(es):\n\n* kernel: Null pointer dereference in search_keyring (CVE-2017-2647)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-09-24"
+      },
+      "Updated": {
+        "Date": "2020-09-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-2647",
+          "Cvss3": "7.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-476",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-2647",
+          "Public": "20170321"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1428353",
+          "ID": "1428353"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.6",
+        "cpe:/o:redhat:rhel_aus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:2.6.32-504.84.1.el6 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20203836009"
+              },
+              {
+                "Comment": "kernel earlier than 0:2.6.32-504.84.1.el6 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20203836010"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:2.6.32-504.84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203836001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:2.6.32-504.84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203836003"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:2.6.32-504.84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203836005"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:2.6.32-504.84.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203836007"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20100842010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

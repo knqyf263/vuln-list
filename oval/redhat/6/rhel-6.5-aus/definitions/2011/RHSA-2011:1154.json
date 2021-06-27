@@ -1,0 +1,112 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111154",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2011:1154: libXfont security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1154",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1154"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2895",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2895"
+      }
+    ],
+    "Description": "The libXfont packages provide the X.Org libXfont runtime library. X.Org is\nan open source implementation of the X Window System.\n\nA buffer overflow flaw was found in the way the libXfont library, used by\nthe X.Org server, handled malformed font files compressed using UNIX\ncompress. A malicious, local user could exploit this issue to potentially\nexecute arbitrary code with the privileges of the X.Org server.\n(CVE-2011-2895)\n\nUsers of libXfont should upgrade to these updated packages, which contain a\nbackported patch to resolve this issue. All running X.Org server instances\nmust be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-08-11"
+      },
+      "Updated": {
+        "Date": "2011-08-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-2895",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2895",
+          "Public": "20110810"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/727624",
+          "ID": "727624"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.5",
+        "cpe:/o:redhat:rhel_aus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libXfont is earlier than 0:1.4.1-2.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111154001"
+                  },
+                  {
+                    "Comment": "libXfont is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111154002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libXfont-devel is earlier than 0:1.4.1-2.el6_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111154003"
+                  },
+                  {
+                    "Comment": "libXfont-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111154004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

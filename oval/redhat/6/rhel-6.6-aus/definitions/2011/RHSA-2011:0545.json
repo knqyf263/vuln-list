@@ -1,0 +1,87 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110545",
+  "Version": "648",
+  "Metadata": {
+    "Title": "RHSA-2011:0545: squid security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0545",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0545"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2010-3072",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2010-3072"
+      }
+    ],
+    "Description": "Squid is a high-performance proxy caching server for web clients,\nsupporting FTP, Gopher, and HTTP data objects.\n\nIt was found that string comparison functions in Squid did not properly\nhandle the comparisons of NULL and empty strings. A remote, trusted web\nclient could use this flaw to cause the squid daemon to crash via a\nspecially-crafted request. (CVE-2010-3072)\n\nThis update also fixes the following bugs:\n\n* A small memory leak in Squid caused multiple \"ctx: enter level\" messages\nto be logged to \"/var/log/squid/cache.log\". This update resolves the memory\nleak. (BZ#666533)\n\n* This erratum upgrades Squid to upstream version 3.1.10. This upgraded\nversion supports the Google Instant service and introduces various code\nimprovements. (BZ#639365)\n\nUsers of squid should upgrade to this updated package, which resolves these\nissues. After installing this update, the squid service will be restarted\nautomatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-05-19"
+      },
+      "Updated": {
+        "Date": "2011-05-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2010-3072",
+          "Cvss2": "3.3/AV:A/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2010-3072",
+          "Public": "20100903"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/630444",
+          "ID": "630444"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.6",
+        "cpe:/o:redhat:rhel_aus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "squid is earlier than 7:3.1.10-1.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110545001"
+          },
+          {
+            "Comment": "squid is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110545002"
+          }
+        ]
+      }
+    ]
+  }
+}

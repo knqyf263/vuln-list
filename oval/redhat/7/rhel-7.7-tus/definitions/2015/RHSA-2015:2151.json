@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20152151",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2015:2151: xfsprogs security, bug fix and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:2151",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:2151"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-2150",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-2150"
+      }
+    ],
+    "Description": "The xfsprogs packages contain a set of commands to use the XFS file system,\nincluding the mkfs.xfs command to construct an XFS system.\n\nIt was discovered that the xfs_metadump tool of the xfsprogs suite did not\nfully adhere to the standards of obfuscation described in its man page. In\ncase a user with the necessary privileges used xfs_metadump and relied on\nthe advertised obfuscation, the generated data could contain unexpected\ntraces of potentially sensitive information. (CVE-2012-2150)\n\nThe xfsprogs packages have been upgraded to upstream version 3.2.2, which\nprovides a number of bug fixes and enhancements over the previous version.\nThis release also includes updates present in upstream version 3.2.3,\nalthough it omits the mkfs.xfs default disk format change (for metadata\nchecksumming) which is present upstream. (BZ#1223991)\n\nUsers of xfsprogs are advised to upgrade to these updated packages, which\nfix these bugs and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-11-19"
+      },
+      "Updated": {
+        "Date": "2015-11-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-2150",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:P/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-2150",
+          "Public": "20150723"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/817696",
+          "ID": "817696"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_tus:7.7",
+        "cpe:/o:redhat:rhel_tus:7.7::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xfsprogs is earlier than 0:3.2.2-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152151001"
+                  },
+                  {
+                    "Comment": "xfsprogs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152151002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xfsprogs-devel is earlier than 0:3.2.2-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152151003"
+                  },
+                  {
+                    "Comment": "xfsprogs-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152151004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xfsprogs-qa-devel is earlier than 0:3.2.2-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152151005"
+                  },
+                  {
+                    "Comment": "xfsprogs-qa-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20152151006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

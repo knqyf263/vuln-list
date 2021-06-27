@@ -1,0 +1,104 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141148",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2014:1148: squid security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1148",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1148"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4115",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4115"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3609",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3609"
+      }
+    ],
+    "Description": "Squid is a high-performance proxy caching server for web clients,\nsupporting FTP, Gopher, and HTTP data objects.\n\nA flaw was found in the way Squid handled malformed HTTP Range headers.\nA remote attacker able to send HTTP requests to the Squid proxy could use\nthis flaw to crash Squid. (CVE-2014-3609)\n\nA buffer overflow flaw was found in Squid's DNS lookup module. A remote\nattacker able to send HTTP requests to the Squid proxy could use this flaw\nto crash Squid. (CVE-2013-4115)\n\nRed Hat would like to thank the Squid project for reporting the\nCVE-2014-3609 issue. Upstream acknowledges Matthew Daley as the original\nreporter.\n\nAll Squid users are advised to upgrade to this updated package, which\ncontains backported patches to correct these issues. After installing this\nupdate, the squid service will be restarted automatically.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-09-03"
+      },
+      "Updated": {
+        "Date": "2014-09-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-4115",
+          "Cvss2": "1.8/AV:A/AC:H/Au:N/C:N/I:N/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4115",
+          "Public": "20130710"
+        },
+        {
+          "CveID": "CVE-2014-3609",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-228-\u003eCWE-617",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3609",
+          "Public": "20140828"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/983653",
+          "ID": "983653"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1134209",
+          "ID": "1134209"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.6",
+        "cpe:/o:redhat:rhel_aus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "squid is earlier than 7:3.1.10-22.el6_5",
+            "TestRef": "oval:com.redhat.rhsa:tst:20141148001"
+          },
+          {
+            "Comment": "squid is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110545002"
+          }
+        ]
+      }
+    ]
+  }
+}

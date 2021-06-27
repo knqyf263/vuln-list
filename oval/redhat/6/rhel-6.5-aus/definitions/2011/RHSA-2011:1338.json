@@ -1,0 +1,151 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111338",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2011:1338: NetworkManager security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1338",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1338"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3364",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3364"
+      }
+    ],
+    "Description": "NetworkManager is a network link manager that attempts to keep a wired or\nwireless network connection active at all times. The ifcfg-rh\nNetworkManager plug-in is used in Red Hat Enterprise Linux distributions to\nread and write configuration information from the\n/etc/sysconfig/network-scripts/ifcfg-* files.\n\nAn input sanitization flaw was found in the way the ifcfg-rh NetworkManager\nplug-in escaped network connection names containing special characters. If\nPolicyKit was configured to allow local, unprivileged users to create and\nsave new network connections, they could create a connection with a\nspecially-crafted name, leading to the escalation of their privileges.\nNote: By default, PolicyKit prevents unprivileged users from creating and\nsaving network connections. (CVE-2011-3364)\n\nRed Hat would like to thank Matt McCutchen for reporting this issue.\n\nUsers of NetworkManager should upgrade to these updated packages, which\ncontain a backported patch to correct this issue. Running instances of\nNetworkManager must be restarted (\"service NetworkManager restart\") for\nthis update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-09-26"
+      },
+      "Updated": {
+        "Date": "2011-09-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-3364",
+          "Cvss2": "6.9/AV:L/AC:M/Au:N/C:C/I:C/A:C",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3364",
+          "Public": "20110926"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/737338",
+          "ID": "737338"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.5",
+        "cpe:/o:redhat:rhel_aus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "NetworkManager is earlier than 1:0.8.1-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111338001"
+                  },
+                  {
+                    "Comment": "NetworkManager is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110930002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "NetworkManager-devel is earlier than 1:0.8.1-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111338003"
+                  },
+                  {
+                    "Comment": "NetworkManager-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110930004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "NetworkManager-glib is earlier than 1:0.8.1-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111338005"
+                  },
+                  {
+                    "Comment": "NetworkManager-glib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110930006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "NetworkManager-glib-devel is earlier than 1:0.8.1-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111338007"
+                  },
+                  {
+                    "Comment": "NetworkManager-glib-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110930008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "NetworkManager-gnome is earlier than 1:0.8.1-9.el6_1.3",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111338009"
+                  },
+                  {
+                    "Comment": "NetworkManager-gnome is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20110930010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

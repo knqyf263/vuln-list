@@ -1,0 +1,87 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111615",
+  "Version": "647",
+  "Metadata": {
+    "Title": "RHSA-2011:1615: virt-v2v security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1615",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1615"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-1773",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-1773"
+      }
+    ],
+    "Description": "virt-v2v is a tool for converting and importing virtual machines to\nlibvirt-managed KVM (Kernel-based Virtual Machine), or Red Hat Enterprise\nVirtualization.\n\nUsing virt-v2v to convert a guest that has a password-protected VNC console\nto a KVM guest removed that password protection from the converted guest:\nafter conversion, a password was not required to access the converted\nguest's VNC console. Now, converted guests will require the same VNC\nconsole password as the original guest. Note that when converting a guest\nto run on Red Hat Enterprise Virtualization, virt-v2v will display a\nwarning that VNC passwords are not supported. (CVE-2011-1773)\n\nNote: The Red Hat Enterprise Linux 6.2 perl-Sys-Virt update must also be\ninstalled to correct CVE-2011-1773.\n\nBug fixes:\n\n* When converting a guest virtual machine (VM), whose name contained\ncertain characters, virt-v2v would create a converted guest with a\ncorrupted name. Now, virt-v2v will not corrupt guest names. (BZ#665883)\n\n* There were numerous usability issues when running virt-v2v as a non-root\nuser. This update makes it simpler to run virt-v2v as a non-root user.\n(BZ#671094)\n\n* virt-v2v failed to convert a Microsoft Windows guest with Windows\nRecovery Console installed in a separate partition. Now, virt-v2v will\nsuccessfully convert a guest with Windows Recovery Console installed in a\nseparate partition by ignoring that partition. (BZ#673066)\n\n* virt-v2v failed to convert a Red Hat Enterprise Linux guest which did not\nhave the symlink \"/boot/grub/menu.lst\". With this update, virt-v2v can\nselect a grub configuration file from several places. (BZ#694364)\n\n* This update removes information about the usage of deprecated command\nline options in the virt-v2v man page. (BZ#694370)\n\n* virt-v2v would fail to correctly change the allocation policy, (sparse or\npreallocated) when converting a guest with QCOW2 image format. The error\nmessage \"Cannot import VM, The selected disk configuration is not\nsupported\" was displayed. With this update, allocation policy changes to a\nguest with QCOW2 storage will work correctly. (BZ#696089)\n\n* The options \"--network\" and \"--bridge\" can not be used in conjunction\nwhen converting a guest, but no error message was displayed. With this\nupdate, virt-v2v will now display an error message if the mutually\nexclusive \"--network\" and \"--bridge\" command line options are both\nspecified. (BZ#700759)\n\n* virt-v2v failed to convert a multi-boot guest, and did not clean up\ntemporary storage and mount points after failure. With this update,\nvirt-v2v will prompt for which operating system to convert from a\nmulti-boot guest, and will correctly clean up if the process fails.\n(BZ#702007)\n\n* virt-v2v failed to correctly configure modprobe aliases when converting a\nVMware ESX guest with VMware Tools installed. With this update, modprobe\naliases will be correctly configured. (BZ#707261)\n\n* When converting a guest with preallocated raw storage using the\nlibvirtxml input method, virt-v2v failed with the erroneous error message\n\"size(X) \u003c usage(Y)\". This update removes this erroneous error. (BZ#727489)\n\n* When converting a Red Hat Enterprise Linux guest, virt-v2v did not check\nthat the Cirrus X driver was available before configuring it. With this\nupdate, virt-v2v will attempt to install the Cirrus X driver if it is\nrequired. (BZ#708961)\n\n* VirtIO systems do not support the Windows Recovery Console on 32-bit\nWindows XP. The virt-v2v man page has been updated to note this. On Windows\nXP Professional x64 Edition, however, if Windows Recovery Console is\nre-installed after conversion, it will work as expected. (BZ#732421)\n\n* Placing comments in the guest fstab file by means of the leading \"#\"\nsymbol caused an \"unknown filesystem\" error after conversion of a guest.\nWith this update comments can now be used and error messages will not be\ndisplayed. (BZ#677870)\n\nUsers of virt-v2v should upgrade to this updated package, which fixes these\nissues and upgrades virt-v2v to version 0.8.3.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-12-05"
+      },
+      "Updated": {
+        "Date": "2011-12-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-1773",
+          "Cvss2": "3.7/AV:L/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-1773",
+          "Public": "20100123"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/702754",
+          "ID": "702754"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:6.6",
+        "cpe:/o:redhat:rhel_aus:6.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          },
+          {
+            "Comment": "virt-v2v is earlier than 0:0.8.3-5.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20111615001"
+          },
+          {
+            "Comment": "virt-v2v is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20111615002"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20194222",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2019:4222: Red Hat OpenShift Service Mesh 1.0.3 RPMs security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "OpenShift Service Mesh 1.0"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:4222",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:4222"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-18801",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-18801"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-18802",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-18802"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-18838",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-18838"
+      }
+    ],
+    "Description": "Red Hat OpenShift Service Mesh is Red Hat's distribution of the Istio service mesh project, tailored for installation into an on-premise OpenShift Container Platform installation.\n\nThis advisory covers the RPM packages for the OpenShift Service Mesh 1.0.3 release.\n\nSecurity Fix(es):\n\n* An untrusted remote client may send HTTP/2 requests that write to the heap outside of the request buffers when the upstream is HTTP/1 (CVE-2019-18801)\n\n* Malformed request header may cause bypass of route matchers resulting in escalation of privileges or information disclosure (CVE-2019-18802)\n\n* Malformed HTTP request without the Host header may cause abnormal termination of the Envoy process (CVE-2019-18838)\n\nFor more details about the security issue(s), including the impact, a CVSS\nscore, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-12-11"
+      },
+      "Updated": {
+        "Date": "2019-12-11"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-18801",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-131",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-18801",
+          "Public": "20191210:1800"
+        },
+        {
+          "CveID": "CVE-2019-18802",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-284",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-18802",
+          "Public": "20191210:1800"
+        },
+        {
+          "CveID": "CVE-2019-18838",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-358",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-18838",
+          "Public": "20191210:1800"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1773444",
+          "ID": "1773444"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1773447",
+          "ID": "1773447"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1773449",
+          "ID": "1773449"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:service_mesh:1.0",
+        "cpe:/a:redhat:service_mesh:1.0::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201818624006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:201818624005"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhea:tst:20193809032"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-prometheus is earlier than 0:2.7.2-26.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222001"
+                  },
+                  {
+                    "Comment": "servicemesh-prometheus is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-cni is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222003"
+                  },
+                  {
+                    "Comment": "servicemesh-cni is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202028362012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222005"
+                  },
+                  {
+                    "Comment": "servicemesh is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-citadel is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222007"
+                  },
+                  {
+                    "Comment": "servicemesh-citadel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-galley is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222009"
+                  },
+                  {
+                    "Comment": "servicemesh-galley is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-istioctl is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222011"
+                  },
+                  {
+                    "Comment": "servicemesh-istioctl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-mixc is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222013"
+                  },
+                  {
+                    "Comment": "servicemesh-mixc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-mixs is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222015"
+                  },
+                  {
+                    "Comment": "servicemesh-mixs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-pilot-agent is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222017"
+                  },
+                  {
+                    "Comment": "servicemesh-pilot-agent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-pilot-discovery is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222019"
+                  },
+                  {
+                    "Comment": "servicemesh-pilot-discovery is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-sidecar-injector is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222021"
+                  },
+                  {
+                    "Comment": "servicemesh-sidecar-injector is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-operator is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222023"
+                  },
+                  {
+                    "Comment": "servicemesh-operator is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202026160010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-proxy is earlier than 0:1.0.3-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222025"
+                  },
+                  {
+                    "Comment": "servicemesh-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202011767002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-grafana is earlier than 0:6.2.2-25.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222027"
+                  },
+                  {
+                    "Comment": "servicemesh-grafana is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201818624002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "servicemesh-grafana-prometheus is earlier than 0:6.2.2-25.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20194222029"
+                  },
+                  {
+                    "Comment": "servicemesh-grafana-prometheus is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201818624004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

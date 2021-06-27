@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140044",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2014:0044: augeas security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0044",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0044"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-6412",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-6412"
+      }
+    ],
+    "Description": "Augeas is a utility for editing configuration. Augeas parses configuration\nfiles in their native formats and transforms them into a tree.\nConfiguration changes are made by manipulating this tree and saving it back\ninto native configuration files. Augeas also uses \"lenses\" as basic\nbuilding blocks for establishing the mapping from files into the Augeas\ntree and back.\n\nA flaw was found in the way Augeas handled certain umask settings when\ncreating new configuration files. This flaw could result in configuration\nfiles being created as world writable, allowing unprivileged local users to\nmodify their content. (CVE-2013-6412)\n\nThis issue was discovered by the Red Hat Security Response Team.\n\nAll augeas users are advised to upgrade to these updated packages, which\ncontain a backported patch to correct this issue. All running applications\nusing augeas must be restarted for the update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-01-20"
+      },
+      "Updated": {
+        "Date": "2014-01-20"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-6412",
+          "Cvss2": "2.6/AV:L/AC:H/Au:N/C:P/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-6412",
+          "Public": "20131125"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1034261",
+          "ID": "1034261"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_eus:6.5",
+        "cpe:/o:redhat:rhel_eus:6.5::computenode",
+        "cpe:/o:redhat:rhel_eus:6.5::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20111656004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20111656003"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "augeas is earlier than 0:1.0.0-5.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140044001"
+                  },
+                  {
+                    "Comment": "augeas is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131537002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "augeas-devel is earlier than 0:1.0.0-5.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140044003"
+                  },
+                  {
+                    "Comment": "augeas-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131537004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "augeas-libs is earlier than 0:1.0.0-5.el6_5.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140044005"
+                  },
+                  {
+                    "Comment": "augeas-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20131537006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
