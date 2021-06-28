@@ -1,0 +1,135 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20200702",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:0702: xerces-c security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:0702",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:0702"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1311",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1311"
+      }
+    ],
+    "Description": "Xerces-C is a validating XML parser written in a portable subset of C++. Xerces-C makes it easy to give your application the ability to read and write XML data. A shared library is provided for parsing, generating, manipulating, and validating XML documents.\n\nSecurity Fix(es):\n\n* xerces-c: XML parser contains a use-after-free error triggered during the scanning of external DTDs (CVE-2018-1311)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-03-04"
+      },
+      "Updated": {
+        "Date": "2020-03-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-1311",
+          "Cvss3": "8.1/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-416",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1311",
+          "Public": "20191216"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1788472",
+          "ID": "1788472"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xerces-c is earlier than 0:3.0.1-21.el6_10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200702001"
+                  },
+                  {
+                    "Comment": "xerces-c is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20120880006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xerces-c-devel is earlier than 0:3.0.1-21.el6_10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200702003"
+                  },
+                  {
+                    "Comment": "xerces-c-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20120880002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "xerces-c-doc is earlier than 0:3.0.1-21.el6_10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20200702005"
+                  },
+                  {
+                    "Comment": "xerces-c-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20120880004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

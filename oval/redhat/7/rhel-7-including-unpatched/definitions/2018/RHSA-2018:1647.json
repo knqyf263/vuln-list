@@ -1,0 +1,161 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20181647",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2018:1647: java-1.7.0-openjdk security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:1647",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:1647"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-3639",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-3639"
+      }
+    ],
+    "Description": "The java-1.7.0-openjdk packages provide the OpenJDK 7 Java Runtime Environment and the OpenJDK 7 Java Software Development Kit.\n\nSecurity Fix(es):\n\n* An industry-wide issue was found in the way many modern microprocessor designs have implemented speculative execution of Load \u0026 Store instructions (a commonly used performance optimization). It relies on the presence of a precisely-defined instruction sequence in the privileged code as well as the fact that memory read from address to which a recent memory write has occurred may see an older value and subsequently cause an update into the microprocessor's data cache even for speculatively executed instructions that never actually commit (retire). As a result, an unprivileged attacker could use this flaw to read privileged memory by conducting targeted cache side-channel attacks. (CVE-2018-3639)\n\nNote: This is the OpenJDK side of the CVE-2018-3639 mitigation.\n\nRed Hat would like to thank Ken Johnson (Microsoft Security Response Center) and Jann Horn (Google Project Zero) for reporting this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-05-21"
+      },
+      "Updated": {
+        "Date": "2018-05-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-3639",
+          "Cvss3": "5.6/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-200",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-3639",
+          "Public": "20180521:2100"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1566890",
+          "ID": "1566890"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.7.0-openjdk is earlier than 1:1.7.0.181-2.6.14.8.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181647001"
+                  },
+                  {
+                    "Comment": "java-1.7.0-openjdk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121009002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.7.0-openjdk-demo is earlier than 1:1.7.0.181-2.6.14.8.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181647003"
+                  },
+                  {
+                    "Comment": "java-1.7.0-openjdk-demo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121009004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.7.0-openjdk-devel is earlier than 1:1.7.0.181-2.6.14.8.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181647005"
+                  },
+                  {
+                    "Comment": "java-1.7.0-openjdk-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121009006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.7.0-openjdk-javadoc is earlier than 1:1.7.0.181-2.6.14.8.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181647007"
+                  },
+                  {
+                    "Comment": "java-1.7.0-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121009008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-1.7.0-openjdk-src is earlier than 1:1.7.0.181-2.6.14.8.el6_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20181647009"
+                  },
+                  {
+                    "Comment": "java-1.7.0-openjdk-src is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20121009010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

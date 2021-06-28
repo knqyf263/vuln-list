@@ -1,0 +1,148 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20190420",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2019:0420: polkit security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:0420",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:0420"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-6133",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-6133"
+      }
+    ],
+    "Description": "The polkit packages provide a component for controlling system-wide privileges. This component provides a uniform and organized way for non-privileged processes to communicate with privileged ones.\n\nSecurity Fix(es):\n\n* polkit: Temporary auth hijacking via PID reuse and non-atomic fork (CVE-2019-6133)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-02-26"
+      },
+      "Updated": {
+        "Date": "2019-02-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-6133",
+          "Cvss3": "7.3/CVSS:3.0/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-697-\u003eCWE-284",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-6133",
+          "Public": "20190109"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1664212",
+          "ID": "1664212"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit is earlier than 0:0.96-11.el6_10.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190420001"
+                  },
+                  {
+                    "Comment": "polkit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20153255008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-desktop-policy is earlier than 0:0.96-11.el6_10.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190420003"
+                  },
+                  {
+                    "Comment": "polkit-desktop-policy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20153255006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-devel is earlier than 0:0.96-11.el6_10.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190420005"
+                  },
+                  {
+                    "Comment": "polkit-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20153255004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "polkit-docs is earlier than 0:0.96-11.el6_10.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190420007"
+                  },
+                  {
+                    "Comment": "polkit-docs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20153255002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

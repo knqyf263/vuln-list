@@ -1,0 +1,135 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20204946",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:4946: libX11 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:4946",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:4946"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-14363",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-14363"
+      }
+    ],
+    "Description": "The libX11 packages contain the core X11 protocol client library.\n\nSecurity Fix(es):\n\n* libX11: integer overflow leads to double free in locale handling (CVE-2020-14363)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-05"
+      },
+      "Updated": {
+        "Date": "2020-11-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-14363",
+          "Cvss3": "7.8/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-190-\u003eCWE-416",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-14363",
+          "Public": "20200825"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1872473",
+          "ID": "1872473"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libX11 is earlier than 0:1.6.4-4.el6_10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204946001"
+                  },
+                  {
+                    "Comment": "libX11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20167942004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libX11-common is earlier than 0:1.6.4-4.el6_10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204946003"
+                  },
+                  {
+                    "Comment": "libX11-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20167942006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libX11-devel is earlier than 0:1.6.4-4.el6_10",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204946005"
+                  },
+                  {
+                    "Comment": "libX11-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20167942002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20172972",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2017:2972: httpd security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2017:2972",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2017:2972"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-12171",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-12171"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-9798",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-9798"
+      }
+    ],
+    "Description": "The httpd packages provide the Apache HTTP Server, a powerful, efficient, and extensible web server.\n\nSecurity Fix(es):\n\n* A use-after-free flaw was found in the way httpd handled invalid and previously unregistered HTTP methods specified in the Limit directive used in an .htaccess file. A remote attacker could possibly use this flaw to disclose portions of the server memory, or cause httpd child process to crash. (CVE-2017-9798)\n\n* A regression was found in the Red Hat Enterprise Linux 6.9 version of httpd, causing comments in the \"Allow\" and \"Deny\" configuration lines to be parsed incorrectly. A web administrator could unintentionally allow any client to access a restricted HTTP resource. (CVE-2017-12171)\n\nRed Hat would like to thank Hanno Böck for reporting CVE-2017-9798 and KAWAHARA Masashi for reporting CVE-2017-12171.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2017 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2017-10-19"
+      },
+      "Updated": {
+        "Date": "2017-10-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-12171",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-284",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-12171",
+          "Public": "20171019"
+        },
+        {
+          "CveID": "CVE-2017-9798",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-416",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-9798",
+          "Public": "20170918"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1490344",
+          "ID": "1490344"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1493056",
+          "ID": "1493056"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd is earlier than 0:2.2.15-60.el6_9.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172972001"
+                  },
+                  {
+                    "Comment": "httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20031418010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-devel is earlier than 0:2.2.15-60.el6_9.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172972003"
+                  },
+                  {
+                    "Comment": "httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20031418004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-manual is earlier than 0:2.2.15-60.el6_9.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172972005"
+                  },
+                  {
+                    "Comment": "httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20031418006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd-tools is earlier than 0:2.2.15-60.el6_9.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172972007"
+                  },
+                  {
+                    "Comment": "httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20031418008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mod_ssl is earlier than 1:2.2.15-60.el6_9.6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20172972009"
+                  },
+                  {
+                    "Comment": "mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20031418002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

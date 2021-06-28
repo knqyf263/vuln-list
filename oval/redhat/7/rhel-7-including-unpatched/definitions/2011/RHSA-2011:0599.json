@@ -1,0 +1,96 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20110599",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2011:0599: sudo security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:0599",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:0599"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-0010",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-0010"
+      }
+    ],
+    "Description": "The sudo (superuser do) utility allows system administrators to give\ncertain users the ability to run commands as root.\n\nA flaw was found in the sudo password checking logic. In configurations\nwhere the sudoers settings allowed a user to run a command using sudo with\nonly the group ID changed, sudo failed to prompt for the user's password\nbefore running the specified command with the elevated group privileges.\n(CVE-2011-0010)\n\nThis update also fixes the following bugs:\n\n* When the \"/etc/sudoers\" file contained entries with multiple hosts,\nrunning the \"sudo -l\" command incorrectly reported that a certain user does\nnot have permissions to use sudo on the system. With this update, running\nthe \"sudo -l\" command now produces the correct output. (BZ#603823)\n\n* Prior to this update, the manual page for sudoers.ldap was not installed,\neven though it contains important information on how to set up an LDAP\n(Lightweight Directory Access Protocol) sudoers source, and other documents\nrefer to it. With this update, the manual page is now properly included in\nthe package. Additionally, various POD files have been removed from the\npackage, as they are required for build purposes only. (BZ#634159)\n\n* The previous version of sudo did not use the same location for the LDAP\nconfiguration files as the nss_ldap package. This has been fixed and sudo\nnow looks for these files in the same location as the nss_ldap package.\n(BZ#652726)\n\n* When a file was edited using the \"sudo -e file\" or the \"sudoedit file\"\ncommand, the editor being executed for this task was logged only as\n\"sudoedit\". With this update, the full path to the executable being used as\nan editor is now logged (instead of \"sudoedit\"). (BZ#665131)\n\n* A comment regarding the \"visiblepw\" option of the \"Defaults\" directive\nhas been added to the default \"/etc/sudoers\" file to clarify its usage.\n(BZ#688640)\n\n* This erratum upgrades sudo to upstream version 1.7.4p5, which provides a\nnumber of bug fixes and enhancements over the previous version. (BZ#615087)\n\nAll users of sudo are advised to upgrade to this updated package, which\nresolves these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-05-19"
+      },
+      "Updated": {
+        "Date": "2011-05-19"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-0010",
+          "Cvss2": "1.2/AV:L/AC:H/Au:N/C:N/I:P/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-0010",
+          "Public": "20110111"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/668879",
+          "ID": "668879"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          },
+          {
+            "Comment": "sudo is earlier than 0:1.7.4p5-5.el6",
+            "TestRef": "oval:com.redhat.rhsa:tst:20110599001"
+          },
+          {
+            "Comment": "sudo is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:20155602002"
+          }
+        ]
+      }
+    ]
+  }
+}

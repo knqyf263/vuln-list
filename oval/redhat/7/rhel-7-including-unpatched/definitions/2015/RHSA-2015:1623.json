@@ -1,0 +1,291 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151623",
+  "Version": "645",
+  "Metadata": {
+    "Title": "RHSA-2015:1623: kernel security and bug fix update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1623",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1623"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5364",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5364"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5366",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5366"
+      }
+    ],
+    "Description": "The kernel packages contain the Linux kernel, the core of any Linux\noperating system.\n\nTwo flaws were found in the way the Linux kernel's networking\nimplementation handled UDP packets with incorrect checksum values. A remote\nattacker could potentially use these flaws to trigger an infinite loop in\nthe kernel, resulting in a denial of service on the system, or cause a\ndenial of service in applications using the edge triggered epoll\nfunctionality. (CVE-2015-5364, CVE-2015-5366, Important)\n\nThis update also fixes the following bugs:\n\n* When removing a directory, and a reference was held to that directory by\na reference to a negative child dentry, the directory dentry was previously\nnot killed. In addition, once the negative child dentry was killed, an\nunlinked and unused dentry was present in the cache. As a consequence,\ndeadlock could be caused by forcing the dentry eviction while the file\nsystem in question was frozen. With this update, all unused dentries are\nunhashed and evicted just after a successful directory removal, which\navoids the deadlock, and the system no longer hangs in the aforementioned\nscenario. (BZ#1243400)\n\n* Due to the broken s_umount lock ordering, a race condition occurred when\nan unlinked file was closed and the sync (or syncfs) utility was run at the\nsame time. As a consequence, deadlock occurred on a frozen file system\nbetween sync and a process trying to unfreeze the file system. With this\nupdate, sync (or syncfs) is skipped on a frozen file system, and deadlock\nno longer occurs in the aforementioned situation. (BZ#1243404)\n\n* Previously, in the scenario when a file was opened by file handle\n(fhandle) with its dentry not present in dcache (\"cold dcache\") and then\nmaking use of the unlink() and close() functions, the inode was not freed\nupon the close() system call. As a consequence, the iput() final was\ndelayed indefinitely. A patch has been provided to fix this bug, and the\ninode is now freed as expected. (BZ#1243406)\n\n* Due to a corrupted Executable and Linkable Format (ELF) header in the\n/proc/vmcore file, the kdump utility failed to provide any information.\nThe underlying source code has been patched, and kdump now provides\ndebuging information for kernel crashes as intended. (BZ#1245195)\n\n* Previously, running the multipath request queue caused regressions in\ncases where paths failed regularly under I/O load. This regression\nmanifested as I/O stalls that exceeded 300 seconds. This update reverts the\nchanges aimed to reduce running the multipath request queue resulting in\nI/O completing in a timely manner. (BZ#1246095)\n\nAll kernel users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. The system must be\nrebooted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-08-13"
+      },
+      "Updated": {
+        "Date": "2015-09-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5364",
+          "Cvss2": "7.1/AV:N/AC:M/Au:N/C:N/I:N/A:C",
+          "Cwe": "CWE-835",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5364",
+          "Public": "20150701"
+        },
+        {
+          "CveID": "CVE-2015-5366",
+          "Cvss2": "7.1/AV:N/AC:M/Au:N/C:N/I:N/A:C",
+          "Cwe": "CWE-835",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5366",
+          "Public": "20150701"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1239029",
+          "ID": "1239029"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel earlier than 0:2.6.32-573.3.1.el6 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20151623027"
+              },
+              {
+                "Comment": "kernel earlier than 0:2.6.32-573.3.1.el6 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20151623028"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623001"
+                  },
+                  {
+                    "Comment": "kernel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-abi-whitelists is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623003"
+                  },
+                  {
+                    "Comment": "kernel-abi-whitelists is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-bootwrapper is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623005"
+                  },
+                  {
+                    "Comment": "kernel-bootwrapper is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623007"
+                  },
+                  {
+                    "Comment": "kernel-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-debug-devel is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623009"
+                  },
+                  {
+                    "Comment": "kernel-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-devel is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623011"
+                  },
+                  {
+                    "Comment": "kernel-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-doc is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623013"
+                  },
+                  {
+                    "Comment": "kernel-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-firmware is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623015"
+                  },
+                  {
+                    "Comment": "kernel-firmware is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-headers is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623017"
+                  },
+                  {
+                    "Comment": "kernel-headers is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623019"
+                  },
+                  {
+                    "Comment": "kernel-kdump is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-kdump-devel is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623021"
+                  },
+                  {
+                    "Comment": "kernel-kdump-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "perf is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623023"
+                  },
+                  {
+                    "Comment": "perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-perf is earlier than 0:2.6.32-573.3.1.el6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151623025"
+                  },
+                  {
+                    "Comment": "python-perf is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20072764022"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

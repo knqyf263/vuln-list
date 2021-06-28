@@ -1,0 +1,173 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20131150",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHBA-2013:1150: net-snmp bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2013:1150",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2013:1150"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2012-6151",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2012-6151"
+      }
+    ],
+    "Description": "The net-snmp packages provide various libraries and tools for the Simple Network Management Protocol (SNMP), including an SNMP library, an extensible agent, tools for requesting or setting information from SNMP agents, tools for generating and handling SNMP traps, a version of the netstat command which uses SNMP, and a Tk/Perl Management Information Base (MIB) browser.\n\nThis update fixes the following bug:\n\n* When an AgentX subagent disconnected from the SNMP daemon (snmpd), the daemon did not properly check that there were no active requests queued in the subagent and destroyed the session. Consequently, the session was referenced by snmpd later when processing queued requests and because it was already destroyed, snmpd terminated unexpectedly with a segmentation fault or looped indefinitely. This update adds several checks to prevent the destruction of sessions with active requests, and snmpd no longer crashes in the described scenario. (BZ#993579)\n\nUsers of net-snmp are advised to upgrade to these updated packages, which fix this bug.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-08-12"
+      },
+      "Updated": {
+        "Date": "2013-08-12"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2012-6151",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2012-6151",
+          "Public": "20120905"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1038007",
+          "ID": "1038007"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp is earlier than 1:5.5-44.el6_4.4",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131150001"
+                  },
+                  {
+                    "Comment": "net-snmp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201818066006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-devel is earlier than 1:5.5-44.el6_4.4",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131150003"
+                  },
+                  {
+                    "Comment": "net-snmp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201818066008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-libs is earlier than 1:5.5-44.el6_4.4",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131150005"
+                  },
+                  {
+                    "Comment": "net-snmp-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201818066004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-perl is earlier than 1:5.5-44.el6_4.4",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131150007"
+                  },
+                  {
+                    "Comment": "net-snmp-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201818066010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-python is earlier than 1:5.5-44.el6_4.4",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131150009"
+                  },
+                  {
+                    "Comment": "net-snmp-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201818066012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-utils is earlier than 1:5.5-44.el6_4.4",
+                    "TestRef": "oval:com.redhat.rhba:tst:20131150011"
+                  },
+                  {
+                    "Comment": "net-snmp-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201818066002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

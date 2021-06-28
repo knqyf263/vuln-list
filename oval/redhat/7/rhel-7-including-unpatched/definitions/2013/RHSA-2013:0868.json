@@ -1,0 +1,96 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20130868",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2013:0868: haproxy security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2013:0868",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2013:0868"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-1912",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-1912"
+      }
+    ],
+    "Description": "HAProxy provides high availability, load balancing, and proxying for TCP\nand HTTP-based applications.\n\nA buffer overflow flaw was found in the way HAProxy handled pipelined HTTP\nrequests. A remote attacker could send pipelined HTTP requests that would\ncause HAProxy to crash or, potentially, execute arbitrary code with the\nprivileges of the user running HAProxy. This issue only affected systems\nusing all of the following combined configuration options: HTTP keep alive\nenabled, HTTP keywords in TCP inspection rules, and request appending\nrules. (CVE-2013-1912)\n\nRed Hat would like to thank Willy Tarreau of HAProxy upstream for reporting\nthis issue. Upstream acknowledges Yves Lafon from the W3C as the original\nreporter.\n\nHAProxy is released as a Technology Preview in Red Hat Enterprise Linux 6.\nMore information about Red Hat Technology Previews is available at\nhttps://access.redhat.com/support/offerings/techpreview/\n\nAll users of haproxy are advised to upgrade to this updated package, which\ncontains a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2013 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2013-05-28"
+      },
+      "Updated": {
+        "Date": "2013-05-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-1912",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-1912",
+          "Public": "20130402"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/947581",
+          "ID": "947581"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          },
+          {
+            "Comment": "haproxy is earlier than 0:1.4.22-4.el6_4",
+            "TestRef": "oval:com.redhat.rhsa:tst:20130868001"
+          },
+          {
+            "Comment": "haproxy is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.cve:tst:20146269002"
+          }
+        ]
+      }
+    ]
+  }
+}

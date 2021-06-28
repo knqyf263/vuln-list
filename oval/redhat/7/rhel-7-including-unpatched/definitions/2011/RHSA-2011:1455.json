@@ -1,0 +1,134 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20111455",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2011:1455: freetype security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2011:1455",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2011:1455"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-3439",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-3439"
+      }
+    ],
+    "Description": "FreeType is a free, high-quality, portable font engine that can open and\nmanage font files. It also loads, hints, and renders individual glyphs\nefficiently. The freetype packages for Red Hat Enterprise Linux 4 provide\nboth the FreeType 1 and FreeType 2 font engines. The freetype packages for\nRed Hat Enterprise Linux 5 and 6 provide only the FreeType 2 font engine.\n\nMultiple input validation flaws were found in the way FreeType processed\nCID-keyed fonts. If a specially-crafted font file was loaded by an\napplication linked against FreeType, it could cause the application to\ncrash or, potentially, execute arbitrary code with the privileges of the\nuser running the application. (CVE-2011-3439)\n\nNote: These issues only affected the FreeType 2 font engine.\n\nUsers are advised to upgrade to these updated packages, which contain a\nbackported patch to correct these issues. The X server must be restarted\n(log out, then log back in) for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2011 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2011-11-16"
+      },
+      "Updated": {
+        "Date": "2011-11-16"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-3439",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-3439",
+          "Public": "20111110"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/753799",
+          "ID": "753799"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "freetype is earlier than 0:2.3.11-6.el6_1.8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111455001"
+                  },
+                  {
+                    "Comment": "freetype is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20102541004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "freetype-demos is earlier than 0:2.3.11-6.el6_1.8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111455003"
+                  },
+                  {
+                    "Comment": "freetype-demos is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20102541006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "freetype-devel is earlier than 0:2.3.11-6.el6_1.8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20111455005"
+                  },
+                  {
+                    "Comment": "freetype-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20102541002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

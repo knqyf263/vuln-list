@@ -1,0 +1,96 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20121459",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2012:1459: nspluginwrapper security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 6"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2012:1459",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2012:1459"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2011-2486",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2011-2486"
+      }
+    ],
+    "Description": "nspluginwrapper is a utility which allows 32-bit plug-ins to run in a\n64-bit browser environment (a common example is Adobe's browser plug-in for\npresenting proprietary Flash files embedded in web pages). It includes the\nplug-in viewer and a tool for managing plug-in installations and updates.\n\nIt was not possible for plug-ins wrapped by nspluginwrapper to discover\nwhether the browser was running in Private Browsing mode. This flaw could\nlead to plug-ins wrapped by nspluginwrapper using normal mode while they\nwere expected to run in Private Browsing mode. (CVE-2011-2486)\n\nThis update also fixes the following bug:\n\n* When using the Adobe Reader web browser plug-in provided by the\nacroread-plugin package on a 64-bit system, opening Portable Document\nFormat (PDF) files in Firefox could cause the plug-in to crash and a black\nwindow to be displayed where the PDF should be. Firefox had to be restarted\nto resolve the issue. This update implements a workaround in\nnspluginwrapper to automatically handle the plug-in crash, so that users\nno longer have to keep restarting Firefox. (BZ#869554)\n\nAll users of nspluginwrapper are advised to upgrade to these updated\npackages, which upgrade nspluginwrapper to upstream version 1.4.4, and\ncorrect these issues. After installing the update, Firefox must be\nrestarted for the changes to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2012 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2012-11-13"
+      },
+      "Updated": {
+        "Date": "2012-11-13"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2011-2486",
+          "Cvss2": "2.6/AV:N/AC:H/Au:N/C:P/I:N/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2011-2486",
+          "Public": "20110325"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/715384",
+          "ID": "715384"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:6",
+        "cpe:/a:redhat:rhel_extras_hpn:6",
+        "cpe:/a:redhat:rhel_extras_oracle_java:6",
+        "cpe:/a:redhat:rhel_extras_sap:6",
+        "cpe:/a:redhat:rhel_extras_sap_hana:6",
+        "cpe:/o:redhat:enterprise_linux:6",
+        "cpe:/o:redhat:enterprise_linux:6::client",
+        "cpe:/o:redhat:enterprise_linux:6::computenode",
+        "cpe:/o:redhat:enterprise_linux:6::server",
+        "cpe:/o:redhat:enterprise_linux:6::workstation",
+        "cpe:/o:redhat:rhel_eus:6.0"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 6 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20022439069"
+          },
+          {
+            "Comment": "nspluginwrapper is earlier than 0:1.4.4-1.el6_3",
+            "TestRef": "oval:com.redhat.rhsa:tst:20121459001"
+          },
+          {
+            "Comment": "nspluginwrapper is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20121459002"
+          }
+        ]
+      }
+    ]
+  }
+}
