@@ -1,0 +1,201 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140704",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:0704: qemu-kvm security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0704",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0704"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-2894",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-2894"
+      }
+    ],
+    "Description": "KVM (Kernel-based Virtual Machine) is a full virtualization solution for\nLinux on AMD64 and Intel 64 systems. The qemu-kvm packages provide a\nuser-space component to run virtual machines using KVM.\n\nAn out-of-bounds memory access flaw was found in the way QEMU's IDE device\ndriver handled the execution of SMART EXECUTE OFFLINE commands.\nA privileged guest user could use this flaw to corrupt QEMU process memory\non the host, which could potentially result in arbitrary code execution on\nthe host with the privileges of the QEMU process. (CVE-2014-2894)\n\nThis update also fixes the following bugs:\n\n* Prior to this update, a bug in the migration code caused the following\nerror on specific machine types: after a Red Hat Enterprise Linux 6.5 guest\nwas migrated from a Red Hat Enterprise Linux 6.5 host to a Red Hat\nEnterprise Linux 7.0 host and then restarted, the boot failed and the guest\nautomatically restarted. Thus, the guest entered an endless loop. With this\nupdate, the migration code has been fixed and the Red Hat Enterprise Linux\n6.5 guests migrated in the aforementioned scenario now boot properly.\n(BZ#1091322)\n\n* Due to a regression bug in the iSCSI driver, the qemu-kvm process\nterminated unexpectedly with a segmentation fault when the \"write same\"\ncommand was executed in guest mode under the iSCSI protocol. This update\nfixes the regression and the \"write same\" command now functions in guest\nmode under iSCSI as intended. (BZ#1090978)\n\n* Due to a mismatch in interrupt request (IRQ) routing, migration of a Red\nHat Enterprise Linux 6.5 guest from a Red Hat Enterprise Linux 6.5 host to\na Red Hat Enterprise Linux 7.0 host could produce a call trace.\nThis happened if memory ballooning and a Universal Host Control Interface\n(UHCI) device were used at the same time on certain machine types.\nWith this patch, the IRQ routing mismatch has been amended and the\ndescribed migration now proceeds as expected. (BZ#1090981)\n\n* Previously, an internal error prevented KVM from executing a CPU hot plug\non a Red Hat Enterprise Linux 7 guest running on a Red Hat Enterprise Linux\n7 host. This update addresses the internal error and CPU hot plugging in\nthe described scenario now functions correctly. (BZ#1094820)\n\nAll qemu-kvm users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. After installing this\nupdate, shut down all running virtual machines. Once all virtual machines\nhave shut down, start them again for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-06-10"
+      },
+      "Updated": {
+        "Date": "2014-06-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-2894",
+          "Cvss2": "4.0/AV:A/AC:H/Au:S/C:P/I:P/A:P",
+          "Cwe": "CWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-2894",
+          "Public": "20140414"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1087971",
+          "ID": "1087971"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcacard is earlier than 10:1.5.3-60.el7_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704001"
+                  },
+                  {
+                    "Comment": "libcacard is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20143672016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcacard-devel is earlier than 10:1.5.3-60.el7_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704003"
+                  },
+                  {
+                    "Comment": "libcacard-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20143672010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libcacard-tools is earlier than 10:1.5.3-60.el7_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704005"
+                  },
+                  {
+                    "Comment": "libcacard-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20143672004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-guest-agent is earlier than 10:1.5.3-60.el7_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704007"
+                  },
+                  {
+                    "Comment": "qemu-guest-agent is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20143672006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-img is earlier than 10:1.5.3-60.el7_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704009"
+                  },
+                  {
+                    "Comment": "qemu-img is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20143672014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm is earlier than 10:1.5.3-60.el7_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704011"
+                  },
+                  {
+                    "Comment": "qemu-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20143672008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-common is earlier than 10:1.5.3-60.el7_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704013"
+                  },
+                  {
+                    "Comment": "qemu-kvm-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20143672002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "qemu-kvm-tools is earlier than 10:1.5.3-60.el7_0.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140704015"
+                  },
+                  {
+                    "Comment": "qemu-kvm-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20143672012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

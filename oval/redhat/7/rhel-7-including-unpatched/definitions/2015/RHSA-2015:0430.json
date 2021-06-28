@@ -1,0 +1,98 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20150430",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2015:0430: virt-who security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:0430",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:0430"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-0189",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-0189"
+      }
+    ],
+    "Description": "The virt-who package provides an agent that collects information about\nvirtual guests present in the system and reports them to the\nsubscription manager.\n\nIt was discovered that the /etc/sysconfig/virt-who configuration file,\nwhich may contain hypervisor authentication credentials, was\nworld-readable. A local user could use this flaw to obtain authentication\ncredentials from this file. (CVE-2014-0189)\n\nRed Hat would like to thank Sal Castiglione for reporting this issue.\n\nThe virt-who package has been upgraded to upstream version 0.11, which\nprovides a number of bug fixes and enhancements over the previous version.\nThe most notable bug fixes and enhancements include:\n\n* Support for remote libvirt.\n* A fix for using encrypted passwords.\n* Bug fixes and enhancements that increase the stability of virt-who.\n(BZ#1122489)\n\nThis update also fixes the following bugs:\n\n* Prior to this update, the virt-who agent failed to read the list of\nvirtual guests provided by the VDSM daemon. As a consequence, when in VDSM\nmode, the virt-who agent was not able to send updates about virtual guests\nto Subscription Asset Manager (SAM) and Red Hat Satellite. With this\nupdate, the agent reads the list of guests when in VDSM mode correctly and\nreports to SAM and Satellite as expected. (BZ#1153405)\n\n* Previously, virt-who used incorrect information when connecting to Red\nHat Satellite 5. Consequently, virt-who could not connect to Red Hat\nSatellite 5 servers. The incorrect parameter has been corrected, and\nvirt-who can now successfully connect to Red Hat Satellite 5. (BZ#1158859)\n\n* Prior to this update, virt-who did not decode the hexadecimal\nrepresentation of a password before decrypting it. As a consequence, the\ndecrypted password did not match the original password, and attempts to\nconnect using the password failed. virt-who has been updated to decode the\nencrypted password and, as a result, virt-who now handles storing\ncredentials using encrypted passwords as expected. (BZ#1161607)\n\nIn addition, this update adds the following enhancement:\n\n* With this update, virt-who is able to read the list of guests from a\nremote libvirt hypervisor. (BZ#1127965)\n\nUsers of virt-who are advised to upgrade to this updated package, which\ncorrects these issues and adds these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-03-05"
+      },
+      "Updated": {
+        "Date": "2015-03-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-0189",
+          "Cvss2": "2.1/AV:L/AC:L/Au:N/C:P/I:N/A:N",
+          "Cwe": "(CWE-732|CWE-522)",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-0189",
+          "Public": "20140326"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1088732",
+          "ID": "1088732"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          },
+          {
+            "Comment": "virt-who is earlier than 0:0.11-5.el7",
+            "TestRef": "oval:com.redhat.rhsa:tst:20150430001"
+          },
+          {
+            "Comment": "virt-who is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20150430002"
+          }
+        ]
+      }
+    ]
+  }
+}

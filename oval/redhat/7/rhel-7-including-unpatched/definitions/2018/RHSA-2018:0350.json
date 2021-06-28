@@ -1,0 +1,136 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20180350",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2018:0350: gcab security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:0350",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:0350"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-5345",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-5345"
+      }
+    ],
+    "Description": "The gcab package contains a utility for managing the Cabinet archives. It can list, extract, and create Microsoft cabinet (.cab) files.\n\nSecurity Fix(es):\n\n* gcab: Extracting malformed .cab files causes stack smashing potentially leading to arbitrary code execution (CVE-2018-5345)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-02-26"
+      },
+      "Updated": {
+        "Date": "2018-02-26"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-5345",
+          "Cvss3": "5.3/CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-121",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-5345",
+          "Public": "20171219"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1527296",
+          "ID": "1527296"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "gcab is earlier than 0:0.7-4.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180350001"
+                  },
+                  {
+                    "Comment": "gcab is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180350002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libgcab1 is earlier than 0:0.7-4.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180350003"
+                  },
+                  {
+                    "Comment": "libgcab1 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180350004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libgcab1-devel is earlier than 0:0.7-4.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180350005"
+                  },
+                  {
+                    "Comment": "libgcab1-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180350006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

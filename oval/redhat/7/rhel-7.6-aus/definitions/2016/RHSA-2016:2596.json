@@ -1,0 +1,105 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20162596",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2016:2596: pcs security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:2596",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:2596"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-0720",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-0720"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-0721",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-0721"
+      }
+    ],
+    "Description": "The pcs packages provide a command-line configuration system for the Pacemaker and Corosync utilities.\n\nThe following packages have been upgraded to a newer upstream version: pcs (0.9.152). (BZ#1299847)\n\nSecurity Fix(es):\n\n* A Cross-Site Request Forgery (CSRF) flaw was found in the pcsd web UI. A remote attacker could provide a specially crafted web page that, when visited by a user with a valid pcsd session, would allow the attacker to trigger requests on behalf of the user, for example removing resources or restarting/removing nodes. (CVE-2016-0720)\n\n* It was found that pcsd did not invalidate cookies on the server side when a user logged out. This could potentially allow an attacker to perform session fixation attacks on pcsd. (CVE-2016-0721)\n\nThese issues were discovered by Martin Prpic (Red Hat Product Security).\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 7.3 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-11-03"
+      },
+      "Updated": {
+        "Date": "2016-11-03"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-0720",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-352",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-0720",
+          "Public": "20160216"
+        },
+        {
+          "CveID": "CVE-2016-0721",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:P/A:N",
+          "Cwe": "CWE-613-\u003eCWE-384",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-0721",
+          "Public": "20160216"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1299614",
+          "ID": "1299614"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1299615",
+          "ID": "1299615"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.6",
+        "cpe:/o:redhat:rhel_aus:7.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          },
+          {
+            "Comment": "pcs is earlier than 0:0.9.152-10.el7",
+            "TestRef": "oval:com.redhat.rhsa:tst:20162596001"
+          },
+          {
+            "Comment": "pcs is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20150980002"
+          }
+        ]
+      }
+    ]
+  }
+}

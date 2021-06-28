@@ -1,0 +1,170 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20204039",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2020:4039: OpenEXR security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:4039",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:4039"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11761",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11761"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11763",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11763"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11764",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11764"
+      }
+    ],
+    "Description": "OpenEXR is a high dynamic-range (HDR) image file format developed by Industrial Light \u0026 Magic for use in computer imaging applications. This package contains libraries and sample applications for handling the format. \n\nSecurity Fix(es):\n\n* OpenEXR: out-of-bounds read during Huffman uncompression (CVE-2020-11761)\n\n* OpenEXR: std::vector out-of-bounds read and write in ImfTileOffsets.cpp (CVE-2020-11763)\n\n* OpenEXR: out-of-bounds write in copyIntoFrameBuffer function in ImfMisc.cpp (CVE-2020-11764)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 7.9 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-09-29"
+      },
+      "Updated": {
+        "Date": "2020-09-29"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-11761",
+          "Cvss3": "5.5/CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-125",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11761",
+          "Public": "20200208"
+        },
+        {
+          "CveID": "CVE-2020-11763",
+          "Cvss3": "5.5/CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-22-\u003e(CWE-125|CWE-787)",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11763",
+          "Public": "20200208"
+        },
+        {
+          "CveID": "CVE-2020-11764",
+          "Cvss3": "5.5/CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-787",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11764",
+          "Public": "20200208"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1828990",
+          "ID": "1828990"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1828995",
+          "ID": "1828995"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1829002",
+          "ID": "1829002"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "OpenEXR is earlier than 0:1.7.1-8.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204039001"
+                  },
+                  {
+                    "Comment": "OpenEXR is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712596002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "OpenEXR-devel is earlier than 0:1.7.1-8.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204039003"
+                  },
+                  {
+                    "Comment": "OpenEXR-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712596004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "OpenEXR-libs is earlier than 0:1.7.1-8.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204039005"
+                  },
+                  {
+                    "Comment": "OpenEXR-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712596006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

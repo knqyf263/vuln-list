@@ -8,7 +8,7 @@
       {
         "Family": "unix",
         "Platforms": [
-          "Red Hat Enterprise Linux 6"
+          "Red Hat Enterprise Linux 7"
         ]
       }
     ],
@@ -69,17 +69,18 @@
         }
       ],
       "AffectedCpeList": [
-        "cpe:/a:redhat:rhel_extras:6",
-        "cpe:/a:redhat:rhel_extras_hpn:6",
-        "cpe:/a:redhat:rhel_extras_oracle_java:6",
-        "cpe:/a:redhat:rhel_extras_sap:6",
-        "cpe:/a:redhat:rhel_extras_sap_hana:6",
-        "cpe:/o:redhat:enterprise_linux:6",
-        "cpe:/o:redhat:enterprise_linux:6::client",
-        "cpe:/o:redhat:enterprise_linux:6::computenode",
-        "cpe:/o:redhat:enterprise_linux:6::server",
-        "cpe:/o:redhat:enterprise_linux:6::workstation",
-        "cpe:/o:redhat:rhel_eus:6.0"
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
       ]
     }
   },
@@ -88,7 +89,7 @@
     "Criterions": [
       {
         "Comment": "Red Hat Enterprise Linux must be installed",
-        "TestRef": "oval:com.redhat.cve:tst:20022439070"
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
       }
     ],
     "Criterias": [
@@ -96,16 +97,41 @@
         "Operator": "AND",
         "Criterions": [
           {
-            "Comment": "Red Hat Enterprise Linux 6 is installed",
-            "TestRef": "oval:com.redhat.cve:tst:20022439069"
-          },
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
           {
-            "Comment": "pcs is earlier than 0:0.9.139-9.el6_7.1",
-            "TestRef": "oval:com.redhat.rhsa:tst:20151700001"
-          },
-          {
-            "Comment": "pcs is signed with Red Hat redhatrelease2 key",
-            "TestRef": "oval:com.redhat.cve:tst:20160720002"
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "pcs is earlier than 0:0.9.137-13.el7_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151700001"
+                  },
+                  {
+                    "Comment": "pcs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20172661002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-clufter is earlier than 0:0.9.137-13.el7_1.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151700003"
+                  },
+                  {
+                    "Comment": "python-clufter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20172661006"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }

@@ -1,0 +1,160 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20141801",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:1801: shim security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:1801",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:1801"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3675",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3675"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3676",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3676"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-3677",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-3677"
+      }
+    ],
+    "Description": "Shim is the initial UEFI bootloader that handles chaining to a trusted full\nbootloader under secure boot environments.\n\nA heap-based buffer overflow flaw was found the way shim parsed certain\nIPv6 addresses. If IPv6 network booting was enabled, a malicious server\ncould supply a crafted IPv6 address that would cause shim to crash or,\npotentially, execute arbitrary code. (CVE-2014-3676)\n\nAn out-of-bounds memory write flaw was found in the way shim processed\ncertain Machine Owner Keys (MOKs). A local attacker could potentially use\nthis flaw to execute arbitrary code on the system. (CVE-2014-3677)\n\nAn out-of-bounds memory read flaw was found in the way shim parsed certain\nIPv6 packets. A specially crafted DHCPv6 packet could possibly cause shim\nto crash, preventing the system from booting if IPv6 booting was enabled.\n(CVE-2014-3675)\n\nRed Hat would like to thank the SUSE Security Team for reporting these\nissues.\n\nAll shim users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. The system must be\nrebooted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-11-04"
+      },
+      "Updated": {
+        "Date": "2014-11-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-3675",
+          "Cvss2": "3.3/AV:A/AC:L/Au:N/C:N/I:N/A:P",
+          "Cwe": "CWE-125",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3675",
+          "Public": "20141013"
+        },
+        {
+          "CveID": "CVE-2014-3676",
+          "Cvss2": "5.8/AV:A/AC:L/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3676",
+          "Public": "20141013"
+        },
+        {
+          "CveID": "CVE-2014-3677",
+          "Cvss2": "4.6/AV:L/AC:L/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-787",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-3677",
+          "Public": "20141013"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1148230",
+          "ID": "1148230"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1148231",
+          "ID": "1148231"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1148232",
+          "ID": "1148232"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.6",
+        "cpe:/o:redhat:rhel_aus:7.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "mokutil is earlier than 0:0.7-8.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141801001"
+                  },
+                  {
+                    "Comment": "mokutil is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141801002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "shim-unsigned is earlier than 0:0.7-8.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141801003"
+                  },
+                  {
+                    "Comment": "shim-unsigned is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141801004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "shim is earlier than 0:0.7-8.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141801005"
+                  },
+                  {
+                    "Comment": "shim is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20141801006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

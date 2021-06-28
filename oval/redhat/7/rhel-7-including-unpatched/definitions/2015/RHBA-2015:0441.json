@@ -1,0 +1,421 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhba:def:20150441",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHBA-2015:0441: sssd bug fix and enhancement update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHBA-2015:0441",
+        "RefURL": "https://access.redhat.com/errata/RHBA-2015:0441"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-0249",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-0249"
+      }
+    ],
+    "Description": "The System Security Services Daemon (SSSD) provides a set of daemons to manage access to remote directories and authentication mechanisms.\n\nThis update adds several enhancements that are described in more detail in the Red Hat Enterprise Linux 7.1 Release Notes, linked to in the References section, including:\n\n* Added the \"domains=\" option to the pam_sss module.\n* Added an SSSD plug-in to enable accessing a CIFS share.\n(BZ#727466, BZ#922081)\n\nThis update fixes the following bugs:\n\n* The sssd-ad(5) man page did not explain that when using multiple types of providers, such as an Active Directory (AD) provider and an LDAP provider, the user must fully configure each of the providers. The man page explains this now. (BZ#1075141)\n\n* The system added the \"sss\" module to the nsswitch.conf file, even when SSSD was not running. The GNU C Library (glibc) calls returned incorrect error messages, which caused certain user space tools to not work properly. The \"sssd_nss\" module returns correct error codes, so that the user space tools handle them gracefully. (BZ#1124320)\n\n* The hard-coded list of supported AD servers in SSSD did not include the Windows Server 2012R2 (WS2012R2) release. Clients connected to WS2012R2 printed a warning to the logs and were unable to use some AD-specific performance enhancements. To fix these problems, this update adds WS2012R2 to the list. (BZ#1134940)\n\n* SSSD overwrote a variable containing password expiration data under certain circumstances, and did not sometimes display password expiration messages to the user. This update fixes the problem, and SSSD displays password expiration data as expected. (BZ#1144011)\n\n* Several AD-specific codepaths in the LDAP provider assumed data structures and functions that were available only with a full AD provider. Looking up secondary groups using the LDAP provider failed. This update modifies the codepaths to allow using the \"id_provider=ldap\" setting with AD servers and disables the support for the tokenGroups attribute when using this configuration. Clients using \"id_provider=ldap\" with an AD server work seamlessly. (BZ#1146541)\n\n* SSSD sometimes did not map some of the group security identifiers (SIDs) returned from the tokenGroups attribute, unless an SSSD client used the \"id_provider=ad\" setting. SSSD did not display all groups in the \"id\" output and could deny access to users. Support for tokenGroups is now disabled if \"id_provider=ad\" is not used, and SSSD reports the group membership correctly. (BZ#1161741)\n\n* Failed attempts to convert a GID to a group name during certain access control checks, which is required for comparison with the \"simple_allow_groups\" list, could cause SSSD to incorrectly deny access. SSSD now continues to resolve the next groups when only allow rules are used, and the users can log in even if SSSD cannot perform the conversion for some of their groups. (BZ#1175408)\n\nThis update adds the following enhancements:\n\n* The sssd service can now be run as a non-root user. Previously, sssd could only be run as root, which could potentially pose a security risk. To set sssd to run unprivileged, add the \"user=sssd\" option to the [sssd] section of the sssd.conf file. (BZ#1113783)\n\n* SSSD is able use the group policy objects (GPOs) stored on an AD server for access control. Windows administrators can now use the GPOs to control access to Linux clients. (BZ#1115429)\n\n* A new Kerberos plug-in helps to map Kerberos principals to local SSSD user names. It is no longer necessary to configure the .k5login file or the \"auth_to_local\" rules in the krb5.conf file to enable passwordless logins to IdM clients for AD users in a setup with AD trusts. (BZ#1135043)\n\nUsers of sssd are advised to upgrade to these updated packages, which fix these bugs and add these enhancements.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-03-05"
+      },
+      "Updated": {
+        "Date": "2015-03-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2014-0249",
+          "Cvss2": "2.1/AV:N/AC:H/Au:S/C:N/I:P/A:N",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-0249",
+          "Public": "20140513"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1101751",
+          "ID": "1101751"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libipa_hbac is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441001"
+                  },
+                  {
+                    "Comment": "libipa_hbac is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883072"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libipa_hbac-devel is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441003"
+                  },
+                  {
+                    "Comment": "libipa_hbac-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libipa_hbac-python is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441005"
+                  },
+                  {
+                    "Comment": "libipa_hbac-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsss_idmap is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441007"
+                  },
+                  {
+                    "Comment": "libsss_idmap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883064"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsss_idmap-devel is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441009"
+                  },
+                  {
+                    "Comment": "libsss_idmap-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsss_nss_idmap is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441011"
+                  },
+                  {
+                    "Comment": "libsss_nss_idmap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsss_nss_idmap-devel is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441013"
+                  },
+                  {
+                    "Comment": "libsss_nss_idmap-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883070"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsss_nss_idmap-python is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441015"
+                  },
+                  {
+                    "Comment": "libsss_nss_idmap-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsss_simpleifp is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441017"
+                  },
+                  {
+                    "Comment": "libsss_simpleifp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883058"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libsss_simpleifp-devel is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441019"
+                  },
+                  {
+                    "Comment": "libsss_simpleifp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-sssdconfig is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441021"
+                  },
+                  {
+                    "Comment": "python-sssdconfig is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441023"
+                  },
+                  {
+                    "Comment": "sssd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-ad is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441025"
+                  },
+                  {
+                    "Comment": "sssd-ad is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-client is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441027"
+                  },
+                  {
+                    "Comment": "sssd-client is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-common is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441029"
+                  },
+                  {
+                    "Comment": "sssd-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-common-pac is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441031"
+                  },
+                  {
+                    "Comment": "sssd-common-pac is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883066"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-dbus is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441033"
+                  },
+                  {
+                    "Comment": "sssd-dbus is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-ipa is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441035"
+                  },
+                  {
+                    "Comment": "sssd-ipa is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-krb5 is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441037"
+                  },
+                  {
+                    "Comment": "sssd-krb5 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-krb5-common is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441039"
+                  },
+                  {
+                    "Comment": "sssd-krb5-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883054"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-ldap is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441041"
+                  },
+                  {
+                    "Comment": "sssd-ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883060"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-libwbclient is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441043"
+                  },
+                  {
+                    "Comment": "sssd-libwbclient is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-libwbclient-devel is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441045"
+                  },
+                  {
+                    "Comment": "sssd-libwbclient-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-proxy is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441047"
+                  },
+                  {
+                    "Comment": "sssd-proxy is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sssd-tools is earlier than 0:1.12.2-58.el7",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150441049"
+                  },
+                  {
+                    "Comment": "sssd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201816883062"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

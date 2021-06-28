@@ -1,0 +1,160 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20162819",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2016:2819: memcached security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:2819",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:2819"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8704",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8704"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8705",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8705"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2016-8706",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2016-8706"
+      }
+    ],
+    "Description": "memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.\n\nSecurity Fix(es):\n\n* Two integer overflow flaws, leading to heap-based buffer overflows, were found in the memcached binary protocol. An attacker could create a specially crafted message that would cause the memcached server to crash or, potentially, execute arbitrary code. (CVE-2016-8704, CVE-2016-8705)\n\n* An integer overflow flaw, leading to a heap-based buffer overflow, was found in memcached's parsing of SASL authentication messages. An attacker could create a specially crafted message that would cause the memcached server to crash or, potentially, execute arbitrary code. (CVE-2016-8706)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-11-23"
+      },
+      "Updated": {
+        "Date": "2016-11-23"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2016-8704",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8704",
+          "Public": "20161031"
+        },
+        {
+          "CveID": "CVE-2016-8705",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cvss3": "9.8/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8705",
+          "Public": "20161031"
+        },
+        {
+          "CveID": "CVE-2016-8706",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cvss3": "8.1/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2016-8706",
+          "Public": "20161031"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1390510",
+          "ID": "1390510"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1390511",
+          "ID": "1390511"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1390512",
+          "ID": "1390512"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "memcached is earlier than 0:1.4.15-10.el7_3.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162819001"
+                  },
+                  {
+                    "Comment": "memcached is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20179951002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "memcached-devel is earlier than 0:1.4.15-10.el7_3.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20162819003"
+                  },
+                  {
+                    "Comment": "memcached-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20179951004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20180223",
+  "Version": "651",
+  "Metadata": {
+    "Title": "RHSA-2018:0223: nautilus security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:0223",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:0223"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2017-14604",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2017-14604"
+      }
+    ],
+    "Description": "Nautilus is the file manager and graphical shell for the GNOME desktop.\n\nSecurity Fix(es):\n\n* An untrusted .desktop file with executable permission set could choose its displayed name and icon, and execute commands without warning when opened by the user. An attacker could use this flaw to trick a user into opening a .desktop file disguised as a document, such as a PDF, and execute arbitrary commands. (CVE-2017-14604)\n\nNote: This update will change the behavior of Nautilus. Nautilus will now prompt the user for confirmation when executing an untrusted .desktop file for the first time, and then add it to the trusted file list. Desktop files stored in the system directory, as specified by the XDG_DATA_DIRS environment variable, are always considered trusted and executed without prompt.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-01-25"
+      },
+      "Updated": {
+        "Date": "2018-01-25"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2017-14604",
+          "Cvss3": "4.8/CVSS:3.0/AV:L/AC:L/PR:L/UI:R/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-345",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2017-14604",
+          "Public": "20170131"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1490872",
+          "ID": "1490872"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nautilus is earlier than 0:3.22.3-4.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180223001"
+                  },
+                  {
+                    "Comment": "nautilus is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20192044110"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nautilus-devel is earlier than 0:3.22.3-4.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180223003"
+                  },
+                  {
+                    "Comment": "nautilus-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20192044112"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nautilus-extensions is earlier than 0:3.22.3-4.el7_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20180223005"
+                  },
+                  {
+                    "Comment": "nautilus-extensions is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20192044114"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

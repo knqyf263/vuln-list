@@ -1,0 +1,237 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151981",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2015:1981: nss, nss-util, and nspr security update (Critical)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1981",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1981"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-7181",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-7181"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-7182",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-7182"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-7183",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-7183"
+      }
+    ],
+    "Description": "Network Security Services (NSS) is a set of libraries designed to support \ncross-platform development of security-enabled client and server\napplications. Netscape Portable Runtime (NSPR) provides platform\nindependence for non-GUI operating system facilities. \n\nA use-after-poison flaw and a heap-based buffer overflow flaw were found in\nthe way NSS parsed certain ASN.1 structures. An attacker could use these\nflaws to cause NSS to crash or execute arbitrary code with the permissions\nof the user running an application compiled against the NSS library.\n(CVE-2015-7181, CVE-2015-7182)\n\nA heap-based buffer overflow was found in NSPR. An attacker could use this\nflaw to cause NSPR to crash or execute arbitrary code with the permissions\nof the user running an application compiled against the NSPR library.\n(CVE-2015-7183)\n\nNote: Applications using NSPR's PL_ARENA_ALLOCATE, PR_ARENA_ALLOCATE,\nPL_ARENA_GROW, or PR_ARENA_GROW macros need to be rebuild against the fixed\nnspr packages to completely resolve the CVE-2015-7183 issue. This erratum\nincludes nss and nss-utils packages rebuilt against the fixed nspr version.\n\nRed Hat would like to thank the Mozilla project for reporting these issues.\nUpstream acknowledges Tyson Smith, David Keeler and Ryan Sleevi as the\noriginal reporter.\n\nAll nss, nss-util and nspr users are advised to upgrade to these updated\npackages, which contain backported patches to correct these issues.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Critical",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-11-04"
+      },
+      "Updated": {
+        "Date": "2015-11-04"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-7181",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-7181",
+          "Public": "20151103"
+        },
+        {
+          "CveID": "CVE-2015-7182",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-122",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-7182",
+          "Public": "20151103"
+        },
+        {
+          "CveID": "CVE-2015-7183",
+          "Cvss2": "6.8/AV:N/AC:M/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Impact": "critical",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-7183",
+          "Public": "20151103"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1269345",
+          "ID": "1269345"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1269351",
+          "ID": "1269351"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1269353",
+          "ID": "1269353"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.6",
+        "cpe:/o:redhat:rhel_aus:7.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nspr is earlier than 0:4.10.8-2.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981001"
+                  },
+                  {
+                    "Comment": "nspr is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nspr-devel is earlier than 0:4.10.8-2.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981003"
+                  },
+                  {
+                    "Comment": "nspr-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss is earlier than 0:3.19.1-7.el7_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981005"
+                  },
+                  {
+                    "Comment": "nss is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-devel is earlier than 0:3.19.1-7.el7_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981007"
+                  },
+                  {
+                    "Comment": "nss-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-pkcs11-devel is earlier than 0:3.19.1-7.el7_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981009"
+                  },
+                  {
+                    "Comment": "nss-pkcs11-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-sysinit is earlier than 0:3.19.1-7.el7_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981011"
+                  },
+                  {
+                    "Comment": "nss-sysinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-tools is earlier than 0:3.19.1-7.el7_1.2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981013"
+                  },
+                  {
+                    "Comment": "nss-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util is earlier than 0:3.19.1-4.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981015"
+                  },
+                  {
+                    "Comment": "nss-util is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "nss-util-devel is earlier than 0:3.19.1-4.el7_1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151981017"
+                  },
+                  {
+                    "Comment": "nss-util-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20150364018"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

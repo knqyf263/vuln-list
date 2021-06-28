@@ -1,0 +1,258 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20140686",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2014:0686: tomcat security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2014:0686",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2014:0686"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4286",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4286"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2013-4322",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2013-4322"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2014-0186",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2014-0186"
+      }
+    ],
+    "Description": "Apache Tomcat is a servlet container for the Java Servlet and JavaServer\nPages (JSP) technologies.\n\nIt was found that a fix for a previous security flaw introduced a\nregression that could cause a denial of service in Tomcat 7. A remote\nattacker could use this flaw to consume an excessive amount of CPU on the\nTomcat server by sending a specially crafted request to that server.\n(CVE-2014-0186)\n\nIt was found that when Tomcat 7 processed a series of HTTP requests in\nwhich at least one request contained either multiple content-length\nheaders, or one content-length header with a chunked transfer-encoding\nheader, Tomcat would incorrectly handle the request. A remote attacker\ncould use this flaw to poison a web cache, perform cross-site scripting\n(XSS) attacks, or obtain sensitive information from other requests.\n(CVE-2013-4286)\n\nIt was discovered that the fix for CVE-2012-3544 did not properly resolve a\ndenial of service flaw in the way Tomcat 7 processed chunk extensions and\ntrailing headers in chunked requests. A remote attacker could use this flaw\nto send an excessively long request that, when processed by Tomcat, could\nconsume network bandwidth, CPU, and memory on the Tomcat server. Note that\nchunked transfer encoding is enabled by default. (CVE-2013-4322)\n\nAll Tomcat 7 users are advised to upgrade to these updated packages, which\ncontain backported patches to correct these issues. Tomcat must be\nrestarted for this update to take effect.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2014 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2014-06-10"
+      },
+      "Updated": {
+        "Date": "2014-06-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2013-4286",
+          "Cvss2": "5.8/AV:N/AC:M/Au:N/C:P/I:P/A:N",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4286",
+          "Public": "20140225"
+        },
+        {
+          "CveID": "CVE-2013-4322",
+          "Cvss2": "4.3/AV:N/AC:M/Au:N/C:N/I:N/A:P",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2013-4322",
+          "Public": "20140225"
+        },
+        {
+          "CveID": "CVE-2014-0186",
+          "Cvss2": "5.0/AV:N/AC:L/Au:N/C:N/I:N/A:P",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2014-0186",
+          "Public": "20140610"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1069905",
+          "ID": "1069905"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1069921",
+          "ID": "1069921"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1089884",
+          "ID": "1089884"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686001"
+                  },
+                  {
+                    "Comment": "tomcat is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-admin-webapps is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686003"
+                  },
+                  {
+                    "Comment": "tomcat-admin-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-docs-webapp is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686005"
+                  },
+                  {
+                    "Comment": "tomcat-docs-webapp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-el-2.2-api is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686007"
+                  },
+                  {
+                    "Comment": "tomcat-el-2.2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-javadoc is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686009"
+                  },
+                  {
+                    "Comment": "tomcat-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-jsp-2.2-api is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686011"
+                  },
+                  {
+                    "Comment": "tomcat-jsp-2.2-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-jsvc is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686013"
+                  },
+                  {
+                    "Comment": "tomcat-jsvc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-lib is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686015"
+                  },
+                  {
+                    "Comment": "tomcat-lib is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-servlet-3.0-api is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686017"
+                  },
+                  {
+                    "Comment": "tomcat-servlet-3.0-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "tomcat-webapps is earlier than 0:7.0.42-5.el7_0",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20140686019"
+                  },
+                  {
+                    "Comment": "tomcat-webapps is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201712616004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

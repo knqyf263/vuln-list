@@ -1,0 +1,221 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20151636",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2015:1636: net-snmp security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2015:1636",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2015:1636"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5621",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5621"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-1000116",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-1000116"
+      }
+    ],
+    "Description": "The net-snmp packages provide various libraries and tools for the Simple\nNetwork Management Protocol (SNMP), including an SNMP library, an\nextensible agent, tools for requesting or setting information from SNMP\nagents, tools for generating and handling SNMP traps, a version of the\nnetstat command which uses SNMP, and a Tk/Perl Management Information Base\n(MIB) browser.\n\nIt was discovered that the snmp_pdu_parse() function could leave\nincompletely parsed varBind variables in the list of variables. A remote,\nunauthenticated attacker could use this flaw to crash snmpd or,\npotentially, execute arbitrary code on the system with the privileges of\nthe user running snmpd. (CVE-2015-5621)\n\nRed Hat would like to thank Qinghao Tang of QIHU 360 company, China for\nreporting this issue.\n\nAll net-snmp users are advised to upgrade to these updated packages,\nwhich contain a backported patch to correct this issue.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2015 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2015-08-17"
+      },
+      "Updated": {
+        "Date": "2015-08-17"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5621",
+          "Cvss2": "5.1/AV:N/AC:H/Au:N/C:P/I:P/A:P",
+          "Cwe": "CWE-772-\u003eCWE-672-\u003eCWE-665",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5621",
+          "Public": "20150413"
+        },
+        {
+          "CveID": "CVE-2018-1000116",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L",
+          "Cwe": "CWE-20",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-1000116",
+          "Public": "20180307"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1212408",
+          "ID": "1212408"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1552844",
+          "ID": "1552844"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:rhel_aus:7.6",
+        "cpe:/o:redhat:rhel_aus:7.6::server"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636001"
+                  },
+                  {
+                    "Comment": "net-snmp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-agent-libs is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636003"
+                  },
+                  {
+                    "Comment": "net-snmp-agent-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-devel is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636005"
+                  },
+                  {
+                    "Comment": "net-snmp-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-gui is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636007"
+                  },
+                  {
+                    "Comment": "net-snmp-gui is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-libs is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636009"
+                  },
+                  {
+                    "Comment": "net-snmp-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-perl is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636011"
+                  },
+                  {
+                    "Comment": "net-snmp-perl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-python is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636013"
+                  },
+                  {
+                    "Comment": "net-snmp-python is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-sysvinit is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636015"
+                  },
+                  {
+                    "Comment": "net-snmp-sysvinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "net-snmp-utils is earlier than 1:5.7.2-20.el7_1.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636017"
+                  },
+                  {
+                    "Comment": "net-snmp-utils is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20151636018"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

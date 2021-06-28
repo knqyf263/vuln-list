@@ -1,0 +1,136 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20205012",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:5012: librepo security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:5012",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:5012"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-14352",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-14352"
+      }
+    ],
+    "Description": "The librepo library provides a C and Python API to download repository metadata.\n\nSecurity Fix(es):\n\n* librepo: missing path validation in repomd.xml may lead to directory traversal (CVE-2020-14352)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-10"
+      },
+      "Updated": {
+        "Date": "2020-11-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-14352",
+          "Cvss3": "8.0/CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-22",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-14352",
+          "Public": "20200813"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1866498",
+          "ID": "1866498"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librepo is earlier than 0:1.8.1-8.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205012001"
+                  },
+                  {
+                    "Comment": "librepo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205012002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "librepo-devel is earlier than 0:1.8.1-8.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205012003"
+                  },
+                  {
+                    "Comment": "librepo-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205012004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-librepo is earlier than 0:1.8.1-8.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205012005"
+                  },
+                  {
+                    "Comment": "python-librepo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205012006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

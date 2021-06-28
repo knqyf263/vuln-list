@@ -1,0 +1,205 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20205010",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:5010: python3 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:5010",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:5010"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-20907",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-20907"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-14422",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-14422"
+      }
+    ],
+    "Description": "Python is an accessible, high-level, dynamically typed, interpreted programming language, designed with an emphasis on code readability. It includes an extensive standard library, and has a vast ecosystem of third-party libraries.\n\nSecurity Fix(es):\n\n* python: infinite loop in the tarfile module via crafted TAR archive (CVE-2019-20907)\n\n* python: DoS via inefficiency in IPv{4,6}Interface classes (CVE-2020-14422)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-10"
+      },
+      "Updated": {
+        "Date": "2020-11-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-20907",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-20-\u003eCWE-835",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-20907",
+          "Public": "20191210"
+        },
+        {
+          "CveID": "CVE-2020-14422",
+          "Cvss3": "5.9/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-14422",
+          "Public": "20200618"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1854926",
+          "ID": "1854926"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1856481",
+          "ID": "1856481"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3 is earlier than 0:3.6.8-18.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205010001"
+                  },
+                  {
+                    "Comment": "python3 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201918348028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-debug is earlier than 0:3.6.8-18.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205010003"
+                  },
+                  {
+                    "Comment": "python3-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201918348016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-devel is earlier than 0:3.6.8-18.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205010005"
+                  },
+                  {
+                    "Comment": "python3-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201918348024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-idle is earlier than 0:3.6.8-18.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205010007"
+                  },
+                  {
+                    "Comment": "python3-idle is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201918348022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-libs is earlier than 0:3.6.8-18.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205010009"
+                  },
+                  {
+                    "Comment": "python3-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201918348002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-test is earlier than 0:3.6.8-18.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205010011"
+                  },
+                  {
+                    "Comment": "python3-test is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201918348014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python3-tkinter is earlier than 0:3.6.8-18.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205010013"
+                  },
+                  {
+                    "Comment": "python3-tkinter is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201918348026"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

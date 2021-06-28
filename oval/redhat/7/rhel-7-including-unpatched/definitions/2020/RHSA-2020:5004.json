@@ -1,0 +1,188 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20205004",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2020:5004: resource-agents security and bug fix update (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:5004",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:5004"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11078",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11078"
+      }
+    ],
+    "Description": "The resource-agents packages provide the Pacemaker and RGManager service managers with a set of scripts. These scripts interface with several services to allow operating in a high-availability (HA) environment.\n\nSecurity Fix(es):\n\n* python-httplib2: CRLF injection via an attacker controlled unescaped part of uri for httplib2.Http.request function (CVE-2020-11078)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* gcp-vpc-move-vip: An existing alias IP range is removed when a second alias IP range is added (BZ#1846732)\n\n* sybaseASE: Resource fails to complete a probe operation without access to $sybase_home [RHEL 7] (BZ#1848673)\n\n* azure-lb: Resource fails intermittently due to nc output redirection to pidfile (BZ#1850779)\n\n* azure-events: handle exceptions in urlopen (RHEL7) (BZ#1862121)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-10"
+      },
+      "Updated": {
+        "Date": "2020-11-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-11078",
+          "Cvss3": "6.8/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:N/I:H/A:N",
+          "Cwe": "CWE-113",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11078",
+          "Public": "20200520"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1845937",
+          "ID": "1845937"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "resource-agents is earlier than 0:4.1.1-61.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205004001"
+                  },
+                  {
+                    "Comment": "resource-agents is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202120270004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "resource-agents-aliyun is earlier than 0:4.1.1-61.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205004003"
+                  },
+                  {
+                    "Comment": "resource-agents-aliyun is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202120270006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "resource-agents-gcp is earlier than 0:4.1.1-61.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205004005"
+                  },
+                  {
+                    "Comment": "resource-agents-gcp is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202120270008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "resource-agents-sap is earlier than 0:4.1.1-61.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205004007"
+                  },
+                  {
+                    "Comment": "resource-agents-sap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202120270012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "resource-agents-sap-hana is earlier than 0:4.1.1-61.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205004009"
+                  },
+                  {
+                    "Comment": "resource-agents-sap-hana is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202120270014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "resource-agents-sap-hana-scaleout is earlier than 0:0.164.0-6.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205004011"
+                  },
+                  {
+                    "Comment": "resource-agents-sap-hana-scaleout is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202120270010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "sap-cluster-connector is earlier than 0:3.0.1-37.el7_9.4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205004013"
+                  },
+                  {
+                    "Comment": "sap-cluster-connector is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202120270002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

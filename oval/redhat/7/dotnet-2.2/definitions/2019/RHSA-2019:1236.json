@@ -1,0 +1,264 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20191236",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2019:1236: .NET Core on Red Hat Enterprise Linux security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          ".NET Core on Red Hat Enterprise Linux"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:1236",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:1236"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-0820",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-0820"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-0980",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-0980"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-0981",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-0981"
+      }
+    ],
+    "Description": ".NET Core is a managed-software framework. It implements a subset of the .NET framework APIs and several new APIs, and it includes a CLR implementation.\n\nNew versions of .NET Core that address security vulnerabilities are now available. The updated versions are .NET Core 1.0.16, 1.1.13, 2.1.11, and 2.2.5.\n\nSecurity Fix(es):\n\n* dotNET: timeouts for regular expressions are not enforced (CVE-2019-0820)\n\n* dotNET: infinite loop in URI.TryCreate leading to ASP.Net Core Denial of Service (CVE-2019-0980)\n\n* dotNET: crash in IPAddress.TryCreate leading to ASP.Net Core Denial of Service (CVE-2019-0981)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Re-enable bash completion in rh-dotnet22-dotnet (BZ#1654863)\n\n* Error rebuilding rh-dotnet22-curl in CentOS (BZ#1678932)\n\n* Broken apphost caused by unset DOTNET_ROOT (BZ#1703479)\n\n* Make bash completion compatible with rh-dotnet22 packages (BZ#1705259)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-05-15"
+      },
+      "Updated": {
+        "Date": "2019-05-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-0820",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-0820",
+          "Public": "20190514"
+        },
+        {
+          "CveID": "CVE-2019-0980",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-835-\u003eCWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-0980",
+          "Public": "20190514"
+        },
+        {
+          "CveID": "CVE-2019-0981",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-0981",
+          "Public": "20190514"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1705502",
+          "ID": "1705502"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1705504",
+          "ID": "1705504"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1705506",
+          "ID": "1705506"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_dotnet:2.2",
+        "cpe:/a:redhat:rhel_dotnet:2.2::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhsa:tst:20190040018"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhsa:tst:20190040017"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22 is earlier than 0:2.2-7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236001"
+                  },
+                  {
+                    "Comment": "rh-dotnet22 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190040014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-runtime is earlier than 0:2.2-7.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236003"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-runtime is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190040016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-curl is earlier than 0:7.61.1-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236005"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-curl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-libcurl is earlier than 0:7.61.1-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236007"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-libcurl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-libcurl-devel is earlier than 0:7.61.1-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236009"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-libcurl-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-dotnet is earlier than 0:2.2.107-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236011"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-dotnet is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190040002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-dotnet-host is earlier than 0:2.2.5-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236013"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-dotnet-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190040004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-dotnet-host-fxr-2.2 is earlier than 0:2.2.5-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236015"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-dotnet-host-fxr-2.2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190040006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-dotnet-runtime-2.2 is earlier than 0:2.2.5-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236017"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-dotnet-runtime-2.2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190040008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-dotnet-sdk-2.2 is earlier than 0:2.2.107-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236019"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-dotnet-sdk-2.2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190040010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rh-dotnet22-dotnet-sdk-2.2.1xx is earlier than 0:2.2.107-2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191236021"
+                  },
+                  {
+                    "Comment": "rh-dotnet22-dotnet-sdk-2.2.1xx is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20190040012"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

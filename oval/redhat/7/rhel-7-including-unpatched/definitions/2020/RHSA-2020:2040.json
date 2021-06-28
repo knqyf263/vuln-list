@@ -1,0 +1,170 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20202040",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2020:2040: squid security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:2040",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:2040"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-12519",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-12519"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-12525",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-12525"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-11945",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-11945"
+      }
+    ],
+    "Description": "Squid is a high-performance proxy caching server for web clients, supporting FTP, Gopher, and HTTP data objects.\n\nSecurity Fix(es):\n\n* squid: improper check for new member in ESIExpression::Evaluate allows for stack buffer overflow (CVE-2019-12519)\n\n* squid: improper access restriction upon Digest Authentication nonce replay could lead to remote code execution (CVE-2020-11945)\n\n* squid: parsing of header Proxy-Authentication leads to memory corruption (CVE-2019-12525)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-05-06"
+      },
+      "Updated": {
+        "Date": "2020-05-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-12519",
+          "Cvss3": "8.1/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-121",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-12519",
+          "Public": "20200424"
+        },
+        {
+          "CveID": "CVE-2019-12525",
+          "Cvss3": "4.3/CVSS:3.0/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+          "Cwe": "CWE-119",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-12525",
+          "Public": "20190712"
+        },
+        {
+          "CveID": "CVE-2020-11945",
+          "Cvss3": "8.1/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-284",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-11945",
+          "Public": "20200424"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1730535",
+          "ID": "1730535"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1827552",
+          "ID": "1827552"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1827563",
+          "ID": "1827563"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20042779006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20042779005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "squid is earlier than 7:3.5.20-15.el7_8.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202040001"
+                  },
+                  {
+                    "Comment": "squid is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20146270006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "squid-migration-script is earlier than 7:3.5.20-15.el7_8.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202040003"
+                  },
+                  {
+                    "Comment": "squid-migration-script is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20146270002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "squid-sysvinit is earlier than 7:3.5.20-15.el7_8.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202040005"
+                  },
+                  {
+                    "Comment": "squid-sysvinit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20146270004"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
