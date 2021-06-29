@@ -1,0 +1,257 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20205026",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2020:5026: kernel-rt security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:5026",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:5026"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-20811",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-20811"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-14331",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-14331"
+      }
+    ],
+    "Description": "The kernel-rt packages provide the Real Time Linux Kernel, which enables fine-tuning for systems with extremely high determinism requirements.\n\nSecurity Fix(es):\n\n* kernel: kernel: buffer over write in vgacon_scroll (CVE-2020-14331)\n\n* kernel: net-sysfs: *_queue_add_kobject refcount issue (CVE-2019-20811)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* [RHEL-7.9] net/ipv6/ip6_flowlabel.c:85 suspicious rcu_dereference_check() usage! (kernel-rt-debug) (BZ#1836846)\n\n* md/raid: sleeping function called from invalid context triggered by CKI storage/swraid/trim test (BZ#1857872)\n\n* Infinite looping when trying to acquire eventpoll-\u003emtx during eventpoll_release_file, 2nd try (BZ#1877695)\n\n* kernel-rt: update to the latest RHEL7.9.z1 source tree (BZ#1883995)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-11-10"
+      },
+      "Updated": {
+        "Date": "2020-11-10"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-20811",
+          "Cvss3": "3.3/CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-460",
+          "Impact": "low",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-20811",
+          "Public": "20190319"
+        },
+        {
+          "CveID": "CVE-2020-14331",
+          "Cvss3": "6.6/CVSS:3.1/AV:P/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-787",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-14331",
+          "Public": "20200728"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1846439",
+          "ID": "1846439"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1858679",
+          "ID": "1858679"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "kernel-rt earlier than 0:3.10.0-1160.6.1.rt56.1139.el7 is currently running",
+                "TestRef": "oval:com.redhat.rhsa:tst:20205023031"
+              },
+              {
+                "Comment": "kernel-rt earlier than 0:3.10.0-1160.6.1.rt56.1139.el7 is set to boot up on next boot",
+                "TestRef": "oval:com.redhat.rhsa:tst:20205026022"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026001"
+                  },
+                  {
+                    "Comment": "kernel-rt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026003"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-devel is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026005"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-debug-kvm is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026007"
+                  },
+                  {
+                    "Comment": "kernel-rt-debug-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-devel is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026009"
+                  },
+                  {
+                    "Comment": "kernel-rt-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-doc is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026011"
+                  },
+                  {
+                    "Comment": "kernel-rt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-kvm is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026013"
+                  },
+                  {
+                    "Comment": "kernel-rt-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026015"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-devel is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026017"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "kernel-rt-trace-kvm is earlier than 0:3.10.0-1160.6.1.rt56.1139.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20205026019"
+                  },
+                  {
+                    "Comment": "kernel-rt-trace-kvm is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20203527020"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

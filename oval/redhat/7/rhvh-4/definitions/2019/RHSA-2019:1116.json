@@ -1,0 +1,126 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20191116",
+  "Version": "643",
+  "Metadata": {
+    "Title": "RHSA-2019:1116: redhat-virtualization-host security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization 4 for Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:1116",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:1116"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-12180",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-12180"
+      }
+    ],
+    "Description": "OVMF (Open Virtual Machine Firmware) is an EDK II (edk2) based project to enable UEFI support for Virtual Machines. The ovmf package contains a sample 64-bit UEFI firmware for QEMU and KVM, including the edk2 package.\n\nThe redhat-virtualization-host packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nSecurity Fix(es):\n\n* edk2: Buffer Overflow in BlockIo service for RAM disk (CVE-2018-12180)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Previously, after upgrading Red Hat Virtualization Host from rhvh-4.1-0.20180425.0 to rhvh-4.2.4.3-0.20180627, the owner and group of sshd.conf were incorrectly changed from root:root to sssd:sssd. As a result, RHEL IdM accounts using sssd could not ssh into the host. The current release fixes this issue. (BZ#1608513)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-05-08"
+      },
+      "Updated": {
+        "Date": "2019-05-08"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-12180",
+          "Cvss3": "8.3/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L",
+          "Cwe": "CWE-125-\u003eCWE-787",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-12180",
+          "Public": "20190226"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1683372",
+          "ID": "1683372"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20172529012"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20172529011"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-release-virtualization-host is earlier than 0:4.3-0.6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191116001"
+                  },
+                  {
+                    "Comment": "redhat-release-virtualization-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is earlier than 0:4.3-0.6.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191116003"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is earlier than 0:4.3-20190418.0.el7_6",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191116005"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20203902",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2020:3902: libtiff security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2020:3902",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2020:3902"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-14973",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-14973"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-17546",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-17546"
+      }
+    ],
+    "Description": "The libtiff packages contain a library of functions for manipulating Tagged Image File Format (TIFF) files.\n\nSecurity Fix(es):\n\n* libtiff: integer overflow in _TIFFCheckMalloc and _TIFFCheckRealloc in tif_aux.c (CVE-2019-14973)\n\n* libtiff: integer overflow leading to heap-based buffer overflow in tif_getimage.c (CVE-2019-17546)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAdditional Changes:\n\nFor detailed information on changes in this release, see the Red Hat Enterprise Linux 7.9 Release Notes linked from the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2020 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2020-09-29"
+      },
+      "Updated": {
+        "Date": "2020-09-29"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-14973",
+          "Cvss3": "4.5/CVSS:3.0/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L",
+          "Cwe": "CWE-190",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-14973",
+          "Public": "20190814"
+        },
+        {
+          "CveID": "CVE-2019-17546",
+          "Cvss3": "8.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-190-\u003eCWE-122",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-17546",
+          "Public": "20190815"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1745951",
+          "ID": "1745951"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1765705",
+          "ID": "1765705"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_extras:7",
+        "cpe:/a:redhat:rhel_extras_oracle_java:7",
+        "cpe:/a:redhat:rhel_extras_rt:7",
+        "cpe:/a:redhat:rhel_extras_sap:7",
+        "cpe:/a:redhat:rhel_extras_sap_hana:7",
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::client",
+        "cpe:/o:redhat:enterprise_linux:7::computenode",
+        "cpe:/o:redhat:enterprise_linux:7::container",
+        "cpe:/o:redhat:enterprise_linux:7::containers",
+        "cpe:/o:redhat:enterprise_linux:7::server",
+        "cpe:/o:redhat:enterprise_linux:7::workstation"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20150364028"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20150364027"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtiff is earlier than 0:4.0.3-35.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203902001"
+                  },
+                  {
+                    "Comment": "libtiff is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161546002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtiff-devel is earlier than 0:4.0.3-35.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203902003"
+                  },
+                  {
+                    "Comment": "libtiff-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161546004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtiff-static is earlier than 0:4.0.3-35.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203902005"
+                  },
+                  {
+                    "Comment": "libtiff-static is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161546006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "libtiff-tools is earlier than 0:4.0.3-35.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20203902007"
+                  },
+                  {
+                    "Comment": "libtiff-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20161546008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

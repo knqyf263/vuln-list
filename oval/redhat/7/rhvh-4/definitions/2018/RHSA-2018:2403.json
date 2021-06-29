@@ -1,0 +1,156 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20182403",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2018:2403: redhat-virtualization-host security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization 4 for Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:2403",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:2403"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-3620",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-3620"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-3646",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-3646"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-5390",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-5390"
+      }
+    ],
+    "Description": "The redhat-virtualization-host packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nSecurity Fix(es):\n\n* Modern operating systems implement virtualization of physical memory to efficiently use available system resources and provide inter-domain protection through access control and isolation. The L1TF issue was found in the way the x86 microprocessor designs have implemented speculative execution of instructions (a commonly used performance optimisation) in combination with handling of page-faults caused by terminated virtual to physical address resolving process. As a result, an unprivileged attacker could use this flaw to read privileged memory of the kernel or other processes and/or cross guest/host boundaries to read host memory by conducting targeted cache side-channel attacks. (CVE-2018-3620, CVE-2018-3646)\n\n* A flaw named SegmentSmack was found in the way the Linux kernel handled specially crafted TCP packets. A remote attacker could use this flaw to trigger time and calculation expensive calls to tcp_collapse_ofo_queue() and tcp_prune_ofo_queue() functions by sending specially modified packets within ongoing TCP sessions which could lead to a CPU saturation and hence a denial of service on the system. Maintaining the denial of service condition requires continuous two-way TCP sessions to a reachable open port, thus the attacks cannot be performed using spoofed IP addresses. (CVE-2018-5390)\n\nRed Hat would like to thank Intel OSSIRT (Intel.com) for reporting CVE-2018-3620 and CVE-2018-3646 and Juha-Matti Tilli (Aalto University, Department of Communications and Networking and Nokia Bell Labs) for reporting CVE-2018-5390.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-08-15"
+      },
+      "Updated": {
+        "Date": "2018-08-15"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-3620",
+          "Cvss3": "5.6/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-200",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-3620",
+          "Public": "20180814:1700"
+        },
+        {
+          "CveID": "CVE-2018-3646",
+          "Cvss3": "5.6/CVSS:3.0/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+          "Cwe": "CWE-226-\u003eCWE-200",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-3646",
+          "Public": "20180814:1700"
+        },
+        {
+          "CveID": "CVE-2018-5390",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-5390",
+          "Public": "20180806"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1585005",
+          "ID": "1585005"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1601704",
+          "ID": "1601704"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20172529012"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20172529011"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-release-virtualization-host is earlier than 0:4.2-5.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182403001"
+                  },
+                  {
+                    "Comment": "redhat-release-virtualization-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is earlier than 0:4.2-5.2.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182403003"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is earlier than 0:4.2-20180813.0.el7_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182403005"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

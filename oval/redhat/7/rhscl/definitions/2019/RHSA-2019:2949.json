@@ -1,0 +1,800 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20192949",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2019:2949: httpd24-httpd and httpd24-nghttp2 security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.5 EUS",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.6 EUS",
+          "Red Hat Software Collections for Red Hat Enterprise Linux 7.7 EUS"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2019:2949",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2019:2949"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9511",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9511"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9513",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9513"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2019-9517",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2019-9517"
+      }
+    ],
+    "Description": "The httpd packages provide the Apache HTTP Server, a powerful, efficient, and extensible web server.\n\nSecurity Fix(es):\n\n* HTTP/2: large amount of data requests leads to denial of service (CVE-2019-9511)\n\n* HTTP/2: flood using PRIORITY frames resulting in excessive resource consumption (CVE-2019-9513)\n\n* HTTP/2: request for large response leads to denial of service (CVE-2019-9517)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2019 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2019-10-01"
+      },
+      "Updated": {
+        "Date": "2019-10-01"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2019-9511",
+          "Cvss3": "6.5/CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9511",
+          "Public": "20190813"
+        },
+        {
+          "CveID": "CVE-2019-9513",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9513",
+          "Public": "20190813:1700"
+        },
+        {
+          "CveID": "CVE-2019-9517",
+          "Cvss3": "7.5/CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "Cwe": "CWE-400",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2019-9517",
+          "Public": "20190813"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1735741",
+          "ID": "1735741"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1741860",
+          "ID": "1741860"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1741868",
+          "ID": "1741868"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_software_collections:1",
+        "cpe:/a:redhat:rhel_software_collections:1::el7",
+        "cpe:/a:redhat:rhel_software_collections:2",
+        "cpe:/a:redhat:rhel_software_collections:2::el7",
+        "cpe:/a:redhat:rhel_software_collections:3",
+        "cpe:/a:redhat:rhel_software_collections:3::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20190772022"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20190772009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-libnghttp2 is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949001"
+                  },
+                  {
+                    "Comment": "httpd24-libnghttp2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-libnghttp2-devel is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949003"
+                  },
+                  {
+                    "Comment": "httpd24-libnghttp2-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-nghttp2 is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949005"
+                  },
+                  {
+                    "Comment": "httpd24-nghttp2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949007"
+                  },
+                  {
+                    "Comment": "httpd24-httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-devel is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949009"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-manual is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949011"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-tools is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949013"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_ldap is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949015"
+                  },
+                  {
+                    "Comment": "httpd24-mod_ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_md is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949017"
+                  },
+                  {
+                    "Comment": "httpd24-mod_md is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183558024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_proxy_html is earlier than 1:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949019"
+                  },
+                  {
+                    "Comment": "httpd24-mod_proxy_html is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_session is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949021"
+                  },
+                  {
+                    "Comment": "httpd24-mod_session is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_ssl is earlier than 1:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949023"
+                  },
+                  {
+                    "Comment": "httpd24-mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20190772009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-libnghttp2 is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949026"
+                  },
+                  {
+                    "Comment": "httpd24-libnghttp2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-libnghttp2-devel is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949027"
+                  },
+                  {
+                    "Comment": "httpd24-libnghttp2-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-nghttp2 is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949028"
+                  },
+                  {
+                    "Comment": "httpd24-nghttp2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949029"
+                  },
+                  {
+                    "Comment": "httpd24-httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-devel is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949030"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-manual is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949011"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-tools is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949032"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_ldap is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949033"
+                  },
+                  {
+                    "Comment": "httpd24-mod_ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_md is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949034"
+                  },
+                  {
+                    "Comment": "httpd24-mod_md is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183558024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_proxy_html is earlier than 1:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949035"
+                  },
+                  {
+                    "Comment": "httpd24-mod_proxy_html is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_session is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949036"
+                  },
+                  {
+                    "Comment": "httpd24-mod_session is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_ssl is earlier than 1:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949037"
+                  },
+                  {
+                    "Comment": "httpd24-mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20190772009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-libnghttp2 is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949026"
+                  },
+                  {
+                    "Comment": "httpd24-libnghttp2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-libnghttp2-devel is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949027"
+                  },
+                  {
+                    "Comment": "httpd24-libnghttp2-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-nghttp2 is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949028"
+                  },
+                  {
+                    "Comment": "httpd24-nghttp2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949029"
+                  },
+                  {
+                    "Comment": "httpd24-httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-devel is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949030"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-manual is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949011"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-tools is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949032"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_ldap is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949033"
+                  },
+                  {
+                    "Comment": "httpd24-mod_ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_md is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949034"
+                  },
+                  {
+                    "Comment": "httpd24-mod_md is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183558024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_proxy_html is earlier than 1:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949035"
+                  },
+                  {
+                    "Comment": "httpd24-mod_proxy_html is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_session is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949036"
+                  },
+                  {
+                    "Comment": "httpd24-mod_session is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_ssl is earlier than 1:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949037"
+                  },
+                  {
+                    "Comment": "httpd24-mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20190772009"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-libnghttp2 is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949026"
+                  },
+                  {
+                    "Comment": "httpd24-libnghttp2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-libnghttp2-devel is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949027"
+                  },
+                  {
+                    "Comment": "httpd24-libnghttp2-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-nghttp2 is earlier than 0:1.7.1-7.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949028"
+                  },
+                  {
+                    "Comment": "httpd24-nghttp2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20173018014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949029"
+                  },
+                  {
+                    "Comment": "httpd24-httpd is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-devel is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949030"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-manual is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949011"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-manual is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-httpd-tools is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949032"
+                  },
+                  {
+                    "Comment": "httpd24-httpd-tools is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_ldap is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949033"
+                  },
+                  {
+                    "Comment": "httpd24-mod_ldap is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_md is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949034"
+                  },
+                  {
+                    "Comment": "httpd24-mod_md is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20183558024"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_proxy_html is earlier than 1:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949035"
+                  },
+                  {
+                    "Comment": "httpd24-mod_proxy_html is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_session is earlier than 0:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949036"
+                  },
+                  {
+                    "Comment": "httpd24-mod_session is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "httpd24-mod_ssl is earlier than 1:2.4.34-8.el7.1",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20192949037"
+                  },
+                  {
+                    "Comment": "httpd24-mod_ssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20205280016"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20210028",
+  "Version": "636",
+  "Metadata": {
+    "Title": "RHSA-2021:0028: Red Hat Virtualization security, bug fix, and enhancement update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization 4 for Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:0028",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:0028"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-8011",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-8011"
+      }
+    ],
+    "Description": "The redhat-virtualization-host packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks. \n\nThe ovirt-node-ng packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nThe following packages have been upgraded to a later upstream version: openvswitch2.11 (2.11.3), ovn2.11 (2.11.1), redhat-release-virtualization-host (4.3.12), redhat-virtualization-host (4.3.12). (BZ#1898513, BZ#1907537, BZ#1907538)\n\nSecurity Fix(es):\n\n* lldpd: buffer overflow in the lldp_decode function in daemon/protocols/lldp.c (CVE-2015-8011)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-01-06"
+      },
+      "Updated": {
+        "Date": "2021-01-06"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-8011",
+          "Cvss3": "9.8/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-120",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-8011",
+          "Public": "20151015"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1896536",
+          "ID": "1896536"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20172529012"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20172529011"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-release-virtualization-host is earlier than 0:4.3.12-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028001"
+                  },
+                  {
+                    "Comment": "redhat-release-virtualization-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is earlier than 0:4.3.12-4.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028003"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch2.11 is earlier than 0:2.11.3-77.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028005"
+                  },
+                  {
+                    "Comment": "openvswitch2.11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204114008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openvswitch2.11-devel is earlier than 0:2.11.3-77.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028007"
+                  },
+                  {
+                    "Comment": "openvswitch2.11-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204114010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-openvswitch2.11 is earlier than 0:2.11.3-77.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028009"
+                  },
+                  {
+                    "Comment": "python-openvswitch2.11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204114012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovn2.11 is earlier than 0:2.11.1-56.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028011"
+                  },
+                  {
+                    "Comment": "ovn2.11 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204114002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovn2.11-host is earlier than 0:2.11.1-56.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028013"
+                  },
+                  {
+                    "Comment": "ovn2.11-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204114004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ovn2.11-vtep is earlier than 0:2.11.1-56.el7fdp",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028015"
+                  },
+                  {
+                    "Comment": "ovn2.11-vtep is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20204114006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is earlier than 0:4.3.12-20201216.0.el7_9",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20210028017"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20160266",
+  "Version": "646",
+  "Metadata": {
+    "Title": "RHSA-2016:0266: openstack-heat bug fix and security advisory (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux OpenStack Platform 7.0 (Kilo) for RHEL 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2016:0266",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2016:0266"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2015-5295",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2015-5295"
+      }
+    ],
+    "Description": "OpenStack Orchestration (heat) is a template-driven engine used to specify\nand deploy configurations for Compute, Storage, and OpenStack Networking.\n\nA vulnerability was discovered in the OpenStack Orchestration \nservice (heat), where a specially formatted template could be used to\ntrick the heat-engine service into opening a local file. Although the\nfile contents are never disclosed to the end user, an OpenStack-\nauthenticated attacker could use this flaw to cause a denial of service\nor determine whether a given file name is present on the server.\n(CVE-2015-5295)\n\nThis issue was discovered by Steven Hardy of Red Hat.\n\nThis update has the following known issue:\n\n* By default, the number of created heat-engine workers match the number of \ncores on the undercloud. However, if there is only one core, there is only \none heat-engine worker, and this causes deadlocks when creating the \novercloud stack. A single heat-engine worker is not enough to launch an \novercloud stack. Workaround: The undercloud must have at least two \n(virtual) cores. For virtual deployments, this should be two vCPUs, \nregardless of cores on the baremetal host. Otherwise, you can uncomment the \nnum_engine_workers line in /etc/heat/heat.conf,  and restart openstack-\nheat-engine. (BZ#1290949)\n\nThis update also fixes the following bugs:\n\n* When a stack update fails, Orchestration stores a merged environment \nfile. Previously, with an interrupted update, the merged environment file \nwas not written, any resources already created that had new type aliases in \nthe environment could not have their types resolved, and the failed stack \ncould not be updated. This patch now catches any exceptions that occur, and \nensures that the stack can now be updated. (BZ#1290950)\n\n* Previously, stack updates resulted in an OS::Neutron::Port resource\nbeing replaced when the property values were changed in the following\nways:\n  - The network property referred to the same network, but by name instead\n    of UUID, or by UUID instead of name.\n  - Specifying the network using the 'network' property instead of the\n    deprecated 'network_id' property, or using the deprecated 'network_id'\n    property instead of the network property.\nThis issue has been resolved. (BZ#1291845)\n\n* This update resolves an issue that caused the deployment of Orchestration\ntemplates to fail during resource validation. Network IDs are now correctly \nidentified. (BZ#1292152)\n\n* Previously, using the Orchestration API actions \u003e check call removed \noutput values from the existing stack (using either CLI or dashboard). This \nbroke stack updates and other operations depending on stack output values \nafter operation execution. This issue has been resolved. (BZ#1299257)\n\n* Upgrades of overclouds from Red Hat Enterprise Linux OpenStack\nPlatform 7.2 to 7.3 failed with the error \n\"resources.SwiftDevicesAndProxyConfig: Property \ncontroller_swift_proxy_memcaches_v6 not assigned\". This issue has been\nresolved. (BZ#1300847)\n\n* Previously, when resource metadata was requested from Orchestration, all  \nattribute values were fetched, even though this data was not returned by \nthe API. This meant at least one pointless ReST API call to the OpenStack \nservice, and \"404 Not Found\" messages accumulated in both heat-engine and \nnova-api logs. With this update, Orchestration no longer calculates \nattribute values when only the metadata for a resource is requested.\n(BZ#1304854)\n\n* Previously, the \"heat-manage purge_delete\" cron job on the undercloud \nfailed when attempting to purge the raw_template table. This patch fixes \nthe raw_template purge query on MySQL, and handles stack tags before \nremoving stacks which resolves the issue and also removes some race \nconditions where incorrect data was being deleted.(BZ#1306444)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2016 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2016-02-18"
+      },
+      "Updated": {
+        "Date": "2016-02-18"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2015-5295",
+          "Cvss2": "6.8/AV:N/AC:L/Au:S/C:N/I:N/A:C",
+          "Cwe": "CWE-400",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2015-5295",
+          "Public": "20160119"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1298295",
+          "ID": "1298295"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openstack-director:7",
+        "cpe:/a:redhat:openstack-director:7::el7",
+        "cpe:/a:redhat:openstack-director_els:7",
+        "cpe:/a:redhat:openstack-director_els:7::el7.4",
+        "cpe:/a:redhat:openstack-optools:7",
+        "cpe:/a:redhat:openstack-optools:7::el7",
+        "cpe:/a:redhat:openstack:7",
+        "cpe:/a:redhat:openstack:7::el7",
+        "cpe:/a:redhat:openstack_els:7",
+        "cpe:/a:redhat:openstack_els:7::el7.4"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20132099008"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:20132099007"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-heat-api is earlier than 0:2015.1.2-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266001"
+                  },
+                  {
+                    "Comment": "openstack-heat-api is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-heat-api-cfn is earlier than 0:2015.1.2-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266003"
+                  },
+                  {
+                    "Comment": "openstack-heat-api-cfn is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-heat-api-cloudwatch is earlier than 0:2015.1.2-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266005"
+                  },
+                  {
+                    "Comment": "openstack-heat-api-cloudwatch is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-heat-common is earlier than 0:2015.1.2-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266007"
+                  },
+                  {
+                    "Comment": "openstack-heat-common is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openstack-heat-engine is earlier than 0:2015.1.2-9.el7ost",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266009"
+                  },
+                  {
+                    "Comment": "openstack-heat-engine is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20160266010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

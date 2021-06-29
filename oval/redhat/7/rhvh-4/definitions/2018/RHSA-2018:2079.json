@@ -1,0 +1,152 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20182079",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2018:2079: Red Hat Virtualization security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization 4 for Red Hat Enterprise Linux 7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2018:2079",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2018:2079"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2018-10855",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2018-10855"
+      }
+    ],
+    "Description": "The redhat-virtualization-host packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nThe ovirt-node-ng packages provide the Red Hat Virtualization Host. These packages include redhat-release-virtualization-host, ovirt-node, and rhev-hypervisor. Red Hat Virtualization Hosts (RHVH) are installed using a special build of Red Hat Enterprise Linux with only the packages required to host virtual machines. RHVH features a Cockpit user interface for monitoring the host's resources and performing administrative tasks.\n\nThe following packages have been upgraded to a later upstream version: imgbased (1.0.20), redhat-release-virtualization-host (4.2), redhat-virtualization-host (4.2). (BZ#1590664)\n\nSecurity Fix(es):\n\n* ansible: Failed tasks do not honour no_log option allowing for secrets to be disclosed in logs (CVE-2018-10855)\n\nFor more details about the security issue(s), including the impact, a CVSS score, and other related information, refer to the CVE page(s) listed in the References section.\n\nRed Hat would like to thank Tobias Henkel (BMW Car IT GmbH) for reporting this issue.\n\nBug Fix(es):\n\n* Previously, if systems were configured to skip Logical Volume Manager (LVM) clusters, imgbased sees output that is unrelated to the Logical Volumes that are being queried.\n\nAs a result, imgbased failed to parse the output, causing Red Hat Virtualization Host updates to fail.\n\nIn this release imgbased now ignores output from skipped clusters enabling imgbased LVM commands to return successfully. (BZ#1568414)\n\nEnhancement(s):\n\n* Starting from version 4.0, Red Hat Virtualization Hosts could not be deployed from Satellite, and therefore could not take advantage of Satellite's tooling features.\n\nIn this release, Red Hat Virtualization Hosts can now be deployed from Satellite 6.3.2 and later. (BZ#1484532)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2018 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2018-06-28"
+      },
+      "Updated": {
+        "Date": "2018-06-28"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2018-10855",
+          "Cvss3": "5.9/CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2018-10855",
+          "Public": "20180611"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1588855",
+          "ID": "1588855"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/o:redhat:enterprise_linux:7",
+        "cpe:/o:redhat:enterprise_linux:7::hypervisor"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20172529012"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.rhba:tst:20172529011"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-release-virtualization-host is earlier than 0:4.2-4.3.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182079001"
+                  },
+                  {
+                    "Comment": "redhat-release-virtualization-host is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is earlier than 0:4.2-4.3.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182079003"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update-placeholder is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "imgbased is earlier than 0:1.0.20-0.1.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182079005"
+                  },
+                  {
+                    "Comment": "imgbased is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "python-imgbased is earlier than 0:1.0.20-0.1.el7ev",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182079007"
+                  },
+                  {
+                    "Comment": "python-imgbased is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20191053012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is earlier than 0:4.2-20180622.0.el7_5",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20182079009"
+                  },
+                  {
+                    "Comment": "redhat-virtualization-host-image-update is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20172529010"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
