@@ -1,0 +1,522 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212584",
+  "Version": "639",
+  "Metadata": {
+    "Title": "RHSA-2021:2584: ruby:2.7 security, bug fix, and enhancement update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2584",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2584"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2020-25613",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2020-25613"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-28965",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-28965"
+      }
+    ],
+    "Description": "Ruby is an extensible, interpreted, object-oriented, scripting language. It has features to process text files and to perform system management tasks.\n\nThe following packages have been upgraded to a later upstream version: ruby (2.7.3). (BZ#1951999)\n\nSecurity Fix(es):\n\n* ruby: Potential HTTP request smuggling in WEBrick (CVE-2020-25613)\n\n* ruby: XML round-trip vulnerability in REXML (CVE-2021-28965)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Resolv::DNS: ruby:2.7/ruby: timeouts if multiple IPv6 name servers are given and address contains leading zero [rhel-8] (BZ#1952000)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-06-29"
+      },
+      "Updated": {
+        "Date": "2021-06-29"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2020-25613",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-444",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2020-25613",
+          "Public": "20200929"
+        },
+        {
+          "CveID": "CVE-2021-28965",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+          "Cwe": "CWE-611",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-28965",
+          "Public": "20210405"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1883623",
+          "ID": "1883623"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1947526",
+          "ID": "1947526"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.4",
+        "cpe:/a:redhat:rhel_aus:8.4::appstream",
+        "cpe:/o:redhat:rhel_aus:8.4",
+        "cpe:/o:redhat:rhel_aus:8.4::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Module ruby:2.7 is enabled",
+            "TestRef": "oval:com.redhat.rhsa:tst:20212584063"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ruby is earlier than 0:2.7.3-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584001"
+                  },
+                  {
+                    "Comment": "ruby is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ruby-default-gems is earlier than 0:2.7.3-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584003"
+                  },
+                  {
+                    "Comment": "ruby-default-gems is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ruby-devel is earlier than 0:2.7.3-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584005"
+                  },
+                  {
+                    "Comment": "ruby-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ruby-doc is earlier than 0:2.7.3-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584007"
+                  },
+                  {
+                    "Comment": "ruby-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "ruby-libs is earlier than 0:2.7.3-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584009"
+                  },
+                  {
+                    "Comment": "ruby-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-abrt is earlier than 0:0.4.0-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584011"
+                  },
+                  {
+                    "Comment": "rubygem-abrt is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-abrt-doc is earlier than 0:0.4.0-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584013"
+                  },
+                  {
+                    "Comment": "rubygem-abrt-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-bigdecimal is earlier than 0:2.0.0-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584015"
+                  },
+                  {
+                    "Comment": "rubygem-bigdecimal is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-bson is earlier than 0:4.8.1-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584017"
+                  },
+                  {
+                    "Comment": "rubygem-bson is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-bson-doc is earlier than 0:4.8.1-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584019"
+                  },
+                  {
+                    "Comment": "rubygem-bson-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-bundler is earlier than 0:2.1.4-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584021"
+                  },
+                  {
+                    "Comment": "rubygem-bundler is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-io-console is earlier than 0:0.5.6-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584023"
+                  },
+                  {
+                    "Comment": "rubygem-io-console is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384028"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-irb is earlier than 0:1.2.6-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584025"
+                  },
+                  {
+                    "Comment": "rubygem-irb is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584026"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-json is earlier than 0:2.3.0-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584027"
+                  },
+                  {
+                    "Comment": "rubygem-json is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-minitest is earlier than 0:5.13.0-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584029"
+                  },
+                  {
+                    "Comment": "rubygem-minitest is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-mongo is earlier than 0:2.11.3-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584031"
+                  },
+                  {
+                    "Comment": "rubygem-mongo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-mongo-doc is earlier than 0:2.11.3-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584033"
+                  },
+                  {
+                    "Comment": "rubygem-mongo-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384036"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-mysql2 is earlier than 0:0.5.3-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584035"
+                  },
+                  {
+                    "Comment": "rubygem-mysql2 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-mysql2-doc is earlier than 0:0.5.3-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584037"
+                  },
+                  {
+                    "Comment": "rubygem-mysql2-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-net-telnet is earlier than 0:0.2.0-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584039"
+                  },
+                  {
+                    "Comment": "rubygem-net-telnet is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384042"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-openssl is earlier than 0:2.1.2-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584041"
+                  },
+                  {
+                    "Comment": "rubygem-openssl is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-pg is earlier than 0:1.2.3-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584043"
+                  },
+                  {
+                    "Comment": "rubygem-pg is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384046"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-pg-doc is earlier than 0:1.2.3-1.module+el8.3.0+7192+4e3a532a",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584045"
+                  },
+                  {
+                    "Comment": "rubygem-pg-doc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384048"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-power_assert is earlier than 0:1.1.7-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584047"
+                  },
+                  {
+                    "Comment": "rubygem-power_assert is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384050"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-psych is earlier than 0:3.1.0-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584049"
+                  },
+                  {
+                    "Comment": "rubygem-psych is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384052"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-rake is earlier than 0:13.0.1-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584051"
+                  },
+                  {
+                    "Comment": "rubygem-rake is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384054"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-rdoc is earlier than 0:6.2.1-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584053"
+                  },
+                  {
+                    "Comment": "rubygem-rdoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384056"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-test-unit is earlier than 0:3.3.4-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584055"
+                  },
+                  {
+                    "Comment": "rubygem-test-unit is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384058"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygem-xmlrpc is earlier than 0:0.3.0-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584057"
+                  },
+                  {
+                    "Comment": "rubygem-xmlrpc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384060"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygems is earlier than 0:3.1.6-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584059"
+                  },
+                  {
+                    "Comment": "rubygems is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384062"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "rubygems-devel is earlier than 0:3.1.6-136.module+el8.4.0+10728+4c884998",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212584061"
+                  },
+                  {
+                    "Comment": "rubygems-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhba:tst:20193384064"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

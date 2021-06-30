@@ -1,0 +1,135 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212575",
+  "Version": "635",
+  "Metadata": {
+    "Title": "RHSA-2021:2575: lz4 security update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2575",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2575"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3520",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3520"
+      }
+    ],
+    "Description": "The lz4 packages provide support for LZ4, a very fast, lossless compression algorithm that provides compression speeds of 400 MB/s per core and scales with multicore CPUs. It also features an extremely fast decoder that reaches speeds of multiple GB/s per core and typically reaches RAM speed limits on multicore systems.\n\nSecurity Fix(es):\n\n* lz4: memory corruption due to an integer overflow bug caused by memmove argument (CVE-2021-3520)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-06-29"
+      },
+      "Updated": {
+        "Date": "2021-06-29"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-3520",
+          "Cvss3": "8.6/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H",
+          "Cwe": "CWE-190-\u003eCWE-787",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3520",
+          "Public": "20210428"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1954559",
+          "ID": "1954559"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_aus:8.4",
+        "cpe:/a:redhat:rhel_aus:8.4::appstream",
+        "cpe:/o:redhat:rhel_aus:8.4",
+        "cpe:/o:redhat:rhel_aus:8.4::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "lz4 is earlier than 0:1.8.3-3.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212575001"
+                  },
+                  {
+                    "Comment": "lz4 is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212575002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "lz4-devel is earlier than 0:1.8.3-3.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212575003"
+                  },
+                  {
+                    "Comment": "lz4-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212575004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "lz4-libs is earlier than 0:1.8.3-3.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212575005"
+                  },
+                  {
+                    "Comment": "lz4-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212575006"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
