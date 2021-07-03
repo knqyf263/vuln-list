@@ -1,0 +1,180 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211006",
+  "Version": "641",
+  "Metadata": {
+    "Title": "RHSA-2021:1006: OpenShift Container Platform 4.7.5 security and bug fix update (Moderate)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1006",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1006"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-20218",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-20218"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3114",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3114"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3121",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3121"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container\nPlatform 4.7.5. See the following advisory for the container images for\nthis release:\n\nhttps://access.redhat.com/errata/RHSA-2021:1005\n\nAll OpenShift Container Platform 4.7 users are advised to upgrade to these\nupdated packages and images when they are available in the appropriate\nrelease channel. To check for available updates, use the OpenShift Console\nor the CLI oc command. Instructions for upgrading a cluster are available\nat\nhttps://docs.openshift.com/container-platform/4.7/updating/updating-cluster-between-minor.html#understanding-upgrade-channels_updating-cluster-between-minor\n\nSecurity Fix(es):\n\n* gogo/protobuf: plugin/unmarshal/unmarshal.go lacks certain index validation (CVE-2021-3121)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Placeholder bug for OCP 4.7.0 rpm release (BZ#1944016)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Moderate",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-04-05"
+      },
+      "Updated": {
+        "Date": "2021-04-05"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-20218",
+          "Cvss3": "7.4/CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+          "Cwe": "CWE-22",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-20218",
+          "Public": "20210112:0435"
+        },
+        {
+          "CveID": "CVE-2021-3114",
+          "Cvss3": "6.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+          "Cwe": "CWE-682",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3114",
+          "Public": "20210120"
+        },
+        {
+          "CveID": "CVE-2021-3121",
+          "Cvss3": "8.6/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H",
+          "Cwe": "CWE-129",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3121",
+          "Public": "20210111"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1918750",
+          "ID": "1918750"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1921650",
+          "ID": "1921650"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1923405",
+          "ID": "1923405"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.7",
+        "cpe:/a:redhat:openshift:4.7::el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201714623006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:201714623005"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20205634014"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients is earlier than 0:4.7.0-202103251046.p0.git.3957.c4da68b.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211006001"
+                  },
+                  {
+                    "Comment": "openshift-clients is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201714623002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-clients-redistributable is earlier than 0:4.7.0-202103251046.p0.git.3957.c4da68b.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211006003"
+                  },
+                  {
+                    "Comment": "openshift-clients-redistributable is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201714623004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "cri-o is earlier than 0:1.20.2-4.rhaos4.7.gitd5a999a.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211006005"
+                  },
+                  {
+                    "Comment": "cri-o is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:202029652008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "jenkins-2-plugins is earlier than 0:4.7.1616671397-1.el8",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211006007"
+                  },
+                  {
+                    "Comment": "jenkins-2-plugins is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211006008"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
