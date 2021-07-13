@@ -1,6 +1,6 @@
 {
   "Title": "ELSA-2021-2683:  xstream security update (IMPORTANT)",
-  "Description": "[1.3.1-14]\n- Fix remote code execution vulnerability\n- Resolves: CVE-2021-29505\n\n[1.3.1-13]\n- Fix remote code execution vulnerability\n- Resolves: CVE-2021-21344\n- Resolves: CVE-2021-21345\n- Resolves: CVE-2021-21346\n- Resolves: CVE-2021-21347\n- Resolves: CVE-2021-21350\n\n[1.3.1-12]\n- Rebuild with OpenJDK 7\n\n[1.3.1-11]\n- Fix remote code execution vulnerability\n- Resolves: CVE-2020-26217\n\n[1.3.1-10]\n- Apply upstream security patch\n- Resolves: CVE-2013-7285\n\n[1.3.1-9]\n- Mass rebuild 2013-12-27\n\n[1.3.1-8]\n- Disable support for XOM\n\n[1.3.1-7]\n- Update to current packaging guidelines\n\n[1.3.1-6]\n- Rebuild to regenerate API documentation\n- Resolves: CVE-2013-1571\n\n[1.3.1-5]\n- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild\n\n[1.3.1-4]\n- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild\n\n[1.3.1-3]\n- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild\n\n[1.3.1-2]\n- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild\n\n[1.3.1-1]\n- Update to 1.3.1.\n- Install maven pom and depmap.\n\n[1.2.2-4]\n- Cosmetic fixes\n\n[0:1.2.2-3]\n- Drop gcj (suggested by Jochen Schmitt), we seem to need OpenJDK anyway\n- Fix -javadoc Require\n- Drop epoch\n\n[0:1.2.2-2]\n- Greatly simplify for Fedora\n- Disable tests, we don't have all that's required to run them\n- Remove maven build\n\n[0:1.2.2-1jpp]\n- Upgrade to 1.2.2\n- Build with maven2 by default\n- Add poms and depmap frags\n\n[0:1.1.3-1jpp]\n- Upgrade to 1.1.3\n- Patched to work with bea\n\n[0:1.0.2-2jpp]\n- Drop saxpath requirement\n- Require jaxen \u003e= 0:1.1\n\n[0:1.0.2-1jpp]\n- Upgrade to 1.0.2\n- Delete included binary jars\n- Change -Dbuild.sysclasspath 'from only' to 'first' (DynamicProxyTest)\n- Relax some versioned dependencies\n- Build with ant-1.6.2\n\n[0:1.0.1-2jpp]\n- Upgrade to ant-1.6.X\n\n[0:1.0.1-1jpp]\n- Upgrade to 1.0.1\n\n[0:0.3-1jpp]\n- Upgrade to 0.3\n- Add manual subpackage\n\n[0:0.2-1jpp]\n- First JPackage release",
+  "Description": "[1.3.1-14]\n- Fix remote code execution vulnerability\n- Resolves: CVE-2021-29505",
   "Platform": [
     "Oracle Linux 7"
   ],
@@ -20,44 +20,90 @@
     "Operator": "AND",
     "Criterias": [
       {
-        "Operator": "AND",
+        "Operator": "OR",
         "Criterias": [
           {
-            "Operator": "OR",
+            "Operator": "AND",
             "Criterias": [
               {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
+                "Operator": "OR",
+                "Criterias": [
                   {
-                    "Comment": "xstream is earlier than 0:1.3.1-14.el7_9"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "xstream is earlier than 0:1.3.1-14.el7_9"
+                      },
+                      {
+                        "Comment": "xstream is signed with the Oracle Linux 7 key"
+                      }
+                    ]
                   },
                   {
-                    "Comment": "xstream is signed with the Oracle Linux 7 key"
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "xstream-javadoc is earlier than 0:1.3.1-14.el7_9"
+                      },
+                      {
+                        "Comment": "xstream-javadoc is signed with the Oracle Linux 7 key"
+                      }
+                    ]
                   }
-                ]
-              },
-              {
-                "Operator": "AND",
-                "Criterias": null,
-                "Criterions": [
-                  {
-                    "Comment": "xstream-javadoc is earlier than 0:1.3.1-14.el7_9"
-                  },
-                  {
-                    "Comment": "xstream-javadoc is signed with the Oracle Linux 7 key"
-                  }
-                ]
+                ],
+                "Criterions": null
               }
             ],
-            "Criterions": null
+            "Criterions": [
+              {
+                "Comment": "Oracle Linux arch is aarch64"
+              }
+            ]
+          },
+          {
+            "Operator": "AND",
+            "Criterias": [
+              {
+                "Operator": "OR",
+                "Criterias": [
+                  {
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "xstream is earlier than 0:1.3.1-14.el7_9"
+                      },
+                      {
+                        "Comment": "xstream is signed with the Oracle Linux 7 key"
+                      }
+                    ]
+                  },
+                  {
+                    "Operator": "AND",
+                    "Criterias": null,
+                    "Criterions": [
+                      {
+                        "Comment": "xstream-javadoc is earlier than 0:1.3.1-14.el7_9"
+                      },
+                      {
+                        "Comment": "xstream-javadoc is signed with the Oracle Linux 7 key"
+                      }
+                    ]
+                  }
+                ],
+                "Criterions": null
+              }
+            ],
+            "Criterions": [
+              {
+                "Comment": "Oracle Linux arch is x86_64"
+              }
+            ]
           }
         ],
-        "Criterions": [
-          {
-            "Comment": "Oracle Linux arch is aarch64"
-          }
-        ]
+        "Criterions": null
       }
     ],
     "Criterions": [
