@@ -1,0 +1,113 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20211562",
+  "Version": "640",
+  "Metadata": {
+    "Title": "RHSA-2021:1562: OpenShift Container Platform 4.7.12 packages and security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat OpenShift Container Platform 4.7"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:1562",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:1562"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-30465",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-30465"
+      }
+    ],
+    "Description": "Red Hat OpenShift Container Platform is Red Hat's cloud computing\nKubernetes application platform solution designed for on-premise or private\ncloud deployments.\n\nThis advisory contains the RPM packages for Red Hat OpenShift Container\nPlatform 4.7.12. See the following advisory for the container images for\nthis release:\n\nhttps://access.redhat.com/errata/RHSA-2021:1561\n\nSecurity Fix(es):\n\n* runc: vulnerable to symlink exchange attack (CVE-2021-30465)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nAll OpenShift Container Platform 4.7 users are advised to upgrade to these\nupdated packages and images when they are available in the appropriate release \nchannel. To check for available updates, use the OpenShift Console or the CLI oc command. Instructions for upgrading a cluster are available at\nhttps://docs.openshift.com/container-platform/4.7/updating/updating-cluster-between-minor.html#understanding-upgrade-channels_updating-cluster-between-minor",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-05-24"
+      },
+      "Updated": {
+        "Date": "2021-05-24"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-30465",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-367-\u003eCWE-59",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-30465",
+          "Public": "20210519:1000"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1954736",
+          "ID": "1954736"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:openshift:4.7",
+        "cpe:/a:redhat:openshift:4.7::el7"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:201714623006"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "Red Hat Enterprise Linux 7 is installed",
+            "TestRef": "oval:com.redhat.cve:tst:201714623005"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "openshift-hyperkube is earlier than 0:4.7.0-202105160013.p0.git.df9c838.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211562001"
+                  },
+                  {
+                    "Comment": "openshift-hyperkube is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:20181002101004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "runc is earlier than 0:1.0.0-96.rhaos4.8.gitcd80260.el7",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20211562003"
+                  },
+                  {
+                    "Comment": "runc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.cve:tst:201916884002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
