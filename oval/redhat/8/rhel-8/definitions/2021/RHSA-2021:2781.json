@@ -1,0 +1,437 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212781",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2021:2781: java-11-openjdk security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2781",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2781"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-2341",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-2341"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-2369",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-2369"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-2388",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-2388"
+      }
+    ],
+    "Description": "The java-11-openjdk packages provide the OpenJDK 11 Java Runtime Environment and the OpenJDK 11 Java Software Development Kit.\n\nSecurity Fix(es):\n\n* OpenJDK: Incorrect comparison during range check elimination (Hotspot, 8264066) (CVE-2021-2388)\n\n* OpenJDK: FTP PASV command response can cause FtpClient to connect to arbitrary host (Networking, 8258432) (CVE-2021-2341)\n\n* OpenJDK: Incorrect verification of JAR files with multiple MANIFEST.MF files (Library, 8260967) (CVE-2021-2369)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-07-21"
+      },
+      "Updated": {
+        "Date": "2021-07-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-2341",
+          "Cvss3": "3.1/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-2341",
+          "Public": "20210720"
+        },
+        {
+          "CveID": "CVE-2021-2369",
+          "Cvss3": "4.3/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-347",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-2369",
+          "Public": "20210720"
+        },
+        {
+          "CveID": "CVE-2021-2388",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-697",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-2388",
+          "Public": "20210720"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1982874",
+          "ID": "1982874"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1982879",
+          "ID": "1982879"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1983075",
+          "ID": "1983075"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:enterprise_linux:8",
+        "cpe:/a:redhat:enterprise_linux:8::appstream",
+        "cpe:/a:redhat:enterprise_linux:8::crb",
+        "cpe:/a:redhat:enterprise_linux:8::highavailability",
+        "cpe:/a:redhat:enterprise_linux:8::nfv",
+        "cpe:/a:redhat:enterprise_linux:8::realtime",
+        "cpe:/a:redhat:enterprise_linux:8::resilientstorage",
+        "cpe:/a:redhat:enterprise_linux:8::sap",
+        "cpe:/a:redhat:enterprise_linux:8::sap_hana",
+        "cpe:/a:redhat:enterprise_linux:8::supplementary",
+        "cpe:/o:redhat:enterprise_linux:8",
+        "cpe:/o:redhat:enterprise_linux:8::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781001"
+                  },
+                  {
+                    "Comment": "java-11-openjdk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-demo is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781003"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-demo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-demo-fastdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781005"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-demo-fastdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-demo-slowdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781007"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-demo-slowdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-devel is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781009"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-devel-fastdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781011"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-devel-fastdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-devel-slowdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781013"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-devel-slowdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-fastdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781015"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-fastdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-headless is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781017"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-headless is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-headless-fastdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781019"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-headless-fastdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781020"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-headless-slowdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781021"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-headless-slowdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781022"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-javadoc is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781023"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-javadoc-zip is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781025"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-jmods is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781027"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-jmods is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-jmods-fastdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781029"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-jmods-fastdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781030"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-jmods-slowdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781031"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-jmods-slowdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781032"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-slowdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781033"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-slowdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781034"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-src is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781035"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-src is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-src-fastdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781037"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-src-fastdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781038"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-src-slowdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781039"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-src-slowdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781040"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-static-libs is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781041"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-static-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202970018"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-static-libs-fastdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781043"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-static-libs-fastdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781044"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-static-libs-slowdebug is earlier than 1:11.0.12.0.7-0.el8_4",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781045"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-static-libs-slowdebug is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212781046"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

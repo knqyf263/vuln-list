@@ -1,0 +1,255 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212782",
+  "Version": "637",
+  "Metadata": {
+    "Title": "RHSA-2021:2782: java-11-openjdk security update (Important)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Enterprise Linux 8.2 Extended Update Support"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2782",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2782"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-2341",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-2341"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-2369",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-2369"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-2388",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-2388"
+      }
+    ],
+    "Description": "The java-11-openjdk packages provide the OpenJDK 11 Java Runtime Environment and the OpenJDK 11 Java Software Development Kit.\n\nSecurity Fix(es):\n\n* OpenJDK: Incorrect comparison during range check elimination (Hotspot, 8264066) (CVE-2021-2388)\n\n* OpenJDK: FTP PASV command response can cause FtpClient to connect to arbitrary host (Networking, 8258432) (CVE-2021-2341)\n\n* OpenJDK: Incorrect verification of JAR files with multiple MANIFEST.MF files (Library, 8260967) (CVE-2021-2369)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Important",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-07-21"
+      },
+      "Updated": {
+        "Date": "2021-07-21"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-2341",
+          "Cvss3": "3.1/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N",
+          "Cwe": "CWE-200",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-2341",
+          "Public": "20210720"
+        },
+        {
+          "CveID": "CVE-2021-2369",
+          "Cvss3": "4.3/CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N",
+          "Cwe": "CWE-347",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-2369",
+          "Public": "20210720"
+        },
+        {
+          "CveID": "CVE-2021-2388",
+          "Cvss3": "7.5/CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "Cwe": "CWE-697",
+          "Impact": "important",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-2388",
+          "Public": "20210720"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1982874",
+          "ID": "1982874"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1982879",
+          "ID": "1982879"
+        },
+        {
+          "Href": "https://bugzilla.redhat.com/1983075",
+          "ID": "1983075"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhel_eus:8.2",
+        "cpe:/a:redhat:rhel_eus:8.2::appstream",
+        "cpe:/a:redhat:rhel_eus:8.2::crb",
+        "cpe:/a:redhat:rhel_eus:8.2::highavailability",
+        "cpe:/a:redhat:rhel_eus:8.2::resilientstorage",
+        "cpe:/a:redhat:rhel_eus:8.2::sap",
+        "cpe:/a:redhat:rhel_eus:8.2::sap_hana",
+        "cpe:/a:redhat:rhel_eus:8.2::supplementary",
+        "cpe:/a:redhat:rhel_extras_nfv:8",
+        "cpe:/a:redhat:rhel_extras_rt:8",
+        "cpe:/o:redhat:rhel_eus:8.2",
+        "cpe:/o:redhat:rhel_eus:8.2::baseos"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.rhba:tst:20191992005"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhba:tst:20191992004"
+              }
+            ]
+          },
+          {
+            "Operator": "OR",
+            "Criterias": [
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782001"
+                  },
+                  {
+                    "Comment": "java-11-openjdk is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518002"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-demo is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782003"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-demo is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518004"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-devel is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782005"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-devel is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518006"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-headless is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782007"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-headless is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518008"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-javadoc is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782009"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-javadoc is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518010"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-javadoc-zip is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782011"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-javadoc-zip is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518012"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-jmods is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782013"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-jmods is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518014"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-src is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782015"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-src is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20191518016"
+                  }
+                ]
+              },
+              {
+                "Operator": "AND",
+                "Criterions": [
+                  {
+                    "Comment": "java-11-openjdk-static-libs is earlier than 1:11.0.12.0.7-0.el8_2",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20212782017"
+                  },
+                  {
+                    "Comment": "java-11-openjdk-static-libs is signed with Red Hat redhatrelease2 key",
+                    "TestRef": "oval:com.redhat.rhsa:tst:20202970018"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
