@@ -1,0 +1,99 @@
+{
+  "Class": "patch",
+  "ID": "oval:com.redhat.rhsa:def:20212866",
+  "Version": "638",
+  "Metadata": {
+    "Title": "RHSA-2021:2866: RHV Engine and Host Common Packages security update [ovirt-4.4.7] (Low)",
+    "AffectedList": [
+      {
+        "Family": "unix",
+        "Platforms": [
+          "Red Hat Virtualization Engine 4.4"
+        ]
+      }
+    ],
+    "References": [
+      {
+        "Source": "RHSA",
+        "RefID": "RHSA-2021:2866",
+        "RefURL": "https://access.redhat.com/errata/RHSA-2021:2866"
+      },
+      {
+        "Source": "CVE",
+        "RefID": "CVE-2021-3447",
+        "RefURL": "https://access.redhat.com/security/cve/CVE-2021-3447"
+      }
+    ],
+    "Description": "The ovirt-engine package provides the Red Hat Virtualization Manager, a centralized management platform that allows system administrators to view and manage virtual machines. The Manager provides a comprehensive range of features including search capabilities, resource management, live migrations, and virtual infrastructure provisioning.\n\nThe ovirt-ansible-hosted-engine-setup package provides an Ansible role for deploying Red Hat Virtualization Hosted-Engine.\n\nSecurity Fix(es):\n\n* ansible: multiple modules expose secured values (CVE-2021-3447)\n\nFor more details about the security issue(s), including the impact, a CVSS score, acknowledgments, and other related information, refer to the CVE page(s) listed in the References section.\n\nBug Fix(es):\n\n* Previously, using an Ansible playbook to fetch virtual machine disk information was slow and incomplete, while the REST API fetched the information faster and more completely.\nIn this release, the Ansible playbook fetches the information completely and quickly. (BZ#1947902)\n\n* The ovirt-engine in RHV 4.4.7 requires an Ansible 2.9.z version later than Ansible 2.9.20. \nIn addition, in RHV 4.4.7 the version limitation for a specific Ansible version has been removed, the correct Ansible version is now shipped in the RHV subscription channels. (BZ#1966145)",
+    "Advisory": {
+      "From": "secalert@redhat.com",
+      "Severity": "Low",
+      "Rights": "Copyright 2021 Red Hat, Inc.",
+      "Issued": {
+        "Date": "2021-07-22"
+      },
+      "Updated": {
+        "Date": "2021-07-22"
+      },
+      "Cves": [
+        {
+          "CveID": "CVE-2021-3447",
+          "Cvss3": "5.0/CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N",
+          "Cwe": "CWE-532",
+          "Impact": "moderate",
+          "Href": "https://access.redhat.com/security/cve/CVE-2021-3447",
+          "Public": "20210316"
+        }
+      ],
+      "Bugzilla": [
+        {
+          "Href": "https://bugzilla.redhat.com/1939349",
+          "ID": "1939349"
+        }
+      ],
+      "AffectedCpeList": [
+        "cpe:/a:redhat:rhev_manager:4.4",
+        "cpe:/a:redhat:rhev_manager:4.4:el8"
+      ]
+    }
+  },
+  "Criteria": {
+    "Operator": "OR",
+    "Criterions": [
+      {
+        "Comment": "Red Hat Enterprise Linux must be installed",
+        "TestRef": "oval:com.redhat.cve:tst:20166341004"
+      }
+    ],
+    "Criterias": [
+      {
+        "Operator": "AND",
+        "Criterions": [
+          {
+            "Comment": "ansible is earlier than 0:2.9.21-1.el8ae",
+            "TestRef": "oval:com.redhat.rhsa:tst:20212866001"
+          },
+          {
+            "Comment": "ansible is signed with Red Hat redhatrelease2 key",
+            "TestRef": "oval:com.redhat.rhsa:tst:20212180002"
+          }
+        ],
+        "Criterias": [
+          {
+            "Operator": "OR",
+            "Criterions": [
+              {
+                "Comment": "Red Hat Enterprise Linux 8 is installed",
+                "TestRef": "oval:com.redhat.cve:tst:20166341003"
+              },
+              {
+                "Comment": "Red Hat CoreOS 4 is installed",
+                "TestRef": "oval:com.redhat.rhsa:tst:20203247050"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
